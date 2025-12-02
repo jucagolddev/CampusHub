@@ -1,2 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
-@use "./app/styles/variables" as *;
+/* Estilos globales de CampusHub */
+/* Este archivo importa todo el sistema de diseño desde la carpeta styles */
+
+// Importar el archivo orquestador principal que contiene todo el sistema de estilos
+@use './styles/main';

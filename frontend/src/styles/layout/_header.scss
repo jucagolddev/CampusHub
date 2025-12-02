@@ -1,7 +1,7 @@
 // Estilos para el encabezado y navegación principal
 // Este archivo define los estilos de la cabecera que aparece en todas las páginas
-@use "../variables" as *;
-@use "../mixins" as *;
+@use "base/variables" as *;
+@use "base/mixins" as *;
 
 // Cabecera principal
 // Contenedor principal del header que incluye logo y navegación

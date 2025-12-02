@@ -1,7 +1,7 @@
 // Estilos para el pie de página
 // Este archivo define los estilos del footer que aparece al final de todas las páginas
-@use '../variables' as *;
-@use '../mixins' as *;
+@use 'base/variables' as *;
+@use 'base/mixins' as *;
 
 // Pie de página principal
 // Contenedor principal del footer con fondo azul marino

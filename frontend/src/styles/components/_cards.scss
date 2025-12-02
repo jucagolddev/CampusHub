@@ -1,7 +1,7 @@
 // Estilos para componentes de tarjetas y alertas
 // Este archivo define los estilos de tarjetas y mensajes de retroalimentación
 @use 'sass:color';
-@use '../variables' as *;
+@use 'base/variables' as *;
 
 // Sección alterna (tarjeta base)
 // Contenedor genérico que se usa como base para diferentes tipos de tarjetas

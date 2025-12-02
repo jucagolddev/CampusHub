@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './main-layout.component.html',
-  styleUrls: ['./main-layout.component.scss']
+
 })
 export class MainLayoutComponent {
 
