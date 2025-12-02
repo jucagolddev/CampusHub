@@ -142,3 +142,128 @@ PROYECTO-EUSA/
 ├── angular.json # Configuración del CLI de Angular
 ├── package.json # Dependencias Frontend
 └── tsconfig.json # Configuración TypeScript Frontend
+
+### 🟢 BACKEND (Servidor)
+
+**Ubicación:** `/backend`
+**Patrón:** MVC (Modelo-Vista-Controlador)
+**Responsabilidad:** Gestionar datos, seguridad y reglas de negocio. No contiene interfaz visual.
+
+```text
+├── 📁 backend
+│   ├── 📁 src
+│   │   ├── 📁 config           # Configuración de entorno (DB, Puertos, Secretos).
+│   │   ├── 📁 controllers      # (CONTROLADOR) Reciben peticiones, ejecutan lógica y responden.
+│   │   ├── 📁 middelwares      # (SEGURIDAD) Verifican permisos antes de llegar al controlador.
+│   │   ├── 📁 models           # (MODELO) Esquemas de BBDD (Definición de Usuario y Proyecto).
+│   │   └── 📁 routes           # (RUTAS) Mapa de endpoints de la API (ej: /api/login).
+
+🔵 FRONTEND (Cliente)
+Ubicación: /frontend Framework: Angular 16+ Patrón: MVVM (Model-View-ViewModel) con Arquitectura Modular.
+
+El frontend se organiza en capas funcionales para asegurar que el código sea limpio y reutilizable.
+
+1. 🧠 CORE (src/app/core)
+El núcleo de la aplicación. Contiene servicios Singletons (instancia única) y lógica de seguridad. Se carga una sola vez al iniciar la app.
+
+guards/ (Guardianes de Ruta):
+
+auth.guard.ts: Protege rutas privadas. Si no estás logueado, te redirige al Login.
+
+role.guard.ts: Protege rutas sensibles (como "Subir Proyecto"). Solo permite el paso si el usuario tiene rol de Colaborador.
+
+interceptors/ (Intermediarios HTTP):
+
+token.interceptor.ts: Agrega automáticamente el Token JWT a cada petición que sale hacia el backend.
+
+error.interceptor.ts: Captura errores globales (401, 500) y muestra alertas sin repetir código en los componentes.
+
+models/ (Interfaces de Datos):
+
+user.ts y project.ts: Definen la estructura estricta de los datos para que Frontend y Backend "hablen el mismo idioma".
+
+services/ (Gestión de Datos):
+
+api.service.ts: Cliente HTTP centralizado.
+
+auth.service.ts: Gestiona Login, Registro y estado de la sesión.
+
+storage.service.ts: Envoltorio seguro para usar localStorage.
+
+ui.service.ts: Controla el estado visual global (Spinners, Modales).
+
+2. 🚀 FEATURES (src/app/features)
+Aquí residen las Vistas Inteligentes (Smart Components). Cada carpeta representa una página funcional.
+
+auth/: Módulo de acceso.
+
+login: Pantalla de inicio de sesión.
+
+register: Pantalla de registro de nuevos usuarios.
+
+home/: Página de aterrizaje (Landing Page).
+
+projects/: Funcionalidad principal de la web.
+
+project-list: Catálogo público. Muestra todos los proyectos disponibles.
+
+project-detail: Vista completa de un proyecto individual.
+
+project-upload: (Protegido) Formulario exclusivo para colaboradores donde se suben imágenes y descripciones de proyectos.
+
+3. 🖼️ LAYOUT (src/app/layout)
+Define los marcos estructurales que envuelven a las páginas, diferenciando la experiencia según el usuario.
+
+main-layout/: Diseño para visitantes y alumnos.
+
+Utiliza header (Navbar pública) y footer.
+
+admin-layout/: Diseño para el panel de gestión (Colaboradores).
+
+Utiliza sidebar para herramientas de administración y gestión de subidas.
+
+4. ♻️ SHARED (src/app/shared)
+Biblioteca de componentes UI reutilizables ("Dumb Components") que no tienen lógica de negocio compleja.
+
+components/:
+
+project-card: Tarjeta visual que resume un proyecto. Se usa tanto en la Home como en las listas.
+
+loading-spinner: Indicador visual de carga para esperas asíncronas.
+
+alert-msg: Componente para notificaciones flotantes (Toast) de éxito o error.
+
+directives/:
+
+img-fallback.directive.ts: Detecta si una imagen está rota y la sustituye automáticamente por un placeholder de EUSA.
+
+pipes/:
+
+truncate.pipe.ts: Corta textos largos (descripciones) añadiendo "..." al final para mantener el diseño limpio.
+
+5. ⚙️ CONFIGURACIÓN GLOBAL
+environments/:
+
+environment.ts: Configuración para desarrollo local (localhost).
+
+environment.prod.ts: Configuración para producción (servidor real).
+
+assets/: Recursos estáticos (imágenes, iconos, fuentes).
+
+app-routing.module.ts: Define el mapa de navegación y la carga perezosa (Lazy Loading) de los módulos.
+
+```
+
+🛠️ Cómo iniciar el proyecto
+Backend
+Bash
+
+cd backend
+npm install
+npm start
+Frontend
+Bash
+
+cd frontend
+npm install
+ng serve
