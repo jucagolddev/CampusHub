@@ -1,4 +1,5 @@
 export const environment = {
-  production: true,
-  apiUrl: 'https://api.midominio.com/api', // Aquí apuntará al servidor real de EUSA
+  production: false,
+  // Esta es la dirección de tu servidor Node local
+  apiUrl: 'http://localhost:3000/api',
 };
