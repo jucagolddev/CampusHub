@@ -1,0 +1,45 @@
+// Estilos para la página de subida de archivos
+// Este archivo define los estilos específicos de la interfaz de carga de archivos
+@use '../variables' as *;
+
+// Página de subida de archivos
+// Contenedor principal de la página de upload
+.pagina-upload {
+    padding: 2rem 0; // Espaciado vertical
+}
+
+// Zona de arrastre
+// Área interactiva donde el usuario puede arrastrar y soltar archivos
+.zona-arrastre {
+    border: 2px dashed $color-interactivo-principal; // Borde punteado azul
+    border-radius: 8px; // Bordes redondeados
+    padding: 3rem; // Espaciado interno generoso
+    text-align: center; // Centra el contenido
+    background-color: rgba($color-interactivo-principal, 0.05); // Fondo azul muy claro (5% opacidad)
+    transition: all 0.3s ease; // Transición suave de todas las propiedades
+    cursor: pointer; // Cursor de mano para indicar que es clickeable
+    margin-bottom: 1.5rem; // Espacio inferior
+
+    // Estados hover y arrastrando
+    // Cambia la apariencia cuando el usuario pasa el cursor o arrastra archivos
+    &:hover,
+    &.arrastrando {
+        background-color: rgba($color-interactivo-principal, 0.1); // Fondo azul claro (10% opacidad)
+        border-color: $color-hover-interactivo; // Borde azul más oscuro
+    }
+
+    // Párrafos dentro de la zona de arrastre
+    p {
+        color: $color-texto-subtitulo; // Color azul intermedio
+        font-weight: $peso-semi-negrita; // Peso semi-negrita
+        margin-bottom: 1rem; // Espacio inferior
+    }
+
+    // Icono de subida
+    // Emoji o icono grande que representa la acción de subir archivos
+    .icono-upload {
+        font-size: 3rem; // Tamaño grande
+        color: $color-interactivo-principal; // Color azul principal
+        margin-bottom: 1rem; // Espacio inferior
+    }
+}

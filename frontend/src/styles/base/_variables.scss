@@ -1,0 +1,54 @@
+// Variables de diseño globales del proyecto CampusHub
+// Este archivo contiene todas las variables de colores, tipografía y otros valores reutilizables
+
+// Colores base y de marca
+// Estos son los colores principales que definen la identidad visual del proyecto
+$color-fondo-base: #f2eef0; // Color de fondo general de la página, gris rosado claro
+$color-interactivo-principal: #009acd; // Color principal para elementos interactivos como botones y enlaces, azul cerúleo
+$color-borde-estructura: #093370; // Color para bordes y elementos estructurales, azul marino profundo
+$color-texto-principal: #000000; // Color de texto por defecto, negro
+
+// Colores de texto
+// Variables para los diferentes niveles de jerarquía y estados del texto
+$color-texto-titulo-h1: #093370; // Color para títulos principales h1, azul marino
+$color-texto-subtitulo: #1a4d7a; // Color para subtítulos h2 y h3, azul intermedio
+$color-texto-secundario: #4a4a4a; // Color para texto de menor importancia, gris oscuro
+$color-texto-deshabilitado: #999999; // Color para texto deshabilitado o inactivo, gris medio
+
+// Colores de interacción
+// Variables para los diferentes estados de elementos interactivos como botones y enlaces
+$color-hover-interactivo: #007ba3; // Color cuando el usuario pasa el cursor sobre un elemento, azul más oscuro
+$color-activo-interactivo: #005f82; // Color cuando el usuario hace clic en un elemento, azul profundo
+$color-deshabilitado-interactivo: #b3d9e8; // Color para elementos deshabilitados, azul desaturado
+$sombra-foco-accesibilidad: #009acd; // Color para el borde de foco de accesibilidad WCAG
+
+// Colores de alerta y retroalimentación
+// Variables para mensajes de diferentes tipos que se muestran al usuario
+$color-alerta-exito: #2d7a4f; // Color para mensajes de éxito, verde académico profesional
+$color-alerta-advertencia: #d68e2e; // Color para mensajes de advertencia, naranja cálido conservador
+$color-alerta-error: #c4324d; // Color para mensajes de error, rojo profundo no agresivo
+$color-alerta-info: #009acd; // Color para mensajes informativos, azul principal
+
+// Fondos secundarios y estructurales
+// Variables para fondos de diferentes secciones y componentes
+$color-fondo-puro: #ffffff; // Fondo blanco puro para tarjetas y formularios
+$color-fondo-tarjeta: #ffffff; // Fondo específico para tarjetas, blanco
+$color-fondo-barra-lateral: #e8e4e6; // Fondo para barras laterales, gris claro
+$color-fondo-pie-pagina: #093370; // Fondo del pie de página, azul marino
+
+// Acentos académicos
+// Variables para elementos de énfasis y bloques especiales
+$color-acento-resaltado: #fff4cc; // Color de fondo para texto resaltado, amarillo suave tipo marcador
+$acento-borde-cita: #009acd; // Color del borde izquierdo de las citas, azul principal
+$acento-fondo-cita: #f7fbfd; // Color de fondo para bloques de citas, azul muy claro
+$acento-fondo-codigo: #f5f5f5; // Color de fondo para bloques de código, gris muy claro
+$acento-texto-codigo: #2c3e50; // Color del texto dentro de bloques de código, gris azulado oscuro
+
+// Tipografía
+// Variables para fuentes y pesos de texto
+$fuente-principal: "Open Sans", Arial, sans-serif; // Fuente principal del sitio, Open Sans con fallbacks
+$fuente-codigo: "Consolas", "Monaco", "Courier New", monospace; // Fuente monoespaciada para código
+$fuente-cita: italic; // Estilo de fuente para citas, cursiva
+$peso-regular: 400; // Peso normal de fuente
+$peso-semi-negrita: 600; // Peso semi-negrita para énfasis medio
+$peso-negrita: 700; // Peso negrita para énfasis fuerte

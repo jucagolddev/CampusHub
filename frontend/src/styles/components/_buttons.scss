@@ -1,0 +1,79 @@
+// Estilos para componentes de botones
+// Este archivo define los estilos de los diferentes tipos de botones usados en la aplicación
+@use '../variables' as *;
+
+// Botón primario
+// Este es el botón principal de acción, usado para las acciones más importantes
+.boton-primario {
+    display: inline-block; // Permite aplicar padding y dimensiones
+    padding: 0.75em 1.5em; // Espaciado interno cómodo para el texto
+    background-color: $color-interactivo-principal; // Fondo azul principal
+    color: $color-fondo-puro; // Texto blanco para buen contraste
+    border: none; // Sin borde
+    border-radius: 4px; // Bordes ligeramente redondeados
+    font-size: 1rem; // Tamaño de fuente estándar
+    font-weight: $peso-semi-negrita; // Peso semi-negrita para énfasis
+    cursor: pointer; // Cursor de mano al pasar sobre el botón
+    transition: background-color 0.3s ease; // Transición suave del color de fondo
+
+    // Estado hover cuando el usuario pasa el cursor sobre el botón
+    &:hover {
+        background-color: $color-hover-interactivo; // Fondo azul más oscuro
+    }
+
+    // Estado activo cuando el usuario hace clic en el botón
+    &:active {
+        background-color: $color-activo-interactivo; // Fondo azul profundo
+        color: $color-fondo-puro !important; // Mantiene el texto blanco
+    }
+
+    // Estado deshabilitado cuando el botón no está disponible
+    &:disabled {
+        background-color: $color-deshabilitado-interactivo; // Fondo azul desaturado
+        cursor: not-allowed; // Cursor de prohibido
+    }
+
+    // Estado de foco para accesibilidad con teclado
+    &:focus {
+        outline: 3px solid $sombra-foco-accesibilidad; // Borde azul visible
+        outline-offset: 2px; // Separación del borde del botón
+    }
+}
+
+// Botón delineado
+// Botón secundario con borde, usado para acciones menos importantes
+.boton-delineado {
+    display: inline-block; // Permite aplicar padding y dimensiones
+    padding: 0.75em 1.5em; // Espaciado interno igual al botón primario
+    background-color: transparent; // Fondo transparente
+    color: $color-interactivo-principal; // Texto azul principal
+    border: 2px solid $color-interactivo-principal; // Borde azul de 2px
+    border-radius: 4px; // Bordes ligeramente redondeados
+    font-size: 1rem; // Tamaño de fuente estándar
+    font-weight: $peso-semi-negrita; // Peso semi-negrita para énfasis
+    cursor: pointer; // Cursor de mano al pasar sobre el botón
+    transition: all 0.3s ease; // Transición suave de todas las propiedades
+
+    // Estado hover cuando el usuario pasa el cursor sobre el botón
+    &:hover {
+        background-color: rgba($color-interactivo-principal, 0.1); // Fondo azul muy claro (10% opacidad)
+    }
+
+    // Estado activo cuando el usuario hace clic en el botón
+    &:active {
+        background-color: rgba($color-interactivo-principal, 0.2); // Fondo azul claro (20% opacidad)
+    }
+
+    // Estado deshabilitado cuando el botón no está disponible
+    &:disabled {
+        border-color: $color-deshabilitado-interactivo; // Borde azul desaturado
+        color: $color-deshabilitado-interactivo; // Texto azul desaturado
+        cursor: not-allowed; // Cursor de prohibido
+    }
+
+    // Estado de foco para accesibilidad con teclado
+    &:focus {
+        outline: 3px solid $sombra-foco-accesibilidad; // Borde azul visible
+        outline-offset: 2px; // Separación del borde del botón
+    }
+}

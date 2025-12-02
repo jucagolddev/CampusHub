@@ -1,0 +1,48 @@
+// Estilos para la página de registro
+// Este archivo define los estilos específicos del formulario de creación de cuenta
+@use '../variables' as *;
+@use '../mixins' as *;
+
+// Página de registro
+// Contenedor principal del formulario de registro
+.pagina-registro {
+    display: flex; // Usa flexbox para centrar el contenido
+    justify-content: center; // Centra horizontalmente
+    padding: 2rem 0; // Espaciado vertical
+
+    // Contenedor del formulario
+    // Caja blanca que contiene el formulario de registro
+    .contenedor-formulario {
+        width: 100%; // Ocupa todo el ancho disponible
+        max-width: 600px; // Ancho máximo de 600px (más ancho que login)
+        padding: 2rem; // Espaciado interno generoso
+        background-color: $color-fondo-puro; // Fondo blanco
+        border-radius: 8px; // Bordes redondeados
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Sombra sutil para dar profundidad
+    }
+
+    // Fila de nombres
+    // Grid para organizar los campos de nombre y apellido en dos columnas
+    .fila-nombres {
+        display: grid; // Usa grid para organizar los campos
+        grid-template-columns: 1fr 1fr; // Dos columnas de igual ancho
+        gap: 1rem; // Espacio entre campos
+        margin-bottom: 1rem; // Espacio inferior
+
+        // Adaptación para dispositivos móviles
+        @include responsive(movil) {
+            grid-template-columns: 1fr; // Una sola columna en móviles
+        }
+    }
+
+    // Sección de términos y condiciones
+    // Contenedor para el checkbox de aceptación de términos
+    .terminos {
+        margin-top: 1rem; // Espacio superior
+        font-size: 0.9rem; // Tamaño de fuente ligeramente más pequeño
+        color: $color-texto-secundario; // Color gris oscuro
+        display: flex; // Usa flexbox para organizar checkbox y label
+        align-items: center; // Centra verticalmente
+        gap: 0.5rem; // Espacio entre checkbox y label
+    }
+}

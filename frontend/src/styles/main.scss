@@ -1,0 +1,30 @@
+// Archivo orquestador principal
+// Este archivo no contiene estilos propios, solo importa todos los demás archivos parciales
+// El orden de importación es importante para evitar problemas de especificidad y dependencias
+
+// 1. Configuración y herramientas
+// Primero se importan las variables y mixins que serán usados por los demás archivos
+@use 'base/variables' as *;
+@use 'base/mixins' as *;
+
+// 2. Base y normalización
+// Se importan los estilos de reset y normalización que afectan a toda la página
+@use 'base/reset';
+
+// 3. Layout (estructura global)
+// Se importan los componentes de estructura principal como header y footer
+@use 'layout/header';
+@use 'layout/footer';
+
+// 4. Componentes (elementos reutilizables)
+// Se importan los componentes que se usan en múltiples páginas
+@use 'components/buttons';
+@use 'components/cards';
+@use 'components/inputs';
+
+// 5. Páginas (vistas específicas)
+// Se importan los estilos específicos de cada página
+@use 'pages/home';
+@use 'pages/login';
+@use 'pages/register';
+@use 'pages/upload';

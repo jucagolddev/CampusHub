@@ -1,0 +1,230 @@
+// Archivo de normalización y estilos base
+// Este archivo establece los estilos fundamentales y resetea los estilos por defecto del navegador
+@use 'variables' as *;
+
+// Reset básico para todos los elementos
+// Aplica box-sizing border-box para que el padding y border se incluyan en el ancho total
+* {
+    box-sizing: border-box;
+}
+
+// Estilos del body
+// Configuración principal del documento que afecta a toda la página
+body {
+    font-family: $fuente-principal; // Aplica la fuente principal Open Sans
+    font-weight: $peso-regular; // Peso de fuente normal
+    line-height: 1.6; // Altura de línea para mejor legibilidad
+    background-color: $color-fondo-base; // Color de fondo general de la página
+    margin: 0; // Elimina márgenes por defecto
+    padding: 0; // Elimina padding por defecto
+    color: $color-texto-principal; // Color de texto por defecto
+
+    // Configuración de flexbox para mantener el footer siempre al final
+    // Esto asegura que el footer se quede abajo incluso si hay poco contenido
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; // Altura mínima del 100% del viewport
+}
+
+// Elemento main que contiene el contenido principal
+// flex: 1 hace que ocupe todo el espacio disponible empujando el footer hacia abajo
+main {
+    flex: 1;
+}
+
+// Estilos para todos los encabezados
+// Configuración común para h1, h2, h3, h4, h5, h6
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $fuente-principal; // Usa la misma fuente principal
+    line-height: 1.2; // Altura de línea más compacta para títulos
+    margin-top: 1.8rem; // Espacio superior
+    margin-bottom: 0.5rem; // Espacio inferior
+}
+
+// Estilo específico para h1
+// El título principal más grande e importante de la página
+h1 {
+    font-size: 2.5rem; // Tamaño grande para máxima jerarquía
+    color: $color-texto-titulo-h1; // Color azul marino
+    font-weight: $peso-negrita; // Peso negrita para énfasis
+}
+
+// Estilo específico para h2
+// Subtítulos de segundo nivel
+h2 {
+    color: $color-texto-subtitulo; // Color azul intermedio
+    font-weight: $peso-semi-negrita; // Peso semi-negrita
+}
+
+// Estilos para h4, h5 y h6
+// Títulos de menor jerarquía
+h4,
+h5,
+h6 {
+    color: $color-texto-secundario; // Color gris oscuro
+    font-weight: $peso-regular; // Peso normal
+}
+
+// Estilos para enlaces
+// Configuración de apariencia y estados de los enlaces
+a {
+    color: $color-interactivo-principal; // Color azul principal
+    text-decoration: none; // Sin subrayado por defecto
+
+    // Estado hover cuando el usuario pasa el cursor sobre el enlace
+    &:hover {
+        color: $color-hover-interactivo; // Color azul más oscuro
+        text-decoration: underline; // Añade subrayado
+    }
+
+    // Estado activo cuando el usuario hace clic en el enlace
+    &:active {
+        color: $color-activo-interactivo; // Color azul profundo
+    }
+
+    // Estado deshabilitado para enlaces inactivos
+    &:disabled {
+        color: $color-deshabilitado-interactivo; // Color azul desaturado
+        pointer-events: none; // Desactiva eventos de mouse
+        cursor: default; // Cursor normal en lugar de pointer
+    }
+}
+
+// Estilos para bloques de citas
+// Se usa para destacar citas o fragmentos importantes de texto
+blockquote {
+    border-left: 5px solid $acento-borde-cita; // Borde izquierdo azul
+    background-color: $acento-fondo-cita; // Fondo azul muy claro
+    padding: 1em 1.5em; // Espaciado interno
+    margin: 2em 0; // Espaciado externo
+    font-style: $fuente-cita; // Estilo cursiva
+    color: $color-texto-secundario; // Color de texto gris oscuro
+}
+
+// Estilos para código inline
+// Se usa para mostrar código o texto técnico dentro de un párrafo
+code {
+    font-family: $fuente-codigo; // Fuente monoespaciada
+    color: $acento-texto-codigo; // Color gris azulado oscuro
+    background-color: $acento-fondo-codigo; // Fondo gris claro
+    padding: 0.2em 0.4em; // Espaciado interno pequeño
+    border-radius: 3px; // Bordes ligeramente redondeados
+    white-space: nowrap; // Evita que el código se divida en varias líneas
+}
+
+// Estilos para bloques de código
+// Se usa para mostrar fragmentos de código más largos
+pre {
+    background-color: $acento-fondo-codigo; // Fondo gris claro
+    color: $acento-texto-codigo; // Color gris azulado oscuro
+    padding: 1em; // Espaciado interno
+    border-radius: 4px; // Bordes redondeados
+    overflow-x: auto; // Permite scroll horizontal si el código es muy ancho
+}
+
+// Clase de utilidad para texto secundario
+// Se usa para texto de menor importancia o descripciones
+.texto-secundario {
+    color: $color-texto-secundario; // Color gris oscuro
+    font-size: 0.9rem; // Tamaño ligeramente más pequeño
+}
+
+// Clase de utilidad para texto deshabilitado
+// Se usa para texto inactivo o no disponible
+.texto-deshabilitado {
+    color: $color-texto-deshabilitado; // Color gris medio
+    font-size: 0.9rem; // Tamaño ligeramente más pequeño
+}
+
+// Clase contenedor principal
+// Limita el ancho del contenido y lo centra en la página
+.contenedor {
+    max-width: 1000px; // Ancho máximo de 1000px
+    margin: 0 auto; // Centra horizontalmente
+    padding: 0 20px; // Espaciado lateral para que no toque los bordes
+}
+
+// Clases de utilidad para espaciado
+// Estas clases permiten añadir márgenes sin usar estilos inline
+
+// Margen superior
+.mt-2 {
+    margin-top: 2rem;
+}
+
+.mt-3 {
+    margin-top: 3rem;
+}
+
+// Margen inferior
+.mb-1 {
+    margin-bottom: 1rem;
+}
+
+.mb-2 {
+    margin-bottom: 2rem;
+}
+
+// Padding superior
+.pt-2 {
+    padding-top: 2rem;
+}
+
+// Clases de utilidad para layout
+
+// Contenedor flex con gap
+.flex-gap {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+// Posición relativa para iconos
+.posicion-relativa {
+    position: relative;
+}
+
+// Icono de búsqueda posicionado
+.icono-busqueda {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+// Ancho completo
+.ancho-completo {
+    width: 100%;
+}
+
+// Centrado de texto
+.texto-centrado {
+    text-align: center;
+}
+
+// Alineación de elementos
+.alinear-inicio {
+    align-self: start;
+}
+
+// Separador de sección
+// Borde superior para separar secciones visualmente
+.separador-seccion {
+    margin-top: 3rem;
+    border-top: 1px solid #eee;
+    padding-top: 2rem;
+}
+
+// Logo como imagen
+// Ajustes para cuando el logo es una imagen en lugar del círculo CSS
+.logo img.icono-logo {
+    width: 40px;
+    height: auto;
+}

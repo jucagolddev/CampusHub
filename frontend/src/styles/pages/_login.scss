@@ -1,0 +1,23 @@
+// Estilos para la página de inicio de sesión
+// Este archivo define los estilos específicos del formulario de login
+@use '../variables' as *;
+
+// Página de login
+// Contenedor principal que centra el formulario de inicio de sesión
+.pagina-login {
+    display: flex; // Usa flexbox para centrar el contenido
+    justify-content: center; // Centra horizontalmente
+    align-items: center; // Centra verticalmente
+    min-height: 80vh; // Altura mínima del 80% del viewport para centrado vertical
+
+    // Contenedor del formulario
+    // Caja blanca que contiene el formulario de login
+    .contenedor-formulario {
+        width: 100%; // Ocupa todo el ancho disponible
+        max-width: 400px; // Ancho máximo de 400px
+        padding: 2rem; // Espaciado interno generoso
+        background-color: $color-fondo-puro; // Fondo blanco
+        border-radius: 8px; // Bordes redondeados
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Sombra sutil para dar profundidad
+    }
+}

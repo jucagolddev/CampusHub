@@ -1,0 +1,71 @@
+// Estilos para componentes de campos de entrada
+// Este archivo define los estilos de inputs, textareas y selects
+@use '../variables' as *;
+
+// Estilos base para todos los campos de entrada
+// Se aplica a inputs de texto, email, password, textareas y selects
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+    width: 100%; // Ocupa todo el ancho disponible
+    padding: 0.75rem; // Espaciado interno cómodo
+    border: 1px solid $color-texto-deshabilitado; // Borde gris medio
+    border-radius: 4px; // Bordes ligeramente redondeados
+    font-family: $fuente-principal; // Usa la fuente principal
+    font-size: 1rem; // Tamaño de fuente estándar
+    color: $color-texto-principal; // Color de texto negro
+    background-color: $color-fondo-puro; // Fondo blanco
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; // Transiciones suaves
+
+    // Estado de foco cuando el usuario hace clic en el campo
+    &:focus {
+        outline: none; // Elimina el outline por defecto del navegador
+        border-color: $color-interactivo-principal; // Borde azul principal
+        box-shadow: 0 0 0 3px rgba($color-interactivo-principal, 0.2); // Sombra azul suave
+    }
+
+    // Estilo del placeholder (texto de ayuda dentro del campo)
+    &::placeholder {
+        color: $color-texto-deshabilitado; // Color gris medio
+    }
+
+    // Estado deshabilitado cuando el campo no está disponible
+    &:disabled {
+        background-color: $color-fondo-base; // Fondo gris rosado claro
+        cursor: not-allowed; // Cursor de prohibido
+    }
+}
+
+// Barra de búsqueda
+// Input especial con bordes más redondeados para búsquedas
+.barra-busqueda {
+    border-radius: 50px; // Bordes completamente redondeados
+    padding-left: 1.5rem; // Espaciado izquierdo extra
+    padding-right: 1.5rem; // Espaciado derecho extra
+}
+
+// Contenedor de inputs
+// Grid responsivo para organizar múltiples campos de entrada
+.contenedor-inputs {
+    display: grid; // Usa grid para organizar los campos
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); // Columnas automáticas con mínimo de 250px
+    gap: 1.5rem; // Espacio entre campos
+    margin-bottom: 1rem; // Espacio inferior
+}
+
+// Grupo de input
+// Contenedor para un campo con su etiqueta
+.grupo-input {
+    display: flex; // Usa flexbox para organizar label e input
+    flex-direction: column; // Organiza en columna vertical
+    gap: 0.5rem; // Espacio entre label e input
+
+    // Etiqueta del campo
+    label {
+        font-weight: $peso-semi-negrita; // Peso semi-negrita para énfasis
+        font-size: 0.9rem; // Tamaño ligeramente más pequeño
+        color: $color-texto-subtitulo; // Color azul intermedio
+    }
+}

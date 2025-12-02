@@ -1,0 +1,82 @@
+// Estilos para componentes de tarjetas y alertas
+// Este archivo define los estilos de tarjetas y mensajes de retroalimentación
+@use 'sass:color';
+@use '../variables' as *;
+
+// Sección alterna (tarjeta base)
+// Contenedor genérico que se usa como base para diferentes tipos de tarjetas
+.seccion-alterna {
+    background-color: $color-fondo-tarjeta; // Fondo blanco
+    border: 1px solid color.adjust($color-borde-estructura, $lightness: 70%); // Borde azul muy claro
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); // Sombra sutil para dar profundidad
+    padding: 1.5em; // Espaciado interno generoso
+    border-radius: 6px; // Bordes redondeados
+    margin-bottom: 1.5em; // Espacio inferior entre secciones
+
+    // Títulos h3 dentro de la sección alterna
+    h3 {
+        color: $color-texto-subtitulo; // Color azul intermedio
+    }
+}
+
+// Tarjeta de sonido
+// Tarjeta específica con diseño vertical para contenido de audio o multimedia
+.tarjeta-sonido {
+    @extend .seccion-alterna; // Hereda todos los estilos de seccion-alterna
+    display: flex; // Usa flexbox para organizar el contenido
+    flex-direction: column; // Organiza los elementos en columna vertical
+    gap: 1rem; // Espacio entre elementos internos
+}
+
+// Sistema de alertas
+// Mensajes de retroalimentación para informar al usuario sobre diferentes estados
+
+// Alerta base
+// Contenedor base para todos los tipos de alertas
+.alerta {
+    padding: 1em; // Espaciado interno
+    margin-bottom: 1em; // Espacio inferior entre alertas
+    border-left: 5px solid; // Borde izquierdo grueso (el color se define en cada tipo)
+    font-weight: $peso-regular; // Peso de fuente normal
+    border-radius: 4px; // Bordes ligeramente redondeados
+
+    // Alerta de éxito
+    // Se usa para confirmar que una acción se completó correctamente
+    &.exito {
+        background-color: color.adjust($color-alerta-exito, $lightness: 40%); // Fondo verde claro
+        border-color: $color-alerta-exito; // Borde verde
+        color: color.adjust($color-alerta-exito, $lightness: -20%); // Texto verde oscuro
+    }
+
+    // Alerta de advertencia
+    // Se usa para avisar al usuario sobre algo que requiere atención
+    &.advertencia {
+        background-color: color.adjust($color-alerta-advertencia, $lightness: 40%); // Fondo naranja claro
+        border-color: $color-alerta-advertencia; // Borde naranja
+        color: color.adjust($color-alerta-advertencia, $lightness: -20%); // Texto naranja oscuro
+    }
+
+    // Alerta de error
+    // Se usa para informar sobre errores o problemas
+    &.error {
+        background-color: color.adjust($color-alerta-error, $lightness: 40%); // Fondo rojo claro
+        border-color: $color-alerta-error; // Borde rojo
+        color: color.adjust($color-alerta-error, $lightness: -20%); // Texto rojo oscuro
+    }
+
+    // Alerta informativa
+    // Se usa para proporcionar información general al usuario
+    &.info {
+        background-color: color.adjust($color-alerta-info, $lightness: 40%); // Fondo azul claro
+        border-color: $color-alerta-info; // Borde azul
+        color: color.adjust($color-alerta-info, $lightness: -20%); // Texto azul oscuro
+    }
+
+    // Texto resaltado dentro de alertas
+    // Se usa para destacar palabras o frases importantes dentro del mensaje
+    .textoResaltado {
+        background-color: $color-acento-resaltado; // Fondo amarillo suave
+        padding: 0.1em 0.3em; // Espaciado interno pequeño
+        border-radius: 2px; // Bordes ligeramente redondeados
+    }
+}
