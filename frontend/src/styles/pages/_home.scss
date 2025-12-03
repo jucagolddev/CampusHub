@@ -1,27 +1,26 @@
 // Estilos para la página de inicio
 // Este archivo define los estilos específicos de la página principal
-@use 'base/variables' as *;
-@use 'base/mixins' as *;
+@use "base/variables" as *;
 
 // Grid de dos columnas
 // Sistema de cuadrícula para organizar contenido en dos columnas
 .grid-dos-columnas {
-    display: grid; // Usa grid para organizar el contenido
-    grid-template-columns: 1fr 1fr; // Dos columnas de igual ancho
-    gap: 20px; // Espacio entre columnas
+  display: grid; // Usa grid para organizar el contenido
+  grid-template-columns: 1fr 1fr; // Dos columnas de igual ancho
+  gap: 20px; // Espacio entre columnas
 
-    // Adaptación para dispositivos móviles
-    // En pantallas pequeñas se muestra una sola columna
-    @include responsive(movil) {
-        grid-template-columns: 1fr; // Una sola columna
-    }
+  // Adaptación para dispositivos móviles
+  // En pantallas pequeñas se muestra una sola columna
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr; // Una sola columna
+  }
 }
 
 // Filtros por categoría
 // Contenedor para botones de filtro que permiten navegar por categorías
 .filtros-categoria {
-    display: flex; // Usa flexbox para organizar los botones
-    gap: 1rem; // Espacio entre botones
-    margin-bottom: 2rem; // Espacio inferior
-    flex-wrap: wrap; // Permite que los botones se envuelvan en múltiples líneas si es necesario
+  display: flex; // Usa flexbox para organizar los botones
+  gap: 1rem; // Espacio entre botones
+  margin-bottom: 2rem; // Espacio inferior
+  flex-wrap: wrap; // Permite que los botones se envuelvan en múltiples líneas si es necesario
 }

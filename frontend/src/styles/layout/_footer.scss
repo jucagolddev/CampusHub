@@ -1,75 +1,77 @@
 // Estilos para el pie de página
 // Este archivo define los estilos del footer que aparece al final de todas las páginas
-@use 'base/variables' as *;
-@use 'base/mixins' as *;
+@use "../variables" as *;
 
 // Pie de página principal
 // Contenedor principal del footer con fondo azul marino
 .pie-pagina-principal {
-    background-color: $color-fondo-pie-pagina; // Fondo azul marino
-    color: $color-fondo-puro; // Texto blanco
-    padding: 3rem 0; // Espaciado vertical generoso
-    margin-top: 4rem; // Espacio superior para separar del contenido
-    font-size: 0.9rem; // Tamaño de fuente ligeramente más pequeño
+  background-color: $color-fondo-pie-pagina; // Fondo azul marino
+  color: $color-fondo-puro; // Texto blanco
+  padding: 3rem 0; // Espaciado vertical generoso
+  margin-top: 4rem; // Espacio superior para separar del contenido
+  font-size: 0.9rem; // Tamaño de fuente ligeramente más pequeño
 
-    // Contenedor de columnas del footer
-    // Organiza el contenido en columnas responsivas
-    .contenedor-footer {
-        display: grid; // Usa grid para organizar columnas
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); // Columnas automáticas con mínimo de 250px
-        gap: 2rem; // Espacio entre columnas
+  // Contenedor de columnas del footer
+  // Organiza el contenido en columnas responsivas
+  .contenedor-footer {
+    display: grid; // Usa grid para organizar columnas
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(250px, 1fr)
+    ); // Columnas automáticas con mínimo de 250px
+    gap: 2rem; // Espacio entre columnas
 
-        // Adaptación para dispositivos móviles
-        @include responsive(movil) {
-            text-align: center; // Centra el texto en móviles
-        }
+    // Adaptación para dispositivos móviles
+    @media (max-width: 768px) {
+      text-align: center; // Centra el texto en móviles
     }
+  }
 
-    // Títulos h4 dentro del footer
-    // Encabezados de cada columna del footer
-    h4 {
-        color: $color-acento-resaltado; // Color amarillo suave
-        margin-top: 0; // Sin margen superior
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2); // Borde inferior blanco semi-transparente
-        padding-bottom: 0.5rem; // Espaciado inferior
-        margin-bottom: 1rem; // Espacio inferior
+  // Títulos h4 dentro del footer
+  // Encabezados de cada columna del footer
+  h4 {
+    color: $color-acento-resaltado; // Color amarillo suave
+    margin-top: 0; // Sin margen superior
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); // Borde inferior blanco semi-transparente
+    padding-bottom: 0.5rem; // Espaciado inferior
+    margin-bottom: 1rem; // Espacio inferior
+  }
+
+  // Párrafos y elementos de lista
+  // Texto del contenido del footer
+  p,
+  li {
+    color: rgba(255, 255, 255, 0.8); // Blanco semi-transparente
+    line-height: 1.8; // Altura de línea para mejor legibilidad
+  }
+
+  // Listas dentro del footer
+  ul {
+    list-style: none; // Sin viñetas
+    padding: 0; // Sin padding
+    margin: 0; // Sin márgenes
+  }
+
+  // Enlaces dentro del footer
+  a {
+    color: $color-fondo-puro; // Color blanco
+    text-decoration: none; // Sin subrayado
+
+    // Estado hover de los enlaces
+    &:hover {
+      color: $color-acento-resaltado; // Cambia a amarillo suave
+      text-decoration: underline; // Añade subrayado
     }
+  }
 
-    // Párrafos y elementos de lista
-    // Texto del contenido del footer
-    p,
-    li {
-        color: rgba(255, 255, 255, 0.8); // Blanco semi-transparente
-        line-height: 1.8; // Altura de línea para mejor legibilidad
-    }
-
-    // Listas dentro del footer
-    ul {
-        list-style: none; // Sin viñetas
-        padding: 0; // Sin padding
-        margin: 0; // Sin márgenes
-    }
-
-    // Enlaces dentro del footer
-    a {
-        color: $color-fondo-puro; // Color blanco
-        text-decoration: none; // Sin subrayado
-
-        // Estado hover de los enlaces
-        &:hover {
-            color: $color-acento-resaltado; // Cambia a amarillo suave
-            text-decoration: underline; // Añade subrayado
-        }
-    }
-
-    // Sección de copyright
-    // Texto de derechos de autor al final del footer
-    .copyright {
-        text-align: center; // Centra el texto
-        margin-top: 3rem; // Espacio superior
-        padding-top: 1rem; // Espaciado superior interno
-        border-top: 1px solid rgba(255, 255, 255, 0.1); // Borde superior blanco muy transparente
-        font-size: 0.8rem; // Tamaño de fuente pequeño
-        color: rgba(255, 255, 255, 0.5); // Blanco muy transparente
-    }
+  // Sección de copyright
+  // Texto de derechos de autor al final del footer
+  .copyright {
+    text-align: center; // Centra el texto
+    margin-top: 3rem; // Espacio superior
+    padding-top: 1rem; // Espaciado superior interno
+    border-top: 1px solid rgba(255, 255, 255, 0.1); // Borde superior blanco muy transparente
+    font-size: 0.8rem; // Tamaño de fuente pequeño
+    color: rgba(255, 255, 255, 0.5); // Blanco muy transparente
+  }
 }
