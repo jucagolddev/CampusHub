@@ -1,4 +1,4 @@
-Estructura CAMPUS HUB
+## Estructura CAMPUS HUB
 ## 📂 Estructura del Proyecto y Definición de Carpetas
 
 Este proyecto sigue una arquitectura **Monorepo** dividida en Backend (API) y Frontend (Cliente SPA), diseñada para ser escalable y mantenible.
