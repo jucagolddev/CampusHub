@@ -5,111 +5,110 @@
 // Cabecera principal
 // Contenedor principal del header que incluye logo y navegación
 .cabecera-principal {
-    background-color: $color-fondo-puro; // Fondo blanco
-    border-bottom: 2px solid $color-borde-estructura; // Borde inferior azul marino
-    padding: 1rem 0; // Espaciado vertical
+  background-color: $color-fondo-puro; // Fondo blanco
+  border-bottom: 2px solid $color-borde-estructura; // Borde inferior azul marino
+  padding: 1rem 0; // Espaciado vertical
 
-    // Contenedor interno del header
-    // Organiza el logo y la navegación en una fila
-    .contenedor-header {
-        display: flex; // Usa flexbox para organizar elementos
-        justify-content: space-between; // Separa logo y navegación a los extremos
-        align-items: center; // Centra verticalmente los elementos
-        flex-wrap: wrap; // Permite que los elementos se envuelvan en pantallas pequeñas
+  // Contenedor interno del header
+  // Organiza el logo y la navegación en una fila
+  .contenedor-header {
+    display: flex; // Usa flexbox para organizar elementos
+    justify-content: space-between; // Separa logo y navegación a los extremos
+    align-items: center; // Centra verticalmente los elementos
+    flex-wrap: wrap; // Permite que los elementos se envuelvan en pantallas pequeñas
 
-        // Adaptación para dispositivos móviles
-        @media (max-width: 768px) {
-            flex-direction: column; // Cambia a columna vertical
-            gap: 1rem; // Espacio entre elementos
-            text-align: center; // Centra el texto
-        }
+    // Adaptación para dispositivos móviles
+    @media (max-width: 768px) {
+      flex-direction: column; // Cambia a columna vertical
+      gap: 1rem; // Espacio entre elementos
+      text-align: center; // Centra el texto
     }
+  }
 }
 
 // Logo
 // Elemento de marca que enlaza a la página principal
 .logo {
-    font-family: $fuente-principal; // Usa la fuente principal
-    font-weight: $peso-negrita; // Peso negrita para énfasis
-    font-size: 1.5rem; // Tamaño grande
-    color: $color-texto-titulo-h1; // Color azul marino
-    text-decoration: none; // Sin subrayado
-    display: flex; // Usa flexbox para organizar icono y texto
-    align-items: center; // Centra verticalmente icono y texto
-    gap: 0.5rem; // Espacio entre icono y texto
+  font-family: $fuente-principal; // Usa la fuente principal
+  font-weight: $peso-negrita; // Peso negrita para énfasis
+  font-size: 1.5rem; // Tamaño grande
+  color: $color-texto-titulo-h1; // Color azul marino
+  text-decoration: none; // Sin subrayado
+  display: flex; // Usa flexbox para organizar icono y texto
+  align-items: center; // Centra verticalmente icono y texto
+  gap: 0.5rem; // Espacio entre icono y texto
 
-    // Icono del logo
-    // Círculo azul que representa la marca
-    .icono-logo {
-        display: inline-block; // Permite aplicar dimensiones
-        width: 30px; // Ancho del círculo
-        height: 30px; // Alto del círculo
-        background-color: $color-interactivo-principal; // Fondo azul principal
-        border-radius: 50%; // Forma circular
-    }
+  // Icono del logo
+  // Círculo azul que representa la marca
+  .icono-logo {
+    display: inline-block; // Permite aplicar dimensiones
+    width: 30px; // Ancho del círculo
+    height: 30px; // Alto del círculo
+    background-color: $color-interactivo-principal; // Fondo azul principal
+    border-radius: 50%; // Forma circular
+  }
 
-    // Estado hover del logo
-    &:hover {
-        text-decoration: none; // Mantiene sin subrayado
-        opacity: 0.9; // Reduce ligeramente la opacidad
-    }
+  // Estado hover del logo
+  &:hover {
+    text-decoration: none; // Mantiene sin subrayado
+    opacity: 0.9; // Reduce ligeramente la opacidad
+  }
 }
 
 // Navegación principal
 // Menú de navegación con enlaces a las secciones principales
 .nav-principal {
+  // Lista de enlaces
+  ul {
+    list-style: none; // Sin viñetas
+    margin: 0; // Sin márgenes
+    padding: 0; // Sin padding
+    display: flex; // Usa flexbox para organizar enlaces en fila
+    gap: 2rem; // Espacio entre enlaces
 
-    // Lista de enlaces
-    ul {
-        list-style: none; // Sin viñetas
-        margin: 0; // Sin márgenes
-        padding: 0; // Sin padding
-        display: flex; // Usa flexbox para organizar enlaces en fila
-        gap: 2rem; // Espacio entre enlaces
+    // Adaptación para dispositivos móviles
+    @media (max-width: 768px) {
+      gap: 1rem; // Reduce el espacio entre enlaces
+      flex-direction: column; // Cambia a columna vertical
+    }
+  }
 
-        // Adaptación para dispositivos móviles
-        @media (max-width: 768px) {
-            gap: 1rem; // Reduce el espacio entre enlaces
-            flex-direction: column; // Cambia a columna vertical
-        }
+  // Enlaces de navegación
+  a {
+    color: $color-texto-subtitulo; // Color azul intermedio
+    font-weight: $peso-semi-negrita; // Peso semi-negrita
+    text-decoration: none; // Sin subrayado
+    padding: 0.5rem 0; // Espaciado vertical
+    position: relative; // Necesario para el pseudo-elemento ::after
+    transition: color 0.3s ease; // Transición suave del color
+
+    // Pseudo-elemento para la línea animada debajo del enlace
+    &::after {
+      content: ""; // Contenido vacío
+      position: absolute; // Posicionamiento absoluto
+      width: 0; // Ancho inicial 0 (invisible)
+      height: 2px; // Altura de la línea
+      bottom: 0; // Posicionado en la parte inferior
+      left: 0; // Alineado a la izquierda
+      background-color: $color-interactivo-principal; // Color azul principal
+      transition: width 0.3s ease; // Transición suave del ancho
     }
 
-    // Enlaces de navegación
-    a {
-        color: $color-texto-subtitulo; // Color azul intermedio
-        font-weight: $peso-semi-negrita; // Peso semi-negrita
-        text-decoration: none; // Sin subrayado
-        padding: 0.5rem 0; // Espaciado vertical
-        position: relative; // Necesario para el pseudo-elemento ::after
-        transition: color 0.3s ease; // Transición suave del color
+    // Estado hover del enlace
+    &:hover {
+      color: $color-interactivo-principal; // Cambia a azul principal
+      text-decoration: none; // Mantiene sin subrayado
 
-        // Pseudo-elemento para la línea animada debajo del enlace
-        &::after {
-            content: ""; // Contenido vacío
-            position: absolute; // Posicionamiento absoluto
-            width: 0; // Ancho inicial 0 (invisible)
-            height: 2px; // Altura de la línea
-            bottom: 0; // Posicionado en la parte inferior
-            left: 0; // Alineado a la izquierda
-            background-color: $color-interactivo-principal; // Color azul principal
-            transition: width 0.3s ease; // Transición suave del ancho
-        }
-
-        // Estado hover del enlace
-        &:hover {
-            color: $color-interactivo-principal; // Cambia a azul principal
-            text-decoration: none; // Mantiene sin subrayado
-
-            // Anima la línea debajo del enlace
-            &::after {
-                width: 100%; // Expande la línea al 100% del ancho
-            }
-        }
-
-        // Estado activo para el enlace de la página actual
-        &.activo {
-            color: $color-interactivo-principal; // Color azul principal
-            font-weight: $peso-negrita; // Peso negrita para mayor énfasis
-        }
+      // Anima la línea debajo del enlace
+      &::after {
+        width: 100%; // Expande la línea al 100% del ancho
+      }
     }
+
+    // Estado activo para el enlace de la página actual
+    &.activo {
+      color: $color-interactivo-principal; // Color azul principal
+      font-weight: $peso-negrita; // Peso negrita para mayor énfasis
+    }
+  }
 }

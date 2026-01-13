@@ -1,1 +1,31 @@
-<p>project-card works!</p>
+<div class="project-card">
+  <!-- 1. Imagen del proyecto -->
+  <div class="card-image">
+    <!-- Usamos [src] para vincular la imagen dinámicamente -->
+    <img [src]="project.image" [alt]="project.title">
+  </div>
+
+  <!-- 2. Tecnologías (Angular, Node, Js) -->
+  <div class="card-tags">
+    <span class="tag" *ngFor="let tech of project.technologies">
+      {{ tech }}
+    </span>
+  </div>
+
+  <!-- 3. Título del Proyecto -->
+  <h3 class="card-title">{{ project.title }}</h3>
+
+  <!-- 4. Descripción breve -->
+  <p class="card-description">
+    {{ project.description }}
+  </p>
+
+  <!-- 5. Footer con Link a GitHub -->
+  <div class="card-footer">
+    <a [href]="project.githubLink" target="_blank" class="github-link">
+      <!-- Icono de GitHub (puedes usar una imagen o svg aquí) -->
+      <img src="assets/icons/github.svg" alt="GitHub" class="github-icon">
+      Link GitHub
+    </a>
+  </div>
+</div>
