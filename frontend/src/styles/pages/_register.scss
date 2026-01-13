@@ -1,13 +1,16 @@
 // Estilos para la página de registro
 // Este archivo define los estilos específicos del formulario de creación de cuenta
 @use "../base/variables" as *;
+@use "../base/utilities" as *;
 
 // Página de registro
 // Contenedor principal del formulario de registro
 .pagina-registro {
+  @include margenes-laterales;
   display: flex; // Usa flexbox para centrar el contenido
   justify-content: center; // Centra horizontalmente
-  padding: 2rem 0; // Espaciado vertical
+  padding-top: 2rem; // Espaciado vertical superior
+  padding-bottom: 2rem; // Espaciado vertical inferior
 
   // Contenedor del formulario
   // Caja blanca que contiene el formulario de registro

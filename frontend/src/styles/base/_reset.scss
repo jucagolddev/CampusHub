@@ -42,8 +42,8 @@ h5,
 h6 {
   font-family: $fuente-principal; // Usa la misma fuente principal
   line-height: 1.2; // Altura de línea más compacta para títulos
-  margin-top: 1.8rem; // Espacio superior
-  margin-bottom: 0.5rem; // Espacio inferior
+  margin-top: $espaciado-xl; // Espacio superior estándar
+  margin-bottom: $espaciado-s; // Espacio inferior estándar
 }
 
 // Estilo específico para h1
@@ -141,38 +141,36 @@ pre {
   font-size: 0.9rem; // Tamaño ligeramente más pequeño
 }
 
-// Clase contenedor principal
-// Limita el ancho del contenido y lo centra en la página
-.contenedor {
-  max-width: 1000px; // Ancho máximo de 1000px
-  margin: 0 auto; // Centra horizontalmente
-  padding: 0 20px; // Espaciado lateral para que no toque los bordes
-}
+// La clase .contenedor antigua ha sido reemplazada por .contenedor-pagina en _utilities.scss
 
 // Clases de utilidad para espaciado
 // Estas clases permiten añadir márgenes sin usar estilos inline
 
 // Margen superior
+.mt-1 {
+  margin-top: $espaciado-m;
+}
+
 .mt-2 {
-  margin-top: 2rem;
+  margin-top: $espaciado-xl;
 }
 
 .mt-3 {
-  margin-top: 3rem;
+  margin-top: $espaciado-xxl;
 }
 
 // Margen inferior
 .mb-1 {
-  margin-bottom: 1rem;
+  margin-bottom: $espaciado-m;
 }
 
 .mb-2 {
-  margin-bottom: 2rem;
+  margin-bottom: $espaciado-xl;
 }
 
 // Padding superior
 .pt-2 {
-  padding-top: 2rem;
+  padding-top: $espaciado-xl;
 }
 
 // Clases de utilidad para layout
@@ -180,8 +178,8 @@ pre {
 // Contenedor flex con gap
 .flex-gap {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: $gap-flex;
+  margin-bottom: $espaciado-xl;
   flex-wrap: wrap;
 }
 
@@ -217,9 +215,9 @@ pre {
 // Separador de sección
 // Borde superior para separar secciones visualmente
 .separador-seccion {
-  margin-top: 3rem;
+  margin-top: $espaciado-xxl;
   border-top: 1px solid #eee;
-  padding-top: 2rem;
+  padding-top: $espaciado-xl;
 }
 
 // Logo como imagen

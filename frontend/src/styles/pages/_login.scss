@@ -1,10 +1,12 @@
 // Estilos para la página de inicio de sesión
 // Este archivo define los estilos específicos del formulario de login
 @use "../base/variables" as *;
+@use "../base/utilities" as *;
 
 // Página de login
 // Contenedor principal que centra el formulario de inicio de sesión
 .pagina-login {
+  @include margenes-laterales;
   display: flex; // Usa flexbox para centrar el contenido
   justify-content: center; // Centra horizontalmente
   align-items: center; // Centra verticalmente

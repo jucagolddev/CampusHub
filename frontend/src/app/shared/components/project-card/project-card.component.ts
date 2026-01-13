@@ -6,6 +6,7 @@ export interface Project {
   technologies: string[];
   title: string;
   description: string;
+  author: string;
   githubLink: string;
 }
 

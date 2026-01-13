@@ -6,7 +6,7 @@
 // Este es el botón principal de acción, usado para las acciones más importantes
 .boton-primario {
   display: inline-block; // Permite aplicar padding y dimensiones
-  padding: 0.75em 1.5em; // Espaciado interno cómodo para el texto
+  padding: $espaciado-s $espaciado-l; // Espaciado interno cómodo para el texto
   background-color: $color-interactivo-principal; // Fondo azul principal
   color: $color-fondo-puro; // Texto blanco para buen contraste
   border: none; // Sin borde
@@ -44,7 +44,7 @@
 // Botón secundario con borde, usado para acciones menos importantes
 .boton-delineado {
   display: inline-block; // Permite aplicar padding y dimensiones
-  padding: 0.75em 1.5em; // Espaciado interno igual al botón primario
+  padding: $espaciado-s $espaciado-l; // Espaciado interno igual al botón primario
   background-color: transparent; // Fondo transparente
   color: $color-interactivo-principal; // Texto azul principal
   border: 2px solid $color-interactivo-principal; // Borde azul de 2px

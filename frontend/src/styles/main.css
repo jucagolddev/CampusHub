@@ -27,7 +27,7 @@ h5,
 h6 {
   font-family: "Open Sans", Arial, sans-serif;
   line-height: 1.2;
-  margin-top: 1.8rem;
+  margin-top: 2rem;
   margin-bottom: 0.5rem;
 }
 
@@ -102,10 +102,8 @@ pre {
   font-size: 0.9rem;
 }
 
-.contenedor {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 0 20px;
+.mt-1 {
+  margin-top: 1rem;
 }
 
 .mt-2 {
@@ -170,6 +168,56 @@ pre {
   height: auto;
 }
 
+.contenedor-pagina {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .contenedor-pagina {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .contenedor-pagina {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+@media (min-width: 1440px) {
+  .contenedor-pagina {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
+}
+
+.margenes-laterales {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+@media (min-width: 768px) {
+  .margenes-laterales {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .margenes-laterales {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+@media (min-width: 1440px) {
+  .margenes-laterales {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
+}
+
 .cabecera-principal {
   background-color: #ffffff;
   border-bottom: 2px solid #093370;
@@ -201,10 +249,8 @@ pre {
 }
 .logo .icono-logo {
   display: inline-block;
-  width: 30px;
-  height: 30px;
-  background-color: #009acd;
-  border-radius: 50%;
+  height: 40px;
+  width: auto;
 }
 .logo:hover {
   text-decoration: none;
@@ -307,7 +353,7 @@ pre {
 
 .boton-primario {
   display: inline-block;
-  padding: 0.75em 1.5em;
+  padding: 0.5rem 1.5rem;
   background-color: #009acd;
   color: #ffffff;
   border: none;
@@ -335,7 +381,7 @@ pre {
 
 .boton-delineado {
   display: inline-block;
-  padding: 0.75em 1.5em;
+  padding: 0.5rem 1.5rem;
   background-color: transparent;
   color: #009acd;
   border: 2px solid #009acd;
@@ -365,9 +411,9 @@ pre {
   background-color: #ffffff;
   border: 1px solid #e1ecfd;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  padding: 1.5em;
+  padding: 1.5rem;
   border-radius: 6px;
-  margin-bottom: 1.5em;
+  margin-bottom: 1.5rem;
 }
 .seccion-alterna h3, .tarjeta-sonido h3 {
   color: #1a4d7a;
@@ -380,8 +426,8 @@ pre {
 }
 
 .alerta {
-  padding: 1em;
-  margin-bottom: 1em;
+  padding: 1rem;
+  margin-bottom: 1rem;
   border-left: 5px solid;
   font-weight: 400;
   border-radius: 4px;
@@ -451,7 +497,7 @@ pre {
 }
 .tarjeta-proyecto .contenido-tarjeta .etiquetas span {
   font-size: 0.75rem;
-  padding: 0.25rem 0.75rem;
+  padding: 0.25rem 0.5rem;
   border: 1px solid #009acd;
   border-radius: 50px;
   color: #009acd;
@@ -479,8 +525,17 @@ pre {
 .tarjeta-proyecto .contenido-tarjeta .autor .avatar {
   width: 30px;
   height: 30px;
-  background-color: #ddd;
   border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tarjeta-proyecto .contenido-tarjeta .autor .avatar img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .tarjeta-proyecto .contenido-tarjeta .autor span {
   font-size: 0.9rem;
@@ -494,7 +549,7 @@ input[type=password],
 textarea,
 select {
   width: 100%;
-  padding: 0.75rem;
+  padding: 0.5rem 1rem;
   border: 1px solid #999999;
   border-radius: 4px;
   font-family: "Open Sans", Arial, sans-serif;
@@ -558,7 +613,7 @@ select:disabled {
 .grid-dos-columnas {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 1.5rem;
 }
 @media (max-width: 768px) {
   .grid-dos-columnas {
@@ -568,16 +623,99 @@ select:disabled {
 
 .filtros-categoria {
   display: flex;
+  align-items: center;
   gap: 1rem;
+  margin-top: 1.5rem;
   margin-bottom: 2rem;
   flex-wrap: wrap;
 }
 
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+#hero {
+  padding: 3rem 0;
+  background-color: rgba(0, 154, 205, 0.05);
+  border-bottom: 1px solid rgba(0, 154, 205, 0.1);
+}
+#hero .hero-content h1 {
+  margin-top: 0;
+  max-width: 800px;
+}
+#hero .hero-content .search-container {
+  display: flex;
+  max-width: 800px;
+  margin-top: 2rem;
+}
+#hero .hero-content .search-container .barra-busqueda {
+  flex: 1;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: none;
+}
+#hero .hero-content .search-container .boton-primario {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+#info-section {
+  padding: 3rem 0;
+}
+#info-section .contenedor-pagina {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  #info-section .contenedor-pagina {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+#info-section .info-image {
+  background-color: #ddd;
+  aspect-ratio: 16/9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
 .pagina-login {
+  padding-left: 1rem;
+  padding-right: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 80vh;
+}
+@media (min-width: 768px) {
+  .pagina-login {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .pagina-login {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+@media (min-width: 1440px) {
+  .pagina-login {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
 }
 .pagina-login .contenedor-formulario {
   width: 100%;
@@ -610,9 +748,30 @@ select:disabled {
 }
 
 .pagina-registro {
+  padding-left: 1rem;
+  padding-right: 1rem;
   display: flex;
   justify-content: center;
-  padding: 2rem 0;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+@media (min-width: 768px) {
+  .pagina-registro {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .pagina-registro {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+@media (min-width: 1440px) {
+  .pagina-registro {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
 }
 .pagina-registro .contenedor-formulario {
   width: 100%;
@@ -679,7 +838,8 @@ select:disabled {
 }
 
 .pagina-upload {
-  padding: 2rem 0;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 .pagina-upload .contenedor-centrado {
   max-width: 800px;

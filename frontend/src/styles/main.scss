@@ -10,6 +10,7 @@
 // 2. Base y normalización
 // Se importan los estilos de reset y normalización que afectan a toda la página
 @use 'base/reset';
+@use 'base/utilities';
 
 // 3. Layout (estructura global)
 // Se importan los componentes de estructura principal como header y footer

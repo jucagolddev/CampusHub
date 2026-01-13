@@ -1,11 +1,13 @@
 // Estilos para la página de subida de archivos
 // Este archivo define los estilos específicos de la interfaz de carga de archivos
 @use "../base/variables" as *;
+@use "../base/utilities" as *;
 
 // Página de subida de archivos
 // Contenedor principal de la página de upload
 .pagina-upload {
-  padding: 2rem 0; // Espaciado vertical
+  padding-top: 2rem; // Espaciado vertical superior
+  padding-bottom: 2rem; // Espaciado vertical inferior
   
   .contenedor-centrado {
      max-width: 800px;

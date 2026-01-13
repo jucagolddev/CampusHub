@@ -52,3 +52,23 @@ $fuente-cita: italic; // Estilo de fuente para citas, cursiva
 $peso-regular: 400; // Peso normal de fuente
 $peso-semi-negrita: 600; // Peso semi-negrita para énfasis medio
 $peso-negrita: 700; // Peso negrita para énfasis fuerte
+
+// Espaciado y márgenes
+// Variables para márgenes laterales y espaciado consistente en todas las páginas
+$margen-lateral-movil: 1rem; // Margen lateral para dispositivos móviles (16px)
+$margen-lateral-tablet: 2rem; // Margen lateral para tablets (32px)
+$margen-lateral-desktop: 4rem; // Margen lateral para escritorio (64px)
+$margen-lateral-desktop-xl: 8rem; // Margen lateral para pantallas extra grandes (128px)
+$ancho-maximo-contenido: 1400px; // Ancho máximo del contenido principal
+
+// Sistema de espaciado (basado en escala de 8px)
+$espaciado-xs: 0.25rem; // 4px
+$espaciado-s: 0.5rem;   // 8px
+$espaciado-m: 1rem;     // 16px
+$espaciado-l: 1.5rem;   // 24px
+$espaciado-xl: 2rem;    // 32px
+$espaciado-xxl: 3rem;   // 48px
+
+// Gaps estándar para grids y flexbox
+$gap-grid: 1.5rem;      // Espacio estándar entre tarjetas y columnas
+$gap-flex: 1rem;        // Espacio estándar entre elementos flex

@@ -39,13 +39,11 @@
   gap: 0.5rem; // Espacio entre icono y texto
 
   // Icono del logo
-  // Círculo azul que representa la marca
+  // Imagen que representa la marca
   .icono-logo {
     display: inline-block; // Permite aplicar dimensiones
-    width: 30px; // Ancho del círculo
-    height: 30px; // Alto del círculo
-    background-color: $color-interactivo-principal; // Fondo azul principal
-    border-radius: 50%; // Forma circular
+    height: 40px; // Altura ajustada para el logo
+    width: auto; // Mantiene la proporción
   }
 
   // Estado hover del logo

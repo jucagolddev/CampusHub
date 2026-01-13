@@ -7,7 +7,7 @@
 .grid-dos-columnas {
   display: grid; // Usa grid para organizar el contenido
   grid-template-columns: 1fr 1fr; // Dos columnas de igual ancho
-  gap: 20px; // Espacio entre columnas
+  gap: $gap-grid; // Usa el gap estándar para grids
 
   // Adaptación para dispositivos móviles
   // En pantallas pequeñas se muestra una sola columna
@@ -20,7 +20,81 @@
 // Contenedor para botones de filtro que permiten navegar por categorías
 .filtros-categoria {
   display: flex; // Usa flexbox para organizar los botones
-  gap: 1rem; // Espacio entre botones
-  margin-bottom: 2rem; // Espacio inferior
+  align-items: center; // Alinea verticalmente el texto y los botones
+  gap: $espaciado-m; // Espacio estándar entre botones
+  margin-top: $espaciado-l; // Espacio superior para separar del buscador
+  margin-bottom: $espaciado-xl; // Espacio inferior estándar
   flex-wrap: wrap; // Permite que los botones se envuelvan en múltiples líneas si es necesario
+}
+
+// Cuadrícula de proyectos
+// Organiza las tarjetas de proyecto en columnas responsivas
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: $gap-grid;
+  margin-top: $espaciado-xl;
+  margin-bottom: $espaciado-xxl;
+}
+
+// Estilos para la sección Hero
+#hero {
+  padding: $espaciado-xxl 0;
+  background-color: rgba($color-interactivo-principal, 0.05);
+  border-bottom: 1px solid rgba($color-interactivo-principal, 0.1);
+  
+  .hero-content {
+    h1 {
+      margin-top: 0;
+      max-width: 800px;
+    }
+
+    .search-container {
+      display: flex;
+      max-width: 800px;
+      margin-top: $espaciado-xl;
+
+      .barra-busqueda {
+        flex: 1;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-right: none;
+      }
+
+      .boton-primario {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 50px; // Redondear derecha para pill shape
+        border-bottom-right-radius: 50px; // Redondear derecha para pill shape
+        padding-left: $espaciado-xl;
+        padding-right: $espaciado-xl;
+      }
+    }
+  }
+}
+
+// Sección de información
+#info-section {
+  padding: $espaciado-xxl 0;
+
+  .contenedor-pagina {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $espaciado-xxl;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  }
+  
+  .info-image {
+    background-color: #ddd;
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+  }
 }

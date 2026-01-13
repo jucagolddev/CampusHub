@@ -1,0 +1,38 @@
+// Utilidades globales para contenedores y márgenes
+// Este archivo contiene clases de utilidad que se pueden usar en cualquier página
+@use "variables" as *;
+
+// Mixin para aplicar márgenes laterales responsivos
+@mixin margenes-laterales {
+  padding-left: $margen-lateral-movil;
+  padding-right: $margen-lateral-movil;
+
+  @media (min-width: 768px) {
+    padding-left: $margen-lateral-tablet;
+    padding-right: $margen-lateral-tablet;
+  }
+
+  @media (min-width: 1024px) {
+    padding-left: $margen-lateral-desktop;
+    padding-right: $margen-lateral-desktop;
+  }
+
+  @media (min-width: 1440px) {
+    padding-left: $margen-lateral-desktop-xl;
+    padding-right: $margen-lateral-desktop-xl;
+  }
+}
+
+// Clase de utilidad para contenedor con márgenes laterales estándar
+.contenedor-pagina {
+  @include margenes-laterales;
+  max-width: $ancho-maximo-contenido;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+// Clase de utilidad solo para márgenes laterales sin ancho máximo
+.margenes-laterales {
+  @include margenes-laterales;
+}
