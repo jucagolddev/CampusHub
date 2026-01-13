@@ -1,14 +1,17 @@
+<!-- SECCIÓN HERO: Cabecera de impacto con buscador y filtros rápidos -->
 <section id="hero">
     <div class="contenedor-pagina">
         <div class="hero-content">
             <h1>Espacio de exhibición para aplicaciones web, móviles y experimentos de código.</h1>
 
+            <!-- Buscador integrado estilo cápsula -->
             <div class="search-container">
                 <input type="text" placeholder="Buscar por tecnología, nombre, autor..." aria-label="Buscar proyectos"
                     class="barra-busqueda">
                 <button type="button" class="boton-primario">Buscar</button>
             </div>
 
+            <!-- Accesos directos por tecnología -->
             <div class="filtros-categoria">
                 <span>Filtros rápidos:</span>
                 <button type="button" class="boton-delineado">Angular</button>
@@ -20,6 +23,7 @@
     </div>
 </section>
 
+<!-- SECCIÓN DE PROYECTOS: Cuadrícula con los trabajos más relevantes -->
 <section id="featured-projects">
     <div class="contenedor-pagina">
         <header>
@@ -27,22 +31,24 @@
             <p>Seleccion de los mas populares</p>
         </header>
 
+        <!-- Grid dinámico que renderiza componentes ProjectCard -->
         <div class="projects-grid">
             <app-project-card *ngFor="let project of projects" [project]="project"></app-project-card>
         </div>
     </div>
 </section>
 
+<!-- SECCIÓN INFORMATIVA: Detalles sobre la iniciativa CampusHub -->
 <section id="info-section">
     <div class="contenedor-pagina">
         <div class="info-text">
             <p>Esta es una iniciativa Open Source para dar visibilidad al talento junior. Aquí alojamos los trabajos
                 finales, hackathons y proyectos personales de nuestros alumnos.</p>
             <p>¿Eres reclutador? Puedes navegar por los perfiles, ver el código fuente en GitHub y contactar
-                directamente
-                con los creadores.</p>
+                directamente con los creadores.</p>
         </div>
         <div class="info-image">
+            <!-- Espacio reservado para imagen descriptiva o mockup -->
             <p>img</p>
         </div>
     </div>

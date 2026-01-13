@@ -1,16 +1,17 @@
+<!-- Página de acceso: Contenedor centrado para el formulario de login -->
 <section class="pagina-login">
     <div class="contenedor-formulario">
         <h1>Iniciar Sesión</h1>
 
         <form (ngSubmit)="onSubmit()">
-            <!-- Email -->
+            <!-- Campo de Email: Vinculado a la variable 'email' mediante doble binding -->
             <div class="grupo-input">
                 <label for="gmail">Email</label>
                 <input type="email" id="gmail" name="gmail" [(ngModel)]="email" required
                     placeholder="ejemplo@correo.com">
             </div>
 
-            <!-- Contraseña -->
+            <!-- Campo de Contraseña: Incluye enlace de redirección al registro -->
             <div class="grupo-input">
                 <label for="password">Contraseña</label>
                 <input type="password" id="password" name="password" [(ngModel)]="password" required
@@ -22,7 +23,7 @@
                 </div>
             </div>
 
-            <!-- Botón -->
+            <!-- Botón de Envío: Desencadena el evento (ngSubmit) definido en el form -->
             <button type="submit" class="boton-primario" style="width: 100%;">
                 INICIAR SESIÓN
             </button>

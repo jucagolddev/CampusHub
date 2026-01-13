@@ -1,14 +1,13 @@
-// Estilos para la página de subida de archivos
-// Este archivo define los estilos específicos de la interfaz de carga de archivos
 @use "../base/variables" as *;
 @use "../base/utilities" as *;
 
-// Página de subida de archivos
-// Contenedor principal de la página de upload
+// Página de Subida de Proyectos: Interfaz de contribución
+// Contenedor principal para la carga de nuevos trabajos y experimentos de código.
 .pagina-upload {
-  padding-top: 2rem; // Espaciado vertical superior
-  padding-bottom: 2rem; // Espaciado vertical inferior
+  padding-top: 2rem; 
+  padding-bottom: 2rem; 
   
+  // Contenedor Centrado: Enmarcado del contenido para lectura cómoda
   .contenedor-centrado {
      max-width: 800px;
      margin: 0 auto;
@@ -47,18 +46,17 @@
   }
 }
 
-// Zona de arrastre (mantenemos estilos previos si se usan, aunque el diseño subido usa inputs normales)
-// Área interactiva donde el usuario puede arrastrar y soltar archivos
+// Zona de Arrastre (Drag & Drop): Selector de archivos interactivo
+// Proporciona una respuesta visual clara mediante bordes discontinuos y cambios de fondo.
 .zona-arrastre {
-  border: 2px dashed $color-interactivo-principal; // Borde punteado azul
-  border-radius: 8px; // Bordes redondeados
-  padding: 3rem; // Espaciado interno generoso
-  text-align: center; // Centra el contenido
-  background-color: rgba($color-interactivo-principal,
-      0.05); // Fondo azul muy claro (5% opacidad)
-  transition: all 0.3s ease; // Transición suave de todas las propiedades
-  cursor: pointer; // Cursor de mano para indicar que es clickeable
-  margin-bottom: 1.5rem; // Espacio inferior
+  border: 2px dashed $color-interactivo-principal; // Indicador de área droppable
+  border-radius: 8px; 
+  padding: 3rem; 
+  text-align: center; 
+  background-color: rgba($color-interactivo-principal, 0.05); 
+  transition: all 0.3s ease; 
+  cursor: pointer; 
+  margin-bottom: 1.5rem; 
 
   // Estados hover y arrastrando
   // Cambia la apariencia cuando el usuario pasa el cursor o arrastra archivos

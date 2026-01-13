@@ -1,26 +1,24 @@
-// Estilos para la página de inicio de sesión
-// Este archivo define los estilos específicos del formulario de login
 @use "../base/variables" as *;
 @use "../base/utilities" as *;
 
-// Página de login
-// Contenedor principal que centra el formulario de inicio de sesión
+// Página de Login: Área de acceso seguro
+// Diseñada para centrar visualmente el formulario en el viewport, eliminando distracciones.
 .pagina-login {
   @include margenes-laterales;
-  display: flex; // Usa flexbox para centrar el contenido
-  justify-content: center; // Centra horizontalmente
-  align-items: center; // Centra verticalmente
-  min-height: 80vh; // Altura mínima del 80% del viewport para centrado vertical
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  min-height: 80vh; // Asegura que el formulario esté verticalmente equilibrado
 
-  // Contenedor del formulario
-  // Caja blanca que contiene el formulario de login
+  // Contenedor del Formulario: Tarjeta de autenticación
+  // Enmarca los campos de entrada en una caja con elevación sutil.
   .contenedor-formulario {
-    width: 100%; // Ocupa todo el ancho disponible
-    max-width: 400px; // Ancho máximo de 400px
-    padding: 2rem; // Espaciado interno generoso
-    background-color: $color-fondo-puro; // Fondo blanco
-    border-radius: 8px; // Bordes redondeados
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Sombra sutil para dar profundidad
+    width: 100%; 
+    max-width: 400px; // Tamaño optimizado para legibilidad en un solo golpe de vista
+    padding: 2rem; 
+    background-color: $color-fondo-puro; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 
     h1 {
       text-align: center;
@@ -28,13 +26,14 @@
       margin-bottom: 2rem;
     }
 
+    // Enlace de Conversión: Redirección al registro
     form {
       .grupo-input {
         margin-bottom: 1.5rem;
       }
       
       .enlace-registro-container {
-        text-align: right;
+        text-align: right; // Alineado a la derecha para separar visualmente del botón
         margin-top: 0.5rem;
 
         a {

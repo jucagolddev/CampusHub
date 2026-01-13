@@ -3,81 +3,64 @@
 @use "sass:color";
 @use "../base/variables" as *;
 
-// Sección alterna (tarjeta base)
-// Contenedor genérico que se usa como base para diferentes tipos de tarjetas
+// Sección Alterna (Tarjeta Base): Base atómica para contenedores destacados
+// Proporciona una elevación visual sutil y un fondo neutro para organizar contenido.
 .seccion-alterna {
-  background-color: $color-fondo-tarjeta; // Fondo blanco
-  border: 1px solid color.adjust($color-borde-estructura, $lightness: 70%); // Borde azul muy claro
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); // Sombra sutil para dar profundidad
-  padding: $espaciado-l; // Espaciado interno generoso
-  border-radius: 6px; // Bordes redondeados
-  margin-bottom: $espaciado-l; // Espacio inferior entre secciones
+  background-color: $color-fondo-tarjeta; 
+  border: 1px solid color.adjust($color-borde-estructura, $lightness: 70%); 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); // Profundidad suave
+  padding: $espaciado-l; 
+  border-radius: 6px; 
+  margin-bottom: $espaciado-l; 
 
-  // Títulos h3 dentro de la sección alterna
   h3 {
-    color: $color-texto-subtitulo; // Color azul intermedio
+    color: $color-texto-subtitulo; 
   }
 }
 
-// Tarjeta de sonido
-// Tarjeta específica con diseño vertical para contenido de audio o multimedia
+// Tarjeta de Sonido: Variante del contenedor base para contenidos multimedia
 .tarjeta-sonido {
-  @extend .seccion-alterna; // Hereda todos los estilos de seccion-alterna
-  display: flex; // Usa flexbox para organizar el contenido
-  flex-direction: column; // Organiza los elementos en columna vertical
-  gap: $espaciado-m; // Espacio entre elementos internos
+  @extend .seccion-alterna; 
+  display: flex; 
+  flex-direction: column; 
+  gap: $espaciado-m; 
 }
 
-// Sistema de alertas
-// Mensajes de retroalimentación para informar al usuario sobre diferentes estados
-
-// Alerta base
-// Contenedor base para todos los tipos de alertas
+// Sistema de Alertas: Retroalimentación de estados del sistema
+// Utiliza una barra de color lateral para indicar rápidamente la naturaleza del mensaje.
 .alerta {
-  padding: $espaciado-m; // Espaciado interno
-  margin-bottom: $espaciado-m; // Espacio inferior entre alertas
-  border-left: 5px solid; // Borde izquierdo grueso (el color se define en cada tipo)
-  font-weight: $peso-regular; // Peso de fuente normal
-  border-radius: 4px; // Bordes ligeramente redondeados
+  padding: $espaciado-m; 
+  margin-bottom: $espaciado-m; 
+  border-left: 5px solid; // Indicador visual de estado
+  font-weight: $peso-regular; 
+  border-radius: 4px; 
 
-  // Alerta de éxito
-  // Se usa para confirmar que una acción se completó correctamente
+  // Variante Éxito: Confirmación de acciones positivas (verde)
   &.exito {
-    background-color: color.adjust($color-alerta-exito,
-        $lightness: 40%); // Fondo verde claro
-    border-color: $color-alerta-exito; // Borde verde
-    color: color.adjust($color-alerta-exito,
-        $lightness: -20%); // Texto verde oscuro
+    background-color: color.adjust($color-alerta-exito, $lightness: 40%);
+    border-color: $color-alerta-exito;
+    color: color.adjust($color-alerta-exito, $lightness: -20%);
   }
 
-  // Alerta de advertencia
-  // Se usa para avisar al usuario sobre algo que requiere atención
+  // Variante Advertencia: Llamada a la precaución (naranja)
   &.advertencia {
-    background-color: color.adjust($color-alerta-advertencia,
-        $lightness: 40%); // Fondo naranja claro
-    border-color: $color-alerta-advertencia; // Borde naranja
-    color: color.adjust($color-alerta-advertencia,
-        $lightness: -20%); // Texto naranja oscuro
+    background-color: color.adjust($color-alerta-advertencia, $lightness: 40%);
+    border-color: $color-alerta-advertencia;
+    color: color.adjust($color-alerta-advertencia, $lightness: -20%);
   }
 
-  // Alerta de error
-  // Se usa para informar sobre errores o problemas
+  // Variante Error: Notificación de fallos críticos (rojo)
   &.error {
-    background-color: color.adjust($color-alerta-error,
-        $lightness: 40%); // Fondo rojo claro
-    border-color: $color-alerta-error; // Borde rojo
-    color: color.adjust($color-alerta-error,
-        $lightness: -20%); // Texto rojo oscuro
+    background-color: color.adjust($color-alerta-error, $lightness: 40%);
+    border-color: $color-alerta-error;
+    color: color.adjust($color-alerta-error, $lightness: -20%);
   }
 
-  // Alerta informativa
-  // Se usa para proporcionar información general al usuario
+  // Variante Informativa: Ayuda o contexto adicional (azul)
   &.info {
-    background-color: color.adjust($color-alerta-info,
-        $lightness: 40%); // Fondo azul claro
-    border-color: $color-alerta-info; // Borde azul
-    color: color.adjust($color-alerta-info,
-        $lightness: -20%); // Texto azul oscuro
+    background-color: color.adjust($color-alerta-info, $lightness: 40%);
+    border-color: $color-alerta-info;
+    color: color.adjust($color-alerta-info, $lightness: -20%);
   }
 
   // Texto resaltado dentro de alertas
@@ -89,21 +72,21 @@
   }
 }
 
-// Tarjeta de proyecto
-// Componente principal para mostrar resumen de proyectos en grids
+// TARJETA DE PROYECTO: Diseño moderno para el escaparate
+// Maximiza el impacto visual con efectos de elevación al pasar el cursor (hover).
 .tarjeta-proyecto {
-  background-color: $color-fondo-tarjeta; // Fondo blanco
-  border: 1px solid $color-interactivo-principal; // Borde azul principal (según mockup)
-  border-radius: 8px; // Bordes redondeados
-  overflow: hidden; // Para recortar la imagen en las esquinas
-  transition: transform 0.3s ease, box-shadow 0.3s ease; // Transición suave
+  background-color: $color-fondo-tarjeta; 
+  border: 1px solid $color-interactivo-principal; 
+  border-radius: 8px; 
+  overflow: hidden; // Recorte limpio de la imagen en las esquinas
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
   display: flex;
   flex-direction: column;
-  height: 100%; // Altura completa para grids
+  height: 100%; // Asegura alineación en cuadrículas de altura variable
 
   &:hover {
-    transform: translateY(-5px); // Se eleva ligeramente
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); // Sombra más pronunciada
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); 
   }
 
   // Contenedor de imagen
@@ -156,15 +139,16 @@
       line-height: 1.5;
     }
 
-    // Autor en la parte inferior
+    // Metadatos del Autor: Identidad del creador al final de la tarjeta
     .autor {
-      margin-top: auto; // Empuja al fondo
+      margin-top: auto; 
       display: flex;
       align-items: center;
       gap: $espaciado-s;
       padding-top: $espaciado-m;
       border-top: 1px solid $color-borde-estructura;
 
+      // Avatar circular (Logo de GitHub integrado)
       .avatar {
         width: 30px;
         height: 30px;
@@ -177,7 +161,7 @@
         img {
           width: 100%;
           height: 100%;
-          object-fit: contain; // Asegura que el logo de GitHub sea visible entero
+          object-fit: contain; 
         }
       }
 

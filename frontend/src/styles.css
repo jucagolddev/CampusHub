@@ -340,6 +340,7 @@ pre {
 .pie-pagina-principal a {
   color: #ffffff;
   text-decoration: none;
+  transition: color 0.2s ease-in-out;
 }
 .pie-pagina-principal a:hover {
   color: #fff4cc;

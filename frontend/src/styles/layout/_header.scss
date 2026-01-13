@@ -2,112 +2,108 @@
 // Este archivo define los estilos de la cabecera que aparece en todas las páginas
 @use "../base/variables" as *;
 
-// Cabecera principal
-// Contenedor principal del header que incluye logo y navegación
+// Cabecera principal: Estructura de navegación global
+// Contenedor principal que se mantiene en la parte superior del visor.
+// Utiliza un diseño de fondo puro y un borde estructural para separar el contenido.
 .cabecera-principal {
-  background-color: $color-fondo-puro; // Fondo blanco
-  border-bottom: 2px solid $color-borde-estructura; // Borde inferior azul marino
-  padding: 1rem 0; // Espaciado vertical
+  background-color: $color-fondo-puro; 
+  border-bottom: 2px solid $color-borde-estructura; // Separador visual inferior
+  padding: 1rem 0; 
 
-  // Contenedor interno del header
-  // Organiza el logo y la navegación en una fila
+  // Contenedor interno: Alineación de elementos (Logo vs Menú)
   .contenedor-header {
-    display: flex; // Usa flexbox para organizar elementos
-    justify-content: space-between; // Separa logo y navegación a los extremos
-    align-items: center; // Centra verticalmente los elementos
-    flex-wrap: wrap; // Permite que los elementos se envuelvan en pantallas pequeñas
+    display: flex; 
+    justify-content: space-between; // Posiciona el logo a la izquierda y el menú a la derecha
+    align-items: center;            // Centrado vertical perfecto
+    flex-wrap: wrap;                // Adaptabilidad para dispositivos pequeños
 
-    // Adaptación para dispositivos móviles
+    // Responsividad móvil: Apilamiento vertical para maximizar el espacio táctil
     @media (max-width: 768px) {
-      flex-direction: column; // Cambia a columna vertical
-      gap: 1rem; // Espacio entre elementos
-      text-align: center; // Centra el texto
+      flex-direction: column; 
+      gap: 1rem; 
+      text-align: center; 
     }
   }
 }
 
-// Logo
-// Elemento de marca que enlaza a la página principal
+// Branding: Identidad visual del sitio
+// Estilizado del logo que combina una imagen (icono) con texto de marca.
 .logo {
-  font-family: $fuente-principal; // Usa la fuente principal
-  font-weight: $peso-negrita; // Peso negrita para énfasis
-  font-size: 1.5rem; // Tamaño grande
-  color: $color-texto-titulo-h1; // Color azul marino
-  text-decoration: none; // Sin subrayado
-  display: flex; // Usa flexbox para organizar icono y texto
-  align-items: center; // Centra verticalmente icono y texto
-  gap: 0.5rem; // Espacio entre icono y texto
+  font-family: $fuente-principal; 
+  font-weight: $peso-negrita;    // Énfasis de marca
+  font-size: 1.5rem; 
+  color: $color-texto-titulo-h1; 
+  text-decoration: none; 
+  display: flex; 
+  align-items: center; 
+  gap: 0.5rem;                   // Espacio entre isotipo y logotipo
 
-  // Icono del logo
-  // Imagen que representa la marca
+  // Ajuste dimensional del icono de marca
   .icono-logo {
-    display: inline-block; // Permite aplicar dimensiones
-    height: 40px; // Altura ajustada para el logo
-    width: auto; // Mantiene la proporción
+    display: inline-block; 
+    height: 40px; 
+    width: auto; 
   }
 
-  // Estado hover del logo
+  // Interacción suave: Retroalimentación visual al cursor
   &:hover {
-    text-decoration: none; // Mantiene sin subrayado
-    opacity: 0.9; // Reduce ligeramente la opacidad
+    text-decoration: none; 
+    opacity: 0.9; 
   }
 }
 
-// Navegación principal
-// Menú de navegación con enlaces a las secciones principales
+// Navegación: Menú de acceso rápido a las funcionalidades
 .nav-principal {
 
-  // Lista de enlaces
   ul {
-    list-style: none; // Sin viñetas
-    margin: 0; // Sin márgenes
-    padding: 0; // Sin padding
-    display: flex; // Usa flexbox para organizar enlaces en fila
-    gap: 2rem; // Espacio entre enlaces
+    list-style: none; 
+    margin: 0; 
+    padding: 0; 
+    display: flex; 
+    gap: 2rem; 
 
-    // Adaptación para dispositivos móviles
+    // Ajuste móvil: Menú vertical para facilitar la interacción en smartphones
     @media (max-width: 768px) {
-      gap: 1rem; // Reduce el espacio entre enlaces
-      flex-direction: column; // Cambia a columna vertical
+      gap: 1rem; 
+      flex-direction: column; 
     }
   }
 
-  // Enlaces de navegación
+  // Enlaces interactivos con subrayado animado
   a {
-    color: $color-texto-subtitulo; // Color azul intermedio
-    font-weight: $peso-semi-negrita; // Peso semi-negrita
-    text-decoration: none; // Sin subrayado
-    padding: 0.5rem 0; // Espaciado vertical
-    position: relative; // Necesario para el pseudo-elemento ::after
-    transition: color 0.3s ease; // Transición suave del color
+    color: $color-texto-subtitulo; 
+    font-weight: $peso-semi-negrita; 
+    text-decoration: none; 
+    padding: 0.5rem 0; 
+    position: relative; // Contexto para el marcador inferior
+    transition: color 0.3s ease; 
 
-    // Pseudo-elemento para la línea animada debajo del enlace
+    // Marcador visual (subrayado) oculto por defecto
     &::after {
-      content: ""; // Contenido vacío
-      position: absolute; // Posicionamiento absoluto
-      width: 0; // Ancho inicial 0 (invisible)
-      height: 2px; // Altura de la línea
-      bottom: 0; // Posicionado en la parte inferior
-      left: 0; // Alineado a la izquierda
-      background-color: $color-interactivo-principal; // Color azul principal
-      transition: width 0.3s ease; // Transición suave del ancho
+      content: ""; 
+      position: absolute; 
+      width: 0; 
+      height: 2px; 
+      bottom: 0; 
+      left: 0; 
+      background-color: $color-interactivo-principal; 
+      transition: width 0.3s ease; // Animación de expansión
     }
 
-    // Estado hover del enlace
+    // Efecto de foco: Expansión de la línea e iluminación del texto
     &:hover {
-      color: $color-interactivo-principal; // Cambia a azul principal
-      text-decoration: none; // Mantiene sin subrayado
+      color: $color-interactivo-principal; 
+      text-decoration: none; 
 
-      // Anima la línea debajo del enlace
       &::after {
-        width: 100%; // Expande la línea al 100% del ancho
+        width: 100%; 
       }
     }
 
-    // Estado activo para el enlace de la página actual
+    // Resaltado de página actual: Mantiene el color corporativo y aumenta grosor
     &.activo {
-      color: $color-interactivo-principal; // Color azul principal
-      font-weight: $peso-negrita; // Peso negrita para mayor énfasis
+      color: $color-interactivo-principal; 
+      font-weight: $peso-negrita; 
     }
   }
 }

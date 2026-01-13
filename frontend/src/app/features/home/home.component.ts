@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectCardComponent } from '../../shared/components/project-card/project-card.component';
 
+/**
+ * Componente de la Página de Inicio (Home)
+ * Es el punto de entrada principal donde se muestran el buscador, los filtros y la parrilla de proyectos.
+ */
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -9,6 +13,8 @@ import { ProjectCardComponent } from '../../shared/components/project-card/proje
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
+  // Datos de prueba para simular una lista de proyectos destacados de la comunidad.
+  // En el futuro, estos datos se obtendrán dinámicamente desde una base de datos.
   projects = [
     {
       title: 'Proyecto 1',

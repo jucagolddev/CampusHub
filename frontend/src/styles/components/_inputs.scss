@@ -1,49 +1,49 @@
-// Estilos para componentes de campos de entrada
-// Este archivo define los estilos de inputs, textareas y selects
 @use "../base/variables" as *;
 
-// Estilos base para todos los campos de entrada
-// Se aplica a inputs de texto, email, password, textareas y selects
+// Estilos Base para Campos de Entrada: Unificación visual de formularios
+// Se aplica a inputs de texto, email, password, textareas y selects para mantener
+// una estética coherente en toda la plataforma.
 input[type="text"],
 input[type="email"],
 input[type="password"],
 textarea,
 select {
-  width: 100%; // Ocupa todo el ancho disponible
-  padding: $espaciado-s $espaciado-m; // Espaciado interno cómodo
-  border: 1px solid $color-texto-deshabilitado; // Borde gris medio
-  border-radius: 4px; // Bordes ligeramente redondeados
-  font-family: $fuente-principal; // Usa la fuente principal
-  font-size: 1rem; // Tamaño de fuente estándar
-  color: $color-texto-principal; // Color de texto negro
-  background-color: $color-fondo-puro; // Fondo blanco
-  transition: border-color 0.3s ease, box-shadow 0.3s ease; // Transiciones suaves
+  width: 100%; 
+  padding: $espaciado-s $espaciado-m; 
+  border: 1px solid $color-texto-deshabilitado; // Borde neutro desaturado
+  border-radius: 4px; 
+  font-family: $fuente-principal; 
+  font-size: 1rem; 
+  color: $color-texto-principal; 
+  background-color: $color-fondo-puro; 
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; 
 
-  // Estado de foco cuando el usuario hace clic en el campo
+  // Estado de Foco (Focus): Mejora de usabilidad y accesibilidad
+  // Resalta el campo activo con el color corporativo y una sombra difusa.
   &:focus {
-    outline: none; // Elimina el outline por defecto del navegador
-    border-color: $color-interactivo-principal; // Borde azul principal
-    box-shadow: 0 0 0 3px rgba($color-interactivo-principal, 0.2); // Sombra azul suave
+    outline: none; 
+    border-color: $color-interactivo-principal; 
+    box-shadow: 0 0 0 3px rgba($color-interactivo-principal, 0.2); 
   }
 
-  // Estilo del placeholder (texto de ayuda dentro del campo)
+  // Texto de Ayuda (Placeholder)
   &::placeholder {
-    color: $color-texto-deshabilitado; // Color gris medio
+    color: $color-texto-deshabilitado; 
   }
 
-  // Estado deshabilitado cuando el campo no está disponible
+  // Estado Deshabilitado (Disabled): Visualización de campos no editables
   &:disabled {
-    background-color: $color-fondo-base; // Fondo gris rosado claro
-    cursor: not-allowed; // Cursor de prohibido
+    background-color: $color-fondo-base; 
+    cursor: not-allowed; 
   }
 }
 
-// Barra de búsqueda
-// Input especial con bordes más redondeados para búsquedas
+// Barra de Búsqueda: Variante estética curva
+// Empleada en el Hero para una apariencia más amigable y moderna de 'píldora'.
 .barra-busqueda {
-  border-radius: 50px; // Bordes completamente redondeados
-  padding-left: $espaciado-l; // Espaciado izquierdo extra
-  padding-right: $espaciado-l; // Espaciado derecho extra
+  border-radius: 50px; 
+  padding-left: $espaciado-l; 
+  padding-right: $espaciado-l; 
 }
 
 // Contenedor de inputs
@@ -56,12 +56,12 @@ select {
   margin-bottom: $espaciado-m; // Espacio inferior estándar
 }
 
-// Grupo de input
-// Contenedor para un campo con su etiqueta
+// Grupo de Input: Estructura Vertical (Label + Campo)
+// Organiza jerárquicamente la etiqueta y el campo de entrada relacionado.
 .grupo-input {
-  display: flex; // Usa flexbox para organizar label e input
-  flex-direction: column; // Organiza en columna vertical
-  gap: $espaciado-s; // Espacio entre label e input estándar
+  display: flex; 
+  flex-direction: column; 
+  gap: $espaciado-s; 
 
   // Etiqueta del campo
   label {

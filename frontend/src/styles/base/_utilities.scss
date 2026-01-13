@@ -3,36 +3,44 @@
 @use "variables" as *;
 
 // Mixin para aplicar márgenes laterales responsivos
+// Este mixin centraliza la lógica de los espacios laterales, asegurando que el contenido
+// nunca toque los bordes de la pantalla y se ajuste según el dispositivo.
 @mixin margenes-laterales {
-  padding-left: $margen-lateral-movil;
+  padding-left: $margen-lateral-movil;   // Margen para móviles (16px)
   padding-right: $margen-lateral-movil;
 
+  // Ajuste para tablets y dispositivos medianos
   @media (min-width: 768px) {
-    padding-left: $margen-lateral-tablet;
+    padding-left: $margen-lateral-tablet; // Margen para tablets (32px)
     padding-right: $margen-lateral-tablet;
   }
 
+  // Ajuste para pantallas de escritorio estándar
   @media (min-width: 1024px) {
-    padding-left: $margen-lateral-desktop;
+    padding-left: $margen-lateral-desktop; // Margen para desktop (64px)
     padding-right: $margen-lateral-desktop;
   }
 
+  // Ajuste para monitores anchos y pantallas extra grandes
   @media (min-width: 1440px) {
-    padding-left: $margen-lateral-desktop-xl;
+    padding-left: $margen-lateral-desktop-xl; // Margen para desktop XL (128px)
     padding-right: $margen-lateral-desktop-xl;
   }
 }
 
 // Clase de utilidad para contenedor con márgenes laterales estándar
+// Se usa para envolver el contenido principal de las páginas, limitando su ancho máximo
+// y manteniéndolo centrado horizontalmente.
 .contenedor-pagina {
-  @include margenes-laterales;
-  max-width: $ancho-maximo-contenido;
-  margin-left: auto;
+  @include margenes-laterales;   // Aplica los márgenes responsivos definidos arriba
+  max-width: $ancho-maximo-contenido; // Limita el ancho para mejor legibilidad (1400px)
+  margin-left: auto;             // Centrado horizontal
   margin-right: auto;
-  width: 100%;
+  width: 100%;                   // Asegura que ocupe todo el espacio disponible hasta el máximo
 }
 
 // Clase de utilidad solo para márgenes laterales sin ancho máximo
+// Útil para secciones que necesitan ocupar todo el ancho pero manteniendo el aire lateral.
 .margenes-laterales {
   @include margenes-laterales;
 }

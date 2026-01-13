@@ -1,27 +1,26 @@
 <article class="tarjeta-proyecto">
-  <!-- 1. Imagen del proyecto -->
+  <!-- 1. Imagen del proyecto: Se vincula dinámicamente el source y el alt -->
   <div class="imagen-tarjeta">
-    <!-- Usamos [src] para vincular la imagen dinámicamente -->
     <img [src]="project.image" [alt]="project.title">
   </div>
 
   <div class="contenido-tarjeta">
-    <!-- 2. Tecnologías (Angular, Node, Js) -->
+    <!-- 2. Etiquetas de Tecnologías: Se recorre la lista del proyecto -->
     <div class="etiquetas">
       <span class="etiqueta" *ngFor="let tech of project.technologies">
         {{ tech }}
       </span>
     </div>
 
-    <!-- 3. Título del Proyecto -->
+    <!-- 3. Título del Proyecto: Nombre principal del trabajo -->
     <h3>{{ project.title }}</h3>
 
-    <!-- 4. Descripción breve -->
+    <!-- 4. Descripción breve: Texto explicativo del proyecto -->
     <p>
       {{ project.description }}
     </p>
 
-    <!-- 5. Autor -->
+    <!-- 5. Sección de Autor: Muestra el icono de GitHub y el nombre del creador -->
     <div class="autor">
       <div class="avatar">
         <img src="assets/images/GitHub.png" alt="GitHub icon">

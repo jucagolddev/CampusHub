@@ -1,22 +1,23 @@
 <header class="cabecera-principal">
     <div class="contenedor-header contenedor-pagina">
-        <!-- 1. Logo -->
+        <!-- 1. Sección del Logo: Enlaza siempre a la raíz de la aplicación -->
         <a routerLink="/" class="logo">
             <img src="assets/images/LogoV2.png" alt="Campus Hub Logo" class="icono-logo">
             EUSA CAMPUS HUB
         </a>
 
-        <!-- 2. Navegación Principal -->
+        <!-- 2. Navegación Principal: Contiene los enlaces dinámicos según el estado del usuario -->
         <nav class="nav-principal">
             <ul>
+                <!-- Enlace de Inicio: Siempre visible -->
                 <li><a routerLink="/" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
                 </li>
 
-                <!-- Mostrar solo cuando NO está autenticado -->
+                <!-- Bloque para usuarios NO autenticados: Registro e Inicio de Sesión -->
                 <li><a routerLink="/login" routerLinkActive="activo" *ngIf="!isLoggedIn">Iniciar Sesión</a></li>
                 <li><a routerLink="/register" routerLinkActive="activo" *ngIf="!isLoggedIn">Registrarse</a></li>
 
-                <!-- Mostrar solo cuando SÍ está autenticado -->
+                <!-- Bloque para usuarios SÍ autenticados: Funcionalidades de carga y cierre de sesión -->
                 <li><a routerLink="/upload" routerLinkActive="activo" *ngIf="isLoggedIn">Subir Archivos</a></li>
                 <li><a (click)="logout()" style="cursor: pointer;" *ngIf="isLoggedIn">Cerrar Sesión</a></li>
             </ul>

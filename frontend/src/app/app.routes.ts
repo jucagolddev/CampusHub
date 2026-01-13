@@ -4,10 +4,21 @@ import { LoginComponent } from './features/auth/login/login.component';
 import { RegisterComponent } from './features/auth/register/register.component';
 import { ProjectUploadComponent } from './features/projects/project-upload/project-upload.component';
 
+/**
+ * Configuración de Rutas de la Aplicación
+ * Define la correspondencia entre las URLs del navegador y los componentes de Angular.
+ */
 export const routes: Routes = [
+  // Ruta de Inicio: Carga el escaparate de proyectos
   { path: '', component: HomeComponent },
+  
+  // Rutas de Autenticación: Login y Registro de nuevos usuarios
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  
+  // Ruta de Carga: Formulario para subir nuevos proyectos (protección de ruta pendiente)
   { path: 'upload', component: ProjectUploadComponent },
+  
+  // Ruta Comodín (Wildcard): Redirige cualquier URL no reconocida al inicio
   { path: '**', redirectTo: '' }
 ];

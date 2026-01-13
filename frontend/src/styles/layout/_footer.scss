@@ -1,38 +1,36 @@
 // Estilos para el pie de página
-// Este archivo define los estilos del footer que aparece al final de todas las páginas
 @use "../base/variables" as *;
 
-// Pie de página principal
-// Contenedor principal del footer con fondo azul marino
+// Pie de página principal: Base estructural oscura
+// Define el área de cierre de la página con un fuerte contraste (azul marino)
+// para dar peso visual y profesionalismo al final del scroll.
 .pie-pagina-principal {
-  background-color: $color-fondo-pie-pagina; // Fondo azul marino
-  color: $color-fondo-puro; // Texto blanco
-  padding: 3rem 0; // Espaciado vertical generoso
-  margin-top: 4rem; // Espacio superior para separar del contenido
-  font-size: 0.9rem; // Tamaño de fuente ligeramente más pequeño
+  background-color: $color-fondo-pie-pagina; 
+  color: $color-fondo-puro; 
+  padding: 3rem 0; 
+  margin-top: 4rem; // Separación generosa del contenido principal
+  font-size: 0.9rem; 
 
-  // Contenedor de columnas del footer
-  // Organiza el contenido en columnas responsivas
+  // Contenedor de columnas: Diseño de cuadrícula autoadaptable
+  // Organiza el contenido en bloques que se ajustan según la disponibilidad de ancho.
   .contenedor-footer {
-    display: grid; // Usa grid para organizar columnas
-    grid-template-columns: repeat(auto-fit,
-        minmax(250px, 1fr)); // Columnas automáticas con mínimo de 250px
-    gap: 2rem; // Espacio entre columnas
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 2rem; 
 
-    // Adaptación para dispositivos móviles
+    // Alineación central en móviles para una mejor jerarquía visual
     @media (max-width: 768px) {
-      text-align: center; // Centra el texto en móviles
+      text-align: center; 
     }
   }
-
-  // Títulos h4 dentro del footer
-  // Encabezados de cada columna del footer
+  // Títulos de sección: Resaltado de color acento
+  // Usa el tono amarillo corporativo para jerarquizar los bloques de información.
   h4 {
-    color: $color-acento-resaltado; // Color amarillo suave
-    margin-top: 0; // Sin margen superior
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2); // Borde inferior blanco semi-transparente
-    padding-bottom: 0.5rem; // Espaciado inferior
-    margin-bottom: 1rem; // Espacio inferior
+    color: $color-acento-resaltado; 
+    margin-top: 0; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); // Línea decorativa sutil
+    padding-bottom: 0.5rem; 
+    margin-bottom: 1rem; 
   }
 
   // Párrafos y elementos de lista
@@ -50,26 +48,27 @@
     margin: 0; // Sin márgenes
   }
 
-  // Enlaces dentro del footer
+  // Enlaces del pie de página: Interactividad clara
+  // Mantiene el blanco por legibilidad y cambia al acento amarillo en hover.
   a {
-    color: $color-fondo-puro; // Color blanco
-    text-decoration: none; // Sin subrayado
+    color: $color-fondo-puro; 
+    text-decoration: none; 
+    transition: color 0.2s ease-in-out;
 
-    // Estado hover de los enlaces
     &:hover {
-      color: $color-acento-resaltado; // Cambia a amarillo suave
-      text-decoration: underline; // Añade subrayado
+      color: $color-acento-resaltado; 
+      text-decoration: underline; 
     }
   }
 
-  // Sección de copyright
-  // Texto de derechos de autor al final del footer
+  // Copyright: Pie de cierre absoluto
+  // Información legal y de derechos con bajo contraste para no distraer.
   .copyright {
-    text-align: center; // Centra el texto
-    margin-top: 3rem; // Espacio superior
-    padding-top: 1rem; // Espaciado superior interno
-    border-top: 1px solid rgba(255, 255, 255, 0.1); // Borde superior blanco muy transparente
-    font-size: 0.8rem; // Tamaño de fuente pequeño
-    color: rgba(255, 255, 255, 0.5); // Blanco muy transparente
+    text-align: center; 
+    margin-top: 3rem; 
+    padding-top: 1rem; 
+    border-top: 1px solid rgba(255, 255, 255, 0.1); // Separador final sutil
+    font-size: 0.8rem; 
+    color: rgba(255, 255, 255, 0.5); 
   }
 }

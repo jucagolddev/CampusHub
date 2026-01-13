@@ -2,17 +2,16 @@
 // Este archivo define los estilos específicos de la página principal
 @use "../base/variables" as *;
 
-// Grid de dos columnas
-// Sistema de cuadrícula para organizar contenido en dos columnas
+// Diseño de cuadrícula de dos columnas pro-activo
+// Utilizado para equilibrar visualmente el texto y las imágenes en pantallas anchas.
 .grid-dos-columnas {
-  display: grid; // Usa grid para organizar el contenido
-  grid-template-columns: 1fr 1fr; // Dos columnas de igual ancho
-  gap: $gap-grid; // Usa el gap estándar para grids
-
-  // Adaptación para dispositivos móviles
-  // En pantallas pequeñas se muestra una sola columna
+  display: grid; 
+  grid-template-columns: 1fr 1fr; // División equitativa del espacio
+  gap: $gap-grid; 
+  
+  // En pantallas de móviles, las columnas se apilan verticalmente para mejor lectura.
   @media (max-width: 768px) {
-    grid-template-columns: 1fr; // Una sola columna
+    grid-template-columns: 1fr;
   }
 }
 
@@ -27,8 +26,9 @@
   flex-wrap: wrap; // Permite que los botones se envuelvan en múltiples líneas si es necesario
 }
 
-// Cuadrícula de proyectos
-// Organiza las tarjetas de proyecto en columnas responsivas
+// Grid de Proyectos
+// Sistema dinámico que ajusta automáticamente el número de columnas (mínimo 300px)
+// según el ancho de la resolución del usuario.
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -37,10 +37,11 @@
   margin-bottom: $espaciado-xxl;
 }
 
-// Estilos para la sección Hero
+// SECCIÓN HERO: Ajustes estéticos para la cabecera principal
+// Aplica un fondo suave y bordes sutiles para destacar el buscador inicial.
 #hero {
   padding: $espaciado-xxl 0;
-  background-color: rgba($color-interactivo-principal, 0.05);
+  background-color: rgba($color-interactivo-principal, 0.05); // Sutil tinte azul
   border-bottom: 1px solid rgba($color-interactivo-principal, 0.1);
   
   .hero-content {
@@ -49,6 +50,7 @@
       max-width: 800px;
     }
 
+    // Contenedor del buscador: Alinea el input y el botón en estilo 'pill'
     .search-container {
       display: flex;
       max-width: 800px;
@@ -56,16 +58,16 @@
 
       .barra-busqueda {
         flex: 1;
-        border-top-right-radius: 0;
+        border-top-right-radius: 0; // Se une visualmente al botón
         border-bottom-right-radius: 0;
         border-right: none;
       }
 
       .boton-primario {
-        border-top-left-radius: 0;
+        border-top-left-radius: 0; // Se une visualmente al input
         border-bottom-left-radius: 0;
-        border-top-right-radius: 50px; // Redondear derecha para pill shape
-        border-bottom-right-radius: 50px; // Redondear derecha para pill shape
+        border-top-right-radius: 50px; // Redondeado final derecho
+        border-bottom-right-radius: 50px;
         padding-left: $espaciado-xl;
         padding-right: $espaciado-xl;
       }

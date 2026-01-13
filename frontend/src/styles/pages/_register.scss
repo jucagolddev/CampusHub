@@ -1,27 +1,26 @@
-// Estilos para la página de registro
-// Este archivo define los estilos específicos del formulario de creación de cuenta
 @use "../base/variables" as *;
 @use "../base/utilities" as *;
 
-// Página de registro
-// Contenedor principal del formulario de registro
+// Página de Registro: Espacio de creación de perfiles
+// Contenedor principal que equilibra el formulario extenso dentro del visor.
 .pagina-registro {
   @include margenes-laterales;
-  display: flex; // Usa flexbox para centrar el contenido
-  justify-content: center; // Centra horizontalmente
-  padding-top: 2rem; // Espaciado vertical superior
-  padding-bottom: 2rem; // Espaciado vertical inferior
+  display: flex; 
+  justify-content: center; 
+  padding-top: 2rem; 
+  padding-bottom: 2rem; 
 
-  // Contenedor del formulario
-  // Caja blanca que contiene el formulario de registro
+  // Contenedor del Formulario: Tarjeta de admisión expandida
+  // Diseño más ancho que el login para acomodar filas de múltiples campos.
   .contenedor-formulario {
-    width: 100%; // Ocupa todo el ancho disponible
-    max-width: 600px; // Ancho máximo de 600px (más ancho que login)
-    padding: 2rem; // Espaciado interno generoso
-    background-color: $color-fondo-puro; // Fondo blanco
-    border-radius: 8px; // Bordes redondeados
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Sombra sutil para dar profundidad
+    width: 100%; 
+    max-width: 600px; 
+    padding: 2rem; 
+    background-color: $color-fondo-puro; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 
+    // Cabecera del Formulario: Identidad corporativa
     header {
       text-align: center;
       margin-bottom: 2rem;
@@ -31,12 +30,13 @@
         color: $color-texto-titulo-h1;
       }
 
-      h2 { // Para "en" y "Campus Hub"
+      // Estilizado diferenciado para el nombre de la marca
+      h2 { 
         font-size: 1.5rem;
         color: $color-texto-secundario;
         margin: 0;
         
-        &:last-child { // "Campus Hub"
+        &:last-child { 
           font-size: 1.8rem;
           color: $color-interactivo-principal;
           margin-top: 0.5rem;
@@ -71,17 +71,17 @@
     }
   }
 
-  // Fila de nombres
-  // Grid para organizar los campos de nombre y apellido en dos columnas
+  // Datos Personales: Organización en columnas
+  // Divide el nombre y apellidos en una sola fila para compactar el formulario.
   .fila-nombres {
-    display: grid; // Usa grid para organizar los campos
-    grid-template-columns: 1fr 1fr; // Dos columnas de igual ancho
-    gap: 1rem; // Espacio entre campos
-    margin-bottom: 1rem; // Espacio inferior
+    display: grid; 
+    grid-template-columns: 1fr 1fr; // Diseño bipartito
+    gap: 1rem; 
+    margin-bottom: 1rem; 
 
-    // Adaptación para dispositivos móviles
+    // Adaptabilidad: Colapso a una columna en dispositivos móviles
     @media (max-width: 768px) {
-      grid-template-columns: 1fr; // Una sola columna en móviles
+      grid-template-columns: 1fr; 
     }
   }
 
