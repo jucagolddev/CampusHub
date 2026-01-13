@@ -1,6 +1,6 @@
 // Estilos para la página de subida de archivos
 // Este archivo define los estilos específicos de la interfaz de carga de archivos
-@use "base/variables" as *;
+@use "../base/variables" as *;
 
 // Página de subida de archivos
 // Contenedor principal de la página de upload
@@ -15,10 +15,8 @@
   border-radius: 8px; // Bordes redondeados
   padding: 3rem; // Espaciado interno generoso
   text-align: center; // Centra el contenido
-  background-color: rgba(
-    $color-interactivo-principal,
-    0.05
-  ); // Fondo azul muy claro (5% opacidad)
+  background-color: rgba($color-interactivo-principal,
+      0.05); // Fondo azul muy claro (5% opacidad)
   transition: all 0.3s ease; // Transición suave de todas las propiedades
   cursor: pointer; // Cursor de mano para indicar que es clickeable
   margin-bottom: 1.5rem; // Espacio inferior
@@ -27,10 +25,8 @@
   // Cambia la apariencia cuando el usuario pasa el cursor o arrastra archivos
   &:hover,
   &.arrastrando {
-    background-color: rgba(
-      $color-interactivo-principal,
-      0.1
-    ); // Fondo azul claro (10% opacidad)
+    background-color: rgba($color-interactivo-principal,
+        0.1); // Fondo azul claro (10% opacidad)
     border-color: $color-hover-interactivo; // Borde azul más oscuro
   }
 

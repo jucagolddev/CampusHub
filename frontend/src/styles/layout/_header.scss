@@ -1,6 +1,6 @@
 // Estilos para el encabezado y navegación principal
 // Este archivo define los estilos de la cabecera que aparece en todas las páginas
-@use "base/variables" as *;
+@use "../base/variables" as *;
 
 // Cabecera principal
 // Contenedor principal del header que incluye logo y navegación
@@ -58,6 +58,7 @@
 // Navegación principal
 // Menú de navegación con enlaces a las secciones principales
 .nav-principal {
+
   // Lista de enlaces
   ul {
     list-style: none; // Sin viñetas

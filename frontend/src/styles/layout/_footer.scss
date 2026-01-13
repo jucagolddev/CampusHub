@@ -1,6 +1,6 @@
 // Estilos para el pie de página
 // Este archivo define los estilos del footer que aparece al final de todas las páginas
-@use "base/variables" as *;
+@use "../base/variables" as *;
 
 // Pie de página principal
 // Contenedor principal del footer con fondo azul marino
@@ -15,10 +15,8 @@
   // Organiza el contenido en columnas responsivas
   .contenedor-footer {
     display: grid; // Usa grid para organizar columnas
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(250px, 1fr)
-    ); // Columnas automáticas con mínimo de 250px
+    grid-template-columns: repeat(auto-fit,
+        minmax(250px, 1fr)); // Columnas automáticas con mínimo de 250px
     gap: 2rem; // Espacio entre columnas
 
     // Adaptación para dispositivos móviles

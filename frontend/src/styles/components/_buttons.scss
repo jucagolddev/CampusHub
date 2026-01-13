@@ -1,6 +1,6 @@
 // Estilos para componentes de botones
 // Este archivo define los estilos de los diferentes tipos de botones usados en la aplicación
-@use "base/variables" as *;
+@use "../base/variables" as *;
 
 // Botón primario
 // Este es el botón principal de acción, usado para las acciones más importantes
@@ -56,18 +56,14 @@
 
   // Estado hover cuando el usuario pasa el cursor sobre el botón
   &:hover {
-    background-color: rgba(
-      $color-interactivo-principal,
-      0.1
-    ); // Fondo azul muy claro (10% opacidad)
+    background-color: rgba($color-interactivo-principal,
+        0.1); // Fondo azul muy claro (10% opacidad)
   }
 
   // Estado activo cuando el usuario hace clic en el botón
   &:active {
-    background-color: rgba(
-      $color-interactivo-principal,
-      0.2
-    ); // Fondo azul claro (20% opacidad)
+    background-color: rgba($color-interactivo-principal,
+        0.2); // Fondo azul claro (20% opacidad)
   }
 
   // Estado deshabilitado cuando el botón no está disponible

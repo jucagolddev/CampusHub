@@ -1,6 +1,6 @@
 // Estilos para componentes de campos de entrada
 // Este archivo define los estilos de inputs, textareas y selects
-@use "base/variables" as *;
+@use "../base/variables" as *;
 
 // Estilos base para todos los campos de entrada
 // Se aplica a inputs de texto, email, password, textareas y selects
@@ -50,10 +50,8 @@ select {
 // Grid responsivo para organizar múltiples campos de entrada
 .contenedor-inputs {
   display: grid; // Usa grid para organizar los campos
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(250px, 1fr)
-  ); // Columnas automáticas con mínimo de 250px
+  grid-template-columns: repeat(auto-fit,
+      minmax(250px, 1fr)); // Columnas automáticas con mínimo de 250px
   gap: 1.5rem; // Espacio entre campos
   margin-bottom: 1rem; // Espacio inferior
 }
