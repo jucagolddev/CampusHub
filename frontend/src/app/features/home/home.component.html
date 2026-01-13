@@ -1,1 +1,48 @@
-<p>home works!</p>
+<div class="container mt-5">
+
+    <div class="p-5 mb-4 bg-light rounded-3 border text-center shadow-sm">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold text-primary">Descubre el talento de tu centro</h1>
+            <p class="col-md-12 fs-4 text-muted">Explora los proyectos finales de los alumnos de DAW y DAM.</p>
+
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-7">
+                    <div class="input-group input-group-lg shadow-sm">
+                        <input type="text" #txtBuscar class="form-control"
+                            placeholder="Buscar por módulo, título o tecnología...">
+                        <button class="btn btn-primary" type="button" (click)="buscarProyecto(txtBuscar.value)">
+                            Buscar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 mb-4 d-flex justify-content-between align-items-center">
+            <h2 class="h4 fw-bold">Proyectos Recientes</h2>
+            <span class="badge bg-secondary">{{ proyectos.length }} proyectos encontrados</span>
+        </div>
+
+        <div class="col-md-4 mb-4" *ngFor="let p of proyectos">
+            <div class="card h-100 shadow-hover transition border-0 shadow-sm">
+                <img [src]="p.imgPortada" class="card-img-top" alt="Portada">
+                <div class="card-body">
+                    <div class="mb-2">
+                        <span class="badge bg-info-subtle text-info border border-info-subtle">{{ p.modulo }}</span>
+                    </div>
+                    <h5 class="card-title fw-bold">{{ p.nombre }}</h5>
+                    <p class="card-text text-muted small">{{ p.descripcion }}</p>
+                </div>
+                <div class="card-footer bg-transparent border-0 pb-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted">Por: <strong>{{ p.autor }}</strong></small>
+                        <button class="btn btn-sm btn-outline-primary">Ver Proyecto</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
