@@ -3,16 +3,17 @@
         <h1>Espacio de exhibición para aplicaciones web, móviles y experimentos de código.</h1>
 
         <div class="search-container">
-            <input type="text" placeholder="Buscar por tecnología, nombre, autor..." aria-label="Buscar proyectos">
-            <button type="button">Buscar</button>
+            <input type="text" placeholder="Buscar por tecnología, nombre, autor..." aria-label="Buscar proyectos"
+                class="barra-busqueda">
+            <button type="button" class="boton-primario">Buscar</button>
         </div>
 
-        <div class="filters-container">
+        <div class="filtros-categoria">
             <span>Filtros rápidos:</span>
-            <button type="button">Proyecto1</button>
-            <button type="button">Proyecto1.1</button>
-            <button type="button">Proyecto1.2</button>
-            <button type="button">Proyecto1.3</button>
+            <button type="button" class="boton-delineado">Proyecto1</button>
+            <button type="button" class="boton-delineado">Proyecto1.1</button>
+            <button type="button" class="boton-delineado">Proyecto1.2</button>
+            <button type="button" class="boton-delineado">Proyecto1.3</button>
         </div>
     </div>
 </section>
@@ -24,53 +25,7 @@
     </header>
 
     <div class="projects-grid">
-        <!-- Project Card 1 Placeholder -->
-        <article class="project-card">
-            <div class="card-image">
-                <!-- Image placeholder -->
-            </div>
-            <div class="card-content">
-                <div class="tags">
-                    <span>Angular</span>
-                    <span>Node</span>
-                    <span>Js</span>
-                </div>
-                <h3>Proyecto 1</h3>
-                <p>Esta es una breve descripción del proyecto.</p>
-                <div class="author">
-                    <div class="avatar">
-                        <!-- Avatar placeholder -->
-                    </div>
-                    <span>User Name</span>
-                </div>
-            </div>
-        </article>
-
-        <!-- Project Card 2 Placeholder -->
-        <article class="project-card">
-            <div class="card-image"></div>
-            <div class="card-content">
-                <div class="tags">
-                    <span>Angular</span><span>Node</span><span>Js</span>
-                </div>
-                <h3>Proyecto 2</h3>
-                <p>Descripción...</p>
-                <div class="author"><span>User Name</span></div>
-            </div>
-        </article>
-
-        <!-- Project Card 3 Placeholder -->
-        <article class="project-card">
-            <div class="card-image"></div>
-            <div class="card-content">
-                <div class="tags">
-                    <span>Angular</span><span>Node</span><span>Js</span>
-                </div>
-                <h3>Proyecto 3</h3>
-                <p>Descripción...</p>
-                <div class="author"><span>User Name</span></div>
-            </div>
-        </article>
+        <app-project-card *ngFor="let project of projects" [project]="project"></app-project-card>
     </div>
 </section>
 
@@ -82,45 +37,13 @@
             con los creadores.</p>
     </div>
     <div class="info-image">
-        <!-- Placeholder for "img" -->
         <p>img</p>
     </div>
 </section>
 
 <section id="more-projects">
     <div class="projects-grid">
-        <!-- Repeat Project Card Structure -->
-        <article class="project-card">
-            <div class="card-image"></div>
-            <div class="card-content">
-                <div class="tags">
-                    <span>Angular</span><span>Node</span><span>Js</span>
-                </div>
-                <h3>Proyecto 4</h3>
-                <div class="author"><span>User Name</span></div>
-            </div>
-        </article>
-
-        <article class="project-card">
-            <div class="card-image"></div>
-            <div class="card-content">
-                <div class="tags">
-                    <span>Angular</span><span>Node</span><span>Js</span>
-                </div>
-                <h3>Proyecto 5</h3>
-                <div class="author"><span>User Name</span></div>
-            </div>
-        </article>
-
-        <article class="project-card">
-            <div class="card-image"></div>
-            <div class="card-content">
-                <div class="tags">
-                    <span>Angular</span><span>Node</span><span>Js</span>
-                </div>
-                <h3>Proyecto 6</h3>
-                <div class="author"><span>User Name</span></div>
-            </div>
-        </article>
+        <!-- Reutilizamos la misma lista para el ejemplo, o podríamos tener otra lista 'moreProjects' -->
+        <app-project-card *ngFor="let project of projects" [project]="project"></app-project-card>
     </div>
 </section>

@@ -1,1 +1,25 @@
-<p>header works!</p>
+<header class="cabecera-principal">
+    <div class="contenedor-header">
+        <!-- 1. Logo -->
+        <a routerLink="/" class="logo">
+            <span class="icono-logo"></span>
+            EUSA CAMPUS HUB
+        </a>
+
+        <!-- 2. Navegación Principal -->
+        <nav class="nav-principal">
+            <ul>
+                <li><a routerLink="/" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
+                </li>
+
+                <!-- Mostrar solo cuando NO está autenticado -->
+                <li><a routerLink="/login" routerLinkActive="activo" *ngIf="!isLoggedIn">Iniciar Sesión</a></li>
+                <li><a routerLink="/register" routerLinkActive="activo" *ngIf="!isLoggedIn">Registrarse</a></li>
+
+                <!-- Mostrar solo cuando SÍ está autenticado -->
+                <li><a routerLink="/upload" routerLinkActive="activo" *ngIf="isLoggedIn">Subir Archivos</a></li>
+                <li><a (click)="logout()" style="cursor: pointer;" *ngIf="isLoggedIn">Cerrar Sesión</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>

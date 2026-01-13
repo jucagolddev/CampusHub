@@ -415,6 +415,82 @@ pre {
   border-radius: 2px;
 }
 
+.tarjeta-proyecto {
+  background-color: #ffffff;
+  border: 1px solid #009acd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.tarjeta-proyecto:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+.tarjeta-proyecto .imagen-tarjeta {
+  height: 180px;
+  background-color: #f0f0f0;
+  position: relative;
+}
+.tarjeta-proyecto .imagen-tarjeta img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.tarjeta-proyecto .contenido-tarjeta {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.tarjeta-proyecto .contenido-tarjeta .etiquetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.tarjeta-proyecto .contenido-tarjeta .etiquetas span {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid #009acd;
+  border-radius: 50px;
+  color: #009acd;
+  font-weight: 600;
+}
+.tarjeta-proyecto .contenido-tarjeta h3 {
+  font-size: 1.25rem;
+  margin: 0;
+  color: #1a4d7a;
+}
+.tarjeta-proyecto .contenido-tarjeta p {
+  font-size: 0.9rem;
+  color: #4a4a4a;
+  margin: 0;
+  line-height: 1.5;
+}
+.tarjeta-proyecto .contenido-tarjeta .autor {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #093370;
+}
+.tarjeta-proyecto .contenido-tarjeta .autor .avatar {
+  width: 30px;
+  height: 30px;
+  background-color: #ddd;
+  border-radius: 50%;
+}
+.tarjeta-proyecto .contenido-tarjeta .autor span {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #000000;
+}
+
 input[type=text],
 input[type=email],
 input[type=password],
@@ -514,6 +590,27 @@ select:disabled {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+.pagina-login .contenedor-formulario h1 {
+  text-align: center;
+  color: #093370;
+  margin-bottom: 2rem;
+}
+.pagina-login .contenedor-formulario form .grupo-input {
+  margin-bottom: 1.5rem;
+}
+.pagina-login .contenedor-formulario form .enlace-registro-container {
+  text-align: right;
+  margin-top: 0.5rem;
+}
+.pagina-login .contenedor-formulario form .enlace-registro-container a {
+  color: #009acd;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.pagina-login .contenedor-formulario form .enlace-registro-container a:hover {
+  text-decoration: underline;
+}
 
 .pagina-registro {
   display: flex;
@@ -527,6 +624,42 @@ select:disabled {
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.pagina-registro .contenedor-formulario header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.pagina-registro .contenedor-formulario header h1 {
+  margin-bottom: 0.5rem;
+  color: #093370;
+}
+.pagina-registro .contenedor-formulario header h2 {
+  font-size: 1.5rem;
+  color: #4a4a4a;
+  margin: 0;
+}
+.pagina-registro .contenedor-formulario header h2:last-child {
+  font-size: 1.8rem;
+  color: #009acd;
+  margin-top: 0.5rem;
+}
+.pagina-registro .contenedor-formulario form .grupo-input {
+  margin-bottom: 1rem;
+}
+.pagina-registro .contenedor-formulario form .grupo-input:last-of-type {
+  margin-bottom: 1.5rem;
+}
+.pagina-registro .contenedor-formulario form .enlace-login-container {
+  text-align: right;
+  margin-bottom: 1.5rem;
+}
+.pagina-registro .contenedor-formulario form .enlace-login-container a {
+  color: #009acd;
+  text-decoration: none;
+  font-weight: 700;
+}
+.pagina-registro .contenedor-formulario form .enlace-login-container a:hover {
+  text-decoration: underline;
 }
 .pagina-registro .fila-nombres {
   display: grid;
@@ -550,6 +683,32 @@ select:disabled {
 
 .pagina-upload {
   padding: 2rem 0;
+}
+.pagina-upload .contenedor-centrado {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.pagina-upload .contenedor-centrado h1 {
+  text-align: center;
+  color: #093370;
+  margin-bottom: 0.5rem;
+}
+.pagina-upload .contenedor-centrado h2 {
+  text-align: center;
+  color: #093370;
+  margin-bottom: 3rem;
+}
+.pagina-upload .contenedor-centrado form .grupo-input {
+  margin-bottom: 1.5rem;
+}
+.pagina-upload .contenedor-centrado form .grupo-input:last-of-type {
+  margin-bottom: 2rem;
+}
+.pagina-upload .contenedor-centrado form .contenedor-boton {
+  text-align: center;
+}
+.pagina-upload .contenedor-centrado form .contenedor-boton .boton-primario {
+  padding: 1rem 3rem;
 }
 
 .zona-arrastre {

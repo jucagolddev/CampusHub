@@ -6,9 +6,46 @@
 // Contenedor principal de la página de upload
 .pagina-upload {
   padding: 2rem 0; // Espaciado vertical
+  
+  .contenedor-centrado {
+     max-width: 800px;
+     margin: 0 auto;
+     
+     h1 {
+       text-align: center;
+       color: $color-texto-titulo-h1;
+       margin-bottom: 0.5rem;
+     }
+     
+     h2 {
+       text-align: center;
+       color: $color-texto-titulo-h1;
+       margin-bottom: 3rem;
+     }
+
+     form {
+       .grupo-input {
+         margin-bottom: 1.5rem;
+         
+         // Más espacio para nombre del centro (último input antes del botón)
+         &:last-of-type {
+           margin-bottom: 2rem;
+         }
+       }
+       
+       .contenedor-boton {
+         text-align: center;
+         
+         .boton-primario {
+           // Podemos sobrescribir propiedades específicas si es necesario
+           padding: 1rem 3rem; 
+         }
+       }
+     }
+  }
 }
 
-// Zona de arrastre
+// Zona de arrastre (mantenemos estilos previos si se usan, aunque el diseño subido usa inputs normales)
 // Área interactiva donde el usuario puede arrastrar y soltar archivos
 .zona-arrastre {
   border: 2px dashed $color-interactivo-principal; // Borde punteado azul

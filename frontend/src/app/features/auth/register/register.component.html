@@ -1,47 +1,60 @@
-<div class="register-container">
-    <div class="register-card">
+<section class="pagina-registro">
+    <div class="contenedor-formulario">
         <header>
             <h1>Registrate</h1>
             <h2>en</h2>
             <h2>Campus Hub</h2>
         </header>
 
-        <form>
-            <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre">
+        <form (ngSubmit)="onSubmit()">
+            <!-- Nombre y Apellidos -->
+            <div class="fila-nombres">
+                <div class="grupo-input">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" [(ngModel)]="nombre" required>
+                </div>
+                <div class="grupo-input">
+                    <label for="apellidos">Apellidos</label>
+                    <input type="text" id="apellidos" name="apellidos" [(ngModel)]="apellidos" required>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="apellidos">Apellidos</label>
-                <input type="text" id="apellidos" name="apellidos">
-            </div>
-
-            <div class="form-group">
+            <!-- Username -->
+            <div class="grupo-input">
                 <label for="username">Nombre usuario</label>
-                <input type="text" id="username" name="username">
+                <input type="text" id="username" name="username" [(ngModel)]="username" required>
             </div>
 
-            <div class="form-group">
+            <!-- Email -->
+            <div class="grupo-input">
                 <label for="email">Correo electronico</label>
-                <input type="email" id="email" name="email">
+                <input type="email" id="email" name="email" [(ngModel)]="email" required>
             </div>
 
-            <div class="form-group">
+            <!-- Password -->
+            <div class="grupo-input">
                 <label for="password">Contraseña</label>
-                <input type="password" id="password" name="password">
+                <input type="password" id="password" name="password" [(ngModel)]="password" required>
             </div>
 
-            <div class="form-group">
+            <!-- Repeat Password -->
+            <div class="grupo-input">
                 <label for="repeat-password">Repetir contraseña</label>
-                <input type="password" id="repeat-password" name="repeat-password">
+                <input type="password" id="repeat-password" name="repeat-password" [(ngModel)]="repeatPassword"
+                    required>
             </div>
 
-            <div class="form-actions">
-                <a routerLink="/login">¿Ya tienes cuenta? Inicia sesión</a>
+            <!-- Link Login -->
+            <div class="enlace-login-container">
+                <a routerLink="/login">
+                    ¿Ya tienes cuenta? Inicia sesión
+                </a>
             </div>
 
-            <button type="submit">REGISTRARSE</button>
+            <!-- Submit -->
+            <button type="submit" class="boton-primario" style="width: 100%;">
+                REGISTRARSE
+            </button>
         </form>
     </div>
-</div>
+</section>

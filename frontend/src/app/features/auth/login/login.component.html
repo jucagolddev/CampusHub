@@ -1,291 +1,31 @@
-<!DOCTYPE html>
-<html lang="es">
+<section class="pagina-login">
+    <div class="contenedor-formulario">
+        <h1>Iniciar Sesión</h1>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión - CampusHub</title>
-    <style>
-        /* --- VARIABLES DE COLOR --- */
-        :root {
-            --bg-color: #f0f0f5;
-            /* Fondo general */
-            --primary-blue: #009bd9;
-            /* Azul claro (bordes, botones) */
-            --dark-blue: #0a2e5c;
-            /* Azul oscuro (títulos, footer) */
-            --text-gray: #555555;
-            /* Color de etiquetas */
-            --input-bg: #f0f0f5;
-            /* Fondo de inputs */
-        }
+        <form (ngSubmit)="onSubmit()">
+            <!-- Email -->
+            <div class="grupo-input">
+                <label for="gmail">Email</label>
+                <input type="email" id="gmail" name="gmail" [(ngModel)]="email" required
+                    placeholder="ejemplo@correo.com">
+            </div>
 
-        /* --- RESET --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        /* --- LOGO (IMAGEN) --- */
-        .top-logo-img {
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            width: 80px;
-            /* Ajusta el tamaño según necesites */
-            height: auto;
-            z-index: 10;
-        }
-
-        /* --- CONTENIDO PRINCIPAL --- */
-        .main-content {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            padding-top: 50px;
-            /* Espacio para no chocar con el logo en móviles */
-            padding-bottom: 50px;
-        }
-
-        /* --- TARJETA DE LOGIN --- */
-        .login-card {
-            background-color: white;
-            border: 2px solid var(--primary-blue);
-            border-radius: 20px;
-            padding: 60px 40px;
-            width: 100%;
-            max-width: 600px;
-            /* Ancho amplio como en la imagen */
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-        }
-
-        h1 {
-            color: var(--dark-blue);
-            font-size: 2.8rem;
-            font-weight: bold;
-            margin-bottom: 50px;
-        }
-
-        /* --- FORMULARIO --- */
-        .input-group {
-            margin-bottom: 30px;
-            text-align: left;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-gray);
-            font-weight: 700;
-            font-size: 1rem;
-            margin-left: 5px;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 15px 20px;
-            border: 2px solid var(--primary-blue);
-            border-radius: 15px;
-            /* Bordes redondeados pero no completamente pastilla */
-            background-color: var(--input-bg);
-            font-size: 1rem;
-            outline: none;
-            transition: box-shadow 0.3s ease;
-        }
-
-        .input-group input:focus {
-            box-shadow: 0 0 0 4px rgba(0, 155, 217, 0.1);
-        }
-
-        /* Link de registro */
-        .register-link {
-            display: block;
-            text-align: right;
-            color: var(--primary-blue);
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 0.9rem;
-            margin-top: 8px;
-        }
-
-        .register-link:hover {
-            text-decoration: underline;
-        }
-
-        /* Botón */
-        .btn-login {
-            background-color: var(--primary-blue);
-            color: white;
-            border: none;
-            padding: 15px 50px;
-            border-radius: 8px;
-            /* Ligeramente redondeado como en la imagen */
-            font-size: 1rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            cursor: pointer;
-            margin-top: 30px;
-            transition: background-color 0.3s;
-        }
-
-        .btn-login:hover {
-            background-color: #0085ba;
-        }
-
-        /* --- FOOTER --- */
-        .main-footer {
-            background-color: var(--dark-blue);
-            color: white;
-            padding: 40px 0 20px 0;
-            width: 100%;
-            margin-top: auto;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 40px;
-        }
-
-        .footer-col {
-            flex: 1;
-            padding: 0 20px;
-        }
-
-        .footer-title {
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            display: inline-block;
-            position: relative;
-        }
-
-        /* Líneas blancas debajo de los títulos (CampusHub, Enlaces, Soporte) */
-        .footer-line {
-            height: 3px;
-            background-color: white;
-            width: 100%;
-            display: block;
-        }
-
-        /* Línea separadora larga */
-        .footer-divider-long {
-            height: 2px;
-            background-color: white;
-            width: 100%;
-            margin-bottom: 15px;
-            opacity: 0.8;
-        }
-
-        .copyright {
-            text-align: center;
-            font-size: 0.85rem;
-            opacity: 0.8;
-        }
-
-        /* --- RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .footer-links {
-                flex-direction: column;
-                gap: 30px;
-                text-align: center;
-            }
-
-            .login-card {
-                padding: 30px 20px;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .top-logo-img {
-                width: 60px;
-                left: 20px;
-                top: 20px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-
-        <!-- LOGO (Ruta para XAMPP) -->
-    <img src="frontend\src\assets\images\logo.png.png" alt="Logo app" class="top-logo-img">
-
-    <!-- CONTENIDO -->
-    <main class="main-content">
-        <div class="login-card">
-            <h1>Iniciar Sesión</h1>
-
-            <form action="#" method="POST">
-                <!-- Gmail -->
-                <div class="input-group">
-                    <label for="gmail">Email</label>
-                    <input type="email" id="gmail" name="gmail" required>
-                </div>
-
-                <!-- Contraseña -->
-                <div class="input-group">
-                    <label for="password">Contraseña</label>
-                    <input type="password" id="password" name="password" required>
-                    <a href="#" class="register-link">¿No tienes cuenta? Regístrate</a>
-                </div>
-
-                <!-- Botón -->
-                <button type="submit" class="btn-login">INICIAR SESION</button>
-            </form>
-        </div>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="main-footer">
-        <div class="footer-container">
-            <div class="footer-links">
-                <!-- Columna 1 -->
-                <div class="footer-col">
-                    <div class="footer-title">CampusHub</div>
-                    <span class="footer-line"></span>
-                </div>
-                <!-- Columna 2 -->
-                <div class="footer-col" style="text-align: center;">
-                    <div class="footer-title">Enlaces</div>
-                    <span class="footer-line"></span>
-                </div>
-                <!-- Columna 3 -->
-                <div class="footer-col" style="text-align: right;">
-                    <div class="footer-title">Soporte</div>
-                    <span class="footer-line"></span>
+            <!-- Contraseña -->
+            <div class="grupo-input">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" [(ngModel)]="password" required
+                    placeholder="********">
+                <div class="enlace-registro-container">
+                    <a routerLink="/register">
+                        ¿No tienes cuenta? Regístrate
+                    </a>
                 </div>
             </div>
 
-            <div class="footer-divider-long"></div>
-
-            <div class="copyright">
-                © 2024 CampusHub. Todos los derechos reservados.
-            </div>
-        </div>
-    </footer>
-
-</body>
-
-</html>
+            <!-- Botón -->
+            <button type="submit" class="boton-primario" style="width: 100%;">
+                INICIAR SESIÓN
+            </button>
+        </form>
+    </div>
+</section>

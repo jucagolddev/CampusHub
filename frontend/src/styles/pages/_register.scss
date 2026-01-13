@@ -18,6 +18,54 @@
     background-color: $color-fondo-puro; // Fondo blanco
     border-radius: 8px; // Bordes redondeados
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Sombra sutil para dar profundidad
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+
+      h1 {
+        margin-bottom: 0.5rem;
+        color: $color-texto-titulo-h1;
+      }
+
+      h2 { // Para "en" y "Campus Hub"
+        font-size: 1.5rem;
+        color: $color-texto-secundario;
+        margin: 0;
+        
+        &:last-child { // "Campus Hub"
+          font-size: 1.8rem;
+          color: $color-interactivo-principal;
+          margin-top: 0.5rem;
+        }
+      }
+    }
+
+    form {
+      .grupo-input {
+        margin-bottom: 1rem;
+        
+        // Espaciado extra para "Repetir contraseña" o grupos finales
+        &:last-of-type {
+            margin-bottom: 1.5rem;
+        }
+      }
+
+      .enlace-login-container {
+        text-align: right;
+        margin-bottom: 1.5rem;
+
+        a {
+           color: $color-interactivo-principal;
+           text-decoration: none;
+           font-weight: $peso-negrita;
+           
+           &:hover {
+             text-decoration: underline;
+           }
+        }
+      }
+    }
   }
 
   // Fila de nombres

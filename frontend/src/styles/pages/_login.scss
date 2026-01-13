@@ -19,5 +19,33 @@
     background-color: $color-fondo-puro; // Fondo blanco
     border-radius: 8px; // Bordes redondeados
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Sombra sutil para dar profundidad
+
+    h1 {
+      text-align: center;
+      color: $color-texto-titulo-h1;
+      margin-bottom: 2rem;
+    }
+
+    form {
+      .grupo-input {
+        margin-bottom: 1.5rem;
+      }
+      
+      .enlace-registro-container {
+        text-align: right;
+        margin-top: 0.5rem;
+
+        a {
+           color: $color-interactivo-principal;
+           text-decoration: none;
+           font-weight: $peso-negrita;
+           font-size: 0.9rem;
+
+           &:hover {
+             text-decoration: underline;
+           }
+        }
+      }
+    }
   }
 }
