@@ -1,6 +1,6 @@
 // Archivo de mixins reutilizables
 // Los mixins son bloques de código reutilizables que se pueden incluir en otros selectores
-@use "variables" as *;
+@use "base/variables" as *;
 
 // Mixin para media queries responsivas
 // Este mixin facilita la creación de estilos adaptativos para diferentes tamaños de pantalla

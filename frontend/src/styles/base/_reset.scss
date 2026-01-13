@@ -1,6 +1,6 @@
 // Archivo de normalización y estilos base
 // Este archivo establece los estilos fundamentales y resetea los estilos por defecto del navegador
-@use "variables" as *;
+@use "base/variables" as *;
 
 // Reset básico para todos los elementos
 // Aplica box-sizing border-box para que el padding y border se incluyan en el ancho total
