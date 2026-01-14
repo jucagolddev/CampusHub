@@ -17,28 +17,28 @@ export class HomeComponent {
   // En el futuro, estos datos se obtendrán dinámicamente desde una base de datos.
   projects = [
     {
-      title: 'Proyecto 1',
-      description: 'Esta es una breve descripción del proyecto.',
+      title: 'Dashboard Docente',
+      description: 'Horario para los profesores.',
       technologies: ['Angular', 'Node', 'Js'],
       image: 'assets/images/placeholder.jpg',
       author: 'User Name',
-      githubLink: '#'
+      githubLink: '#',
     },
     {
-      title: 'Proyecto 2',
-      description: 'Descripción del proyecto 2.',
+      title: 'Calendario de tareas',
+      description: 'Es un calendario donde los docentes pueden agregar tareas.',
       technologies: ['Angular', 'Node', 'Js'],
       image: 'assets/images/placeholder.jpg',
       author: 'User Name',
-      githubLink: '#'
+      githubLink: '#',
     },
     {
-      title: 'Proyecto 3',
-      description: 'Descripción del proyecto 3.',
+      title: 'Generador de informes',
+      description: 'Genera informes de los alumnos en pdf con sus datos.',
       technologies: ['Angular', 'Node', 'Js'],
       image: 'assets/images/placeholder.jpg',
       author: 'User Name',
-      githubLink: '#'
-    }
+      githubLink: '#https://github.com/PabloGD78/proyecto-pi',
+    },
   ];
 }
