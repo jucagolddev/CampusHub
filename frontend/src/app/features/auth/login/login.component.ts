@@ -5,9 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 
 /**
- * Componente de Inicio de Sesión (Login)
- * Gestiona el formulario de acceso, captura las credenciales del usuario
- * y coordina con el AuthService para validar la sesión.
+ * Esta es mi puerta de entrada para usuarios registrados.
+ * Aquí controlo el formulario de acceso, asegurándome de que las credenciales
+ * pasen por mi servicio de autenticación antes de dejar pasar a nadie al sistema.
  */
 @Component({
   selector: 'app-login',
@@ -20,23 +20,19 @@ export class LoginComponent {
   email = '';
   password = '';
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   /**
-   * Procesa el envío del formulario.
-   * Valida que los campos no estén vacíos antes de intentar el login.
+   * Cuando el usuario me da sus datos y pulsa entrar, yo me encargo de todo.
+   * Valido rápidamente que no me deje nada vacío y pido permiso al AuthService.
    */
   onSubmit(): void {
     if (this.email && this.password) {
       // Llamamos al servicio para establecer la sesión (simulado)
       this.authService.login(this.email, this.password);
-      
+
       // Una vez autenticado, redirigimos al usuario a la página de inicio.
       this.router.navigate(['/']);
     }
   }
 }
-

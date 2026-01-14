@@ -1,7 +1,7 @@
-// Variables de diseño globales del proyecto CampusHub
-// Este archivo contiene todas las variables de colores, tipografía y otros valores reutilizables
+// Aquí defino mi paleta de colores y el ADN visual de CampusHub.
+// He elegido tonos que transmitan profesionalidad y claridad.
 
-// Colores base y de marca
+// Mis colores insignia:
 // Estos son los colores principales que definen la identidad visual del proyecto
 $color-fondo-base: #f2eef0; // Color de fondo general de la página, gris rosado claro
 $color-interactivo-principal: #009acd; // Color principal para elementos interactivos como botones y enlaces, azul cerúleo
@@ -44,7 +44,8 @@ $acento-fondo-cita: #f7fbfd; // Color de fondo para bloques de citas, azul muy c
 $acento-fondo-codigo: #f5f5f5; // Color de fondo para bloques de código, gris muy claro
 $acento-texto-codigo: #2c3e50; // Color del texto dentro de bloques de código, gris azulado oscuro
 
-// Tipografía
+// Mi elección tipográfica.
+// Uso Open Sans para que todo se lea de maravilla en cualquier pantalla.
 // Variables para fuentes y pesos de texto
 $fuente-principal: "Open Sans", Arial, sans-serif; // Fuente principal del sitio, Open Sans con fallbacks
 $fuente-codigo: "Consolas", "Monaco", "Courier New", monospace; // Fuente monoespaciada para código
@@ -63,12 +64,12 @@ $ancho-maximo-contenido: 1400px; // Ancho máximo del contenido principal
 
 // Sistema de espaciado (basado en escala de 8px)
 $espaciado-xs: 0.25rem; // 4px
-$espaciado-s: 0.5rem;   // 8px
-$espaciado-m: 1rem;     // 16px
-$espaciado-l: 1.5rem;   // 24px
-$espaciado-xl: 2rem;    // 32px
-$espaciado-xxl: 3rem;   // 48px
+$espaciado-s: 0.5rem; // 8px
+$espaciado-m: 1rem; // 16px
+$espaciado-l: 1.5rem; // 24px
+$espaciado-xl: 2rem; // 32px
+$espaciado-xxl: 3rem; // 48px
 
 // Gaps estándar para grids y flexbox
-$gap-grid: 1.5rem;      // Espacio estándar entre tarjetas y columnas
-$gap-flex: 1rem;        // Espacio estándar entre elementos flex
+$gap-grid: 1.5rem; // Espacio estándar entre tarjetas y columnas
+$gap-flex: 1rem; // Espacio estándar entre elementos flex

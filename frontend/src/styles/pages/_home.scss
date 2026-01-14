@@ -1,14 +1,14 @@
-// Estilos para la página de inicio
-// Este archivo define los estilos específicos de la página principal
+// Así es como le doy vida a mi página de inicio.
+// Aquí controlo desde el Hero hasta cómo se comportan mis cuadrículas de proyectos.
 @use "../base/variables" as *;
 
 // Diseño de cuadrícula de dos columnas pro-activo
 // Utilizado para equilibrar visualmente el texto y las imágenes en pantallas anchas.
 .grid-dos-columnas {
-  display: grid; 
+  display: grid;
   grid-template-columns: 1fr 1fr; // División equitativa del espacio
-  gap: $gap-grid; 
-  
+  gap: $gap-grid;
+
   // En pantallas de móviles, las columnas se apilan verticalmente para mejor lectura.
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -37,13 +37,16 @@
   margin-bottom: $espaciado-xxl;
 }
 
-// SECCIÓN HERO: Ajustes estéticos para la cabecera principal
-// Aplica un fondo suave y bordes sutiles para destacar el buscador inicial.
+// Mi sección HERO: el primer flechazo para el usuario.
+// Le doy un aire moderno con un buscador estilo 'pill' muy cómodo.
 #hero {
   padding: $espaciado-xxl 0;
-  background-color: rgba($color-interactivo-principal, 0.05); // Sutil tinte azul
+  background-color: rgba(
+    $color-interactivo-principal,
+    0.05
+  ); // Sutil tinte azul
   border-bottom: 1px solid rgba($color-interactivo-principal, 0.1);
-  
+
   .hero-content {
     h1 {
       margin-top: 0;
@@ -90,7 +93,7 @@
       text-align: center;
     }
   }
-  
+
   .info-image {
     background-color: #ddd;
     aspect-ratio: 16/9;

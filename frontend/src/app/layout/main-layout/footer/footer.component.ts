@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 /**
- * Componente de Pie de Página (Footer)
- * Proporciona información de contacto, enlaces rápidos y derechos de autor al final de cada página.
+ * El cierre de mi página (Footer).
+ * Aquí pongo los típicos enlaces de contacto y el copyright para que la web
+ * quede bien rematada abajo.
  */
 @Component({
   selector: 'app-footer',

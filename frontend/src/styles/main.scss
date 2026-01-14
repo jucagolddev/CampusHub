@@ -1,8 +1,8 @@
-// Archivo orquestador principal
-// Este archivo no contiene estilos propios, solo importa todos los demás archivos parciales
-// El orden de importación es importante para evitar problemas de especificidad y dependencias
+// ¡Este es mi orquestador de estilos!
+// Aquí no escribo ni una línea de CSS propio; me dedico a importar todos los parciales
+// en el orden correcto para que la cascada funcione como un reloj suizo.
 
-// 1. Configuración y herramientas
+// 1. Herramientas de diseño (Variables y Mixins)
 // Primero se importan las variables y mixins que serán usados por los demás archivos
 @use "base/variables" as *;
 @use "base/mixins" as *;

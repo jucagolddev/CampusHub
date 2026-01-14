@@ -2,22 +2,26 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 /**
- * Servicio de Autenticación (AuthService)
- * Centraliza toda la lógica relacionada con el inicio de sesión, registro y gestión del estado del usuario.
- * Utiliza RxJS para permitir que otros componentes reaccionen a cambios en el estado de autenticación.
+ * ¡Este es mi guardián de la sesión!
+ * En este servicio centralizo toda la lógica para que un usuario pueda entrar,
+ * registrarse o salir de CampusHub. Uso RxJS para que cualquier parte de mi app
+ * sepa al instante si hay alguien logueado o no.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-  // BehaviorSubject que mantiene el estado actual de autenticación. 
+  // BehaviorSubject que mantiene el estado actual de autenticación.
   // Se inicializa comprobando si ya existe un token guardado.
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
-  
-  // Observable público para que los componentes se suscriban al estado de autenticación de forma reactiva.
-  public isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(
+    this.hasToken()
+  );
 
-  constructor() { }
+  // Observable público para que los componentes se suscriban al estado de autenticación de forma reactiva.
+  public isAuthenticated$: Observable<boolean> =
+    this.isAuthenticatedSubject.asObservable();
+
+  constructor() {}
 
   /**
    * Verifica de forma privada si existe un token de seguridad en el almacenamiento local.
@@ -45,7 +49,7 @@ export class AuthService {
     // NOTA: Aquí se integrará la llamada real a la API mediante HttpClient en el futuro.
     localStorage.setItem('authToken', 'fake-jwt-token');
     localStorage.setItem('userEmail', email);
-    
+
     // Notificamos a todos los suscriptores que el usuario ya está autenticado.
     this.isAuthenticatedSubject.next(true);
   }
@@ -61,7 +65,7 @@ export class AuthService {
     localStorage.setItem('authToken', 'fake-jwt-token');
     localStorage.setItem('userEmail', email);
     localStorage.setItem('userName', name);
-    
+
     // Activamos el estado de sesión tras el registro automático.
     this.isAuthenticatedSubject.next(true);
   }
@@ -74,7 +78,7 @@ export class AuthService {
     localStorage.removeItem('authToken');
     localStorage.removeItem('userEmail');
     localStorage.removeItem('userName');
-    
+
     // Notificamos el cambio de estado a False.
     this.isAuthenticatedSubject.next(false);
   }

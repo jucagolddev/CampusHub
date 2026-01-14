@@ -5,8 +5,9 @@ import { AuthService } from '../../../core/services/auth.service';
 import { Subscription } from 'rxjs';
 
 /**
- * Componente de Cabecera (Header)
- * Gestiona la navegación principal y el estado visual de la sesión del usuario.
+ * Este es mi menú de navegación (Header).
+ * Es el que siempre está arriba del todo, vigilando si el usuario está dentro
+ * para mostrarle el botón de salir o el de entrar.
  */
 @Component({
   selector: 'app-header',
@@ -23,8 +24,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    // Al inicializar el componente, nos suscribimos al flujo de autenticación.
-    // Esto permite que el header reaccione instantáneamente cuando el usuario inicia o cierra sesión.
+    // Justo al arrancar, me pego al servicio de autenticación para estar
+    // siempre al tanto de si cambia el estado de la sesión.
     this.authSubscription = this.authService.isAuthenticated$.subscribe(
       (isAuthenticated) => {
         this.isLoggedIn = isAuthenticated;
@@ -33,8 +34,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Es fundamental limpiar la suscripción cuando el componente se destruye
-    // para liberar recursos del navegador y prevenir comportamientos inesperados.
+    // Por limpieza y para que el navegador no sufra, me desengancho al irme.
     this.authSubscription?.unsubscribe();
   }
 
@@ -45,4 +45,3 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.authService.logout();
   }
 }
-

@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 
 /**
- * Componente Raíz de la Aplicación (AppComponent)
- * Actúa como el punto de anclaje de Angular en el DOM y contenedor de nivel superior.
- * Gestiona el título global de la página y sirve como base para el enrutado.
+ * Este es mi componente raíz (AppComponent).
+ * Es el punto donde Angular se engancha al HTML y me permite empezar a montar
+ * toda la estructura de CampusHub, manejando el título global y el enrutado.
  */
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
 })
 export class AppComponent {
-  // Título oficial de la plataforma Campus Hub
+  // El nombre oficial que he elegido para mi plataforma.
   title = 'CampusHub';
 }

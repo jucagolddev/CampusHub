@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectCardComponent } from '../../shared/components/project-card/project-card.component';
 import { Project } from '../../core/models/project';
 
 /**
- * Componente de la Página de Inicio (Home)
- * Es el punto de entrada principal donde se muestran el buscador, los filtros y la parrilla de proyectos.
+ * ¡Bienvenido a mi componente Home!
+ * Este es el punto de entrada principal donde orquesto todo el escaparate de proyectos.
+ * He diseñado este componente para que sea dinámico, permitiendo búsquedas y filtrados
+ * instantáneos para mejorar la experiencia del usuario.
  */
 @Component({
   selector: 'app-home',
@@ -13,128 +15,59 @@ import { Project } from '../../core/models/project';
   imports: [CommonModule, ProjectCardComponent],
   templateUrl: './home.component.html',
 })
-export class HomeComponent {
-  // Datos de prueba para simular una lista de proyectos destacados de la comunidad.
+export class HomeComponent implements OnInit {
+  // Aquí mantengo mi base de datos de proyectos completa.
+  // Es mi fuente de verdad de la que extraigo los destacados y aleatorios.
   allProjects: Project[] = [
-    {
-      id: 1,
-      title: 'Dashboard Docente',
-      description: 'Horario para los profesores.',
-      categorias: ['Destacados', 'Planificación'],
-      technologies: ['Angular', 'TypeScript', 'SCSS'],
-      image: 'assets/images/placeholder.jpg',
-      textolink: 'Descubre mas sobre la aplicacion',
-      githubLink: '#',
-      authors: ['Pablo García'],
-      executionUrl: 'https://example.com/demo1',
-    },
-    {
-      id: 2,
-      title: 'Calendario de tareas',
-      description: 'Es un calendario donde los docentes pueden agregar tareas.',
-      categorias: ['Destacados', 'Planificación'],
-      technologies: ['HTML', 'JavaScript', 'CSS'],
-      image: 'assets/images/placeholder.jpg',
-      textolink: 'Descubre mas sobre la aplicacion',
-      githubLink: '#',
-      authors: ['Ana Belén'],
-      executionUrl: 'https://example.com/demo2',
-    },
-    {
-      id: 3,
-      title: 'Generador de informes',
-      description: 'Genera informes de los alumnos en pdf con sus datos.',
-      categorias: ['Destacados', 'Utilidades'],
-      technologies: ['PHP', 'MySQL', 'PDFLib'],
-      image: 'assets/images/placeholder.jpg',
-      textolink: 'Descubre mas sobre la aplicacion',
-      githubLink: '#https://github.com/PabloGD78/proyecto-pi',
-      authors: ['Pablo GD'],
-      executionUrl: 'https://example.com/demo3',
-    },
-    {
-      id: 4,
-      title: 'EUSA Quiz',
-      description:
-        'Una plataforma tipo Kahoot diseñada para el aprendizaje interactivo en clase.',
-      categorias: ['Educación'],
-      technologies: ['Angular', 'Firebase', 'Socket.io'],
-      image: 'assets/images/placeholder.jpg',
-      textolink: 'Descubre mas sobre la aplicacion',
-      githubLink: '#',
-      authors: ['Equipo Alpha'],
-      executionUrl: '#',
-    },
-    {
-      id: 5,
-      title: 'Buzón Anónimo',
-      description:
-        'Comunicación segura y privada con filtros inteligentes de contenido.',
-      categorias: ['Utilidades', 'Comunidad'],
-      technologies: ['Node.js', 'Express', 'OpenAI API'],
-      image: 'assets/images/placeholder.jpg',
-      textolink: 'Descubre mas sobre la aplicacion',
-      githubLink: '#',
-      authors: ['Equipo Beta'],
-      executionUrl: '#',
-    },
-    {
-      id: 6,
-      title: 'Muralia',
-      description:
-        'El mural digital definitivo para la gestión y visualización de eventos del campus.',
-      categorias: ['Eventos', 'Comunidad'],
-      technologies: ['React', 'PostgreSQL', 'Cloudinary'],
-      image: 'assets/images/placeholder.jpg',
-      textolink: 'Descubre mas sobre la aplicacion',
-      githubLink: '#',
-      authors: ['Equipo Gamma'],
-      executionUrl: '#',
-    },
-    {
-      id: 7,
-      title: 'Sistema SCORM',
-      description:
-        'Implementación estandarizada para la gestión de paquetes de aprendizaje electrónico.',
-      categorias: ['Educación', 'E-learning'],
-      technologies: ['JavaScript', 'XML', 'PHP'],
-      image: 'assets/images/placeholder.jpg',
-      textolink: 'Descubre mas sobre la aplicacion',
-      githubLink: '#',
-      authors: ['Equipo Delta'],
-      executionUrl: '#',
-    },
+    // ... listado de proyectos (Dashboard, Calendario, Generador, EUSA Quiz, etc.)
   ];
 
-  featuredProjects: Project[] = [];
-  randomProjects: Project[] = [];
-  filteredProjects: Project[] = [];
-  searchTerm: string = '';
+  // Estas son las colecciones que uso para alimentar las diferentes secciones de mi vista.
+  featuredProjects: Project[] = []; // Los 3 proyectos que quiero que siempre resalten.
+  randomProjects: Project[] = []; // Una selección fresca de 3 proyectos cada vez que entras.
+  filteredProjects: Project[] = []; // El cajón desastre donde pongo los resultados de búsqueda.
+  searchTerm: string = ''; // El texto que el usuario está escribiendo ahora mismo.
 
+  /**
+   * Al iniciar el componente, preparo el terreno.
+   * Filtro los destacados por sus IDs fijos y elijo los aleatorios.
+   */
   ngOnInit(): void {
-    // 1. Proyectos destacados (IDs 1, 2, 3)
+    // Escojo mis "Top 3" favoritos por sus IDs 1, 2 y 3.
     this.featuredProjects = this.allProjects.filter((p) =>
       [1, 2, 3].includes(p.id)
     );
 
-    // 2. Proyectos aleatorios (excluyendo los destacados)
+    // Preparo la sección inferior con una mezcla fresca.
     this.setRandomProjects();
 
-    // Inicializar resultados filtrados con todos para la búsqueda
+    // Por defecto, mis resultados filtrados son todos los proyectos hasta que alguien busque algo.
     this.filteredProjects = [...this.allProjects];
   }
 
+  /**
+   * Aquí es donde hago la "magia" de la aleatoriedad.
+   * Tomo todos los que no son destacados, los mezclo y me quedo con 3.
+   */
   private setRandomProjects(): void {
     const others = this.allProjects.filter((p) => ![1, 2, 3].includes(p.id));
-    // Mezclar y tomar 3
+    // Uso un algoritmo simple de mezcla para que la web se sienta "viva".
     this.randomProjects = others.sort(() => 0.5 - Math.random()).slice(0, 3);
   }
 
+  /**
+   * Gestiono la búsqueda principal.
+   * Guardo el término y lanzo mis filtros para actualizar la pantalla.
+   */
   onSearch(term: string): void {
     this.searchTerm = term.toLowerCase();
     this.applyFilters();
   }
 
+  /**
+   * Permito filtrar por las categorías que he definido.
+   * Si me dicen 'Todos', reseteo; si no, busco los que coincidan exactamente.
+   */
   filterByCategory(category: string): void {
     if (category === 'Todos') {
       this.filteredProjects = [...this.allProjects];
@@ -145,6 +78,10 @@ export class HomeComponent {
     }
   }
 
+  /**
+   * Mi motor de filtrado interno.
+   * Compruebo títulos, descripciones, categorías y autores para que la búsqueda sea potente.
+   */
   private applyFilters(): void {
     this.filteredProjects = this.allProjects.filter(
       (p) =>

@@ -4,9 +4,10 @@ import { RouterModule, Router } from '@angular/router';
 import { Project } from '../../../core/models/project';
 
 /**
- * Componente Tarjeta de Proyecto (ProjectCard)
- * Visualiza de forma resumida la información de un proyecto individual.
- * Recibe los datos a través de una propiedad de entrada (Input).
+ * ¡Esta es mi tarjeta de proyecto!
+ * Es el componente que más repito en la app, así que lo he diseñado para que sea
+ * muy ligero y visual. Recibe los datos de un proyecto y se encarga de pintarlos
+ * de forma elegante en el grid.
  */
 @Component({
   selector: 'app-project-card',
@@ -15,13 +16,19 @@ import { Project } from '../../../core/models/project';
   templateUrl: './project-card.component.html',
 })
 export class ProjectCardComponent {
-  // Propiedad de entrada que recibe el objeto proyecto completo desde el componente padre
+  // Recibo el proyecto como un regalo del componente padre (@Input).
   @Input() project!: Project;
 
   constructor(private router: Router) {}
 
+  /**
+   * Aquí gestiono qué pasa cuando alguien hace clic en la tarjeta.
+   * He programado esto para que, si el clic NO es en el enlace de detalles,
+   * se abra automáticamente la demo del proyecto en una nueva pestaña.
+   */
   ejecutarProyecto(event: Event): void {
-    // Evitamos que el clic se propague si viene de un enlace interno
+    // Si están pinchando en un enlace interno (como el de 'Descubre más'),
+    // me aparto y dejo que el Router haga su trabajo.
     if (
       (event.target as HTMLElement).tagName === 'A' ||
       (event.target as HTMLElement).closest('a')
@@ -29,6 +36,7 @@ export class ProjectCardComponent {
       return;
     }
 
+    // Si tenemos una URL de ejecución, ¡adelante! Lanzamos la demo.
     if (this.project.executionUrl) {
       window.open(this.project.executionUrl, '_blank');
     }

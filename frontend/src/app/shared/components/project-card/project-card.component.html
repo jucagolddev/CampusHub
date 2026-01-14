@@ -1,11 +1,11 @@
 <article class="tarjeta-proyecto" (click)="ejecutarProyecto($event)" style="cursor: pointer;">
-  <!-- 1. Imagen del proyecto: Se vincula dinámicamente el source y el alt -->
+  <!-- 1. La imagen principal del proyecto para que entre por los ojos. -->
   <div class="imagen-tarjeta">
     <img [src]="project.image" [alt]="project.title">
   </div>
 
   <div class="contenido-tarjeta">
-    <!-- 2. Etiquetas de Tecnologías: Se recorre la lista del proyecto -->
+    <!-- 2. Mis etiquetas dinámicas. Aquí pinto las categorías como píldoras. -->
     <div class="etiquetas">
       <span class="etiqueta-tech" *ngFor="let cat of project.categorias">
         {{ cat }}
@@ -20,7 +20,8 @@
       {{ project.description }}
     </p>
 
-    <!-- 5. Sección de Autor: Muestra el icono de GitHub y el nombre del creador -->
+    <!-- 5. Pie de la tarjeta: Aquí pongo el enlace a los detalles.
+         Uso stopPropagation() para que no se abra la demo al pinchar aquí. -->
     <div class="autor">
       <div class="avatar">
         <img src="assets/images/GitHub.png" alt="GitHub icon">

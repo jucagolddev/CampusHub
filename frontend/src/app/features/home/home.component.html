@@ -1,17 +1,20 @@
-<!-- SECCIÓN HERO: Cabecera de impacto con buscador y filtros rápidos -->
+<!-- SECCIÓN HERO: Mi cabecera principal de impacto.
+     Aquí presento el propósito de CampusHub y ofrezco las herramientas de búsqueda 
+     y filtros rápidos para que el usuario encuentre lo que necesita al instante. -->
 <section id="hero">
     <div class="contenedor-pagina">
         <div class="hero-content">
             <h1>Espacio de aplicaciones web y móviles.</h1>
 
-            <!-- Buscador integrado estilo cápsula -->
+            <!-- He diseñado este buscador con un estilo de cápsula moderna.
+                 Lanzo la búsqueda tanto al pulsar el botón como al darle a Enter. -->
             <div class="search-container">
                 <input #searchInput type="text" placeholder="Buscar por tecnología, nombre, autor..."
                     aria-label="Buscar proyectos" class="barra-busqueda" (keyup.enter)="onSearch(searchInput.value)">
                 <button type="button" class="boton-primario" (click)="onSearch(searchInput.value)">Buscar</button>
             </div>
 
-            <!-- Accesos directos por tecnología -->
+            <!-- Estos botones permiten a mis usuarios filtrar rápidamente por las categorías más comunes. -->
             <div class="filtros-categoria">
                 <span>Filtros rápidos:</span>
                 <button type="button" class="boton-delineado" (click)="filterByCategory('Todos')">Todos</button>
@@ -26,7 +29,9 @@
     </div>
 </section>
 
-<!-- SECCIÓN DE PROYECTOS: Cuadrícula con los trabajos más relevantes -->
+<!-- SECCIÓN DE PROYECTOS DESTACADOS:
+     Solo la muestro si el usuario NO está buscando nada específico.
+     Aquí renderizo mis 3 proyectos estrella (los de ID 1, 2 y 3). -->
 <section id="featured-projects" *ngIf="!searchTerm">
     <div class="contenedor-pagina">
         <header>
@@ -34,14 +39,16 @@
             <p>Seleccion de los mas populares</p>
         </header>
 
-        <!-- Grid dinámico para destacados -->
+        <!-- Uso un grid dinámico para mostrar mis tarjetas de proyecto destacadas. -->
         <div class="projects-grid">
             <app-project-card *ngFor="let project of featuredProjects" [project]="project"></app-project-card>
         </div>
     </div>
 </section>
 
-<!-- SECCIÓN INFORMATIVA: Detalles sobre la iniciativa CampusHub -->
+<!-- SECCIÓN INFORMATIVA: 
+     Aprovecho este bloque para explicar brevemente qué es CampusHub y sus beneficios.
+     Uso un diseño que alterna texto e imagen para que no sea pesado de leer. -->
 <section id="info-section" *ngIf="!searchTerm">
     <div class="contenedor-pagina">
         <div class="info-text">
@@ -51,13 +58,15 @@
             <p>Dando a los desarrolladores y estudiantes la posibilidad de publicar sus propuestas de proyectos.</p>
         </div>
         <div class="info-image">
-            <!-- Espacio reservado para imagen descriptiva o mockup -->
+            <!-- He dejado este espacio para una imagen descriptiva que pondré más adelante. -->
             <p>img</p>
         </div>
     </div>
 </section>
 
-<!-- SECCIÓN MÁS PROYECTOS: Selección aleatoria -->
+<!-- SECCIÓN MÁS PROYECTOS:
+     Aquí es donde muestro la selección aleatoria que preparé en el TypeScript.
+     También la oculto si hay una búsqueda activa para no confundir al usuario. -->
 <section id="more-projects" *ngIf="!searchTerm">
     <div class="contenedor-pagina">
         <header>
@@ -70,7 +79,9 @@
     </div>
 </section>
 
-<!-- SECCIÓN DE RESULTADOS DE BÚSQUEDA: Se muestra solo cuando hay un término activo -->
+<!-- SECCIÓN DE RESULTADOS DE BÚSQUEDA:
+     Esta sección cobra vida solo cuando el usuario empieza a escribir en el buscador.
+     Muestro el conteo de resultados para que el feedback sea claro. -->
 <section id="search-results" *ngIf="searchTerm">
     <div class="contenedor-pagina">
         <header>
@@ -80,6 +91,7 @@
         <div class="projects-grid">
             <app-project-card *ngFor="let project of filteredProjects" [project]="project"></app-project-card>
         </div>
+        <!-- Si mi búsqueda no arroja nada, ofrezco un botón para resetear y volver a ver todo. -->
         <div *ngIf="filteredProjects.length === 0" class="no-results">
             <p>No se encontraron proyectos que coincidan con tu búsqueda.</p>
             <button class="boton-primario" (click)="onSearch('')">Ver todos los proyectos</button>

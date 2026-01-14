@@ -7,24 +7,26 @@ import { ProjectListComponent } from './features/projects/project-list/project-l
 import { ProjectDetailComponent } from './features/projects/project-detail/project-detail.component';
 
 /**
- * Configuración de Rutas de la Aplicación
- * Define la correspondencia entre las URLs del navegador y los componentes de Angular.
+ * He definido aquí el mapa de navegación de mi aplicación.
+ * Asocio cada URL con el componente que quiero que se cargue dinámicamente.
+ * Esto me permite tener una Single Page Application (SPA) fluida.
  */
 export const routes: Routes = [
-  // Ruta de Inicio: Carga el escaparate de proyectos
+  // Esta es mi página de aterrizaje donde muestro los proyectos más importantes.
   { path: '', component: HomeComponent },
 
-  // Rutas de Autenticación: Login y Registro de nuevos usuarios
+  // Aquí defino los accesos para mi sistema de autenticación de usuarios.
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 
-  // Rutas de Proyectos: Listado y Detalle
+  // Estas rutas gestionan todo lo relacionado con el catálogo de mis proyectos.
   { path: 'projects', component: ProjectListComponent },
   { path: 'projects/:id', component: ProjectDetailComponent },
 
-  // Ruta de Carga: Formulario para subir nuevos proyectos (protección de ruta pendiente)
+  // Mi sección para que los alumnos puedan subir sus propias creaciones.
   { path: 'upload', component: ProjectUploadComponent },
 
-  // Ruta Comodín (Wildcard): Redirige cualquier URL no reconocida al inicio
+  // He añadido esta ruta comodín para que, si el usuario escribe algo que no existe,
+  // siempre lo mande de vuelta al inicio. Así evito errores 404 perdidos.
   { path: '**', redirectTo: '' },
 ];
