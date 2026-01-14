@@ -27,22 +27,22 @@
 </section>
 
 <!-- SECCIÓN DE PROYECTOS: Cuadrícula con los trabajos más relevantes -->
-<section id="featured-projects">
+<section id="featured-projects" *ngIf="!searchTerm">
     <div class="contenedor-pagina">
         <header>
             <h2>PROYECTOS DESTACADOS</h2>
             <p>Seleccion de los mas populares</p>
         </header>
 
-        <!-- Grid dinámico que renderiza componentes ProjectCard -->
+        <!-- Grid dinámico para destacados -->
         <div class="projects-grid">
-            <app-project-card *ngFor="let project of filteredProjects" [project]="project"></app-project-card>
+            <app-project-card *ngFor="let project of featuredProjects" [project]="project"></app-project-card>
         </div>
     </div>
 </section>
 
 <!-- SECCIÓN INFORMATIVA: Detalles sobre la iniciativa CampusHub -->
-<section id="info-section">
+<section id="info-section" *ngIf="!searchTerm">
     <div class="contenedor-pagina">
         <div class="info-text">
             <p>En campus hub ofrecemos variedad de aplicaciones orientadas a la docencia.</p>
@@ -57,10 +57,32 @@
     </div>
 </section>
 
-<section id="more-projects">
+<!-- SECCIÓN MÁS PROYECTOS: Selección aleatoria -->
+<section id="more-projects" *ngIf="!searchTerm">
     <div class="contenedor-pagina">
+        <header>
+            <h2>MÁS PROYECTOS</h2>
+            <p>Explora otras creaciones de la comunidad</p>
+        </header>
+        <div class="projects-grid">
+            <app-project-card *ngFor="let project of randomProjects" [project]="project"></app-project-card>
+        </div>
+    </div>
+</section>
+
+<!-- SECCIÓN DE RESULTADOS DE BÚSQUEDA: Se muestra solo cuando hay un término activo -->
+<section id="search-results" *ngIf="searchTerm">
+    <div class="contenedor-pagina">
+        <header>
+            <h2>RESULTADOS DE BÚSQUEDA</h2>
+            <p>Encontrados {{ filteredProjects.length }} proyectos para "{{ searchTerm }}"</p>
+        </header>
         <div class="projects-grid">
             <app-project-card *ngFor="let project of filteredProjects" [project]="project"></app-project-card>
+        </div>
+        <div *ngIf="filteredProjects.length === 0" class="no-results">
+            <p>No se encontraron proyectos que coincidan con tu búsqueda.</p>
+            <button class="boton-primario" (click)="onSearch('')">Ver todos los proyectos</button>
         </div>
     </div>
 </section>
