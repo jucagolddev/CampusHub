@@ -12,6 +12,8 @@
                 <!-- Enlace de Inicio: Siempre visible -->
                 <li><a routerLink="/" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
                 </li>
+                <li><a routerLink="/projects" routerLinkActive="activo">Proyectos</a></li>
+
 
                 <!-- Bloque para usuarios NO autenticados: Registro e Inicio de Sesión -->
                 <li><a routerLink="/login" routerLinkActive="activo" *ngIf="!isLoggedIn">Iniciar Sesión</a></li>

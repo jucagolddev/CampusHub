@@ -1,3 +1,10 @@
 <div class="contenedor-pagina">
-    <p>project-list works!</p>
+    <header class="listado-header">
+        <h1>Todos los Proyectos</h1>
+        <p>Explora todos los proyectos subidos por nuestra comunidad.</p>
+    </header>
+
+    <div class="projects-grid">
+        <app-project-card *ngFor="let project of projects" [project]="project"></app-project-card>
+    </div>
 </div>

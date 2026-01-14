@@ -6,18 +6,21 @@
 
             <!-- Buscador integrado estilo cápsula -->
             <div class="search-container">
-                <input type="text" placeholder="Buscar por tecnología, nombre, autor..." aria-label="Buscar proyectos"
-                    class="barra-busqueda">
-                <button type="button" class="boton-primario">Buscar</button>
+                <input #searchInput type="text" placeholder="Buscar por tecnología, nombre, autor..."
+                    aria-label="Buscar proyectos" class="barra-busqueda" (keyup.enter)="onSearch(searchInput.value)">
+                <button type="button" class="boton-primario" (click)="onSearch(searchInput.value)">Buscar</button>
             </div>
 
             <!-- Accesos directos por tecnología -->
             <div class="filtros-categoria">
                 <span>Filtros rápidos:</span>
-                <button type="button" class="boton-delineado">Destacados</button>
-                <button type="button" class="boton-delineado">React</button>
-                <button type="button" class="boton-delineado">Node.js</button>
-                <button type="button" class="boton-delineado">Python</button>
+                <button type="button" class="boton-delineado" (click)="filterByCategory('Todos')">Todos</button>
+                <button type="button" class="boton-delineado"
+                    (click)="filterByCategory('Destacados')">Destacados</button>
+                <button type="button" class="boton-delineado"
+                    (click)="filterByCategory('Planificación')">Planificación</button>
+                <button type="button" class="boton-delineado"
+                    (click)="filterByCategory('Utilidades')">Utilidades</button>
             </div>
         </div>
     </div>
@@ -33,7 +36,7 @@
 
         <!-- Grid dinámico que renderiza componentes ProjectCard -->
         <div class="projects-grid">
-            <app-project-card *ngFor="let project of projects" [project]="project"></app-project-card>
+            <app-project-card *ngFor="let project of filteredProjects" [project]="project"></app-project-card>
         </div>
     </div>
 </section>
@@ -57,8 +60,7 @@
 <section id="more-projects">
     <div class="contenedor-pagina">
         <div class="projects-grid">
-            <!-- Reutilizamos la misma lista para el ejemplo, o podríamos tener otra lista 'moreProjects' -->
-            <app-project-card *ngFor="let project of projects" [project]="project"></app-project-card>
+            <app-project-card *ngFor="let project of filteredProjects" [project]="project"></app-project-card>
         </div>
     </div>
 </section>

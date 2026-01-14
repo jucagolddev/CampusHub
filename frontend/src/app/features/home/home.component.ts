@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectCardComponent } from '../../shared/components/project-card/project-card.component';
+import { Project } from '../../core/models/project';
 
 /**
  * Componente de la Página de Inicio (Home)
@@ -14,31 +15,67 @@ import { ProjectCardComponent } from '../../shared/components/project-card/proje
 })
 export class HomeComponent {
   // Datos de prueba para simular una lista de proyectos destacados de la comunidad.
-  // En el futuro, estos datos se obtendrán dinámicamente desde una base de datos.
-  projects = [
+  allProjects: Project[] = [
     {
+      id: 1,
       title: 'Dashboard Docente',
       description: 'Horario para los profesores.',
-      technologies: ['Angular', 'Node', 'Js'],
+      categorias: ['Destacados', 'Planificación'],
       image: 'assets/images/placeholder.jpg',
-      author: 'User Name',
-      githubLink: '#',
+      textolink: 'Descubre mas sobre la aplicacion ',
+      githubLink: 'https://github.com/',
+      authors: ['Pablo García'],
+      executionUrl: 'https://example.com/demo1',
     },
     {
+      id: 2,
       title: 'Calendario de tareas',
       description: 'Es un calendario donde los docentes pueden agregar tareas.',
-      technologies: ['Angular', 'Node', 'Js'],
+      categorias: ['Destacados', 'Planificación'],
       image: 'assets/images/placeholder.jpg',
-      author: 'User Name',
-      githubLink: '#',
+      textolink: 'Descubre mas sobre la aplicacion ',
+      githubLink: 'https://github.com/',
+      authors: ['Ana Belén'],
+      executionUrl: 'https://example.com/demo2',
     },
     {
+      id: 3,
       title: 'Generador de informes',
       description: 'Genera informes de los alumnos en pdf con sus datos.',
-      technologies: ['Angular', 'Node', 'Js'],
+      categorias: ['Destacados', 'Utilidades'],
       image: 'assets/images/placeholder.jpg',
-      author: 'User Name',
-      githubLink: '#https://github.com/PabloGD78/proyecto-pi',
+      textolink: 'Descubre mas sobre la aplicacion ',
+      githubLink: 'https://github.com/PabloGD78/proyecto-pi',
+      authors: ['Pablo GD'],
+      executionUrl: 'https://example.com/demo3',
     },
   ];
+
+  filteredProjects: Project[] = [...this.allProjects];
+  searchTerm: string = '';
+
+  onSearch(term: string): void {
+    this.searchTerm = term.toLowerCase();
+    this.applyFilters();
+  }
+
+  filterByCategory(category: string): void {
+    if (category === 'Todos') {
+      this.filteredProjects = [...this.allProjects];
+    } else {
+      this.filteredProjects = this.allProjects.filter((p) =>
+        p.categorias.includes(category)
+      );
+    }
+  }
+
+  private applyFilters(): void {
+    this.filteredProjects = this.allProjects.filter(
+      (p) =>
+        p.title.toLowerCase().includes(this.searchTerm) ||
+        p.description.toLowerCase().includes(this.searchTerm) ||
+        p.categorias.some((c) => c.toLowerCase().includes(this.searchTerm)) ||
+        p.authors.some((a) => a.toLowerCase().includes(this.searchTerm))
+    );
+  }
 }

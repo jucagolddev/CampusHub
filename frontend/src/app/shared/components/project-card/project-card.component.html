@@ -1,4 +1,4 @@
-<article class="tarjeta-proyecto">
+<article class="tarjeta-proyecto" (click)="ejecutarProyecto($event)" style="cursor: pointer;">
   <!-- 1. Imagen del proyecto: Se vincula dinámicamente el source y el alt -->
   <div class="imagen-tarjeta">
     <img [src]="project.image" [alt]="project.title">
@@ -7,7 +7,7 @@
   <div class="contenido-tarjeta">
     <!-- 2. Etiquetas de Tecnologías: Se recorre la lista del proyecto -->
     <div class="etiquetas">
-      <span class="etiqueta" *ngFor="let tech of project.technologies">
+      <span class="etiqueta" *ngFor="let tech of project.categorias">
         {{ tech }}
       </span>
     </div>
@@ -25,7 +25,9 @@
       <div class="avatar">
         <img src="assets/images/GitHub.png" alt="GitHub icon">
       </div>
-      <span>{{ project.author || 'Usuario' }}</span>
+      <a [routerLink]="['/projects', project.id]" class="link-detalle" (click)="$event.stopPropagation()">
+        {{ project.textolink || 'Ver detalles' }}
+      </a>
     </div>
   </div>
 </article>
