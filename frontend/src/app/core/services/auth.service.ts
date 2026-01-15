@@ -1,99 +1,131 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+
+// Interfaces para tipado fuerte de respuestas API
+export interface LoginResponse {
+  message: string;
+  token: string;
+  user: {
+    userName: string;
+    email: string;
+    rolId?: number;
+  };
+}
 
 /**
- * ¡Este es mi guardián de la sesión!
- * En este servicio centralizo toda la lógica para que un usuario pueda entrar,
- * registrarse o salir de CampusHub. Uso RxJS para que cualquier parte de mi app
- * sepa al instante si hay alguien logueado o no.
+ * SERVICIO DE AUTENTICACIÓN (AuthService)
+ * -------------------------------------------------------------------------
+ * Este servicio centraliza toda la lógica de seguridad y gestión de sesiones
+ * del lado del cliente. Se encarga de la comunicación con el backend para
+ * procesos de login y registro, gestionando el estado reactivo de la sesión
+ * mediante RxJS y persistiendo los tokens JWT en el almacenamiento local.
  */
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  // BehaviorSubject que mantiene el estado actual de autenticación.
-  // Se inicializa comprobando si ya existe un token guardado.
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(
-    this.hasToken()
-  );
+  private apiUrl = 'http://localhost:3000/api/users';
+  
+  // Estado reactivo de autenticación
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
+  public isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
 
-  // Observable público para que los componentes se suscriban al estado de autenticación de forma reactiva.
-  public isAuthenticated$: Observable<boolean> =
-    this.isAuthenticatedSubject.asObservable();
+  // Estado reactivo del usuario actual
+  private currentUserSubject = new BehaviorSubject<any>(this.getUserFromStorage());
+  public currentUser$ = this.currentUserSubject.asObservable();
 
-  constructor() {}
+  constructor(private http: HttpClient, private router: Router) {}
+
+  // =================================================================
+  // MÉTODOS PÚBLICOS DE API
+  // =================================================================
 
   /**
-   * Verifica de forma privada si existe un token de seguridad en el almacenamiento local.
-   * @returns boolean - True si el token existe, False en caso contrario.
+   * Inicia sesión contra el backend.
+   * @param userName Nombre de usuario
+   * @param password Contraseña plana
+   * @returns Observable con la respuesta del servidor
    */
-  private hasToken(): boolean {
-    return !!localStorage.getItem('authToken');
+  login(userName: string, password: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { userName, password }).pipe(
+      tap((response: LoginResponse) => {
+        // Al recibir éxito, guardamos la sesión
+        this.setSession(response);
+      })
+    );
   }
 
   /**
-   * Obtiene el valor booleano actual del estado de autenticación sin necesidad de suscribirse.
-   * Útil para comprobaciones puntuales en guards o lógica de componentes.
+   * Registra un nuevo usuario.
+   * @param userData Objeto con userName, email, password, y opcionales (rolId, centroId, tituloId)
+   * @returns Observable con respuesta
    */
+  register(userData: { 
+    userName: string; 
+    email: string; 
+    password: string;
+    rolId?: number;
+    centroId?: number;
+    tituloId?: number;
+  }): Observable<any> {
+    return this.http.post(`${this.apiUrl}/register`, userData).pipe(
+      tap(() => {
+        // Opcional: Auto-login tras registro o redirigir a login
+      })
+    );
+  }
+
+  /**
+   * Cierra la sesión y limpia el almacenamiento local.
+   */
+  logout(): void {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('user');
+    
+    this.isAuthenticatedSubject.next(false);
+    this.currentUserSubject.next(null);
+    
+    this.router.navigate(['/login']);
+  }
+
+  // =================================================================
+  // MÉTODOS DE ESTADO Y UTILIDADES
+  // =================================================================
+
+  getToken(): string | null {
+    return localStorage.getItem('authToken');
+  }
+
   isLoggedIn(): boolean {
     return this.isAuthenticatedSubject.value;
   }
 
-  /**
-   * Procesa la solicitud de inicio de sesión.
-   * Por ahora simula una respuesta exitosa guardando un token ficticio.
-   * @param email - Correo del usuario
-   * @param password - Contraseña
-   */
-  login(email: string, password: string): void {
-    // NOTA: Aquí se integrará la llamada real a la API mediante HttpClient en el futuro.
-    localStorage.setItem('authToken', 'fake-jwt-token');
-    localStorage.setItem('userEmail', email);
+  getCurrentUser(): any {
+    return this.currentUserSubject.value;
+  }
 
-    // Notificamos a todos los suscriptores que el usuario ya está autenticado.
+  // =================================================================
+  // MÉTODOS PRIVADOS
+  // =================================================================
+
+  private hasToken(): boolean {
+    return !!localStorage.getItem('authToken');
+  }
+
+  private getUserFromStorage(): any {
+    const userStr = localStorage.getItem('user');
+    return userStr ? JSON.parse(userStr) : null;
+  }
+
+  private setSession(authResult: LoginResponse): void {
+    localStorage.setItem('authToken', authResult.token);
+    // Guardamos info básica del usuario para mostrar en UI
+    localStorage.setItem('user', JSON.stringify(authResult.user));
+
     this.isAuthenticatedSubject.next(true);
-  }
-
-  /**
-   * Crea una nueva cuenta de usuario en el sistema.
-   * @param email - Correo del usuario
-   * @param password - Contraseña elegida
-   * @param name - Nombre del usuario
-   */
-  register(email: string, password: string, name: string): void {
-    // NOTA: Integrar llamada POST al backend para persistencia real.
-    localStorage.setItem('authToken', 'fake-jwt-token');
-    localStorage.setItem('userEmail', email);
-    localStorage.setItem('userName', name);
-
-    // Activamos el estado de sesión tras el registro automático.
-    this.isAuthenticatedSubject.next(true);
-  }
-
-  /**
-   * Finaliza la sesión actual eliminando toda la información de seguridad y usuario del navegador.
-   * Notifica a la aplicación que el usuario ha salido.
-   */
-  logout(): void {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('userEmail');
-    localStorage.removeItem('userName');
-
-    // Notificamos el cambio de estado a False.
-    this.isAuthenticatedSubject.next(false);
-  }
-
-  /**
-   * Obtiene el email del usuario actual
-   */
-  getUserEmail(): string | null {
-    return localStorage.getItem('userEmail');
-  }
-
-  /**
-   * Obtiene el nombre del usuario actual
-   */
-  getUserName(): string | null {
-    return localStorage.getItem('userName');
+    this.currentUserSubject.next(authResult.user);
   }
 }

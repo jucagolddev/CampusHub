@@ -1,13 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectCardComponent } from '../../../shared/components/project-card/project-card.component';
 import { Project } from '../../../core/models/project';
+import { ProjectService } from '../../../core/services/project.service';
 
 /**
- * Este es mi componente de Listado de Proyectos.
- * Aquí muestro el catálogo completo de trabajos disponibles en la plataforma.
- * He configurado una lista de datos de prueba para alimentar la vista, similar al Home,
- * pero centrada exclusivamente en mostrar todos los proyectos en un solo lugar.
+ * COMPONENTE DE LISTADO DE PROYECTOS (ProjectListComponent)
+ * -------------------------------------------------------------------------
+ * Proporciona una vista de catálogo completa donde se muestran todas las
+ * aplicaciones y trabajos técnicos disponibles en CampusHub.
+ * 
+ * Implementa una carga asíncrona de datos desde la API y maneja estados
+ * de carga para mejorar la experiencia de usuario (UX).
  */
 @Component({
   selector: 'app-project-list',
@@ -15,10 +19,38 @@ import { Project } from '../../../core/models/project';
   imports: [CommonModule, ProjectCardComponent],
   templateUrl: './project-list.component.html',
 })
-export class ProjectListComponent {
-  // Aquí mantengo mis proyectos. Los he definido con sus categorías y tecnologías
-  // para que las tarjetas se rendericen correctamente con sus píldoras azules.
-  projects: Project[] = [
-    // ... listado de proyectos (Dashboard, Calendario, Generador, EUSA Quiz, etc.)
-  ];
+export class ProjectListComponent implements OnInit {
+  projects: Project[] = [];
+  isLoading = true;
+
+  constructor(private projectService: ProjectService) {}
+
+  ngOnInit(): void {
+    this.loadProjects();
+  }
+
+  loadProjects(): void {
+    this.projectService.getProjects().subscribe({
+      next: (data) => {
+        // Mapeamos los campos del backend a los campos esperados por el frontend
+        this.projects = data.map(p => ({
+          id: p.id,
+          title: p.nombreProyecto,
+          description: p.descripcionProyecto,
+          authors: ['Usuario'], // Por defecto hasta tener relación en BD
+          categorias: ['General'], 
+          technologies: ['Web'],
+          image: p.imgPortada,
+          githubLink: p.urlGitHub,
+          executionUrl: p.urlProyecto,
+          textolink: 'Ver Proyecto'
+        }));
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Error al cargar proyectos:', err);
+        this.isLoading = false;
+      }
+    });
+  }
 }

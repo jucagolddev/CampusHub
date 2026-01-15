@@ -1,0 +1,12 @@
+# Common ignores
+node_modules/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+
+# Build artifacts
+dist/
+.angular/
+out-tsc/

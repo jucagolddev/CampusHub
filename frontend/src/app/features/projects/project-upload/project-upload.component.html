@@ -5,33 +5,48 @@
             <h1>Sube proyectos</h1>
             <h2>a nuestra plataforma</h2>
 
-            <form>
-                <!-- Información técnica: Nombre y enlaces de repositorio/despliegue -->
+            <form (ngSubmit)="onSubmit()">
+                <!-- Información técnica -->
                 <div class="grupo-input">
-                    <label for="nombreProyecto">Nombre del proyecto</label>
-                    <input type="text" id="nombreProyecto" name="nombreProyecto">
+                    <label for="nombreProyecto">Nombre del proyecto *</label>
+                    <input type="text" id="nombreProyecto" name="nombreProyecto" [(ngModel)]="nombreProyecto" required>
+                </div>
+
+                <!-- Descripción (Nuevo Campo requerido por backend) -->
+                <div class="grupo-input">
+                    <label for="descripcionProyecto">Descripción</label>
+                    <textarea id="descripcionProyecto" name="descripcionProyecto" [(ngModel)]="descripcionProyecto"
+                        rows="3"></textarea>
                 </div>
 
                 <div class="grupo-input">
-                    <label for="linkGithub">Link a github</label>
-                    <input type="text" id="linkGithub" name="linkGithub">
+                    <label for="linkGithub">Link a GitHub *</label>
+                    <input type="text" id="linkGithub" name="linkGithub" [(ngModel)]="linkGithub" required>
                 </div>
 
                 <div class="grupo-input">
-                    <label for="urlProyecto">Url proyecto</label>
-                    <input type="text" id="urlProyecto" name="urlProyecto">
+                    <label for="urlProyecto">URL del Proyecto desplegado</label>
+                    <input type="text" id="urlProyecto" name="urlProyecto" [(ngModel)]="urlProyecto">
                 </div>
 
-                <!-- Contexto Académico: Institución o Centro Educativo -->
+                <!-- Imagen de Portada (URL) -->
+                <div class="grupo-input">
+                    <label for="imgPortada">URL Imagen de Portada</label>
+                    <input type="text" id="imgPortada" name="imgPortada" [(ngModel)]="imgPortada"
+                        placeholder="https://...">
+                </div>
+
+                <!-- Contexto Académico -->
                 <div class="grupo-input">
                     <label for="nombreCentro">Nombre del centro</label>
-                    <input type="text" id="nombreCentro" name="nombreCentro">
+                    <input type="text" id="nombreCentro" name="nombreCentro" [(ngModel)]="nombreCentro">
                 </div>
 
-                <!-- Botón Principal: Ejecuta la acción de guardado -->
+                <!-- Botón Principal -->
                 <div class="contenedor-boton">
-                    <button type="submit" class="boton-primario">
-                        SUBIR PROYECTO
+                    <button type="submit" class="boton-primario" [disabled]="isLoading">
+                        <span *ngIf="!isLoading">SUBIR PROYECTO</span>
+                        <span *ngIf="isLoading">Subiendo...</span>
                     </button>
                 </div>
             </form>

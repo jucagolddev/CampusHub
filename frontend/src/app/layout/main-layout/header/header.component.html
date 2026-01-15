@@ -21,6 +21,7 @@
 
                 <!-- Bloque para usuarios SÍ autenticados: Funcionalidades de carga y cierre de sesión -->
                 <li><a routerLink="/upload" routerLinkActive="activo" *ngIf="isLoggedIn">Subir Archivos</a></li>
+                <li *ngIf="isLoggedIn && userName" class="saludo-usuario">Hola, {{ userName }}</li>
                 <li><a (click)="logout()" style="cursor: pointer;" *ngIf="isLoggedIn">Cerrar Sesión</a></li>
             </ul>
         </nav>

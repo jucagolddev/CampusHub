@@ -2,12 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProjectCardComponent } from '../../shared/components/project-card/project-card.component';
 import { Project } from '../../core/models/project';
+import { ProjectService } from '../../core/services/project.service';
 
 /**
- * ¡Bienvenido a mi componente Home!
- * Este es el punto de entrada principal donde orquesto todo el escaparate de proyectos.
- * He diseñado este componente para que sea dinámico, permitiendo búsquedas y filtrados
- * instantáneos para mejorar la experiencia del usuario.
+ * COMPONENTE HOME (HomeComponent)
+ * -------------------------------------------------------------------------
+ * Es la página de aterrizaje principal de CampusHub. Su responsabilidad es:
+ * 1. Presentar el buscador global de proyectos.
+ * 2. Mostrar una selección dinámica de proyectos "Destacados" y "Aleatorios".
+ * 3. Gestionar los filtros rápidos por categoría.
+ * 
+ * Los datos se obtienen de forma asíncrona desde el ProjectService al iniciar
+ * el componente (ngOnInit).
  */
 @Component({
   selector: 'app-home',
@@ -16,27 +22,60 @@ import { Project } from '../../core/models/project';
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
-  // Aquí mantengo mi base de datos de proyectos completa.
-  // Es mi fuente de verdad de la que extraigo los destacados y aleatorios.
-  allProjects: Project[] = [
-    // ... listado de proyectos (Dashboard, Calendario, Generador, EUSA Quiz, etc.)
-  ];
+  // Lista maestra de proyectos (ahora viene de la API)
+  allProjects: Project[] = [];
 
-  // Estas son las colecciones que uso para alimentar las diferentes secciones de mi vista.
-  featuredProjects: Project[] = []; // Los 3 proyectos que quiero que siempre resalten.
-  randomProjects: Project[] = []; // Una selección fresca de 3 proyectos cada vez que entras.
-  filteredProjects: Project[] = []; // El cajón desastre donde pongo los resultados de búsqueda.
-  searchTerm: string = ''; // El texto que el usuario está escribiendo ahora mismo.
+  // Colecciones para la vista
+  featuredProjects: Project[] = []; 
+  randomProjects: Project[] = []; 
+  filteredProjects: Project[] = []; 
+  searchTerm: string = ''; 
+  isLoading = true;
+
+  constructor(private projectService: ProjectService) {}
 
   /**
-   * Al iniciar el componente, preparo el terreno.
-   * Filtro los destacados por sus IDs fijos y elijo los aleatorios.
+   * Al iniciar el componente, pido los datos al servidor.
    */
   ngOnInit(): void {
-    // Escojo mis "Top 3" favoritos por sus IDs 1, 2 y 3.
-    this.featuredProjects = this.allProjects.filter((p) =>
-      [1, 2, 3].includes(p.id)
-    );
+    this.projectService.getProjects().subscribe({
+      next: (data) => {
+        this.allProjects = data.map(p => ({
+          id: p.id,
+          title: p.nombreProyecto,
+          description: p.descripcionProyecto,
+          authors: ['Usuario'], 
+          categorias: p.id <= 3 ? ['Destacados', 'General'] : ['General'], // Lógica temporal para destacados
+          technologies: ['Web'],
+          image: p.imgPortada,
+          githubLink: p.urlGitHub,
+          executionUrl: p.urlProyecto,
+          textolink: 'Ver Proyecto'
+        }));
+
+        this.setupView();
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Error al cargar proyectos en Home:', err);
+        this.isLoading = false;
+      }
+    });
+  }
+
+  /**
+   * Configura las secciones de destacados y aleatorios una vez tenemos los datos.
+   */
+  private setupView(): void {
+    // Filtramos los destacados (IDs 1, 2, 3 o los que tengan la categoría)
+    this.featuredProjects = this.allProjects.filter(p => 
+      p.categorias.includes('Destacados')
+    ).slice(0, 3);
+
+    // Si no hay suficientes destacados por categoría, cogemos los primeros 3
+    if (this.featuredProjects.length === 0) {
+      this.featuredProjects = this.allProjects.slice(0, 3);
+    }
 
     // Preparo la sección inferior con una mezcla fresca.
     this.setRandomProjects();
@@ -47,27 +86,25 @@ export class HomeComponent implements OnInit {
 
   /**
    * Aquí es donde hago la "magia" de la aleatoriedad.
-   * Tomo todos los que no son destacados, los mezclo y me quedo con 3.
    */
   private setRandomProjects(): void {
-    const others = this.allProjects.filter((p) => ![1, 2, 3].includes(p.id));
-    // Uso un algoritmo simple de mezcla para que la web se sienta "viva".
+    const featuredIds = this.featuredProjects.map(p => p.id);
+    const others = this.allProjects.filter(p => !featuredIds.includes(p.id));
+    
+    // Mezclamos y cogemos 3
     this.randomProjects = others.sort(() => 0.5 - Math.random()).slice(0, 3);
+    
+    // Si no hay "otros", cogemos algunos de los que haya
+    if (this.randomProjects.length === 0 && this.allProjects.length > 3) {
+      this.randomProjects = this.allProjects.slice(3, 6);
+    }
   }
 
-  /**
-   * Gestiono la búsqueda principal.
-   * Guardo el término y lanzo mis filtros para actualizar la pantalla.
-   */
   onSearch(term: string): void {
     this.searchTerm = term.toLowerCase();
     this.applyFilters();
   }
 
-  /**
-   * Permito filtrar por las categorías que he definido.
-   * Si me dicen 'Todos', reseteo; si no, busco los que coincidan exactamente.
-   */
   filterByCategory(category: string): void {
     if (category === 'Todos') {
       this.filteredProjects = [...this.allProjects];
@@ -78,10 +115,6 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  /**
-   * Mi motor de filtrado interno.
-   * Compruebo títulos, descripciones, categorías y autores para que la búsqueda sea potente.
-   */
   private applyFilters(): void {
     this.filteredProjects = this.allProjects.filter(
       (p) =>

@@ -2,11 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Project } from '../../../core/models/project';
+import { ProjectService } from '../../../core/services/project.service';
 
 /**
- * ¡Esta es mi vista de detalle!
- * Aquí es donde el usuario llega tras hacer clic en una tarjeta para conocer a fondo un proyecto.
- * Me encargo de capturar el ID de la URL y buscar el proyecto correspondiente en mi lista.
+ * COMPONENTE DE DETALLE DE PROYECTO (ProjectDetailComponent)
+ * -------------------------------------------------------------------------
+ * Ofrece una vista pormenorizada de un proyecto específico, mostrando su
+ * descripción completa, autores, tecnologías y enlaces de ejecución.
+ * 
+ * Extrae el identificador único (ID) de la URL activa y consulta al servidor
+ * para obtener la información más reciente vinculada a ese recurso.
  */
 @Component({
   selector: 'app-project-detail',
@@ -15,22 +20,42 @@ import { Project } from '../../../core/models/project';
   templateUrl: './project-detail.component.html',
 })
 export class ProjectDetailComponent implements OnInit {
-  // Aquí guardo el proyecto que he encontrado. Si no existe, Angular lo manejará como undefined.
   project?: Project;
+  isLoading = true;
 
-  // De nuevo, uso mi lista de proyectos para simular la base de datos.
-  private allProjects: Project[] = [
-    // ... listado de proyectos con sus detalles extendidos (authors, githubLink, etc.)
-  ];
+  constructor(
+    private route: ActivatedRoute,
+    private projectService: ProjectService
+  ) {}
 
-  constructor(private route: ActivatedRoute) {}
-
-  /**
-   * Al iniciar, leo el ID de la ruta activa.
-   * Es la clave que uso para "pescar" el proyecto correcto de mi colección.
-   */
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.project = this.allProjects.find((p) => p.id === id);
+    if (id) {
+      this.loadProject(id);
+    }
+  }
+
+  private loadProject(id: number): void {
+    this.projectService.getProjectById(id).subscribe({
+      next: (p) => {
+        this.project = {
+          id: p.id,
+          title: p.nombreProyecto,
+          description: p.descripcionProyecto,
+          authors: ['Usuario'], 
+          categorias: p.id <= 3 ? ['Destacados', 'General'] : ['General'],
+          technologies: ['Web'],
+          image: p.imgPortada,
+          githubLink: p.urlGitHub,
+          executionUrl: p.urlProyecto,
+          textolink: 'Ver Proyecto'
+        };
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Error al cargar detalle del proyecto:', err);
+        this.isLoading = false;
+      }
+    });
   }
 }

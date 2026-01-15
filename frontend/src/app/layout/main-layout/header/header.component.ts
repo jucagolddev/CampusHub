@@ -18,8 +18,11 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
   // Indica si el usuario ha iniciado sesión actualmente
   isLoggedIn = false;
+  userName: string | null = null;
+  
   // Almacena la suscripción al servicio de autenticación para evitar fugas de memoria
   private authSubscription?: Subscription;
+  private userSubscription?: Subscription;
 
   constructor(private authService: AuthService) {}
 
@@ -31,11 +34,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.isLoggedIn = isAuthenticated;
       }
     );
+
+    this.userSubscription = this.authService.currentUser$.subscribe(
+      (user) => {
+        this.userName = user ? user.userName : null;
+      }
+    );
   }
 
   ngOnDestroy(): void {
     // Por limpieza y para que el navegador no sufra, me desengancho al irme.
     this.authSubscription?.unsubscribe();
+    this.userSubscription?.unsubscribe();
   }
 
   /**

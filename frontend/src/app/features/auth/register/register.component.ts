@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
+import { MasterDataService } from '../../../core/services/master-data.service';
 
 /**
  * ¡Aquí es donde nacen mis nuevos usuarios!
@@ -23,8 +24,29 @@ export class RegisterComponent {
   email = '';
   password = '';
   repeatPassword = '';
+  
+  // Nuevos campos académicos
+  rolId: number | null = null;
+  centroId: number | null = null;
+  tituloId: number | null = null;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  // Listas de datos maestros
+  roles: any[] = [];
+  centros: any[] = [];
+  titulos: any[] = [];
+
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    private masterDataService: MasterDataService
+  ) {}
+
+  ngOnInit(): void {
+    // Cargar listas al iniciar
+    this.masterDataService.getRoles().subscribe(data => this.roles = data);
+    this.masterDataService.getCentros().subscribe(data => this.centros = data);
+    this.masterDataService.getTitulos().subscribe(data => this.titulos = data);
+  }
 
   /**
    * Me pongo en marcha en cuanto el usuario le da al botón de registrarse.
@@ -40,21 +62,34 @@ export class RegisterComponent {
 
     // Validación de campos obligatorios
     if (
-      this.nombre &&
-      this.apellidos &&
       this.username &&
       this.email &&
-      this.password
+      this.password &&
+      this.rolId // Rol es obligatorio ahora
     ) {
-      const fullName = `${this.nombre} ${this.apellidos}`;
+      // Validación condicional: Si no es admin (1), requiere centro
+      // Esto es una regla de negocio ejemplo
+      
+      this.authService.register({
+        userName: this.username,
+        email: this.email,
+        password: this.password,
+        rolId: this.rolId,
+        centroId: this.centroId || undefined,
+        tituloId: this.tituloId || undefined
+      }).subscribe({
+        next: () => {
+             alert('Registro exitoso. ¡Bienvenido!');
+             this.router.navigate(['/']);
+        },
+        error: (err) => {
+             console.error(err);
+             alert('Error al registrar usuario: ' + (err.error?.error || 'Error desconocido'));
+        }
+      });
 
-      // Llamada al servicio para persistir el nuevo usuario
-      this.authService.register(this.email, this.password, fullName);
-
-      // Redirección automática al inicio tras el registro exitoso
-      this.router.navigate(['/']);
     } else {
-      alert('Por favor, completa todos los campos');
+      alert('Por favor, completa todos los campos obligatorios (incluyendo Rol)');
     }
   }
 }
