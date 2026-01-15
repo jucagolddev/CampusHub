@@ -131,6 +131,3 @@ _Visita `http://localhost:4200` para empezar a usar la aplicación._
 
 ---
 
-## 📄 Licencia
-
-Proyecto desarrollado con fines académicos educativos. Todos los derechos reservados &copy; 2026.
