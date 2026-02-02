@@ -1,54 +1,45 @@
-/**
- * ARCHIVO: models/tituloModel.ts
- * AUTOR: Equipo de Desarrollo CampusHub
- * FECHA: Actualizado el 15 de Enero de 2026
- *
- * DESCRIPCIÓN:
- * DAO para la entidad 'Título'.
- * Representa el nombre de la titulación (ej. DAW, DAM, ASIR).
- */
-
-import pool from '../config/db';
-import { RowDataPacket, ResultSetHeader } from 'mysql2';
-
-export interface Titulo {
-    id?: number;
-    nombreTitulo: string;
-}
+import db from "../db/index.js";
+import { Titulo } from "../types.js";
 
 /**
- * Crea un nuevo título académico.
- * @param nombreTitulo Nombre corto o largo del título (ej. "Desarrollo de Aplicaciones Web")
+ * Gestión de Títulos Académicos (ej: DAW, ASIR, Bachillerato).
  */
-export async function createTitulo(nombreTitulo: string) {
-  const [r] = await pool.execute<ResultSetHeader>(
-    'INSERT INTO TITULO (nombreTitulo) VALUES (?)',
+
+/**
+ * Crea un nuevo título en el sistema.
+ */
+export async function createTitulo(nombreTitulo: string): Promise<number> {
+  const [r]: any = await db.execute(
+    "INSERT INTO TITULO (nombreTitulo) VALUES (?)",
     [nombreTitulo]
   );
   return r.insertId;
 }
 
 /**
- * Obtiene la lista de todos los títulos.
+ * Lista todos los títulos registrados.
  */
 export async function getTitulos(): Promise<Titulo[]> {
-  const [rows] = await pool.execute<RowDataPacket[]>('SELECT * FROM TITULO');
+  const [rows] = await db.execute("SELECT * FROM TITULO");
   return rows as Titulo[];
 }
 
 /**
- * Actualiza el nombre de un título.
+ * Actualiza el nombre de un título académico.
  */
-export async function updateTitulo(id: number, nombreTitulo: string) {
-  await pool.execute(
-    'UPDATE TITULO SET nombreTitulo = ? WHERE id = ?',
-    [nombreTitulo, id]
-  );
+export async function updateTitulo(
+  id: number,
+  nombreTitulo: string
+): Promise<void> {
+  await db.execute("UPDATE TITULO SET nombreTitulo = ? WHERE id = ?", [
+    nombreTitulo,
+    id,
+  ]);
 }
 
 /**
  * Elimina un título del sistema.
  */
-export async function deleteTitulo(id: number) {
-  await pool.execute('DELETE FROM TITULO WHERE id = ?', [id]);
+export async function deleteTitulo(id: number): Promise<void> {
+  await db.execute("DELETE FROM TITULO WHERE id = ?", [id]);
 }

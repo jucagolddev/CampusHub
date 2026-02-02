@@ -23,6 +23,15 @@
 @use "components/cards";
 @use "components/inputs";
 
+// 4.1 Admin Layout & Components
+@use "layout/admin/admin-layout";
+@use "layout/admin/sidebar";
+@use "pages/admin/dashboard";
+@use "pages/admin/user-list";
+@use "pages/admin/user-register";
+@use "pages/admin/role-management";
+@use "pages/admin/user-project-management";
+
 // 5. Páginas (vistas específicas)
 // Se importan los estilos específicos de cada página
 @use "pages/home";

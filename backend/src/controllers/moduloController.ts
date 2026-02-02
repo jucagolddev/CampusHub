@@ -1,30 +1,30 @@
+import { Request, Response } from "express";
+import * as model from "../models/moduloModel.js";
+
 /**
- * ARCHIVO: controllers/moduloController.ts
- * AUTOR: Equipo de Desarrollo CampusHub
- * FECHA: Actualizado el 15 de Enero de 2026
- *
- * DESCRIPCIÓN:
- * Lógica para la gestión de Módulos (Asignaturas).
+ * Controladores para la entidad Módulo.
+ * Manejan las peticiones HTTP y llaman al modelo correspondiente.
  */
 
-import { Request, Response } from 'express';
-import * as model from '../models/moduloModel';
-
+/** Registra un nuevo módulo */
 export async function create(req: Request, res: Response) {
   const id = await model.createModulo(req.body.nombreModulo);
   res.status(201).json({ id });
 }
 
+/** Devuelve la lista de módulos */
 export async function list(req: Request, res: Response) {
   res.json(await model.getModulos());
 }
 
+/** Actualiza un módulo existente */
 export async function update(req: Request, res: Response) {
-  await model.updateModulo(parseInt(req.params.id), req.body.nombreModulo);
-  res.json({ message: 'Módulo actualizado' });
+  await model.updateModulo(Number(req.params.id), req.body.nombreModulo);
+  res.json({ message: "Actualizado correctamente" });
 }
 
+/** Elimina un módulo */
 export async function remove(req: Request, res: Response) {
-  await model.deleteModulo(parseInt(req.params.id));
-  res.json({ message: 'Módulo eliminado' });
+  await model.deleteModulo(Number(req.params.id));
+  res.json({ message: "Eliminado correctamente" });
 }

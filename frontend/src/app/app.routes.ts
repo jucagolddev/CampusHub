@@ -12,18 +12,40 @@ import { ProjectDetailComponent } from './features/projects/project-detail/proje
  * Asocio cada URL con el componente que quiero que se cargue dinámicamente.
  * Esto me permite tener una Single Page Application (SPA) fluida.
  */
+import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
+import { DashboardComponent } from './features/admin/dashboard/dashboard.component';
+import { UserListComponent } from './features/admin/users/user-list.component';
+import { UserRegisterComponent } from './features/admin/register/user-register.component';
+import { RoleManagementComponent } from './features/admin/roles/role-management.component';
+import { UserProjectManagementComponent } from './features/admin/users/user-project-management.component';
+import { authGuard } from './core/guards/auth.guard';
+
 export const routes: Routes = [
   // Esta es mi página de aterrizaje donde muestro los proyectos más importantes.
   { path: '', component: HomeComponent },
-
+  
   // Aquí defino los accesos para mi sistema de autenticación de usuarios.
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   
-  // Gestión Administrativa
-  { path: 'admin/centers', component: CenterRegistrationComponent },
+  // Rutas de Administración
+  {
+    path: 'admin',
+    component: AdminLayoutComponent,
+    canActivate: [authGuard],
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'usuarios', component: UserListComponent },
+      { path: 'registro-sesion', component: UserRegisterComponent },
+      { path: 'gestion-roles', component: RoleManagementComponent },
+      { path: 'gestion-usuarios', component: UserProjectManagementComponent },
+      { path: 'centers', component: CenterRegistrationComponent },
+      { path: 'proyectos', component: ProjectListComponent }, // Admin view of projects
+      { path: 'subir-proyecto', component: ProjectUploadComponent }
+    ]
+  },
 
-  // Estas rutas gestionan todo lo relacionado con el catálogo de mis proyectos.
+  // Estas rutas gestionan todo lo relacionado con el catálogo de mis proyectos (Vist públicas)
   { path: 'projects', component: ProjectListComponent },
   { path: 'projects/:id', component: ProjectDetailComponent },
 

@@ -1,60 +1,50 @@
-/**
- * ARCHIVO: routes/relationRoutes.ts
- * AUTOR: Equipo de Desarrollo CampusHub
- * FECHA: Actualizado el 15 de Enero de 2026
- *
- * DESCRIPCIÓN:
- * Define endpoints para gestionar relaciones M:N entre entidades.
- * Ejemplos: Asignar un módulo a un curso, asignar un rol a un usuario.
- * 
- * SEGURIDAD:
- * Todas estas rutas están protegidas por 'authMiddleware'.
- */
+import express from "express";
+import * as relationController from "../controllers/relationController.js";
+import auth from "../middleware/authMiddleware.js";
 
-import { Router } from 'express';
-import * as relationController from '../controllers/relationController';
-import auth from '../middlewares/authMiddleware';
-
-const router = Router();
-
-// ==========================================
-// RUTAS DE ASIGNACIÓN
-// ==========================================
+const router = express.Router();
 
 /**
- * POST /assign-project
- * Asigna un colaborador a un proyecto existente.
+ * Rutas de Gestión de Relaciones N:M.
+ * Controlan las vinculaciones entre diferentes entidades del sistema.
+ * Todas estas rutas requieren autenticación.
  */
-router.post('/assign-project', auth, relationController.assignProjectToUser);
 
-/**
- * GET /users/:tokken/projects
- * Obtiene los proyectos en los que participa un usuario específico.
- */
-router.get('/users/:tokken/projects', auth, relationController.getProjectsByUser);
+// Asignar proyecto a usuario
+router.post("/assign-project", auth, relationController.assignProjectToUser);
 
-/**
- * POST /assign-rol-user
- * Asigna un rol a un usuario (Admin Only).
- */
-router.post('/assign-rol-user', auth, relationController.assignRolToUser);
+// Desvincular proyecto de usuario
+router.post("/remove-project", auth, relationController.removeProjectFromUser);
 
-/**
- * POST /assign-titulo-centro
- * Vincula un título (grado) a un centro educativo.
- */
-router.post('/assign-titulo-centro', auth, relationController.assignTituloToCentro);
+// Consultar proyectos de un usuario concreto
+router.get(
+  "/users/:tokken/projects",
+  auth,
+  relationController.getProjectsByUser
+);
 
-/**
- * POST /assign-curso-titulo
- * Vincula un curso (año) a un título.
- */
-router.post('/assign-curso-titulo', auth, relationController.assignCursoToTitulo);
+// Vincular Rol a Usuario
+router.post("/assign-rol-user", auth, relationController.assignRolToUser);
 
-/**
- * POST /assign-modulo-curso
- * Vincula una asignatura a un curso.
- */
-router.post('/assign-modulo-curso', auth, relationController.assignModuloToCurso);
+// Vincular Título a un Centro Educativo
+router.post(
+  "/assign-titulo-centro",
+  auth,
+  relationController.assignTituloToCentro
+);
+
+// Vincular Curso a un Título Académico
+router.post(
+  "/assign-curso-titulo",
+  auth,
+  relationController.assignCursoToTitulo
+);
+
+// Vincular Módulo a un Curso específico
+router.post(
+  "/assign-modulo-curso",
+  auth,
+  relationController.assignModuloToCurso
+);
 
 export default router;

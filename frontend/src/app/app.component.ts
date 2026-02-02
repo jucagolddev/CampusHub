@@ -1,15 +1,19 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { HeaderComponent } from './layout/main-layout/header/header.component';
+import { FooterComponent } from './layout/main-layout/footer/footer.component';
 
 /**
- * Este es mi componente raíz (AppComponent).
- * Es el punto donde Angular se engancha al HTML y me permite empezar a montar
- * toda la estructura de CampusHub, manejando el título global y el enrutado.
+ * Componente raíz (AppComponent) convertido a Standalone.
+ * Gestiona la estructura base de la aplicación.
  */
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, RouterModule, HeaderComponent, FooterComponent],
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  // El nombre oficial que he elegido para mi plataforma.
   title = 'CampusHub';
 }

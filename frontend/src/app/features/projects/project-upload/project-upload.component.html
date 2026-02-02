@@ -5,28 +5,31 @@
             <h1>Sube proyectos</h1>
             <h2>a nuestra plataforma</h2>
 
-            <form (ngSubmit)="onSubmit()">
+            <form (ngSubmit)="onSubmit()" aria-label="Formulario de subida de proyectos">
                 <!-- Información técnica -->
                 <div class="grupo-input">
                     <label for="nombreProyecto">Nombre del proyecto *</label>
-                    <input type="text" id="nombreProyecto" name="nombreProyecto" [(ngModel)]="nombreProyecto" required>
+                    <input type="text" id="nombreProyecto" name="nombreProyecto" [(ngModel)]="nombreProyecto" required
+                        aria-required="true">
                 </div>
 
                 <!-- Descripción (Nuevo Campo requerido por backend) -->
                 <div class="grupo-input">
                     <label for="descripcionProyecto">Descripción</label>
                     <textarea id="descripcionProyecto" name="descripcionProyecto" [(ngModel)]="descripcionProyecto"
-                        rows="3"></textarea>
+                        rows="3" aria-label="Descripción detallada del proyecto"></textarea>
                 </div>
 
                 <div class="grupo-input">
                     <label for="linkGithub">Link a GitHub *</label>
-                    <input type="text" id="linkGithub" name="linkGithub" [(ngModel)]="linkGithub" required>
+                    <input type="text" id="linkGithub" name="linkGithub" [(ngModel)]="linkGithub" required
+                        aria-required="true" placeholder="https://github.com/usuario/repo">
                 </div>
 
                 <div class="grupo-input">
                     <label for="urlProyecto">URL del Proyecto desplegado</label>
-                    <input type="text" id="urlProyecto" name="urlProyecto" [(ngModel)]="urlProyecto">
+                    <input type="text" id="urlProyecto" name="urlProyecto" [(ngModel)]="urlProyecto"
+                        placeholder="https://mi-proyecto.com">
                 </div>
 
                 <!-- Imagen de Portada (URL) -->
@@ -44,9 +47,9 @@
 
                 <!-- Botón Principal -->
                 <div class="contenedor-boton">
-                    <button type="submit" class="boton-primario" [disabled]="isLoading">
+                    <button type="submit" class="boton-primario" [disabled]="isLoading" [attr.aria-busy]="isLoading">
                         <span *ngIf="!isLoading">SUBIR PROYECTO</span>
-                        <span *ngIf="isLoading">Subiendo...</span>
+                        <span *ngIf="isLoading" role="status">Subiendo...</span>
                     </button>
                 </div>
             </form>

@@ -1,28 +1,16 @@
+import express from "express";
+import * as c from "../controllers/centroController.js";
+
+const router = express.Router();
+
 /**
- * ARCHIVO: routes/centroRoutes.ts
- * AUTOR: Equipo de Desarrollo CampusHub
- * FECHA: Actualizado el 15 de Enero de 2026
- *
- * DESCRIPCIÓN:
- * Endpoints CRUD para la entidad 'Centro Educativo'.
- * Ruta Base: /api/centros
+ * Definición de rutas CRUD para los Centros Educativos.
+ * Accesibles desde: /api/centros/...
  */
 
-import { Router } from 'express';
-import * as centroController from '../controllers/centroController';
-
-const router = Router();
-
-// crear
-router.post('/', centroController.create);
-
-// listar
-router.get('/', centroController.list);
-
-// actualizar
-router.put('/:id', centroController.update);
-
-// eliminar
-router.delete('/:id', centroController.remove);
+router.post("/", c.create); // POST /api/centros/ - Crear centro
+router.get("/", c.list); // GET /api/centros/  - Listar todos
+router.put("/:id", c.update); // PUT /api/centros/:id - Actualizar
+router.delete("/:id", c.remove); // DELETE /api/centros/:id - Borrar
 
 export default router;

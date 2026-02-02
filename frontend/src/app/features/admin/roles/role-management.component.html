@@ -1,0 +1,41 @@
+<div class="role-management-container">
+    <div class="header">
+        <h2>Gestión de Roles</h2>
+        <p>Asigna o modifica los permisos de los usuarios del sistema.</p>
+    </div>
+
+    <div class="card">
+        <div class="form-grid">
+            <div class="form-group">
+                <label>Usuario</label>
+                <select [(ngModel)]="selectedUser" class="form-control">
+                    <option [ngValue]="null">Seleccionar Usuario</option>
+                    <option *ngFor="let user of users" [ngValue]="user">{{ user.userName }} ({{ user.email }})</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Rol a Asignar</label>
+                <select [(ngModel)]="selectedRole" class="form-control">
+                    <option [ngValue]="null">Seleccionar Rol</option>
+                    <option *ngFor="let role of roles" [value]="role.id">{{ role.nombreGrupo }}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button (click)="assignRole()" [disabled]="!selectedUser || !selectedRole" class="btn-primary">
+                <i class="fas fa-save"></i> Guardar Cambios
+            </button>
+        </div>
+
+        <div class="info-box" *ngIf="selectedUser">
+            <h4>Roles actuales de {{ selectedUser.userName }}</h4>
+            <div class="badges">
+                <span *ngFor="let role of selectedUser.roles" class="badge">{{ role }}</span>
+                <span *ngIf="!selectedUser.roles || selectedUser.roles.length === 0" class="text-muted">Sin roles
+                    asignados</span>
+            </div>
+        </div>
+    </div>
+</div>

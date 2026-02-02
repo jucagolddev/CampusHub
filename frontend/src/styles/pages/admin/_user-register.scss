@@ -1,0 +1,133 @@
+@use "../../base/variables" as *;
+
+/* User Register Styles */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: $espaciado-l;
+  background-color: $color-fondo-principal;
+
+  .register-card {
+    background: $color-fondo-tarjeta;
+    padding: $espaciado-xl;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); // Sombra premium
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+
+    .card-header {
+      text-align: center;
+      margin-bottom: $espaciado-l;
+
+      h2 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: $color-texto-titulo-h1;
+        margin-bottom: 0.5rem;
+      }
+      
+      p {
+        color: $color-texto-secundario;
+        font-size: 1rem;
+      }
+    }
+
+    form {
+      .form-group {
+        margin-bottom: $espaciado-m;
+
+        label {
+          display: block;
+          margin-bottom: 0.5rem;
+          color: $color-texto-subtitulo;
+          font-weight: 600;
+          font-size: 0.9rem;
+        }
+
+        .input-wrapper {
+          position: relative;
+          
+          i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: $color-texto-secundario;
+            pointer-events: none;
+          }
+
+          input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.8rem; // Espacio para el icono
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f9f9f9;
+
+            &:focus {
+              outline: none;
+              border-color: $color-interactivo-principal;
+              background: white;
+              box-shadow: 0 0 0 3px rgba($color-interactivo-principal, 0.1);
+            }
+
+            &.error {
+              border-color: $color-alerta-error;
+              background: rgba($color-alerta-error, 0.02);
+            }
+          }
+        }
+
+        .error-msg {
+          color: $color-alerta-error;
+          font-size: 0.8rem;
+          margin-top: 0.4rem;
+          display: flex;
+          align-items: center;
+          gap: 0.4rem;
+
+          &::before {
+            content: "⚠"; 
+          }
+        }
+      }
+
+      .actions {
+        margin-top: $espaciado-l;
+        width: 100%;
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, $color-interactivo-principal 0%, $color-hover-interactivo 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba($color-interactivo-principal, 0.3);
+
+            &:hover:not(:disabled) {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba($color-interactivo-principal, 0.4);
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
+
+            &:disabled {
+                opacity: 0.7;
+                cursor: wait;
+            }
+        }
+      }
+    }
+  }
+}

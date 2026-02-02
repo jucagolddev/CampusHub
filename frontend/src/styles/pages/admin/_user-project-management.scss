@@ -1,0 +1,128 @@
+@use "../../base/variables" as *;
+
+/* User Project Management Styles */
+.project-management-container {
+  padding: $espaciado-xl;
+
+  .header {
+    margin-bottom: $espaciado-l;
+    h2 { color: $color-texto-titulo-h1; margin-bottom: $espaciado-xs; }
+    p { color: $color-texto-secundario; }
+  }
+
+  .card {
+    background: $color-fondo-tarjeta;
+    padding: $espaciado-xl;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    min-height: 400px;
+  }
+
+  .selection-area {
+    margin-bottom: $espaciado-xl;
+    border-bottom: 1px solid #eee;
+    padding-bottom: $espaciado-l;
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: $espaciado-s;
+      color: $color-texto-subtitulo;
+    }
+
+    .user-select {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.75rem;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 1rem;
+      
+      &:focus {
+        outline: none;
+        border-color: $color-interactivo-principal;
+      }
+    }
+  }
+
+  .projects-area {
+    .projects-header {
+      margin-bottom: $espaciado-l;
+      h3 { color: $color-texto-subtitulo; margin-bottom: 0.5rem; }
+      p { color: $color-texto-secundario; }
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: $espaciado-l;
+    }
+
+    .project-card {
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: $espaciado-m;
+      transition: all 0.2s ease;
+      background: white;
+
+      &.assigned {
+        border-color: $color-interactivo-principal;
+        background-color: rgba($color-interactivo-principal, 0.02);
+      }
+
+      &:hover {
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      }
+
+      .card-content {
+        display: flex;
+        align-items: center;
+        gap: $espaciado-m;
+      }
+
+      .checkbox-wrapper {
+        input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+      }
+
+      .project-info {
+        h4 {
+          margin: 0;
+          color: $color-texto-principal;
+          font-size: 1rem;
+        }
+
+        .status {
+          font-size: 0.75rem;
+          color: $color-alerta-exito;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: $color-texto-deshabilitado;
+
+    i {
+      font-size: 3rem;
+      margin-bottom: $espaciado-m;
+    }
+  }
+}
+
+// Simple fade in animation
+.fadeIn {
+  animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

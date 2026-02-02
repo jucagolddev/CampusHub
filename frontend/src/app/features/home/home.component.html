@@ -9,9 +9,12 @@
             <!-- He diseñado este buscador con un estilo de cápsula moderna.
                  Lanzo la búsqueda tanto al pulsar el botón como al darle a Enter. -->
             <div class="search-container">
-                <input #searchInput type="text" placeholder="Buscar por tecnología, nombre, autor..."
-                    aria-label="Buscar proyectos" class="barra-busqueda" (keyup.enter)="onSearch(searchInput.value)">
-                <button type="button" class="boton-primario" (click)="onSearch(searchInput.value)">Buscar</button>
+                <label for="searchApp" class="sr-only">Buscar aplicación</label>
+                <input #searchInput id="searchApp" type="text" placeholder="Buscar por tecnología, nombre, autor..."
+                    aria-label="Buscar aplicaciones web y móviles por tecnología, nombre o autor" class="barra-busqueda"
+                    (keyup.enter)="onSearch(searchInput.value)">
+                <button type="button" class="boton-primario" (click)="onSearch(searchInput.value)"
+                    aria-label="Ejecutar búsqueda">Buscar</button>
             </div>
 
             <!-- Estos botones permiten a mis usuarios filtrar rápidamente por las categorías más comunes. -->

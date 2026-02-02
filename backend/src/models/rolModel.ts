@@ -1,68 +1,52 @@
+import db from "../db/index.js";
+import { Rol } from "../types.js";
+
 /**
- * ARCHIVO: models/rolModel.ts
- * AUTOR: Equipo de Desarrollo CampusHub
- * FECHA: Actualizado el 15 de Enero de 2026
- *
- * DESCRIPCIÓN:
- * DAO para la entidad 'Rol'.
- * Gestiona los permisos y grupos de usuarios (ej. Admin, Profesor, Alumno).
+ * Gestión de Roles y Permisos en la base de datos.
+ * Define qué tipo de usuario es cada uno y qué puede hacer.
  */
 
-import pool from '../config/db';
-import { RowDataPacket, ResultSetHeader } from 'mysql2';
-
-export interface Role {
-    id: number;
-    nombreGrupo: string;
-    permisos: string; // JSON o CSV de permisos
+/**
+ * Registra un nuevo rol.
+ * @param nombreGrupo Nombre del grupo (ej: "Administrador", "Estudiante")
+ * @param permisos Descripción de permisos (ej: "all", "read_only")
+ */
+export async function createRol(
+  nombreGrupo: string,
+  permisos: string
+): Promise<number> {
+  const [r]: any = await db.execute(
+    "INSERT INTO ROL (nombreGrupo, permisos) VALUES (?, ?)",
+    [nombreGrupo, permisos]
+  );
+  return r.insertId;
 }
 
 /**
- * Crea un nuevo rol.
- * Si se pasa un ID, intenta usarlo (útil para migración de datos con IDs fijos).
- * Si no, deja que la BD autoincremente.
+ * Obtiene la lista de todos los roles definidos.
  */
-export async function createRol(id: number | null, nombreGrupo: string, permisos: string) {
-  let sql;
-  let params;
-
-  if (id) {
-    // Inserción forzada con ID
-    sql = 'INSERT INTO ROL (id, nombreGrupo, permisos) VALUES (?, ?, ?)';
-    params = [id, nombreGrupo, permisos];
-  } else {
-    // Autoincremental
-    sql = 'INSERT INTO ROL (nombreGrupo, permisos) VALUES (?, ?)';
-    params = [nombreGrupo, permisos];
-  }
-
-  const [result] = await pool.execute<ResultSetHeader>(sql, params);
-  
-  // Retornamos el ID usado
-  return id || result.insertId;
+export async function getRoles(): Promise<Rol[]> {
+  const [rows] = await db.execute("SELECT * FROM ROL");
+  return rows as Rol[];
 }
 
 /**
- * Obtiene lista de roles.
+ * Actualiza la información de un rol.
  */
-export async function getRoles(): Promise<Role[]> {
-  const [rows] = await pool.execute<RowDataPacket[]>('SELECT * FROM ROL');
-  return rows as Role[];
-}
-
-/**
- * Actualiza nombre o permisos de un rol.
- */
-export async function updateRol(id: number, nombreGrupo: string, permisos: string) {
-  await pool.execute(
-    'UPDATE ROL SET nombreGrupo = ?, permisos = ? WHERE id = ?',
+export async function updateRol(
+  id: number,
+  nombreGrupo: string,
+  permisos: string
+): Promise<void> {
+  await db.execute(
+    "UPDATE ROL SET nombreGrupo = ?, permisos = ? WHERE id = ?",
     [nombreGrupo, permisos, id]
   );
 }
 
 /**
- * Elimina un rol.
+ * Elimina un rol del sistema.
  */
-export async function deleteRol(id: number) {
-  await pool.execute('DELETE FROM ROL WHERE id = ?', [id]);
+export async function deleteRol(id: number): Promise<void> {
+  await db.execute("DELETE FROM ROL WHERE id = ?", [id]);
 }

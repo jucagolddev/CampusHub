@@ -7,13 +7,13 @@
         </a>
 
         <!-- 2. Navegación Principal: Contiene los enlaces dinámicos según el estado del usuario -->
-        <nav class="nav-principal">
+        <nav class="nav-principal" aria-label="Navegación principal">
             <ul>
                 <!-- Enlace de Inicio: Siempre visible -->
-                <li><a routerLink="/" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
+                <li><a routerLink="/" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}"
+                        aria-current="page">Inicio</a>
                 </li>
                 <li><a routerLink="/projects" routerLinkActive="activo">Proyectos</a></li>
-
 
                 <!-- Bloque para usuarios NO autenticados: Registro e Inicio de Sesión -->
                 <li><a routerLink="/login" routerLinkActive="activo" *ngIf="!isLoggedIn">Iniciar Sesión</a></li>
@@ -21,8 +21,10 @@
 
                 <!-- Bloque para usuarios SÍ autenticados: Funcionalidades de carga y cierre de sesión -->
                 <li><a routerLink="/upload" routerLinkActive="activo" *ngIf="isLoggedIn">Subir Archivos</a></li>
-                <li *ngIf="isLoggedIn && userName" class="saludo-usuario">Hola, {{ userName }}</li>
-                <li><a (click)="logout()" style="cursor: pointer;" *ngIf="isLoggedIn">Cerrar Sesión</a></li>
+                <li *ngIf="isLoggedIn && userName" class="saludo-usuario" aria-live="polite">Hola, {{ userName }}</li>
+                <li><button (click)="logout()"
+                        style="cursor: pointer; background:none; border:none; color: inherit; font: inherit;"
+                        *ngIf="isLoggedIn" aria-label="Cerrar sesión actual">Cerrar Sesión</button></li>
             </ul>
         </nav>
     </div>

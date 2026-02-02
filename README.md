@@ -83,7 +83,8 @@ La API está documentada para facilitar la integración. La ruta base es `http:/
 ### Usuarios (`/users`)
 
 - `POST /register`: Registra un nuevo usuario con datos académicos opcionales.
-- `POST /login`: Autentica al usuario y devuelve un token de sesión.
+- `POST /login`: Autentica al usuario, devuelve JWT y roles.
+- `GET /users`: Lista todos los usuarios con sus roles (Admin).
 
 ### Datos Maestros (`/`)
 
@@ -130,4 +131,3 @@ ng serve
 _Visita `http://localhost:4200` para empezar a usar la aplicación._
 
 ---
-

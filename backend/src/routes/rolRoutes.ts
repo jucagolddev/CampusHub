@@ -1,21 +1,16 @@
+import express from "express";
+import * as c from "../controllers/rolController.js";
+
+const router = express.Router();
+
 /**
- * ARCHIVO: routes/rolRoutes.ts
- * AUTOR: Equipo de Desarrollo CampusHub
- * FECHA: Actualizado el 15 de Enero de 2026
- *
- * DESCRIPCIÓN:
- * CRUD Base para Roles.
- * Ruta Base: /api/roles
+ * Definición de rutas CRUD para la gestión de Roles.
+ * Accesibles desde: /api/roles/...
  */
 
-import { Router } from 'express';
-import * as c from '../controllers/rolController';
-
-const router = Router();
-
-router.post('/', c.create);
-router.get('/', c.list);
-router.put('/:id', c.update);
-router.delete('/:id', c.remove);
+router.post("/", c.create);
+router.get("/", c.list);
+router.put("/:id", c.update);
+router.delete("/:id", c.remove);
 
 export default router;

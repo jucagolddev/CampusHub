@@ -1,0 +1,123 @@
+@use "../../base/variables" as *;
+
+/* Role Management Styles */
+.role-management-container {
+  padding: $espaciado-xl;
+  max-width: 800px;
+  margin: 0 auto;
+
+  .header {
+    margin-bottom: $espaciado-l;
+    h2 { color: $color-texto-titulo-h1; margin-bottom: $espaciado-xs; }
+    p { color: $color-texto-secundario; }
+  }
+
+  .card {
+    background: $color-fondo-tarjeta;
+    padding: $espaciado-xl;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: $espaciado-l;
+      margin-bottom: $espaciado-l;
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      label {
+        display: block;
+        margin-bottom: $espaciado-s;
+        font-weight: 600;
+        color: $color-texto-subtitulo;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #fff;
+        font-size: 1rem;
+        transition: border-color 0.2s;
+
+        &:focus {
+          outline: none;
+          border-color: $color-interactivo-principal;
+          box-shadow: 0 0 0 3px rgba($color-interactivo-principal, 0.1);
+        }
+      }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      padding-top: $espaciado-m;
+      border-top: 1px solid #eee;
+
+      .btn-primary {
+        padding: 0.75rem 1.5rem;
+        background: $color-interactivo-principal;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: background 0.2s;
+
+        &:hover:not(:disabled) {
+          background: $color-hover-interactivo;
+        }
+
+        &:disabled {
+          background: $color-deshabilitado-interactivo;
+          cursor: not-allowed;
+        }
+      }
+    }
+
+    .info-box {
+      margin-top: $espaciado-l;
+      background: $acento-fondo-cita;
+      padding: $espaciado-m;
+      border-radius: 8px;
+      border-left: 4px solid $acento-borde-cita;
+
+      h4 {
+        margin-bottom: $espaciado-s;
+        color: $color-texto-subtitulo;
+        font-size: 1rem;
+      }
+
+      .badges {
+        display: flex;
+        gap: 0.5rem;
+        
+        .badge {
+          background: white;
+          border: 1px solid $color-interactivo-principal;
+          color: $color-interactivo-principal;
+          padding: 0.25rem 0.75rem;
+          border-radius: 20px;
+          font-weight: 600;
+          font-size: 0.85rem;
+        }
+        
+        .text-muted {
+            font-style: italic;
+            color: $color-texto-secundario;
+        }
+      }
+    }
+  }
+}

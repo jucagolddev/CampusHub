@@ -1,37 +1,20 @@
-/**
- * ARCHIVO: routes/userRoutes.ts
- * AUTOR: Equipo de Desarrollo CampusHub
- * FECHA: Actualizado el 15 de Enero de 2026
- *
- * DESCRIPCIÓN:
- * Define los endpoints relacionados con la gestión de usuarios.
- * Principalmente se encarga de la Autenticación (Login/Registro).
- *
- * ENDPOINTS:
- * - POST /register: Crea un nuevo usuario.
- * - POST /login: Valida credenciales y devuelve un Token JWT.
- */
+import express from "express";
+import * as userController from "../controllers/userController.js";
 
-import { Router } from 'express';
-import * as userController from '../controllers/userController';
-
-const router = Router();
-
-// ==========================================
-// RUTAS PÚBLICAS
-// ==========================================
+const router = express.Router();
 
 /**
- * POST /register
- * Descripción: Recibe datos de usuario (nombre, email, password) y lo registra en BD.
+ * Rutas de Gestión de Usuarios.
+ * No requieren autenticación previa para permitir el acceso inicial.
  */
-router.post('/register', userController.register);
 
-/**
- * POST /login
- * Descripción: Recibe credenciales (email, password), las verifica contra hash
- * y devuelve un JWT si son válidas.
- */
-router.post('/login', userController.login);
+// URL: POST /api/users/register
+router.post("/register", userController.register);
+
+// URL: POST /api/users/login
+router.post("/login", userController.login);
+
+// URL: GET /api/users
+router.get("/", userController.getUsers);
 
 export default router;

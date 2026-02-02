@@ -1,1 +1,47 @@
-<p>sidebar works!</p>
+<div class="sidebar-container">
+    <div class="logo">
+        CampusHub <span style="font-size: 0.8rem; color: #007bff;">Admin</span>
+    </div>
+
+    <nav>
+        <a routerLink="/admin/dashboard" routerLinkActive="active">
+            <i class="fas fa-chart-line"></i> Dashboard
+        </a>
+        <a routerLink="/login" routerLinkActive="active">
+            <i class="fas fa-sign-in-alt"></i> Inicio Sesión
+        </a>
+        <a routerLink="/admin/registro-sesion" routerLinkActive="active" *ngIf="authService.isAdmin()">
+            <i class="fas fa-user-plus"></i> Registro
+        </a>
+        <a routerLink="/home" routerLinkActive="active">
+            <i class="fas fa-home"></i> Home
+        </a>
+        <a routerLink="/admin/gestion-roles" routerLinkActive="active" *ngIf="authService.isAdmin()">
+            <i class="fas fa-user-tag"></i> Gestión Roles
+        </a>
+        <a routerLink="/admin/gestion-usuarios" routerLinkActive="active" *ngIf="authService.isAdmin()">
+            <i class="fas fa-users-cog"></i> Gestión Usuarios
+        </a>
+        <a routerLink="/admin/usuarios" routerLinkActive="active" *ngIf="authService.isAdmin()">
+            <i class="fas fa-list"></i> Usuarios
+        </a>
+        <a routerLink="/admin/proyectos" routerLinkActive="active">
+            <i class="fas fa-project-diagram"></i> Proyectos
+        </a>
+        <a routerLink="/admin/subir-proyecto" routerLinkActive="active"
+            *ngIf="authService.isAdmin() || authService.isGestor()">
+            <i class="fas fa-upload"></i> Subir Proyecto
+        </a>
+    </nav>
+
+    <div class="spacer"></div>
+
+    <div class="user-info" *ngIf="authService.currentUser$ | async as user">
+        <div>{{ user.userName }}</div>
+        <div class="role-badge" *ngFor="let role of user.roles">{{ role }}</div>
+        <button (click)="logout()"
+            style="margin-top: 10px; width: 100%; border: none; background: #ff4d4d; color: white; padding: 5px; border-radius: 4px; cursor: pointer;">
+            Cerrar Sesión
+        </button>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+@use "../../base/variables" as *;
+@use "../../base/mixins" as *;
+
+/* User List Styles */
+.user-list-container {
+  padding: $espaciado-xl;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $espaciado-l;
+
+    h2 { color: $color-texto-titulo-h1; font-weight: 700; }
+    
+    .search-box {
+      input {
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        width: 300px;
+        font-size: 0.95rem;
+
+        &:focus {
+            outline: none;
+            border-color: $color-interactivo-principal;
+            box-shadow: 0 0 0 3px rgba($color-interactivo-principal, 0.1);
+        }
+      }
+    }
+  }
+
+  .table-responsive {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    overflow: hidden;
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+
+        thead {
+            background: #f8f9fa;
+            border-bottom: 2px solid #eee;
+
+            th {
+                padding: 1rem;
+                text-align: left;
+                font-weight: 600;
+                color: $color-texto-subtitulo;
+                font-size: 0.9rem;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+        }
+
+        tbody {
+            tr {
+                border-bottom: 1px solid #eee;
+                transition: background 0.2s;
+
+                &:hover {
+                    background: #fcfcfc;
+                }
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                td {
+                    padding: 1rem;
+                    color: $color-texto-principal;
+                    vertical-align: middle;
+
+                    .email { color: $color-texto-secundario; font-size: 0.9rem; }
+                    
+                    .role-badge {
+                        display: inline-block;
+                        padding: 0.25rem 0.75rem;
+                        border-radius: 20px;
+                        font-size: 0.75rem;
+                        font-weight: 700;
+                        margin-right: 0.5rem;
+                        background: #eee;
+                        color: #555;
+
+                        &.admin { background: rgba($color-interactivo-principal, 0.1); color: $color-interactivo-principal; }
+                        &.gestor { background: rgba($color-alerta-exito, 0.1); color: $color-alerta-exito; }
+                        &.profesor { background: rgba(230, 126, 34, 0.1); color: #e67e22; }
+                    }
+
+                    .token-box {
+                        display: flex;
+                        gap: 0.5rem;
+                        align-items: center;
+
+                        code {
+                            background: #f1f3f5;
+                            padding: 0.2rem 0.5rem;
+                            border-radius: 4px;
+                            font-family: monospace;
+                            font-size: 0.85rem;
+                            color: $color-interactivo-principal;
+                        }
+
+                        button {
+                            background: none;
+                            border: none;
+                            cursor: pointer;
+                            color: $color-texto-secundario;
+                            transition: color 0.2s;
+
+                            &:hover {
+                                color: $color-interactivo-principal;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+  }
+}

@@ -1,53 +1,45 @@
-/**
- * ARCHIVO: models/moduloModel.ts
- * AUTOR: Equipo de Desarrollo CampusHub
- * FECHA: Actualizado el 15 de Enero de 2026
- *
- * DESCRIPCIÓN:
- * DAO para la entidad 'Módulo'.
- * Representa las asignaturas o materias (ej. "Programación", "Bases de Datos").
- */
-
-import pool from '../config/db';
-import { RowDataPacket, ResultSetHeader } from 'mysql2';
-
-export interface Modulo {
-    id?: number;
-    nombreModulo: string;
-}
+import db from "../db/index.js";
+import { Modulo } from "../types.js";
 
 /**
- * Crea un nuevo módulo.
+ * Gestión de Módulos (Asignaturas) en la base de datos.
  */
-export async function createModulo(nombreModulo: string) {
-  const [r] = await pool.execute<ResultSetHeader>(
-    'INSERT INTO MODULO (nombreModulo) VALUES (?)',
+
+/**
+ * Crea un nuevo módulo educativo.
+ */
+export async function createModulo(nombreModulo: string): Promise<number> {
+  const [r]: any = await db.execute(
+    "INSERT INTO MODULO (nombreModulo) VALUES (?)",
     [nombreModulo]
   );
   return r.insertId;
 }
 
 /**
- * Lista todos los módulos.
+ * Obtiene el listado de todos los módulos disponibles.
  */
 export async function getModulos(): Promise<Modulo[]> {
-  const [rows] = await pool.execute<RowDataPacket[]>('SELECT * FROM MODULO');
+  const [rows] = await db.execute("SELECT * FROM MODULO");
   return rows as Modulo[];
 }
 
 /**
  * Actualiza el nombre de un módulo.
  */
-export async function updateModulo(id: number, nombreModulo: string) {
-  await pool.execute(
-    'UPDATE MODULO SET nombreModulo = ? WHERE id = ?',
-    [nombreModulo, id]
-  );
+export async function updateModulo(
+  id: number,
+  nombreModulo: string
+): Promise<void> {
+  await db.execute("UPDATE MODULO SET nombreModulo = ? WHERE id = ?", [
+    nombreModulo,
+    id,
+  ]);
 }
 
 /**
- * Elimina un módulo.
+ * Elimina un módulo por su ID.
  */
-export async function deleteModulo(id: number) {
-  await pool.execute('DELETE FROM MODULO WHERE id = ?', [id]);
+export async function deleteModulo(id: number): Promise<void> {
+  await db.execute("DELETE FROM MODULO WHERE id = ?", [id]);
 }

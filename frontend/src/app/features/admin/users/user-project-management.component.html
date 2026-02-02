@@ -1,0 +1,44 @@
+<div class="project-management-container">
+    <div class="header">
+        <h2>Gestión de Proyectos por Usuario</h2>
+        <p>Controla qué proyectos pueden visualizar los usuarios de la plataforma.</p>
+    </div>
+
+    <div class="card">
+        <div class="selection-area">
+            <label>Seleccionar Usuario:</label>
+            <select [(ngModel)]="selectedUser" (change)="onUserSelect()" class="form-control user-select">
+                <option [ngValue]="null">-- Seleccionar Usuario --</option>
+                <option *ngFor="let user of users" [ngValue]="user">{{ user.userName }} ({{ user.email }})</option>
+            </select>
+        </div>
+
+        <div *ngIf="selectedUser" class="projects-area animated fadeIn">
+            <div class="projects-header">
+                <h3>Proyectos Disponibles</h3>
+                <p>Marca las casillas para dar acceso a <strong>{{ selectedUser.userName }}</strong>.</p>
+            </div>
+
+            <div class="project-grid">
+                <div *ngFor="let project of projects" class="project-card" [class.assigned]="isAssigned(project.id)">
+                    <div class="card-content">
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" [id]="'proj-' + project.id" [checked]="isAssigned(project.id)"
+                                (change)="toggleAssignment(project, $event)">
+                            <label [for]="'proj-' + project.id"></label>
+                        </div>
+                        <div class="project-info">
+                            <h4>{{ project.nombreProyecto }}</h4>
+                            <span class="status" *ngIf="isAssigned(project.id)">Asignado</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="!selectedUser" class="empty-state">
+            <i class="fas fa-hand-pointer"></i>
+            <p>Selecciona un usuario arriba para comenzar a gestionar sus permisos.</p>
+        </div>
+    </div>
+</div>

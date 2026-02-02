@@ -8,16 +8,16 @@
             <div class="grupo-input">
                 <label for="userName">Usuario</label>
                 <input type="text" id="userName" name="userName" [(ngModel)]="userName" required
-                    placeholder="Tu nombre de usuario">
+                    placeholder="Tu nombre de usuario" aria-required="true" autocomplete="username">
             </div>
 
             <!-- Campo de Contraseña -->
             <div class="grupo-input">
                 <label for="password">Contraseña</label>
                 <input type="password" id="password" name="password" [(ngModel)]="password" required
-                    placeholder="********">
+                    placeholder="********" aria-required="true" autocomplete="current-password">
                 <div class="enlace-registro-container">
-                    <a routerLink="/register">
+                    <a routerLink="/register" aria-label="Ir a página de registro">
                         ¿No tienes cuenta? Regístrate
                     </a>
                 </div>
@@ -29,9 +29,10 @@
             </div>
 
             <!-- Botón de Envío -->
-            <button type="submit" class="boton-primario" style="width: 100%;" [disabled]="isLoading">
+            <button type="submit" class="boton-primario" style="width: 100%;" [disabled]="isLoading"
+                [attr.aria-busy]="isLoading">
                 <span *ngIf="!isLoading">INICIAR SESIÓN</span>
-                <span *ngIf="isLoading">Cargando...</span>
+                <span *ngIf="isLoading" role="status" aria-live="polite">Cargando...</span>
             </button>
         </form>
     </div>

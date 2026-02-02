@@ -1,42 +1,43 @@
-<div class="contenedor-pagina detalle-proyecto" *ngIf="project; else notFound">
+<article class="contenedor-pagina detalle-proyecto" *ngIf="project; else notFound">
     <header class="detalle-header">
         <h1>{{ project.title }}</h1>
     </header>
 
     <div class="detalle-contenido">
         <div class="detalle-imagen">
-            <img [src]="project.image" [alt]="project.title">
+            <img [src]="project.image" [alt]="'Captura de pantalla del proyecto ' + project.title">
         </div>
 
-        <div class="detalle-tecnologias">
+        <div class="detalle-tecnologias" aria-label="Tecnologías utilizadas">
             <span class="etiqueta-tech" *ngFor="let tech of project.technologies">
                 {{ tech }}
             </span>
         </div>
 
         <div class="detalle-info">
-            <section class="seccion-descripcion">
-                <h2>Descripción del Proyecto</h2>
+            <section class="seccion-descripcion" aria-labelledby="desc-heading">
+                <h2 id="desc-heading">Descripción del Proyecto</h2>
                 <p>{{ project.description }}</p>
             </section>
 
-            <section class="seccion-autores">
-                <h3>Autores</h3>
+            <section class="seccion-autores" aria-labelledby="authors-heading">
+                <h3 id="authors-heading">Autores</h3>
                 <ul>
                     <li *ngFor="let author of project.authors">{{ author }}</li>
                 </ul>
             </section>
 
             <footer class="detalle-footer">
-                <a [href]="project.githubLink" target="_blank" class="boton-proyecto">
-                    <img src="assets/images/GitHub.png" alt="GitHub" class="icono-github">
+                <a [href]="project.githubLink" target="_blank" class="boton-proyecto"
+                    aria-label="Ver código fuente en GitHub (se abre en nueva pestaña)">
+                    <img src="assets/images/GitHub.png" alt="" class="icono-github" aria-hidden="true">
                     Ver en GitHub
                 </a>
                 <a routerLink="/" class="boton-volver">Volver al inicio</a>
             </footer>
         </div>
     </div>
-</div>
+</article>
 
 <ng-template #notFound>
     <div class="contenedor-pagina">

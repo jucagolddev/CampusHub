@@ -1,21 +1,16 @@
+import express from "express";
+import * as c from "../controllers/tituloController.js";
+
+const router = express.Router();
+
 /**
- * ARCHIVO: routes/tituloRoutes.ts
- * AUTOR: Equipo de Desarrollo CampusHub
- * FECHA: Actualizado el 15 de Enero de 2026
- *
- * DESCRIPCIÓN:
- * Endpoints CRUD para la entidad 'Título'.
- * Ruta Base: /api/titulos
+ * Definición de rutas CRUD para los Títulos Académicos.
+ * Accesibles desde: /api/titulos/...
  */
 
-import { Router } from 'express';
-import * as tituloController from '../controllers/tituloController';
-
-const router = Router();
-
-router.post('/', tituloController.create);
-router.get('/', tituloController.list);
-router.put('/:id', tituloController.update);
-router.delete('/:id', tituloController.remove);
+router.post("/", c.create);
+router.get("/", c.list);
+router.put("/:id", c.update);
+router.delete("/:id", c.remove);
 
 export default router;

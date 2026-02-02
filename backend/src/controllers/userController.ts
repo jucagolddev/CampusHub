@@ -1,116 +1,107 @@
+import { Request, Response } from "express";
+import { v4 as uuidv4 } from "uuid";
+import { hashPassword, comparePassword } from "../utils/hash.js";
+import * as userModel from "../models/userModel.js";
+
 /**
- * CONTROLADOR DE USUARIOS (userController.ts)
- * -------------------------------------------------------------------------
- * Este componente gestiona el ciclo de vida de las cuentas de usuario en
- * CampusHub. Sus responsabilidades principales incluyen:
- * 1. Proceso de Registro: Validación de datos e inspección de duplicados.
- * 2. Autenticación (Login): Verificación de credenciales mediante hashing.
- * 3. Gestión de Identidad: Emisión de tokens de sesión para acceso privado.
- * 
- * Sigue las mejores prácticas en seguridad de contraseñas y reporte de errores.
+ * Controladores para la gestión de usuarios (Registro y Autenticación).
  */
 
-import { Request, Response } from 'express';
-import { v4 as uuidv4 } from 'uuid';
-import { hashPassword, comparePassword } from '../utils/hash';
-import * as userModel from '../models/userModel';
-
 /**
- * REGISTRO DE USUARIO NUEVO
- * Ruta: POST /api/users/register
+ * Registra un nuevo usuario.
+ * Proceso:
+ * 1. Valida campos obligatorios.
+ * 2. Verifica si el usuario ya existe.
+ * 3. Hashea la contraseña.
+ * 4. Genera un token UUID único (sesión permanente).
+ * 5. Guarda en DB.
  */
 export async function register(req: Request, res: Response) {
   try {
-    const { userName, password, email, rolId, centroId, tituloId } = req.body;
+    const { userName, password, email } = req.body;
 
-    // 1. Validación básica de entrada
+    // Validación básica de entrada
     if (!userName || !password || !email) {
-        return res.status(400).json({ error: 'Faltan campos obligatorios (userName, password, email)' });
+      return res.status(400).json({ error: "Faltan campos obligatorios" });
     }
 
-    // 2. Verificar duplicados
+    // Comprobamos duplicados para evitar errores de clave única en la DB
     const existing = await userModel.findUserByUsername(userName);
     if (existing) {
-        return res.status(409).json({ error: 'El nombre de usuario ya está en uso' });
+      return res
+        .status(409)
+        .json({ error: "El nombre de usuario ya está registrado" });
     }
 
-    // 3. Hashear la contraseña (CRÍTICO)
+    // Seguridad: Nunca guardar contraseñas en texto plano
     const hashed = await hashPassword(password);
-    
-    // 4. Generar identificador único (Token/UUID)
+
+    // Generamos el ID de sesión (token) que usará el frontend
     const tokken = uuidv4();
 
-    // 5. Persistir en Base de Datos
-    // Se pasan los campos opcionales rolId, centroId, tituloId si existen
-    await userModel.createUser({ 
-        tokken, 
-        userName, 
-        passwrd: hashed, 
-        email, 
-        rolId: rolId ? Number(rolId) : undefined, 
-        centroId: centroId ? Number(centroId) : undefined, 
-        tituloId: tituloId ? Number(tituloId) : undefined
-    });
-    
-    // Responder con éxito (201 Created)
-    return res.status(201).json({ 
-        message: 'Usuario registrado exitosamente',
-        tokken, 
-        userName, 
-        email,
-        rolId,
-        centroId,
-        tituloId
-    });
+    // Persistencia en base de datos
+    await userModel.createUser({ tokken, userName, passwrd: hashed, email });
 
+    // Devolvemos los datos (excepto la contraseña)
+    return res.status(201).json({ tokken, userName, email });
   } catch (err) {
-    console.error('[ERROR REGISTER]', err);
-    return res.status(500).json({ error: 'Error interno del servidor al registrar usuario' });
+    console.error("Error en registro:", err);
+    return res.status(500).json({ error: "Error interno del servidor" });
   }
 }
 
 /**
- * INICIO DE SESIÓN
- * Ruta: POST /api/users/login
+ * Autentica un usuario existente.
+ * Proceso:
+ * 1. Busca el usuario por nombre.
+ * 2. Compara el hash de la contraseña.
+ * 3. Si es correcto, devuelve el token UUID para futuras peticiones.
  */
 export async function login(req: Request, res: Response) {
   try {
     const { userName, password } = req.body;
 
-    // 1. Buscamos usuario por nombre
     const user = await userModel.findUserByUsername(userName);
     if (!user) {
-        // Por seguridad, mensaje genérico para no revelar existencia de usuario
-        return res.status(404).json({ error: 'Usuario o contraseña incorrectos' });
+      return res.status(404).json({ error: "Usuario no encontrado" });
     }
 
-    // Validación de integridad de datos
-    if (!user.passwrd) {
-        console.error(`[CRITICAL] Usuario ${userName} no tiene password hash en BD.`);
-        return res.status(500).json({ error: 'Error de integridad de datos' });
-    }
-
-    // 2. Comparamos contraseña
+    // Verificamos la contraseña con la utilidad segura
     const ok = await comparePassword(password, user.passwrd);
     if (!ok) {
-        return res.status(401).json({ error: 'Usuario o contraseña incorrectos' });
+      return res.status(401).json({ error: "Credenciales inválidas" });
     }
 
-    // 3. Respuesta Exitosa
-    // NOTA: Mantenemos la lógica original de usar el 'tokken' de BD como token de sesión.
-    // En una refactorización futura, esto debería ser un JWT firmado.
-    return res.json({
-      message: 'Login exitoso',
-      token: user.tokken, // UUID de la BD usado como Auth Token
-      user: {
-        userName: user.userName,
-        email: user.email,
-        rolId: user.rolId // Importante para el frontend saber permisos
-      }
-    });
-
+    // Login exitoso: El frontend guardará este token para autorizar sus llamadas
+    if (user) {
+      const roles = await userModel.getRolesByUserToken(user.tokken);
+      
+      return res.json({
+        message: "Login exitoso",
+        token: user.tokken,
+        user: {
+          id: user.id,
+          userName: user.userName,
+          email: user.email,
+          roles: roles // Array de roles
+        },
+      });
+    }
   } catch (err) {
-    console.error('[ERROR LOGIN]', err);
-    return res.status(500).json({ error: 'Error interno del servidor al iniciar sesión' });
+    console.error("Error en login:", err);
+    return res.status(500).json({ error: "Error interno del servidor" });
+  }
+}
+
+/**
+ * Obtiene la lista de todos los usuarios con sus roles.
+ */
+export async function getUsers(req: Request, res: Response) {
+  try {
+    const usersWithRoles = await userModel.getAllUsersWithRoles();
+    return res.json(usersWithRoles);
+  } catch (err) {
+    console.error("Error al obtener usuarios:", err);
+    return res.status(500).json({ error: "Error al listar usuarios" });
   }
 }

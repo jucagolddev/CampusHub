@@ -1,50 +1,21 @@
-/**
- * DEFINICIÓN DE RUTAS DE PROYECTOS (projectRoutes.ts)
- * -------------------------------------------------------------------------
- * Este archivo define los puntos de entrada (endpoints) para la gestión
- * de proyectos en la API. Organiza la accesibilidad mediante el uso de
- * middlewares de autenticación para proteger las acciones de escritura.
- * 
- * Rutas Finales: /api/projects/
- */
+import express from "express";
+import * as projectController from "../controllers/projectController.js";
+import auth from "../middleware/authMiddleware.js";
 
-import { Router } from 'express';
-import * as projectController from '../controllers/projectController';
-import auth from '../middlewares/authMiddleware'; 
-
-const router = Router();
-
-// ==========================================
-// RUTAS
-// ==========================================
+const router = express.Router();
 
 /**
- * POST /
- * Middleware: auth (Requiere Token)
- * Descripción: Crea un nuevo proyecto vinculado al usuario autenticado.
+ * Rutas de Proyectos.
+ * El middleware 'auth' protege los métodos de escritura (POST, PUT).
  */
-router.post('/', auth, projectController.createProject);
 
-/**
- * GET /
- * Middleware: Ninguno (Público)
- * Descripción: Devuelve la lista de proyectos públicos.
- */
-router.get('/', projectController.listProjects);
+// Crear un proyecto: Requiere autenticación
+router.post("/", auth, projectController.createProject);
 
-/**
- * GET /:id
- * Middleware: Ninguno (Público)
- * Descripción: Obtiene el detalle de un proyecto específico.
- */
-router.get('/:id', projectController.getProjectById);
+// Listar proyectos: Público
+router.get("/", projectController.listProjects);
 
-/**
- * PUT /:id
- * Middleware: auth (Requiere Token)
- * Descripción: Actualiza un proyecto existente.
- * Validación: El controlador debe verificar que el usuario sea el dueño del proyecto.
- */
-router.put('/:id', auth, projectController.updateProject);
+// Editar proyecto: Requiere autenticación y verificación de autoría (en el controlador)
+router.put("/:id", auth, projectController.updateProject);
 
 export default router;

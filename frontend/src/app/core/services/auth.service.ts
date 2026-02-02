@@ -9,9 +9,10 @@ export interface LoginResponse {
   message: string;
   token: string;
   user: {
+    id: number;
     userName: string;
     email: string;
-    rolId?: number;
+    roles: string[]; // Ahora recibimos un array de nombres de rol
   };
 }
 
@@ -60,22 +61,15 @@ export class AuthService {
 
   /**
    * Registra un nuevo usuario.
-   * @param userData Objeto con userName, email, password, y opcionales (rolId, centroId, tituloId)
+   * @param userData Objeto con userName, email, password
    * @returns Observable con respuesta
    */
   register(userData: { 
     userName: string; 
     email: string; 
     password: string;
-    rolId?: number;
-    centroId?: number;
-    tituloId?: number;
   }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, userData).pipe(
-      tap(() => {
-        // Opcional: Auto-login tras registro o redirigir a login
-      })
-    );
+    return this.http.post(`${this.apiUrl}/register`, userData);
   }
 
   /**
@@ -105,6 +99,30 @@ export class AuthService {
 
   getCurrentUser(): any {
     return this.currentUserSubject.value;
+  }
+
+  /**
+   * Verifica si el usuario tiene el rol de Administrador.
+   */
+  isAdmin(): boolean {
+    const user = this.getCurrentUser();
+    return user?.roles?.includes('Administrador') || false;
+  }
+
+  /**
+   * Verifica si el usuario tiene el rol de Gestor.
+   */
+  isGestor(): boolean {
+    const user = this.getCurrentUser();
+    return user?.roles?.includes('Gestor') || false;
+  }
+
+  /**
+   * Verifica si el usuario tiene el rol de Profesor.
+   */
+  isProfesor(): boolean {
+    const user = this.getCurrentUser();
+    return user?.roles?.includes('Profesor') || false;
   }
 
   // =================================================================
