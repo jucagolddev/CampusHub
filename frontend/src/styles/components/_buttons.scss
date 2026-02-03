@@ -77,6 +77,47 @@
   // Estado de foco para accesibilidad con teclado
   &:focus {
     outline: 3px solid $sombra-foco-accesibilidad; // Borde azul visible
+    outline: 3px solid $sombra-foco-accesibilidad; // Borde azul visible
     outline-offset: 2px; // Separación del borde del botón
+  }
+}
+
+// Botón de Peligro: Acciones destructivas
+.boton-peligro {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: $espaciado-s $espaciado-l;
+  background-color: $color-alerta-error;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: $peso-semi-negrita;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba($color-alerta-error, 0.2);
+
+  &:hover {
+    background-color: darken($color-alerta-error, 8%);
+    box-shadow: 0 4px 8px rgba($color-alerta-error, 0.3);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    background-color: darken($color-alerta-error, 15%);
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba($color-alerta-error, 0.2);
+  }
+
+  &:disabled {
+    background-color: $color-deshabilitado-interactivo;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+  
+  i {
+    font-size: 1rem;
   }
 }

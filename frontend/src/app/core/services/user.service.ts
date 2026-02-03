@@ -30,6 +30,10 @@ export class UserService {
     return this.http.post(`${this.apiUrl}/users/register`, user);
   }
 
+  deleteUser(tokken: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/users/${tokken}`);
+  }
+
   // Gestión de Roles
   getRoles(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/roles`).pipe(

@@ -3,7 +3,7 @@
 
 /* User List Styles */
 .user-list-container {
-  padding: $espaciado-xl;
+  padding: $espaciado-m;
 
   .header {
     display: flex;
@@ -92,7 +92,7 @@
                         &.profesor { background: rgba(230, 126, 34, 0.1); color: #e67e22; }
                     }
 
-                    .token-box {
+                    .token-container {
                         display: flex;
                         gap: 0.5rem;
                         align-items: center;
@@ -107,14 +107,29 @@
                         }
 
                         button {
-                            background: none;
-                            border: none;
+                            background: white;
+                            border: 1px solid #ddd;
                             cursor: pointer;
                             color: $color-texto-secundario;
-                            transition: color 0.2s;
-
+                            transition: all 0.2s ease;
+                            padding: 0.25rem;
+                            border-radius: 4px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 28px;
+                            height: 28px;
+                            
                             &:hover {
                                 color: $color-interactivo-principal;
+                                border-color: $color-interactivo-principal;
+                                background-color: rgba($color-interactivo-principal, 0.05);
+                                transform: scale(1.05);
+                            }
+
+                            &:active {
+                                transform: scale(0.95);
+                                background-color: rgba($color-interactivo-principal, 0.1);
                             }
                         }
                     }

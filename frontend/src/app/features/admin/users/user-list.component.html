@@ -18,6 +18,7 @@
             <th scope="col">Email</th>
             <th scope="col">JWT (Token)</th>
             <th scope="col">Roles</th>
+            <th scope="col">Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -52,9 +53,32 @@
                 </span>
               </div>
             </td>
+            <td>
+              <button
+                class="boton-peligro"
+                (click)="startDeleteProcess(user)"
+                title="Eliminar usuario"
+              >
+                <i class="fas fa-trash"></i> Eliminar
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
+
+  <!-- Modal de Confirmación Personalizado -->
+  <app-confirmation-modal
+    [isOpen]="showDeleteModal"
+    title="Eliminar Usuario"
+    [message]="
+      '¿Estás seguro de eliminar a ' +
+      (userToDelete?.userName || 'este usuario') +
+      '? Esta acción no se puede deshacer.'
+    "
+    confirmText="Eliminar"
+    (confirm)="confirmDelete()"
+    (cancel)="cancelDelete()"
+  ></app-confirmation-modal>
 </div>

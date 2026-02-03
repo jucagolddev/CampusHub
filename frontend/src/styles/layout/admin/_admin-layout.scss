@@ -11,7 +11,7 @@
   }
 
   .sidebar {
-    width: 260px;
+    width: 240px;
     flex-shrink: 0;
     z-index: 1000;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -24,11 +24,11 @@
 
   .content {
     flex: 1;
-    margin-left: 260px; 
+    margin-left: 240px; 
     padding: $espaciado-l;
     overflow-y: auto;
     overflow-x: hidden;
-    width: calc(100% - 260px);
+    width: calc(100% - 240px);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     
     animation: fadeIn 0.4s ease-out;

@@ -55,8 +55,9 @@
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            color: $color-texto-secundario;
+            color: $color-texto-titulo-h1;
             pointer-events: none;
+            font-size: 1.1rem;
           }
 
           input {

@@ -75,3 +75,10 @@ export async function getAllUsersWithRoles(): Promise<any[]> {
 
   return usersWithRoles;
 }
+
+/**
+ * Elimina un usuario de la base de datos por su token.
+ */
+export async function deleteUserByTokken(tokken: string): Promise<void> {
+  await db.execute("DELETE FROM USUARIO WHERE tokken = ?", [tokken]);
+}

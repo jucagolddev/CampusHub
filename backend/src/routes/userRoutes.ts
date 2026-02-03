@@ -17,4 +17,7 @@ router.post("/login", userController.login);
 // URL: GET /api/users
 router.get("/", userController.getUsers);
 
+// URL: DELETE /api/users/:tokken
+router.delete("/:tokken", userController.deleteUser);
+
 export default router;

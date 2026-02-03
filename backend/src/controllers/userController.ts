@@ -104,3 +104,22 @@ export async function getUsers(req: Request, res: Response) {
     return res.status(500).json({ error: "Error al listar usuarios" });
   }
 }
+
+/**
+ * Elimina un usuario.
+ */
+export async function deleteUser(req: Request, res: Response) {
+  try {
+    const { tokken } = req.params;
+
+    if (!tokken) {
+      return res.status(400).json({ error: "Token de usuario requerido" });
+    }
+
+    await userModel.deleteUserByTokken(tokken);
+    return res.status(200).json({ message: "Usuario eliminado correctamente" });
+  } catch (err) {
+    console.error("Error al eliminar usuario:", err);
+    return res.status(500).json({ error: "Error al eliminar usuario" });
+  }
+}

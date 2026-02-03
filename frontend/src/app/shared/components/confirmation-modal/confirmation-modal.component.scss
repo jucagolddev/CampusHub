@@ -1,0 +1,98 @@
+@use "src/styles/base/variables" as *;
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-content {
+  background-color: $color-fondo-tarjeta;
+  padding: $espaciado-xl;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 400px;
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba($color-borde-estructura, 0.1);
+
+  .modal-header {
+    margin-bottom: $espaciado-m;
+    
+    .modal-title {
+      color: $color-texto-titulo-h1;
+      font-family: $fuente-principal;
+      font-size: 1.25rem;
+      font-weight: $peso-semi-negrita;
+      margin: 0;
+    }
+  }
+
+  .modal-body {
+    margin-bottom: $espaciado-l;
+    
+    p {
+      color: $color-texto-principal;
+      font-size: 1rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+  }
+
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: $espaciado-m;
+    
+    button {
+      min-width: 100px;
+    }
+  }
+}
+
+// Button styles (local override if needed, but reusing classes)
+.boton-peligro {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: $color-alerta-error; // Red
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: $peso-semi-negrita;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: darken($color-alerta-error, 10%);
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
