@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { UserService } from '../../../core/services/user.service';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-user-list',
@@ -11,10 +13,10 @@ import { HttpClient } from '@angular/common/http';
 export class UserListComponent implements OnInit {
   users: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private userService: UserService, private notificationService: NotificationService) {}
 
   ngOnInit() {
-    this.http.get<any[]>('http://localhost:3000/api/users').subscribe(
+    this.userService.getAllUsers().subscribe(
       data => this.users = data,
       error => console.error('Error fetching users', error)
     );
@@ -22,7 +24,7 @@ export class UserListComponent implements OnInit {
 
   copyToken(token: string) {
     navigator.clipboard.writeText(token).then(() => {
-      alert('Token copiado al portapapeles');
+      this.notificationService.showInfo('Token copiado al portapapeles');
     });
   }
 }

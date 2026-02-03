@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+
+import { UserService } from '../../../core/services/user.service';
+import { ProjectService } from '../../../core/services/project.service';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-user-project-management',
@@ -15,20 +18,24 @@ export class UserProjectManagementComponent implements OnInit {
   userProjects: any[] = [];
   selectedUser: any = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private userService: UserService,
+    private projectService: ProjectService,
+    private notificationService: NotificationService
+  ) {}
 
   ngOnInit() {
     this.loadInitialData();
   }
 
   loadInitialData() {
-    this.http.get<any[]>('http://localhost:3000/api/users').subscribe(u => this.users = u);
-    this.http.get<any[]>('http://localhost:3000/api/projects').subscribe(p => this.projects = p);
+    this.userService.getAllUsers().subscribe(u => this.users = u);
+    this.projectService.getProjects().subscribe(p => this.projects = p);
   }
 
   onUserSelect() {
     if (this.selectedUser) {
-      this.http.get<any[]>(`http://localhost:3000/api/relations/users/${this.selectedUser.tokken}/projects`)
+      this.userService.getUserProjects(this.selectedUser.tokken)
         .subscribe(up => this.userProjects = up);
     } else {
       this.userProjects = [];
@@ -41,23 +48,26 @@ export class UserProjectManagementComponent implements OnInit {
 
   toggleAssignment(project: any, event: any) {
     const isChecked = event.target.checked;
-    const body = { tokken: this.selectedUser.tokken, proyectoId: project.id };
 
     if (isChecked) {
-      this.http.post('http://localhost:3000/api/relations/assign-project', body).subscribe({
-        next: () => this.userProjects.push(project),
+      this.userService.assignProject(this.selectedUser.tokken, project.id).subscribe({
+        next: () => {
+          this.userProjects.push(project);
+          this.notificationService.showSuccess(`Proyecto ${project.nombreProyecto} asignado`);
+        },
         error: () => {
-          alert('Error al asignar proyecto');
+          this.notificationService.showError('Error al asignar proyecto');
           event.target.checked = false; // Revert
         }
       });
     } else {
-      this.http.post('http://localhost:3000/api/relations/remove-project', body).subscribe({
+      this.userService.removeProject(this.selectedUser.tokken, project.id).subscribe({
         next: () => {
           this.userProjects = this.userProjects.filter(p => p.id !== project.id);
+          this.notificationService.showInfo(`Proyecto ${project.nombreProyecto} desvinculado`);
         },
         error: () => {
-          alert('Error al desvincular proyecto');
+          this.notificationService.showError('Error al desvincular proyecto');
           event.target.checked = true; // Revert
         }
       });

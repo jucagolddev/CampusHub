@@ -1,43 +1,60 @@
 <div class="user-list-container">
-    <div class="header">
-        <h2>Gestión de Usuarios</h2>
-        <p>Visualiza y administra todos los usuarios registrados en la plataforma.</p>
-    </div>
+  <div class="header">
+    <h2>Gestión de Usuarios</h2>
+    <p>
+      Visualiza y administra todos los usuarios registrados en la plataforma.
+    </p>
+  </div>
 
-    <div class="table-card">
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Email</th>
-                        <th>JWT (Token)</th>
-                        <th>Roles</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let user of users">
-                        <td class="font-weight-bold">{{ user.userName }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>
-                            <div class="token-container" title="{{user.tokken}}">
-                                <code>{{ user.tokken | slice:0:12 }}...</code>
-                                <button class="btn-icon-small" (click)="copyToken(user.tokken)" title="Copiar Token">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="badges">
-                                <span *ngFor="let role of user.roles" class="badge"
-                                    [ngClass]="{'badge-admin': role === 'Administrador', 'badge-gestor': role === 'Gestor', 'badge-profesor': role === 'Profesor'}">
-                                    {{ role }}
-                                </span>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+  <div class="table-card">
+    <div class="table-responsive">
+      <table class="table">
+        <caption class="sr-only">
+          Listado de usuarios registrados en la plataforma
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Email</th>
+            <th scope="col">JWT (Token)</th>
+            <th scope="col">Roles</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td class="font-weight-bold">{{ user.userName }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+              <div class="token-container" title="{{ user.tokken }}">
+                <code>{{ user.tokken | slice: 0 : 12 }}...</code>
+                <button
+                  class="btn-icon-small"
+                  (click)="copyToken(user.tokken)"
+                  title="Copiar Token"
+                  aria-label="Copiar Token al portapapeles"
+                >
+                  <i class="fas fa-copy" aria-hidden="true"></i>
+                </button>
+              </div>
+            </td>
+            <td>
+              <div class="badges">
+                <span
+                  *ngFor="let role of user.roles"
+                  class="badge"
+                  [ngClass]="{
+                    'badge-admin': role === 'Administrador',
+                    'badge-gestor': role === 'Gestor',
+                    'badge-profesor': role === 'Profesor',
+                  }"
+                >
+                  {{ role }}
+                </span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>

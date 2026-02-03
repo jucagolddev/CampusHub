@@ -39,7 +39,13 @@ export class LoginComponent {
         next: (response) => {
           console.log('Login exitoso:', response);
           this.isLoading = false;
-          this.router.navigate(['/']); // Redirigir al home
+          
+          // Redirección condicional según rol
+          if (this.authService.isAdmin()) {
+            this.router.navigate(['/admin/dashboard']);
+          } else {
+            this.router.navigate(['/']);
+          }
         },
         error: (err) => {
           console.error('Error de login:', err);

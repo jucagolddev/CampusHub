@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from '../../../core/services/auth.service';
+import { UserService } from '../../../core/services/user.service';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-admin-register',
@@ -12,7 +13,11 @@ import { AuthService } from '../../../core/services/auth.service';
 export class UserRegisterComponent {
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(
+    private fb: FormBuilder, 
+    private userService: UserService,
+    private notificationService: NotificationService
+  ) {
     this.registerForm = this.fb.group({
       userName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -22,12 +27,15 @@ export class UserRegisterComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      this.authService.register(this.registerForm.value).subscribe({
+      this.userService.createUser(this.registerForm.value).subscribe({
         next: () => {
-          alert('Usuario registrado correctamente');
+          this.notificationService.showSuccess('Usuario registrado correctamente');
           this.registerForm.reset();
         },
-        error: (err) => alert('Error al registrar usuario')
+        error: (err) => {
+          console.error('Error creating user:', err);
+          this.notificationService.showError('Error al registrar usuario. Compruebe si el nombre de usuario ya existe.');
+        }
       });
     }
   }

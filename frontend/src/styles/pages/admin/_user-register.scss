@@ -100,7 +100,7 @@
         margin-top: $espaciado-l;
         width: 100%;
 
-        button {
+        .btn-submit {
             width: 100%;
             padding: 1rem;
             background: linear-gradient(135deg, $color-interactivo-principal 0%, $color-hover-interactivo 100%);
@@ -112,6 +112,10 @@
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 4px 15px rgba($color-interactivo-principal, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
 
             &:hover:not(:disabled) {
                 transform: translateY(-2px);

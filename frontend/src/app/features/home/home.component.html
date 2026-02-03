@@ -1,103 +1,169 @@
-<!-- SECCIÓN HERO: Mi cabecera principal de impacto.
-     Aquí presento el propósito de CampusHub y ofrezco las herramientas de búsqueda 
-     y filtros rápidos para que el usuario encuentre lo que necesita al instante. -->
-<section id="hero">
+<!-- SECCIÓN PARA NO ADMINISTRADORES:
+     Si el usuario no es un administrador, mostramos un mensaje centrado. -->
+<div *ngIf="!isAdmin" class="no-projects-experience">
+  <div class="contenedor-pagina">
+    <p>no tienes proyectos todavia</p>
+  </div>
+</div>
+
+<div *ngIf="isAdmin">
+  <!-- SECCIÓN HERO: Mi cabecera principal de impacto.
+         Aquí presento el propósito de CampusHub y ofrezco las herramientas de búsqueda 
+         y filtros rápidos para que el usuario encuentre lo que necesita al instante. -->
+  <section id="hero">
     <div class="contenedor-pagina">
-        <div class="hero-content">
-            <h1>Espacio de aplicaciones web y móviles.</h1>
+      <div class="hero-content">
+        <h1>Espacio de aplicaciones web y móviles.</h1>
 
-            <!-- He diseñado este buscador con un estilo de cápsula moderna.
-                 Lanzo la búsqueda tanto al pulsar el botón como al darle a Enter. -->
-            <div class="search-container">
-                <label for="searchApp" class="sr-only">Buscar aplicación</label>
-                <input #searchInput id="searchApp" type="text" placeholder="Buscar por tecnología, nombre, autor..."
-                    aria-label="Buscar aplicaciones web y móviles por tecnología, nombre o autor" class="barra-busqueda"
-                    (keyup.enter)="onSearch(searchInput.value)">
-                <button type="button" class="boton-primario" (click)="onSearch(searchInput.value)"
-                    aria-label="Ejecutar búsqueda">Buscar</button>
-            </div>
-
-            <!-- Estos botones permiten a mis usuarios filtrar rápidamente por las categorías más comunes. -->
-            <div class="filtros-categoria">
-                <span>Filtros rápidos:</span>
-                <button type="button" class="boton-delineado" (click)="filterByCategory('Todos')">Todos</button>
-                <button type="button" class="boton-delineado"
-                    (click)="filterByCategory('Destacados')">Destacados</button>
-                <button type="button" class="boton-delineado"
-                    (click)="filterByCategory('Planificación')">Planificación</button>
-                <button type="button" class="boton-delineado"
-                    (click)="filterByCategory('Utilidades')">Utilidades</button>
-            </div>
+        <!-- He diseñado este buscador con un estilo de cápsula moderna.
+                     Lanzo la búsqueda tanto al pulsar el botón como al darle a Enter. -->
+        <div class="search-container">
+          <label for="searchApp" class="sr-only">Buscar aplicación</label>
+          <input
+            #searchInput
+            id="searchApp"
+            type="text"
+            placeholder="Buscar por tecnología, nombre, autor..."
+            aria-label="Buscar aplicaciones web y móviles por tecnología, nombre o autor"
+            class="barra-busqueda"
+            (keyup.enter)="onSearch(searchInput.value)"
+          />
+          <button
+            type="button"
+            class="boton-primario"
+            (click)="onSearch(searchInput.value)"
+            aria-label="Ejecutar búsqueda"
+          >
+            Buscar
+          </button>
         </div>
-    </div>
-</section>
 
-<!-- SECCIÓN DE PROYECTOS DESTACADOS:
-     Solo la muestro si el usuario NO está buscando nada específico.
-     Aquí renderizo mis 3 proyectos estrella (los de ID 1, 2 y 3). -->
-<section id="featured-projects" *ngIf="!searchTerm">
+        <!-- Estos botones permiten a mis usuarios filtrar rápidamente por las categorías más comunes. -->
+        <div class="filtros-categoria">
+          <span>Filtros rápidos:</span>
+          <button
+            type="button"
+            class="boton-delineado"
+            (click)="filterByCategory('Todos')"
+          >
+            Todos
+          </button>
+          <button
+            type="button"
+            class="boton-delineado"
+            (click)="filterByCategory('Destacados')"
+          >
+            Destacados
+          </button>
+          <button
+            type="button"
+            class="boton-delineado"
+            (click)="filterByCategory('Planificación')"
+          >
+            Planificación
+          </button>
+          <button
+            type="button"
+            class="boton-delineado"
+            (click)="filterByCategory('Utilidades')"
+          >
+            Utilidades
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN DE PROYECTOS DESTACADOS:
+         Solo la muestro si el usuario NO está buscando nada específico.
+         Aquí renderizo mis 3 proyectos estrella (los de ID 1, 2 y 3). -->
+  <section id="featured-projects" *ngIf="!searchTerm">
     <div class="contenedor-pagina">
-        <header>
-            <h2>PROYECTOS DESTACADOS</h2>
-            <p>Seleccion de los mas populares</p>
-        </header>
+      <header>
+        <h2>PROYECTOS DESTACADOS</h2>
+        <p>Seleccion de los mas populares</p>
+      </header>
 
-        <!-- Uso un grid dinámico para mostrar mis tarjetas de proyecto destacadas. -->
-        <div class="projects-grid">
-            <app-project-card *ngFor="let project of featuredProjects" [project]="project"></app-project-card>
-        </div>
+      <!-- Uso un grid dinámico para mostrar mis tarjetas de proyecto destacadas. -->
+      <div class="projects-grid">
+        <app-project-card
+          *ngFor="let project of featuredProjects"
+          [project]="project"
+        ></app-project-card>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- SECCIÓN INFORMATIVA: 
-     Aprovecho este bloque para explicar brevemente qué es CampusHub y sus beneficios.
-     Uso un diseño que alterna texto e imagen para que no sea pesado de leer. -->
-<section id="info-section" *ngIf="!searchTerm">
+  <!-- SECCIÓN INFORMATIVA: 
+         Aprovecho este bloque para explicar brevemente qué es CampusHub y sus beneficios.
+         Uso un diseño que alterna texto e imagen para que no sea pesado de leer. -->
+  <section id="info-section" *ngIf="!searchTerm">
     <div class="contenedor-pagina">
-        <div class="info-text">
-            <p>En campus hub ofrecemos variedad de aplicaciones orientadas a la docencia.</p>
-            <p>Conteniendo en un solo espacio de trabajo todas las funcionalidades necesarias para hacer esto posible.
-            </p>
-            <p>Dando a los desarrolladores y estudiantes la posibilidad de publicar sus propuestas de proyectos.</p>
-        </div>
-        <div class="info-image">
-            <!-- He dejado este espacio para una imagen descriptiva que pondré más adelante. -->
-            <p>img</p>
-        </div>
+      <div class="info-text">
+        <p>
+          En campus hub ofrecemos variedad de aplicaciones orientadas a la
+          docencia.
+        </p>
+        <p>
+          Conteniendo en un solo espacio de trabajo todas las funcionalidades
+          necesarias para hacer esto posible.
+        </p>
+        <p>
+          Dando a los desarrolladores y estudiantes la posibilidad de publicar
+          sus propuestas de proyectos.
+        </p>
+      </div>
+      <div class="info-image">
+        <!-- He dejado este espacio para una imagen descriptiva que pondré más adelante. -->
+        <p>img</p>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- SECCIÓN MÁS PROYECTOS:
-     Aquí es donde muestro la selección aleatoria que preparé en el TypeScript.
-     También la oculto si hay una búsqueda activa para no confundir al usuario. -->
-<section id="more-projects" *ngIf="!searchTerm">
+  <!-- SECCIÓN MÁS PROYECTOS:
+         Aquí es donde muestro la selección aleatoria que preparé en el TypeScript.
+         También la oculto si hay una búsqueda activa para no confundir al usuario. -->
+  <section id="more-projects" *ngIf="!searchTerm">
     <div class="contenedor-pagina">
-        <header>
-            <h2>MÁS PROYECTOS</h2>
-            <p>Explora otras creaciones de la comunidad</p>
-        </header>
-        <div class="projects-grid">
-            <app-project-card *ngFor="let project of randomProjects" [project]="project"></app-project-card>
-        </div>
+      <header>
+        <h2>MÁS PROYECTOS</h2>
+        <p>Explora otras creaciones de la comunidad</p>
+      </header>
+      <div class="projects-grid">
+        <app-project-card
+          *ngFor="let project of randomProjects"
+          [project]="project"
+        ></app-project-card>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- SECCIÓN DE RESULTADOS DE BÚSQUEDA:
-     Esta sección cobra vida solo cuando el usuario empieza a escribir en el buscador.
-     Muestro el conteo de resultados para que el feedback sea claro. -->
-<section id="search-results" *ngIf="searchTerm">
+  <!-- SECCIÓN DE RESULTADOS DE BÚSQUEDA:
+         Esta sección cobra vida solo cuando el usuario empieza a escribir en el buscador.
+         Muestro el conteo de resultados para que el feedback sea claro. -->
+  <section id="search-results" *ngIf="searchTerm">
     <div class="contenedor-pagina">
-        <header>
-            <h2>RESULTADOS DE BÚSQUEDA</h2>
-            <p>Encontrados {{ filteredProjects.length }} proyectos para "{{ searchTerm }}"</p>
-        </header>
-        <div class="projects-grid">
-            <app-project-card *ngFor="let project of filteredProjects" [project]="project"></app-project-card>
-        </div>
-        <!-- Si mi búsqueda no arroja nada, ofrezco un botón para resetear y volver a ver todo. -->
-        <div *ngIf="filteredProjects.length === 0" class="no-results">
-            <p>No se encontraron proyectos que coincidan con tu búsqueda.</p>
-            <button class="boton-primario" (click)="onSearch('')">Ver todos los proyectos</button>
-        </div>
+      <header>
+        <h2>RESULTADOS DE BÚSQUEDA</h2>
+        <p>
+          Encontrados {{ filteredProjects.length }} proyectos para "{{
+            searchTerm
+          }}"
+        </p>
+      </header>
+      <div class="projects-grid">
+        <app-project-card
+          *ngFor="let project of filteredProjects"
+          [project]="project"
+        ></app-project-card>
+      </div>
+      <!-- Si mi búsqueda no arroja nada, ofrezco un botón para resetear y volver a ver todo. -->
+      <div *ngIf="filteredProjects.length === 0" class="no-results">
+        <p>No se encontraron proyectos que coincidan con tu búsqueda.</p>
+        <button class="boton-primario" (click)="onSearch('')">
+          Ver todos los proyectos
+        </button>
+      </div>
     </div>
-</section>
+  </section>
+</div>

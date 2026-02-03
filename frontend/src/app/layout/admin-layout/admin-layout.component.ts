@@ -10,5 +10,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   templateUrl: './admin-layout.component.html'
 })
 export class AdminLayoutComponent {
+  isSidebarCollapsed = false;
 
+  toggleSidebar() {
+    this.isSidebarCollapsed = !this.isSidebarCollapsed;
+  }
 }

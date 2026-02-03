@@ -9,7 +9,6 @@ export interface LoginResponse {
   message: string;
   token: string;
   user: {
-    id: number;
     userName: string;
     email: string;
     roles: string[]; // Ahora recibimos un array de nombres de rol
@@ -29,16 +28,24 @@ export interface LoginResponse {
 })
 export class AuthService {
   private apiUrl = 'http://localhost:3000/api/users';
-  
+
   // Estado reactivo de autenticación
-  private isAuthenticatedSubject = new BehaviorSubject<boolean>(this.hasToken());
-  public isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(
+    this.hasToken(),
+  );
+  public isAuthenticated$: Observable<boolean> =
+    this.isAuthenticatedSubject.asObservable();
 
   // Estado reactivo del usuario actual
-  private currentUserSubject = new BehaviorSubject<any>(this.getUserFromStorage());
+  private currentUserSubject = new BehaviorSubject<any>(
+    this.getUserFromStorage(),
+  );
   public currentUser$ = this.currentUserSubject.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+  ) {}
 
   // =================================================================
   // MÉTODOS PÚBLICOS DE API
@@ -51,12 +58,14 @@ export class AuthService {
    * @returns Observable con la respuesta del servidor
    */
   login(userName: string, password: string): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/login`, { userName, password }).pipe(
-      tap((response: LoginResponse) => {
-        // Al recibir éxito, guardamos la sesión
-        this.setSession(response);
-      })
-    );
+    return this.http
+      .post<LoginResponse>(`${this.apiUrl}/login`, { userName, password })
+      .pipe(
+        tap((response: LoginResponse) => {
+          // Al recibir éxito, guardamos la sesión
+          this.setSession(response);
+        }),
+      );
   }
 
   /**
@@ -64,10 +73,13 @@ export class AuthService {
    * @param userData Objeto con userName, email, password
    * @returns Observable con respuesta
    */
-  register(userData: { 
-    userName: string; 
-    email: string; 
+  register(userData: {
+    userName: string;
+    email: string;
     password: string;
+    rolId: number;
+    centroId?: number;
+    tituloId?: number;
   }): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, userData);
   }
@@ -78,10 +90,10 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('authToken');
     localStorage.removeItem('user');
-    
+
     this.isAuthenticatedSubject.next(false);
     this.currentUserSubject.next(null);
-    
+
     this.router.navigate(['/login']);
   }
 

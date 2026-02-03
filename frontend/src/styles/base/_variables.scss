@@ -4,9 +4,11 @@
 // Mis colores insignia:
 // Estos son los colores principales que definen la identidad visual del proyecto
 $color-fondo-base: #f2eef0; // Color de fondo general de la página, gris rosado claro
+$color-fondo-principal: $color-fondo-base; // Alias para compatibilidad
 $color-interactivo-principal: #009acd; // Color principal para elementos interactivos como botones y enlaces, azul cerúleo
 $color-borde-estructura: #093370; // Color para bordes y elementos estructurales, azul marino profundo
 $color-texto-principal: #000000; // Color de texto por defecto, negro
+
 
 // Colores de texto
 // Variables para los diferentes niveles de jerarquía y estados del texto
@@ -21,6 +23,9 @@ $color-hover-interactivo: #007ba3; // Color cuando el usuario pasa el cursor sob
 $color-activo-interactivo: #005f82; // Color cuando el usuario hace clic en un elemento, azul profundo
 $color-deshabilitado-interactivo: #b3d9e8; // Color para elementos deshabilitados, azul desaturado
 $sombra-foco-accesibilidad: #009acd; // Color para el borde de foco de accesibilidad WCAG
+
+// Gradientes
+$color-gradiente-principal: linear-gradient(135deg, $color-interactivo-principal 0%, $color-activo-interactivo 100%);
 
 // Colores de alerta y retroalimentación
 // Variables para mensajes de diferentes tipos que se muestran al usuario
@@ -47,8 +52,10 @@ $acento-texto-codigo: #2c3e50; // Color del texto dentro de bloques de código, 
 // Mi elección tipográfica.
 // Uso Open Sans para que todo se lea de maravilla en cualquier pantalla.
 // Variables para fuentes y pesos de texto
-$fuente-principal: "Open Sans", Arial, sans-serif; // Fuente principal del sitio, Open Sans con fallbacks
-$fuente-codigo: "Consolas", "Monaco", "Courier New", monospace; // Fuente monoespaciada para código
+$fuente-principal:
+  "Open Sans", Arial, sans-serif; // Fuente principal del sitio, Open Sans con fallbacks
+$fuente-codigo:
+  "Consolas", "Monaco", "Courier New", monospace; // Fuente monoespaciada para código
 $fuente-cita: italic; // Estilo de fuente para citas, cursiva
 $peso-regular: 400; // Peso normal de fuente
 $peso-semi-negrita: 600; // Peso semi-negrita para énfasis medio

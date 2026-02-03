@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProjectCardComponent } from '../../shared/components/project-card/project-card.component';
 import { Project } from '../../core/models/project';
 import { ProjectService } from '../../core/services/project.service';
+import { AuthService } from '../../core/services/auth.service';
 
 /**
  * COMPONENTE HOME (HomeComponent)
@@ -31,13 +32,20 @@ export class HomeComponent implements OnInit {
   filteredProjects: Project[] = []; 
   searchTerm: string = ''; 
   isLoading = true;
+  isAdmin = false;
 
-  constructor(private projectService: ProjectService) {}
+  constructor(
+    private projectService: ProjectService,
+    private authService: AuthService
+  ) {}
 
   /**
    * Al iniciar el componente, pido los datos al servidor.
    */
   ngOnInit(): void {
+    // Verificamos si es administrador
+    this.isAdmin = this.authService.isAdmin();
+
     this.projectService.getProjects().subscribe({
       next: (data) => {
         this.allProjects = data.map(p => ({

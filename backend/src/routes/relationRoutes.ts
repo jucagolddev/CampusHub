@@ -26,6 +26,9 @@ router.get(
 // Vincular Rol a Usuario
 router.post("/assign-rol-user", auth, relationController.assignRolToUser);
 
+// Desvincular Rol de Usuario
+router.post("/remove-rol-user", auth, relationController.removeRolFromUser);
+
 // Vincular Título a un Centro Educativo
 router.post(
   "/assign-titulo-centro",

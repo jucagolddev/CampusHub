@@ -1,47 +1,129 @@
-<div class="sidebar-container">
-    <div class="logo">
-        CampusHub <span style="font-size: 0.8rem; color: #007bff;">Admin</span>
+<div class="admin-sidebar" [ngClass]="{ collapsed: isCollapsed }">
+  <div class="sidebar-header">
+    <div class="logo-area" *ngIf="!isCollapsed">
+      <h2>CampusHub <span class="tag">Admin</span></h2>
+    </div>
+    <div class="logo-area mini" *ngIf="isCollapsed">
+      <div class="avatar mini">C</div>
+    </div>
+    <button
+      class="btn-toggle"
+      (click)="onToggle()"
+      [title]="isCollapsed ? 'Expandir' : 'Colapsar'"
+    >
+      <span class="material-icons">{{
+        isCollapsed ? "chevron_right" : "chevron_left"
+      }}</span>
+    </button>
+  </div>
+
+  <nav aria-label="Menú de administración">
+    <div class="nav-section">
+      <span class="section-title" *ngIf="!isCollapsed">Navegación</span>
+      <a
+        routerLink="/admin/dashboard"
+        routerLinkActive="active"
+        [title]="isCollapsed ? 'Dashboard' : ''"
+      >
+        <span class="material-icons">dashboard</span>
+        <span class="nav-text" *ngIf="!isCollapsed">Dashboard</span>
+      </a>
+      <a
+        routerLink="/home"
+        routerLinkActive="active"
+        [title]="isCollapsed ? 'Inicio' : ''"
+      >
+        <span class="material-icons">home</span>
+        <span class="nav-text" *ngIf="!isCollapsed">Inicio</span>
+      </a>
     </div>
 
-    <nav>
-        <a routerLink="/admin/dashboard" routerLinkActive="active">
-            <i class="fas fa-chart-line"></i> Dashboard
-        </a>
-        <a routerLink="/login" routerLinkActive="active">
-            <i class="fas fa-sign-in-alt"></i> Inicio Sesión
-        </a>
-        <a routerLink="/admin/registro-sesion" routerLinkActive="active" *ngIf="authService.isAdmin()">
-            <i class="fas fa-user-plus"></i> Registro
-        </a>
-        <a routerLink="/home" routerLinkActive="active">
-            <i class="fas fa-home"></i> Home
-        </a>
-        <a routerLink="/admin/gestion-roles" routerLinkActive="active" *ngIf="authService.isAdmin()">
-            <i class="fas fa-user-tag"></i> Gestión Roles
-        </a>
-        <a routerLink="/admin/gestion-usuarios" routerLinkActive="active" *ngIf="authService.isAdmin()">
-            <i class="fas fa-users-cog"></i> Gestión Usuarios
-        </a>
-        <a routerLink="/admin/usuarios" routerLinkActive="active" *ngIf="authService.isAdmin()">
-            <i class="fas fa-list"></i> Usuarios
-        </a>
-        <a routerLink="/admin/proyectos" routerLinkActive="active">
-            <i class="fas fa-project-diagram"></i> Proyectos
-        </a>
-        <a routerLink="/admin/subir-proyecto" routerLinkActive="active"
-            *ngIf="authService.isAdmin() || authService.isGestor()">
-            <i class="fas fa-upload"></i> Subir Proyecto
-        </a>
-    </nav>
-
-    <div class="spacer"></div>
-
-    <div class="user-info" *ngIf="authService.currentUser$ | async as user">
-        <div>{{ user.userName }}</div>
-        <div class="role-badge" *ngFor="let role of user.roles">{{ role }}</div>
-        <button (click)="logout()"
-            style="margin-top: 10px; width: 100%; border: none; background: #ff4d4d; color: white; padding: 5px; border-radius: 4px; cursor: pointer;">
-            Cerrar Sesión
-        </button>
+    <div class="nav-section">
+      <span class="section-title" *ngIf="!isCollapsed">Administración</span>
+      <a
+        routerLink="/admin/usuarios"
+        routerLinkActive="active"
+        *ngIf="authService.isAdmin()"
+        [title]="isCollapsed ? 'Usuarios' : ''"
+      >
+        <span class="material-icons">people</span>
+        <span class="nav-text" *ngIf="!isCollapsed">Usuarios</span>
+      </a>
+      <a
+        routerLink="/admin/registro-sesion"
+        routerLinkActive="active"
+        *ngIf="authService.isAdmin()"
+        [title]="isCollapsed ? 'Registro' : ''"
+      >
+        <span class="material-icons">person_add</span>
+        <span class="nav-text" *ngIf="!isCollapsed">Registro</span>
+      </a>
+      <a
+        routerLink="/admin/gestion-roles"
+        routerLinkActive="active"
+        *ngIf="authService.isAdmin()"
+        [title]="isCollapsed ? 'Gestión Roles' : ''"
+      >
+        <span class="material-icons">admin_panel_settings</span>
+        <span class="nav-text" *ngIf="!isCollapsed">Gestión Roles</span>
+      </a>
+      <a
+        routerLink="/admin/gestion-usuarios"
+        routerLinkActive="active"
+        *ngIf="authService.isAdmin()"
+        [title]="isCollapsed ? 'Gestión Autoría' : ''"
+      >
+        <span class="material-icons">edit_note</span>
+        <span class="nav-text" *ngIf="!isCollapsed">Gestión Autoría</span>
+      </a>
     </div>
+
+    <div class="nav-section">
+      <span class="section-title" *ngIf="!isCollapsed">Contenido</span>
+      <a
+        routerLink="/admin/proyectos"
+        routerLinkActive="active"
+        [title]="isCollapsed ? 'Proyectos' : ''"
+      >
+        <span class="material-icons">folder</span>
+        <span class="nav-text" *ngIf="!isCollapsed">Proyectos</span>
+      </a>
+      <a
+        routerLink="/admin/subir-proyecto"
+        routerLinkActive="active"
+        *ngIf="authService.isAdmin() || authService.isGestor()"
+        [title]="isCollapsed ? 'Subir Proyecto' : ''"
+      >
+        <span class="material-icons">cloud_upload</span>
+        <span class="nav-text" *ngIf="!isCollapsed">Subir Proyecto</span>
+      </a>
+      <a
+        routerLink="/admin/centers"
+        routerLinkActive="active"
+        *ngIf="authService.isAdmin()"
+        [title]="isCollapsed ? 'Centros' : ''"
+      >
+        <span class="material-icons">account_balance</span>
+        <span class="nav-text" *ngIf="!isCollapsed">Centros</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="user-footer" *ngIf="authService.currentUser$ | async as user">
+    <div class="user-info" [title]="isCollapsed ? user.userName : ''">
+      <div class="avatar">{{ user.userName.charAt(0) }}</div>
+      <div class="details" *ngIf="!isCollapsed">
+        <span class="username">{{ user.userName }}</span>
+        <small class="role" *ngFor="let role of user.roles">{{ role }}</small>
+      </div>
+    </div>
+    <button
+      class="btn-logout"
+      (click)="logout()"
+      [title]="isCollapsed ? 'Cerrar Sesión' : ''"
+    >
+      <span class="material-icons">logout</span>
+      <span class="nav-text" *ngIf="!isCollapsed">Cerrar Sesión</span>
+    </button>
+  </div>
 </div>

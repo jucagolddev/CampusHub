@@ -1,30 +1,63 @@
 <div class="dashboard-container">
-    <div class="header-section">
-        <h1>Dashboard Administrativo</h1>
-        <p>Bienvenido al panel de control de CampusHub.</p>
-    </div>
+  <div class="header-section">
+    <h1>Panel de Control</h1>
+    <p>Gestión centralizada de la plataforma CampusHub.</p>
+  </div>
 
-    <div class="stats-grid">
-        <div class="stat-card">
-            <i class="fas fa-users"></i>
-            <div class="info">
-                <h3>Usuarios</h3>
-                <p>Gestión de cuentas</p>
-            </div>
-        </div>
-        <div class="stat-card">
-            <i class="fas fa-project-diagram"></i>
-            <div class="info">
-                <h3>Proyectos</h3>
-                <p>Catálogo completo</p>
-            </div>
-        </div>
-        <div class="stat-card">
-            <i class="fas fa-university"></i>
-            <div class="info">
-                <h3>Centros</h3>
-                <p>Red educativa</p>
-            </div>
-        </div>
-    </div>
+  <div class="stats-grid">
+    <!-- Gestión de Usuarios -->
+    <a routerLink="/admin/usuarios" class="stat-card">
+      <i class="fas fa-users-cog"></i>
+      <div class="info">
+        <h3>Gestión de Usuarios</h3>
+        <p>
+          Administrar cuentas, perfiles y estados de acceso de todos los
+          usuarios.
+        </p>
+      </div>
+    </a>
+
+    <!-- Gestión de Proyectos -->
+    <a routerLink="/admin/proyectos" class="stat-card">
+      <i class="fas fa-project-diagram"></i>
+      <div class="info">
+        <h3>Catálogo de Proyectos</h3>
+        <p>
+          Supervisar y moderar todos los proyectos publicados en la plataforma.
+        </p>
+      </div>
+    </a>
+
+    <!-- Gestión de Centros -->
+    <a routerLink="/admin/centers" class="stat-card">
+      <i class="fas fa-university"></i>
+      <div class="info">
+        <h3>Red de Centros</h3>
+        <p>
+          Configurar y gestionar los centros educativos vinculados a CampusHub.
+        </p>
+      </div>
+    </a>
+
+    <!-- Gestión de Creaciones (Autoría) -->
+    <a routerLink="/admin/gestion-usuarios" class="stat-card">
+      <i class="fas fa-user-edit"></i>
+      <div class="info">
+        <h3>Gestión de Autoría</h3>
+        <p>
+          Vincular proyectos a usuarios y gestionar permisos de edición
+          específicos.
+        </p>
+      </div>
+    </a>
+
+    <!-- Gestión de Roles -->
+    <a routerLink="/admin/gestion-roles" class="stat-card">
+      <i class="fas fa-shield-alt"></i>
+      <div class="info">
+        <h3>Roles y Permisos</h3>
+        <p>Definir niveles de acceso y responsabilidades dentro del sistema.</p>
+      </div>
+    </a>
+  </div>
 </div>

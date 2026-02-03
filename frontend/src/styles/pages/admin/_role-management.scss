@@ -101,16 +101,45 @@
 
       .badges {
         display: flex;
-        gap: 0.5rem;
+        flex-wrap: wrap;
+        gap: 10px;
         
-        .badge {
-          background: white;
-          border: 1px solid $color-interactivo-principal;
-          color: $color-interactivo-principal;
-          padding: 0.25rem 0.75rem;
-          border-radius: 20px;
-          font-weight: 600;
-          font-size: 0.85rem;
+        .badge-container {
+            display: flex;
+            align-items: center;
+            background: #f1f2f6;
+            border-radius: 20px;
+            padding-right: 8px;
+            border: 1px solid #ddd;
+            
+            .badge {
+                margin-right: 5px;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                background: white;
+                border: none; // Reset border for inner badge
+                border-right: 1px solid #ddd;
+                color: $color-interactivo-principal;
+                padding: 0.25rem 0.75rem;
+                font-weight: 600;
+                font-size: 0.85rem;
+            }
+
+            .btn-remove-role {
+                background: none;
+                border: none;
+                color: #e74c3c;
+                cursor: pointer;
+                padding: 0 5px;
+                font-size: 0.9rem;
+                transition: color 0.2s;
+                display: flex;
+                align-items: center;
+
+                &:hover {
+                    color: #c0392b;
+                }
+            }
         }
         
         .text-muted {

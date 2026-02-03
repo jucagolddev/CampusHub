@@ -18,6 +18,7 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
   // Indica si el usuario ha iniciado sesión actualmente
   isLoggedIn = false;
+  isAdmin = false;
   userName: string | null = null;
   
   // Almacena la suscripción al servicio de autenticación para evitar fugas de memoria
@@ -38,6 +39,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.userSubscription = this.authService.currentUser$.subscribe(
       (user) => {
         this.userName = user ? user.userName : null;
+        this.isAdmin = this.authService.isAdmin();
       }
     );
   }

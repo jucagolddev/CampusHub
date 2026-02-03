@@ -80,7 +80,6 @@ export async function login(req: Request, res: Response) {
         message: "Login exitoso",
         token: user.tokken,
         user: {
-          id: user.id,
           userName: user.userName,
           email: user.email,
           roles: roles // Array de roles

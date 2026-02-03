@@ -1,31 +1,77 @@
 <header class="cabecera-principal">
-    <div class="contenedor-header contenedor-pagina">
-        <!-- 1. Sección del Logo: Enlaza siempre a la raíz de la aplicación -->
-        <a routerLink="/" class="logo">
-            <img src="assets/images/LogoV2.png" alt="Campus Hub Logo" class="icono-logo">
-            EUSA CAMPUS HUB
-        </a>
+  <div class="contenedor-header contenedor-pagina">
+    <!-- 1. Sección del Logo: Enlaza siempre a la raíz de la aplicación -->
+    <a routerLink="/" class="logo">
+      <img
+        src="assets/images/LogoV2.png"
+        alt="Campus Hub Logo"
+        class="icono-logo"
+      />
+      EUSA CAMPUS HUB
+    </a>
 
-        <!-- 2. Navegación Principal: Contiene los enlaces dinámicos según el estado del usuario -->
-        <nav class="nav-principal" aria-label="Navegación principal">
-            <ul>
-                <!-- Enlace de Inicio: Siempre visible -->
-                <li><a routerLink="/" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}"
-                        aria-current="page">Inicio</a>
-                </li>
-                <li><a routerLink="/projects" routerLinkActive="activo">Proyectos</a></li>
+    <!-- 2. Navegación Principal: Contiene los enlaces dinámicos según el estado del usuario -->
+    <nav class="nav-principal" aria-label="Navegación principal">
+      <ul>
+        <!-- Enlace de Inicio: Siempre visible -->
+        <li>
+          <a
+            routerLink="/"
+            routerLinkActive="activo"
+            [routerLinkActiveOptions]="{ exact: true }"
+            aria-current="page"
+            >Inicio</a
+          >
+        </li>
+        <li>
+          <a routerLink="/projects" routerLinkActive="activo">Proyectos</a>
+        </li>
 
-                <!-- Bloque para usuarios NO autenticados: Registro e Inicio de Sesión -->
-                <li><a routerLink="/login" routerLinkActive="activo" *ngIf="!isLoggedIn">Iniciar Sesión</a></li>
-                <li><a routerLink="/register" routerLinkActive="activo" *ngIf="!isLoggedIn">Registrarse</a></li>
+        <!-- Bloque para usuarios NO autenticados: Registro e Inicio de Sesión -->
+        <li>
+          <a routerLink="/login" routerLinkActive="activo" *ngIf="!isLoggedIn"
+            >Iniciar Sesión</a
+          >
+        </li>
 
-                <!-- Bloque para usuarios SÍ autenticados: Funcionalidades de carga y cierre de sesión -->
-                <li><a routerLink="/upload" routerLinkActive="activo" *ngIf="isLoggedIn">Subir Archivos</a></li>
-                <li *ngIf="isLoggedIn && userName" class="saludo-usuario" aria-live="polite">Hola, {{ userName }}</li>
-                <li><button (click)="logout()"
-                        style="cursor: pointer; background:none; border:none; color: inherit; font: inherit;"
-                        *ngIf="isLoggedIn" aria-label="Cerrar sesión actual">Cerrar Sesión</button></li>
-            </ul>
-        </nav>
-    </div>
+        <!-- Bloque para usuarios SÍ autenticados: Funcionalidades de carga y cierre de sesión -->
+        <li>
+          <a
+            routerLink="/admin/dashboard"
+            routerLinkActive="activo"
+            *ngIf="isLoggedIn && isAdmin"
+            >Dashboard</a
+          >
+        </li>
+        <li>
+          <a routerLink="/upload" routerLinkActive="activo" *ngIf="isLoggedIn"
+            >Subir Archivos</a
+          >
+        </li>
+        <li
+          *ngIf="isLoggedIn && userName"
+          class="saludo-usuario"
+          aria-live="polite"
+        >
+          Hola, {{ userName }}
+        </li>
+        <li>
+          <button
+            (click)="logout()"
+            style="
+              cursor: pointer;
+              background: none;
+              border: none;
+              color: inherit;
+              font: inherit;
+            "
+            *ngIf="isLoggedIn"
+            aria-label="Cerrar sesión actual"
+          >
+            Cerrar Sesión
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </header>

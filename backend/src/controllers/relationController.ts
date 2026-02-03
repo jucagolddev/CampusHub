@@ -70,9 +70,29 @@ export async function assignRolToUser(req: Request, res: Response) {
       tokken,
     ]);
     res.json({ message: "Rol asignado correctamente" });
+  } catch (err: any) {
+    console.error(err);
+    if (err.code === 'ER_DUP_ENTRY' || err.errno === 1062) {
+      return res.status(409).json({ error: "El usuario ya tiene asignado este rol" });
+    }
+    res.status(500).json({ error: "Error interno al asignar rol" });
+  }
+}
+
+/**
+ * Desvincula un ROL de un usuario.
+ */
+export async function removeRolFromUser(req: Request, res: Response) {
+  try {
+    const { rolId, tokken } = req.body;
+    await db.execute(
+      "DELETE FROM ROL_USUARIO WHERE rolId = ? AND tokken = ?",
+      [rolId, tokken]
+    );
+    res.json({ message: "Rol desvinculado correctamente" });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Error interno al asignar rol" });
+    res.status(500).json({ error: "Error interno al desvincular rol" });
   }
 }
 

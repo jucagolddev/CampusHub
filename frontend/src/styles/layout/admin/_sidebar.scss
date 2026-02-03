@@ -1,30 +1,137 @@
 @use "../../base/variables" as *;
+@use "../../base/mixins" as *;
 
-/* Admin Sidebar Styles */
+/* Estilos del Sidebar Admin - Rediseño Premium Colapsable */
 .admin-sidebar {
-  width: 250px;
-  background-color: $color-fondo-tarjeta;
+  width: 260px;
+  background-color: white;
   height: 100vh;
   position: fixed;
   left: 0;
   top: 0;
-  border-right: 1px solid rgba(0,0,0,0.05);
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
   padding: $espaciado-l;
-  box-shadow: 2px 0 10px rgba(0,0,0,0.02);
+  box-shadow: 10px 0 30px rgba(0, 0, 0, 0.02);
+  z-index: 1000;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
-  .logo-area {
-    padding-bottom: $espaciado-xl;
-    text-align: center;
-    border-bottom: 1px solid #f0f0f0;
-    margin-bottom: $espaciado-l;
+  &.collapsed {
+    width: 80px;
+    padding: $espaciado-l $espaciado-s;
 
-    h2 {
-      color: $color-interactivo-principal;
+    .sidebar-header {
+      justify-content: center;
+      margin-bottom: $espaciado-xl;
+      
+      .mini .avatar.mini {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+        background: $color-gradiente-principal;
+        color: white;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+      }
+    }
+
+    nav {
+      align-items: center;
+      
+      a {
+        width: 48px;
+        height: 48px;
+        padding: 0;
+        justify-content: center;
+        border-radius: 12px;
+        margin-bottom: $espaciado-s;
+        background: transparent;
+        box-shadow: none;
+
+        .material-icons {
+          margin: 0;
+          font-size: 1.4rem;
+        }
+
+        &:hover, &.active {
+          background: rgba($color-interactivo-principal, 0.08);
+          transform: scale(1.05);
+          box-shadow: 0 4px 12px rgba($color-interactivo-principal, 0.1);
+        }
+      }
+    }
+
+    .user-footer {
+      align-items: center;
+      
+      .user-info {
+        padding: 0;
+        margin-bottom: $espaciado-m;
+        justify-content: center;
+      }
+
+      .btn-logout {
+        width: 48px;
+        height: 48px;
+        padding: 0;
+        border-radius: 12px;
+        justify-content: center;
+        
+        .material-icons { margin: 0; }
+      }
+    }
+  }
+
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $espaciado-xl;
+    min-height: 40px;
+
+    .logo-area h2 {
+      color: $color-texto-principal;
       font-weight: 800;
-      letter-spacing: -1px;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
+      margin: 0;
+      letter-spacing: -0.5px;
+      
+      .tag {
+        font-size: 0.65rem;
+        background: rgba($color-interactivo-principal, 0.1);
+        color: $color-interactivo-principal;
+        padding: 2px 6px;
+        border-radius: 4px;
+        margin-left: 5px;
+        text-transform: uppercase;
+      }
+    }
+
+    .btn-toggle {
+      background: white;
+      border: 1px solid rgba(0,0,0,0.05);
+      color: $color-texto-secundario;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+
+      .material-icons { font-size: 1.2rem; }
+
+      &:hover {
+        background: $color-interactivo-principal;
+        color: white;
+        border-color: $color-interactivo-principal;
+      }
     }
   }
 
@@ -32,104 +139,143 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 4px;
+
+    &::-webkit-scrollbar { width: 4px; }
+    &::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.05); border-radius: 10px; }
+
+    .nav-section {
+      margin-bottom: $espaciado-l;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .section-title {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      color: $color-texto-secundario;
+      font-weight: 700;
+      margin-bottom: $espaciado-s;
+      opacity: 0.4;
+      letter-spacing: 0.8px;
+      padding-left: 8px;
+    }
 
     a {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      padding: 0.8rem 1rem;
+      gap: 12px;
+      padding: 10px 14px;
       color: $color-texto-secundario;
       text-decoration: none;
-      border-radius: 8px;
+      border-radius: 12px;
       transition: all 0.2s ease;
       font-weight: 500;
+      font-size: 0.92rem;
+      margin-bottom: 4px;
 
-      i {
-        font-size: 1.1rem;
-        width: 20px;
-        text-align: center;
+      .material-icons {
+        font-size: 1.25rem;
+        color: $color-texto-secundario;
+        opacity: 0.7;
+        transition: all 0.2s ease;
       }
 
       &:hover {
-        background-color: rgba($color-interactivo-principal, 0.05);
+        background: rgba($color-interactivo-principal, 0.04);
         color: $color-interactivo-principal;
-        transform: translateX(4px);
+        padding-left: 18px;
+
+        .material-icons {
+          color: $color-interactivo-principal;
+          opacity: 1;
+        }
       }
 
-      &.active {
-        background-color: $color-interactivo-principal;
+      &.router-link-active, &.active {
+        background: $color-gradiente-principal;
         color: white;
-        box-shadow: 0 4px 10px rgba($color-interactivo-principal, 0.3);
-      }
-    }
+        box-shadow: 0 8px 16px rgba($color-interactivo-principal, 0.15);
+        font-weight: 600;
 
-    .section-title {
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        color: #aaa;
-        font-weight: 700;
-        margin-top: 1.5rem;
-        margin-bottom: 0.5rem;
-        padding-left: 0.5rem;
+        .material-icons { color: white; opacity: 1; }
+      }
     }
   }
 
   .user-footer {
     padding-top: $espaciado-l;
-    border-top: 1px solid #f0f0f0;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
     
     .user-info {
       display: flex;
       align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 1rem;
+      gap: 12px;
+      margin-bottom: $espaciado-l;
+      padding: 4px;
       
       .avatar {
-        width: 36px;
-        height: 36px;
+        width: 40px;
+        height: 40px;
         background: $color-gradiente-principal;
-        border-radius: 50%;
+        border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
         color: white;
-        font-weight: bold;
+        font-weight: 700;
+        font-size: 1.2rem;
+        box-shadow: 0 4px 10px rgba($color-interactivo-principal, 0.2);
+        flex-shrink: 0;
       }
       
       .details {
-        span {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: $color-texto-principal;
+        overflow: hidden;
+        .username {
+          display: block;
+          font-size: 0.9rem;
+          font-weight: 700;
+          color: $color-texto-principal;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
-        small {
-            font-size: 0.75rem;
-            color: $color-texto-secundario;
+        .role {
+          display: block;
+          font-size: 0.7rem;
+          color: $color-texto-secundario;
+          opacity: 0.6;
+          text-transform: capitalize;
         }
       }
     }
 
     .btn-logout {
       width: 100%;
-      padding: 0.6rem;
-      border: 1px solid #eee;
+      padding: 10px;
+      border: 1px solid rgba($color-alerta-error, 0.1);
       background: white;
       color: $color-alerta-error;
-      border-radius: 6px;
+      border-radius: 12px;
       cursor: pointer;
-      font-size: 0.9rem;
-      transition: all 0.2s;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 8px;
+
+      .material-icons { font-size: 1.2rem; }
 
       &:hover {
         background: $color-alerta-error;
         color: white;
-        border-color: $color-alerta-error;
+        box-shadow: 0 4px 12px rgba($color-alerta-error, 0.2);
       }
     }
   }

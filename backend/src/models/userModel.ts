@@ -22,15 +22,16 @@ export async function createUser({ tokken, userName, passwrd, email }: User) {
 }
 
 /**
- * Busca un usuario por su nombre de usuario único.
+ * Busca un usuario por su nombre de usuario o email único.
  * Utilizado principalmente durante el login.
  */
 export async function findUserByUsername(
-  userName: string
+  identifier: string
 ): Promise<User | undefined> {
-  const [rows] = await db.execute("SELECT * FROM USUARIO WHERE userName = ?", [
-    userName,
-  ]);
+  const [rows] = await db.execute(
+    "SELECT * FROM USUARIO WHERE userName = ? OR email = ?",
+    [identifier, identifier]
+  );
   // Casteamos el resultado a la interfaz User y devolvemos la primera fila encontrada
   return (rows as User[])[0];
 }
@@ -65,7 +66,7 @@ export async function getRolesByUserToken(tokken: string): Promise<string[]> {
  * Obtiene todos los usuarios junto con sus roles.
  */
 export async function getAllUsersWithRoles(): Promise<any[]> {
-  const [users]: any = await db.execute("SELECT id, userName, email, tokken, passwrd FROM USUARIO");
+  const [users]: any = await db.execute("SELECT userName, email, tokken, passwrd FROM USUARIO");
   
   const usersWithRoles = await Promise.all(users.map(async (u: any) => {
     const roles = await getRolesByUserToken(u.tokken);

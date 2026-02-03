@@ -103,3 +103,20 @@
     border-radius: 8px;
   }
 }
+
+// Experiencia para usuarios sin proyectos (no administradores)
+.no-projects-experience {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 80px); // Ajustado para centrar verticalmente restando el header aprox.
+  text-align: center;
+  background-color: $color-fondo-base;
+
+  p {
+    font-size: 1.5rem;
+    font-weight: $peso-semi-negrita;
+    color: $color-texto-secundario;
+    opacity: 0.8;
+  }
+}

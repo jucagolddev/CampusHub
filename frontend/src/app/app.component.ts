@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { HeaderComponent } from './layout/main-layout/header/header.component';
-import { FooterComponent } from './layout/main-layout/footer/footer.component';
+import { NotificationToastComponent } from './shared/components/notification-toast/notification-toast.component';
 
 /**
  * Componente raíz (AppComponent) convertido a Standalone.
@@ -11,7 +10,7 @@ import { FooterComponent } from './layout/main-layout/footer/footer.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterModule, HeaderComponent, FooterComponent],
+  imports: [CommonModule, RouterModule, NotificationToastComponent],
   templateUrl: './app.component.html',
 })
 export class AppComponent {
