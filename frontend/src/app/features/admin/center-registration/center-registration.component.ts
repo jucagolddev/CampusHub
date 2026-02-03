@@ -4,6 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { MasterDataService } from '../../../core/services/master-data.service';
 import { Router } from '@angular/router';
 
+/**
+ * ==========================================
+ * COMPONENTE REGISTRO DE CENTROS
+ * ==========================================
+ * Permite a los administradores dar de alta nuevos centros educativos
+ * en el sistema, definiendo su nombre y sufijo de email corporativo.
+ */
 @Component({
   selector: 'app-center-registration',
   standalone: true,
@@ -14,7 +21,7 @@ export class CenterRegistrationComponent {
   nombreCentro: string = '';
   sufijoEmail: string = '';
   
-  // Feedback visual
+  // Control de feedback visual para el usuario
   mensaje: string = '';
   tipoMensaje: 'exito' | 'error' = 'exito';
 
@@ -23,6 +30,9 @@ export class CenterRegistrationComponent {
     private router: Router
   ) {}
 
+  /**
+   * Procesa el formulario de alta de nuevo centro.
+   */
   onSubmit(): void {
     if (!this.nombreCentro.trim()) {
       this.mostrarMensaje('El nombre del centro es obligatorio', 'error');
@@ -46,6 +56,9 @@ export class CenterRegistrationComponent {
     });
   }
 
+  /**
+   * Muestra notificaciones temporales en la interfaz.
+   */
   mostrarMensaje(texto: string, tipo: 'exito' | 'error') {
     this.mensaje = texto;
     this.tipoMensaje = tipo;

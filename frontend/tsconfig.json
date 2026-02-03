@@ -1,33 +1,40 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
+/* 
+  ==========================================
+  CampusHub: Configuración de TypeScript
+  ==========================================
+  Este archivo define cómo el compilador de TypeScript procesa nuestro código.
+  Aseguramos un tipado estricto y compatibilidad con estándares modernos (ES2022).
+  Para más info ver: https://angular.io/config/tsconfig.
+*/
 {
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "strict": true, // Habilitamos modo estricto para minimizar errores en tiempo de ejecución
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "sourceMap": true,
+    "sourceMap": true, // Genera mapas para poder depurar el TS original en el navegador
     "declaration": false,
     "downlevelIteration": true,
-    "experimentalDecorators": true,
+    "experimentalDecorators": true, // Necesario para los decoradores de Angular (@Component, etc.)
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "ES2022",
+    "target": "ES2022", // Nuestro objetivo de compilación (JavaScript moderno)
     "module": "ES2022",
     "useDefineForClassFields": false,
     "lib": [
       "ES2022",
-      "dom"
+      "dom" // Incluye tipado para el DOM (Document Object Model)
     ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": true // Verificación estricta en las plantillas HTML para detectar errores antes
   }
 }

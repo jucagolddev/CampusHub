@@ -6,6 +6,13 @@ import { UserService } from '../../../core/services/user.service';
 import { ProjectService } from '../../../core/services/project.service';
 import { NotificationService } from '../../../core/services/notification.service';
 
+/**
+ * ==========================================
+ * COMPONENTE ASIGNACIÓN PROYECTOS-USUARIOS
+ * ==========================================
+ * Permite gestionar las relaciones N:M entre usuarios y proyectos.
+ * El administrador puede vincular o desvincular proyectos de un usuario específico.
+ */
 @Component({
   selector: 'app-user-project-management',
   standalone: true,
@@ -28,11 +35,17 @@ export class UserProjectManagementComponent implements OnInit {
     this.loadInitialData();
   }
 
+  /**
+   * Carga los catálogos base de usuarios y proyectos.
+   */
   loadInitialData() {
     this.userService.getAllUsers().subscribe(u => this.users = u);
     this.projectService.getProjects().subscribe(p => this.projects = p);
   }
 
+  /**
+   * Al seleccionar un usuario, cargamos sus proyectos actuales.
+   */
   onUserSelect() {
     if (this.selectedUser) {
       this.userService.getUserProjects(this.selectedUser.tokken)
@@ -42,10 +55,16 @@ export class UserProjectManagementComponent implements OnInit {
     }
   }
 
+  /**
+   * Verifica si un proyecto ya está asignado al usuario activo.
+   */
   isAssigned(projectId: number): boolean {
     return this.userProjects.some(p => p.id === projectId);
   }
 
+  /**
+   * Gestiona el cambio de estado (checkbox) para asignar/desasignar.
+   */
   toggleAssignment(project: any, event: any) {
     const isChecked = event.target.checked;
 

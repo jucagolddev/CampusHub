@@ -5,13 +5,11 @@ import { Project } from '../../../core/models/project';
 import { ProjectService } from '../../../core/services/project.service';
 
 /**
- * COMPONENTE DE DETALLE DE PROYECTO (ProjectDetailComponent)
- * -------------------------------------------------------------------------
- * Ofrece una vista pormenorizada de un proyecto específico, mostrando su
- * descripción completa, autores, tecnologías y enlaces de ejecución.
- * 
- * Extrae el identificador único (ID) de la URL activa y consulta al servidor
- * para obtener la información más reciente vinculada a ese recurso.
+ * ==========================================
+ * COMPONENTE DE DETALLE DE PROYECTO
+ * ==========================================
+ * Muestra la información completa de un proyecto específico identificado por su ID.
+ * Recupera los datos del servidor y renderiza la vista detallada.
  */
 @Component({
   selector: 'app-project-detail',
@@ -28,6 +26,9 @@ export class ProjectDetailComponent implements OnInit {
     private projectService: ProjectService
   ) {}
 
+  /**
+   * Al iniciar, capturamos el ID de la URL y cargamos el proyecto.
+   */
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     if (id) {
@@ -35,6 +36,9 @@ export class ProjectDetailComponent implements OnInit {
     }
   }
 
+  /**
+   * Realiza la petición al servicio para obtener los detalles del proyecto.
+   */
   private loadProject(id: number): void {
     this.projectService.getProjectById(id).subscribe({
       next: (p) => {
@@ -53,7 +57,7 @@ export class ProjectDetailComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        console.error('Error al cargar detalle del proyecto:', err);
+        console.error('Error al obtener detalles del proyecto:', err);
         this.isLoading = false;
       }
     });

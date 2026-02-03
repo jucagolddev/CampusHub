@@ -5,8 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 
 /**
+ * ==========================================
  * COMPONENTE DE LOGIN
- * Gestiona el formulario y comunica las credenciales al AuthService.
+ * ==========================================
+ * Gestiona el formulario de acceso y comunica las credenciales al AuthService.
+ * Realiza la validación básica de campos antes de enviar la petición.
  */
 @Component({
   selector: 'app-login',
@@ -15,11 +18,9 @@ import { AuthService } from '../../../core/services/auth.service';
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
-  // Variables vinculadas al formulario
-  // NOTA: El backend espera 'userName', pero el HTML original usaba 'email' o 'gmail'.
-  // Al migrar, debemos asegurar que coincidan. Usaremos 'userName' como campo genérico (puede ser usuario o email si el backend lo soporta).
-  // Según backend actual: userController busca por 'userName'.
-  userName = ''; // Cambiado de email a userName para coincidir con backend
+  // Credenciales del usuario
+  // Utilizamos 'userName' para coincidir con la estructura del backend
+  userName = '';
   password = '';
   
   errorMessage: string | null = null;

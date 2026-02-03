@@ -14,38 +14,54 @@ import { UserProjectManagementComponent } from './features/admin/users/user-proj
 import { CenterRegistrationComponent } from './features/admin/center-registration/center-registration.component';
 import { authGuard } from './core/guards/auth.guard';
 
+/**
+ * ==========================================
+ * SISTEMA DE ENRUTAMIENTO CENTRAL
+ * ==========================================
+ * Aquí definimos todas las rutas de navegación de la aplicación.
+ * Separamos la aplicación en dos grandes bloques: Parte Pública y Administración.
+ */
 export const routes: Routes = [
-  // Layout Principal (Público) con Header y Footer
+  // ==========================================
+  // BLOQUE PÚBLICO (Layout Principal)
+  // ==========================================
+  // Usa MainLayoutComponent, que incluye Header y Footer estándar.
   {
     path: '',
     component: MainLayoutComponent,
     children: [
-      { path: '', component: HomeComponent },
-      { path: 'login', component: LoginComponent },
-      // Registro público eliminado
-      { path: 'projects', component: ProjectListComponent },
-      { path: 'projects/:id', component: ProjectDetailComponent },
-      { path: 'upload', component: ProjectUploadComponent }
+      { path: '', component: HomeComponent }, // Página de inicio (Landing)
+      { path: 'login', component: LoginComponent }, // Acceso de usuarios
+      // Registro público desactivado intencionalmente
+      { path: 'projects', component: ProjectListComponent }, // Catálogo de proyectos públicos
+      { path: 'projects/:id', component: ProjectDetailComponent }, // Detalles de un proyecto específico
+      { path: 'upload', component: ProjectUploadComponent } // Subida de proyectos (provisionalmente aquí)
     ]
   },
 
-  // Rutas de Administración (Sidebar Only)
+  // ==========================================
+  // BLOQUE PRIVADO (Panel de Administración)
+  // ==========================================
+  // Usa AdminLayoutComponent (Sidebar lateral). Protegido por 'authGuard'.
   {
     path: 'admin',
     component: AdminLayoutComponent,
-    canActivate: [authGuard],
+    canActivate: [authGuard], // Guard: Verifica que el usuario haya iniciado sesión
     children: [
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'usuarios', component: UserListComponent },
-      { path: 'registro-sesion', component: UserRegisterComponent },
-      { path: 'gestion-roles', component: RoleManagementComponent },
-      { path: 'gestion-usuarios', component: UserProjectManagementComponent },
-      { path: 'centers', component: CenterRegistrationComponent },
-      { path: 'proyectos', component: ProjectListComponent },
-      { path: 'subir-proyecto', component: ProjectUploadComponent }
+      { path: 'dashboard', component: DashboardComponent }, // Panel de control general
+      { path: 'usuarios', component: UserListComponent }, // Gestión de usuarios (listar/editar)
+      { path: 'registro-sesion', component: UserRegisterComponent }, // Registrar nuevos usuarios
+      { path: 'gestion-roles', component: RoleManagementComponent }, // Asignar roles y permisos
+      { path: 'gestion-usuarios', component: UserProjectManagementComponent }, // Asignar proyectos a usuarios
+      { path: 'centers', component: CenterRegistrationComponent }, // Gestión de centros educativos
+      { path: 'proyectos', component: ProjectListComponent }, // Vista administrativa de proyectos
+      { path: 'subir-proyecto', component: ProjectUploadComponent } // Formulario de carga de proyectos
     ]
   },
 
-  // Redirección por defecto
+  // ==========================================
+  // REDIRECCIONES
+  // ==========================================
+  // Cualquier ruta no reconocida redirige a la home.
   { path: '**', redirectTo: '' },
 ];

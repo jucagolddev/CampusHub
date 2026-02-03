@@ -5,8 +5,11 @@ import { Router } from '@angular/router';
 import { ProjectService, ProjectData } from '../../../core/services/project.service';
 
 /**
- * Componente de Subida de Proyectos (ProjectUpload)
- * Permite a los usuarios autenticados cargar la información, imágenes y enlaces de sus proyectos.
+ * ==========================================
+ * COMPONENTE DE SUBIDA DE PROYECTOS
+ * ==========================================
+ * Formulario que permite a los usuarios registrados publicar nuevos proyectos.
+ * Valida la información básica y la envía al backend.
  */
 @Component({
   selector: 'app-project-upload',
@@ -15,49 +18,50 @@ import { ProjectService, ProjectData } from '../../../core/services/project.serv
   templateUrl: './project-upload.component.html',
 })
 export class ProjectUploadComponent {
-  // Datos del formulario vinculados con ngModel
+  // Modelo de datos para el formulario
   nombreProyecto = '';
   descripcionProyecto = '';
   urlProyecto = '';
-  linkGithub = ''; // Se mapeará a urlGitHub
-  imgPortada = ''; // URL de la imagen
-  nombreCentro = ''; // (Opcional visual, no backend todavía)
+  linkGithub = ''; // Mapeo a urlGitHub
+  imgPortada = ''; 
+  nombreCentro = ''; 
 
   isLoading = false;
 
   constructor(private projectService: ProjectService, private router: Router) {}
 
+  /**
+   * Envío del formulario de creación de proyecto.
+   */
   onSubmit(): void {
     if (this.isLoading) return;
 
-    // Validación básica
+    // Validación de campos obligatorios
     if (!this.nombreProyecto || !this.linkGithub) {
-        alert('Por favor completa al menos el nombre y el link a GitHub.');
+        alert('Por favor complete los campos obligatorios (Nombre y GitHub).');
         return;
     }
 
     this.isLoading = true;
 
+    // Construcción del objeto de datos
     const newProject: ProjectData = {
         nombreProyecto: this.nombreProyecto,
         descripcionProyecto: this.descripcionProyecto || 'Sin descripción',
         urlProyecto: this.urlProyecto,
         urlGitHub: this.linkGithub,
-        imgPortada: this.imgPortada || 'https://via.placeholder.com/300' // Placeholder si no hay imagen
+        imgPortada: this.imgPortada || 'https://via.placeholder.com/300'
     };
-
-    console.log('Enviando proyecto:', newProject);
 
     this.projectService.createProject(newProject).subscribe({
         next: (res) => {
-            console.log('Proyecto creado:', res);
-            alert('¡Proyecto subido con éxito!');
+            alert('Proyecto publicado correctamente.');
             this.isLoading = false;
-            this.router.navigate(['/projects']); // Redirigir al listado
+            this.router.navigate(['/projects']);
         },
         error: (err) => {
             console.error('Error al subir proyecto:', err);
-            alert('Error al subir proyecto: ' + (err.error?.error || 'Error desconocido'));
+            alert('Error al publicar el proyecto. Inténtelo de nuevo.');
             this.isLoading = false;
         }
     });

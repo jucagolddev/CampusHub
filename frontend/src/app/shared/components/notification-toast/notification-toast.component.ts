@@ -3,6 +3,14 @@ import { CommonModule } from '@angular/common';
 import { NotificationService, Notification } from '../../../core/services/notification.service';
 import { Subscription } from 'rxjs';
 
+/**
+ * ==========================================
+ * COMPONENTE NOTIFICACIÓN TOAST
+ * ==========================================
+ * Sistema de alertas flotantes no intrusivas.
+ * Muestran feedback temporal (éxito, error, info) en la esquina superior.
+ * Se suscribe al NotificationService para recibir los mensajes globalmente.
+ */
 @Component({
   selector: 'app-notification-toast',
   standalone: true,

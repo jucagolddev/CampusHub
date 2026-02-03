@@ -4,6 +4,13 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { UserService } from '../../../core/services/user.service';
 import { NotificationService } from '../../../core/services/notification.service';
 
+/**
+ * ==========================================
+ * COMPONENTE REGISTRO DE USUARIOS (ADMIN)
+ * ==========================================
+ * Permite a los administradores crear manualmente nuevos usuarios en la plataforma.
+ * Utiliza Formularios Reactivos para validación robusta.
+ */
 @Component({
   selector: 'app-admin-register',
   standalone: true,
@@ -25,6 +32,9 @@ export class UserRegisterComponent {
     });
   }
 
+  /**
+   * Envía la solicitud de registro al servicio de usuarios.
+   */
   onSubmit() {
     if (this.registerForm.valid) {
       this.userService.createUser(this.registerForm.value).subscribe({

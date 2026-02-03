@@ -7,6 +7,13 @@ export interface Notification {
   duration?: number;
 }
 
+/**
+ * ==========================================
+ * SERVICIO DE NOTIFICACIONES
+ * ==========================================
+ * Gestiona la comunicación de eventos globales a nivel de interfaz.
+ * Permite emitir mensajes de éxito, error o advertencia desde cualquier componente.
+ */
 @Injectable({
   providedIn: 'root'
 })

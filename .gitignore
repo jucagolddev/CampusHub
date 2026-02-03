@@ -1,12 +1,22 @@
-# Common ignores
+# ==========================================
+# CampusHub: Archivos Ignorados Globalmente
+# ==========================================
+# Este archivo define las exclusiones comunes para todo el repositorio.
+# Mantenemos limpia nuestra estructura de control de versiones.
+
+# Dependencias del proyecto (se instalan vía npm)
 node_modules/
+
+# Configuraciones de entorno de desarrollo (IDE)
 .vscode/
 .idea/
+
+# Archivos del sistema operativo y logs
 .DS_Store
 Thumbs.db
 *.log
 
-# Build artifacts
+# Artefactos de compilación y distribución
 dist/
 .angular/
 out-tsc/

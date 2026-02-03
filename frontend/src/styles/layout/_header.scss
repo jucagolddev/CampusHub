@@ -6,22 +6,22 @@
 // Contenedor principal que se mantiene en la parte superior del visor.
 // Utiliza un diseño de fondo puro y un borde estructural para separar el contenido.
 .cabecera-principal {
-  background-color: $color-fondo-puro; 
+  background-color: $color-fondo-puro;
   border-bottom: 2px solid $color-borde-estructura; // Separador visual inferior
-  padding: 1rem 0; 
+  padding: 1rem 0;
 
   // Contenedor interno: Alineación de elementos (Logo vs Menú)
   .contenedor-header {
-    display: flex; 
+    display: flex;
     justify-content: space-between; // Posiciona el logo a la izquierda y el menú a la derecha
-    align-items: center;            // Centrado vertical perfecto
-    flex-wrap: wrap;                // Adaptabilidad para dispositivos pequeños
+    align-items: center; // Centrado vertical perfecto
+    flex-wrap: wrap; // Adaptabilidad para dispositivos pequeños
 
     // Responsividad móvil: Apilamiento vertical para maximizar el espacio táctil
     @media (max-width: 768px) {
-      flex-direction: column; 
-      gap: 1rem; 
-      text-align: center; 
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
     }
   }
 }
@@ -29,81 +29,100 @@
 // Branding: Identidad visual del sitio
 // Estilizado del logo que combina una imagen (icono) con texto de marca.
 .logo {
-  font-family: $fuente-principal; 
-  font-weight: $peso-negrita;    // Énfasis de marca
-  font-size: 1.5rem; 
-  color: $color-texto-titulo-h1; 
-  text-decoration: none; 
-  display: flex; 
-  align-items: center; 
-  gap: 0.5rem;                   // Espacio entre isotipo y logotipo
+  font-family: $fuente-principal;
+  font-weight: $peso-negrita; // Énfasis de marca
+  font-size: 1.5rem;
+  color: $color-texto-titulo-h1;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; // Espacio entre isotipo y logotipo
 
   // Ajuste dimensional del icono de marca
   .icono-logo {
-    display: inline-block; 
-    height: 40px; 
-    width: auto; 
+    display: inline-block;
+    height: 50px; // Adjusted for LogoV2
+    width: auto;
   }
 
   // Interacción suave: Retroalimentación visual al cursor
   &:hover {
-    text-decoration: none; 
-    opacity: 0.9; 
+    text-decoration: none;
+    opacity: 0.9;
   }
 }
 
 // Navegación: Menú de acceso rápido a las funcionalidades
 .nav-principal {
-
   ul {
-    list-style: none; 
-    margin: 0; 
-    padding: 0; 
-    display: flex; 
-    gap: 2rem; 
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 2rem;
+    align-items: center; // Asegurar alineación vertical con el botón
 
     // Ajuste móvil: Menú vertical para facilitar la interacción en smartphones
     @media (max-width: 768px) {
-      gap: 1rem; 
-      flex-direction: column; 
+      gap: 1rem;
+      flex-direction: column;
     }
   }
 
   // Enlaces interactivos con subrayado animado
-  a {
-    color: $color-texto-subtitulo; 
-    font-weight: $peso-semi-negrita; 
-    text-decoration: none; 
-    padding: 0.5rem 0; 
+  a,
+  .btn-logout {
+    color: $color-texto-subtitulo;
+    font-weight: $peso-semi-negrita;
+    text-decoration: none;
+    padding: 0.5rem 0;
     position: relative; // Contexto para el marcador inferior
-    transition: color 0.3s ease; 
+    transition: color 0.3s ease;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
 
     // Marcador visual (subrayado) oculto por defecto
     &::after {
-      content: ""; 
-      position: absolute; 
-      width: 0; 
-      height: 2px; 
-      bottom: 0; 
-      left: 0; 
-      background-color: $color-interactivo-principal; 
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: $color-interactivo-principal;
       transition: width 0.3s ease; // Animación de expansión
     }
 
     // Efecto de foco: Expansión de la línea e iluminación del texto
     &:hover {
-      color: $color-interactivo-principal; 
-      text-decoration: none; 
+      color: $color-interactivo-principal;
+      text-decoration: none;
+      outline: none;
 
       &::after {
-        width: 100%; 
+        width: 100%;
       }
     }
 
     // Resaltado de página actual: Mantiene el color corporativo y aumenta grosor
     &.activo {
-      color: $color-interactivo-principal; 
-      font-weight: $peso-negrita; 
+      color: $color-interactivo-principal;
+      font-weight: $peso-negrita;
+    }
+  }
+
+  // Estilos específicos para el botón de cerrar sesión (sobrescribe hover)
+  .btn-logout {
+    &:hover {
+      color: $color-alerta-error;
+
+      &::after {
+        background-color: $color-alerta-error;
+        width: 100%;
+      }
     }
   }
 }

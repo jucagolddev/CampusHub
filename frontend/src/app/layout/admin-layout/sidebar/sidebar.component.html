@@ -1,10 +1,15 @@
 <div class="admin-sidebar" [ngClass]="{ collapsed: isCollapsed }">
   <div class="sidebar-header">
     <div class="logo-area" *ngIf="!isCollapsed">
+      <img src="assets/images/LogoV2.png" alt="Logo" class="sidebar-logo" />
       <h2>CampusHub <span class="tag">Admin</span></h2>
     </div>
     <div class="logo-area mini" *ngIf="isCollapsed">
-      <div class="avatar mini">C</div>
+      <img
+        src="assets/images/LogoV2.png"
+        alt="Logo"
+        class="sidebar-logo mini"
+      />
     </div>
     <button
       class="btn-toggle"

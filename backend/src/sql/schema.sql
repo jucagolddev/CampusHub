@@ -1,3 +1,9 @@
+-- ==========================================================
+-- CAMPUSHUB - ESQUEMA DE BASE DE DATOS
+-- ==========================================================
+-- Definición de tablas y relaciones para el sistema MySQL.
+-- Incluye entidades principales y enlaces N:M.
+
 -- ============================
 -- ENTIDADES BÁSICAS
 -- ============================

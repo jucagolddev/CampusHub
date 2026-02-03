@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 /**
- * El cierre de mi página (Footer).
- * Aquí pongo los típicos enlaces de contacto y el copyright para que la web
- * quede bien rematada abajo.
+ * ==========================================
+ * COMPONENTE FOOTER (Pie de Página)
+ * ==========================================
+ * Sección inferior visible en todas las páginas públicas.
+ * Contiene información legal, enlaces de contacto y copyright.
  */
 @Component({
   selector: 'app-footer',

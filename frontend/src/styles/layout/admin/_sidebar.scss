@@ -25,17 +25,10 @@
       justify-content: center;
       margin-bottom: $espaciado-xl;
       
-      .mini .avatar.mini {
+      .mini .sidebar-logo.mini {
         width: 32px;
         height: 32px;
-        font-size: 1rem;
-        background: $color-gradiente-principal;
-        color: white;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 800;
+        object-fit: contain;
       }
     }
 
@@ -93,7 +86,17 @@
     margin-bottom: $espaciado-xl;
     min-height: 40px;
 
-    .logo-area h2 {
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .sidebar-logo {
+        height: 32px;
+        width: auto;
+      }
+
+      h2 {
       color: $color-texto-principal;
       font-weight: 800;
       font-size: 1.3rem;
@@ -108,6 +111,7 @@
         border-radius: 4px;
         margin-left: 5px;
         text-transform: uppercase;
+      }
       }
     }
 

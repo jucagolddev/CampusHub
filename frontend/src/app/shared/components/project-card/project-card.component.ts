@@ -4,10 +4,11 @@ import { RouterModule, Router } from '@angular/router';
 import { Project } from '../../../core/models/project';
 
 /**
- * ¡Esta es mi tarjeta de proyecto!
- * Es el componente que más repito en la app, así que lo he diseñado para que sea
- * muy ligero y visual. Recibe los datos de un proyecto y se encarga de pintarlos
- * de forma elegante en el grid.
+ * ==========================================
+ * COMPONENTE TARJETA DE PROYECTO
+ * ==========================================
+ * Elemento de UI reutilizable para presentar el resumen de un proyecto en listas y grids.
+ * Gestiona la navegación al detalle del proyecto o la apertura directa de la demo.
  */
 @Component({
   selector: 'app-project-card',
@@ -16,19 +17,18 @@ import { Project } from '../../../core/models/project';
   templateUrl: './project-card.component.html',
 })
 export class ProjectCardComponent {
-  // Recibo el proyecto como un regalo del componente padre (@Input).
+  // Datos del proyecto a visualizar, inyectados por el componente padre
   @Input() project!: Project;
 
   constructor(private router: Router) {}
 
   /**
-   * Aquí gestiono qué pasa cuando alguien hace clic en la tarjeta.
-   * He programado esto para que, si el clic NO es en el enlace de detalles,
-   * se abra automáticamente la demo del proyecto en una nueva pestaña.
+   * Manejador de clic en la tarjeta.
+   * Si el usuario no hace clic en un enlace específico, abrimos la URL de ejecución del proyecto.
+   * Esto mejora la UX al hacer que toda la tarjeta sea interactiva.
    */
   ejecutarProyecto(event: Event): void {
-    // Si están pinchando en un enlace interno (como el de 'Descubre más'),
-    // me aparto y dejo que el Router haga su trabajo.
+    // Evitamos conflictos si se hace clic en enlaces internos (botones de acción)
     if (
       (event.target as HTMLElement).tagName === 'A' ||
       (event.target as HTMLElement).closest('a')
@@ -36,7 +36,7 @@ export class ProjectCardComponent {
       return;
     }
 
-    // Si tenemos una URL de ejecución, ¡adelante! Lanzamos la demo.
+    // Abrimos la demo en una nueva pestaña si está disponible
     if (this.project.executionUrl) {
       window.open(this.project.executionUrl, '_blank');
     }

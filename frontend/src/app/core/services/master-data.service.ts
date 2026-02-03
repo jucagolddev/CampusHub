@@ -1,6 +1,9 @@
 /**
+ * ==========================================
  * SERVICIO DE DATOS MAESTROS
- * Gestiona la recuperación de catálogos desde el backend.
+ * ==========================================
+ * Gestiona la recuperación de catálogos y listas auxiliares desde el backend.
+ * Centraliza el acceso a tablas como Roles, Centros Educativos y Títulos.
  */
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';

@@ -16,8 +16,9 @@ export interface LoginResponse {
 }
 
 /**
+ * =========================================================================
  * SERVICIO DE AUTENTICACIÓN (AuthService)
- * -------------------------------------------------------------------------
+ * =========================================================================
  * Este servicio centraliza toda la lógica de seguridad y gestión de sesiones
  * del lado del cliente. Se encarga de la comunicación con el backend para
  * procesos de login y registro, gestionando el estado reactivo de la sesión

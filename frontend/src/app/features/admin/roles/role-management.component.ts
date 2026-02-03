@@ -5,6 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from '../../../core/services/user.service';
 import { NotificationService } from '../../../core/services/notification.service';
 
+/**
+ * ==========================================
+ * COMPONENTE GESTIÓN DE ROLES
+ * ==========================================
+ * Interfaz para asignar y revocar permisos y roles (profesor, gestor, etc.)
+ * a los usuarios registrados en el sistema.
+ */
 @Component({
   selector: 'app-role-management',
   standalone: true,
@@ -19,6 +26,9 @@ export class RoleManagementComponent implements OnInit {
 
   constructor(private userService: UserService, private notificationService: NotificationService) {}
 
+  /**
+   * Carga inicial de usuarios y listado de roles disponibles.
+   */
   ngOnInit() {
     this.loadData();
   }
@@ -28,6 +38,9 @@ export class RoleManagementComponent implements OnInit {
     this.userService.getRoles().subscribe(r => this.roles = r);
   }
 
+  /**
+   * Asigna el rol seleccionado al usuario seleccionado.
+   */
   assignRole() {
     if (!this.selectedUser || !this.selectedRole) return;
 
@@ -50,6 +63,9 @@ export class RoleManagementComponent implements OnInit {
     });
   }
 
+  /**
+   * Elimina un rol específico de un usuario.
+   */
   removeRole(roleName: string) {
     if (!this.selectedUser) return;
     

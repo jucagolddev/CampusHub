@@ -1,78 +1,98 @@
-# 🎨 CampusHub Frontend
+# CampusHub - Frontend
 
-Aplicación web desarrollada en **Angular 16+** que sirve como interfaz de usuario para la plataforma CampusHub. Diseñada con un enfoque moderno, modular y responsivo.
+Este directorio contiene la aplicación cliente de **CampusHub**, desarrollada con **Angular 16+**. Nuestra interfaz está diseñada para ser rápida, responsiva y estéticamente agradable.
 
-## 🚀 Tecnologías Clave
+---
 
-- **Angular 16**: Framework principal.
-- **TypeScript 5**: Tipado estático robusto.
-- **SCSS**: Preprocesador CSS con arquitectura 7-1 (Base, Components, Layout, Pages, Themes, Abstracts, Vendors).
-- **RxJS**: Gestión reactiva del estado y peticiones HTTP.
-- **Glassmorphism**: Estilo visual predominante en el panel de administración.
+## 🛠 Tecnologías Utilizadas
 
-## 📂 Estructura del Proyecto
+- **Core**: Angular (v16), TypeScript (v5.1).
+- **Estilos**: SCSS (Sass) para estilos modulares y mantenibles.
+- **Enrutamiento**: Angular Router.
+- **Cliente HTTP**: Angular HttpClient.
 
-```text
-src/app/
-├── core/               # Lógica de negocio esencial (Singleton)
-│   ├── guards/         # Protección de rutas (AuthGuard)
-│   ├── interceptors/   # Interceptores HTTP (TokenInterceptor)
-│   ├── services/       # Comunicación con API (AuthService)
-│   └── models/         # Interfaces de datos TS
-├── features/           # Módulos funcionales
-│   ├── admin/          # Panel de administración (Dashboard, Usuarios, Roles)
-│   ├── auth/           # Login y Registro
-│   ├── home/           # Página de inicio
-│   └── projects/       # Catálogo y gestión de proyectos
-├── layout/             # Componentes estructurales
-│   ├── admin-layout/   # Layout específico para admin (Sidebar)
-│   └── main-layout/    # Layout público (Header/Footer)
-└── shared/             # Reutilizables (Spinners, Pipes, Directivas)
+---
+
+## ⚙️ Configuración e Instalación
+
+### 1. Prerrequisitos
+
+Asegúrese de estar en el directorio `frontend/`:
+
+```bash
+cd frontend
 ```
 
-## 🛡️ Funcionalidades Implementadas
+### 2. Instalar Dependencias
 
-### Módulo Público
+Instalamos todas las librerías necesarias definidas en `package.json`:
 
-- **Catálogo de Proyectos**: Visualización de proyectos aprobados.
-- **Registro de Alumnos**: Formulario de alta para nuevos usuarios.
-- **Login**: Autenticación segura con JWT.
+```bash
+npm install
+```
 
-### Módulo de Administración (Protegido)
+---
 
-- **Dashboard**: Vista general con estadísticas clave.
-- **Gestión de Usuarios**: Listado completo, búsqueda y visualización de tokens.
-- **Gestión de Roles**: Asignación dinámica de roles (Admin, Gestor, Profesor) a usuarios.
-- **Asignación de Proyectos**: Control de visibilidad de proyectos por usuario.
-- **Gestión de Centros**: Alta y modificación de centros educativos.
+## ▶️ Ejecución del Proyecto
 
-## 🔧 Configuración y Ejecución
+### Servidor de Desarrollo
 
-1. **Instalar dependencias**:
+Para iniciar la aplicación en modo desarrollo con recarga automática:
 
-   ```bash
-   npm install
-   ```
+```bash
+npm start
+# O alternativamente:
+ng serve
+```
 
-2. **Servidor de Desarrollo**:
+La aplicación estará disponible en `http://localhost:4200/`.
 
-   ```bash
-   ng serve
-   ```
+### Compilación para Producción
 
-   Navega a `http://localhost:4200`.
+Para generar los archivos optimizados para despliegue:
 
-3. **Build de Producción**:
-   ```bash
-   ng build
-   ```
+```bash
+npm run build
+```
 
-## 🎨 Sistema de Diseño
+Los artefactos de compilación se almacenarán en el directorio `dist/campus-hub`.
 
-El proyecto utiliza una arquitectura de estilos centralizada en `src/styles`.
+### Tests Unitarios
 
-- `main.scss`: Punto de entrada que importa todos los parciales.
-- `base/_variables.scss`: Paleta de colores, tipografía y espaciados.
-- `base/_mixins.scss`: Utilidades para media queries y flexbox.
+Para ejecutar las pruebas unitarias con Karma/Jasmine:
 
-Los componentes utilizan **ViewEncapsulation.Emulated** (por defecto) pero importan variables globales para mantener la consistencia.
+```bash
+npm run test
+```
+
+---
+
+## 📂 Estructura del Proyecto Frontend
+
+```plaintext
+src/
+├── app/
+│   ├── layout/          # Componentes de estructura (Sidebar, Navbar, Footer)
+│   ├── modules/         # Módulos funcionales (Auth, Dashboard, Usuarios)
+│   ├── shared/          # Componentes y servicios reutilizables
+│   ├── core/            # Servicios singleton y guardias
+│   ├── app.component.ts # Componente raíz
+│   └── app.module.ts    # Módulo raíz
+├── assets/              # Imágenes, fuentes e iconos estáticos
+├── environments/        # Variables de entorno (dev, prod)
+├── styles/              # Estilos globales y mixins SCSS
+├── index.html           # HTML base de la aplicación
+└── main.ts              # Punto de entrada de la aplicación
+```
+
+---
+
+## 📝 Guía de Estilos y Buenas Prácticas
+
+- **Componentes**: Usamos la estrategia `OnPush` donde sea posible para mejorar el rendimiento.
+- **Estilos**: Evitamos estilos globales innecesarios; preferimos encapsulación de componentes.
+- **Tipado**: Utilizamos TypeScript en modo estricto (`strict: true`) para garantizar la robustez del código.
+
+---
+
+**CampusHub Frontend Team**

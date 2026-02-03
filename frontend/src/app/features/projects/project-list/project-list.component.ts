@@ -5,13 +5,11 @@ import { Project } from '../../../core/models/project';
 import { ProjectService } from '../../../core/services/project.service';
 
 /**
- * COMPONENTE DE LISTADO DE PROYECTOS (ProjectListComponent)
- * -------------------------------------------------------------------------
- * Proporciona una vista de catálogo completa donde se muestran todas las
- * aplicaciones y trabajos técnicos disponibles en CampusHub.
- * 
- * Implementa una carga asíncrona de datos desde la API y maneja estados
- * de carga para mejorar la experiencia de usuario (UX).
+ * ==========================================
+ * COMPONENTE DE LISTADO DE PROYECTOS
+ * ==========================================
+ * Catálogo completo de aplicaciones y proyectos disponibles en la plataforma.
+ * Se encarga de la recuperación de datos desde el backend y la presentación en rejilla.
  */
 @Component({
   selector: 'app-project-list',
@@ -25,19 +23,25 @@ export class ProjectListComponent implements OnInit {
 
   constructor(private projectService: ProjectService) {}
 
+  /**
+   * Inicialización: Solicitamos la lista completa de proyectos.
+   */
   ngOnInit(): void {
     this.loadProjects();
   }
 
+  /**
+   * Carga asíncrona de proyectos y mapeo de datos.
+   */
   loadProjects(): void {
     this.projectService.getProjects().subscribe({
       next: (data) => {
-        // Mapeamos los campos del backend a los campos esperados por el frontend
+        // Transformamos los datos del backend al formato visual esperado
         this.projects = data.map(p => ({
           id: p.id,
           title: p.nombreProyecto,
           description: p.descripcionProyecto,
-          authors: ['Usuario'], // Por defecto hasta tener relación en BD
+          authors: ['Usuario'], // Pendiente: integrar autores reales
           categorias: ['General'], 
           technologies: ['Web'],
           image: p.imgPortada,
@@ -48,7 +52,7 @@ export class ProjectListComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        console.error('Error al cargar proyectos:', err);
+        console.error('Error al cargar catálogo de proyectos:', err);
         this.isLoading = false;
       }
     });

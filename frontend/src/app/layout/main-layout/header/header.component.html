@@ -7,7 +7,7 @@
         alt="Campus Hub Logo"
         class="icono-logo"
       />
-      EUSA CAMPUS HUB
+      CAMPUS HUB
     </a>
 
     <!-- 2. Navegación Principal: Contiene los enlaces dinámicos según el estado del usuario -->
@@ -58,13 +58,7 @@
         <li>
           <button
             (click)="logout()"
-            style="
-              cursor: pointer;
-              background: none;
-              border: none;
-              color: inherit;
-              font: inherit;
-            "
+            class="btn-logout"
             *ngIf="isLoggedIn"
             aria-label="Cerrar sesión actual"
           >

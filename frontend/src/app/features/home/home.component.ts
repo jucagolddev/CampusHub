@@ -6,15 +6,16 @@ import { ProjectService } from '../../core/services/project.service';
 import { AuthService } from '../../core/services/auth.service';
 
 /**
- * COMPONENTE HOME (HomeComponent)
- * -------------------------------------------------------------------------
- * Es la página de aterrizaje principal de CampusHub. Su responsabilidad es:
+ * ==========================================
+ * COMPONENTE HOME (Página Principal)
+ * ==========================================
+ * Página de aterrizaje de la plataforma.
+ * Responsabilidades:
  * 1. Presentar el buscador global de proyectos.
- * 2. Mostrar una selección dinámica de proyectos "Destacados" y "Aleatorios".
- * 3. Gestionar los filtros rápidos por categoría.
+ * 2. Mostrar selecciones de proyectos "Destacados" y "Aleatorios".
+ * 3. Facilitar el filtrado rápido por categorías.
  * 
- * Los datos se obtienen de forma asíncrona desde el ProjectService al iniciar
- * el componente (ngOnInit).
+ * Los datos se cargan dinámicamente desde el ProjectService.
  */
 @Component({
   selector: 'app-home',
@@ -23,10 +24,10 @@ import { AuthService } from '../../core/services/auth.service';
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
-  // Lista maestra de proyectos (ahora viene de la API)
+  // Lista maestra de proyectos obtenida de la API
   allProjects: Project[] = [];
 
-  // Colecciones para la vista
+  // Colecciones para las distintas secciones de la vista
   featuredProjects: Project[] = []; 
   randomProjects: Project[] = []; 
   filteredProjects: Project[] = []; 
@@ -40,10 +41,11 @@ export class HomeComponent implements OnInit {
   ) {}
 
   /**
-   * Al iniciar el componente, pido los datos al servidor.
+   * Inicialización del componente.
+   * Recupera los proyectos del servidor y configura la vista inicial.
    */
   ngOnInit(): void {
-    // Verificamos si es administrador
+    // Verificamos permisos de administración
     this.isAdmin = this.authService.isAdmin();
 
     this.projectService.getProjects().subscribe({
@@ -72,37 +74,37 @@ export class HomeComponent implements OnInit {
   }
 
   /**
-   * Configura las secciones de destacados y aleatorios una vez tenemos los datos.
+   * Organiza los proyectos en las secciones correspondientes (Destacados, Aleatorios).
    */
   private setupView(): void {
-    // Filtramos los destacados (IDs 1, 2, 3 o los que tengan la categoría)
+    // Filtramos los destacados
     this.featuredProjects = this.allProjects.filter(p => 
       p.categorias.includes('Destacados')
     ).slice(0, 3);
 
-    // Si no hay suficientes destacados por categoría, cogemos los primeros 3
+    // Fallback: si no hay destacados, tomamos los primeros
     if (this.featuredProjects.length === 0) {
       this.featuredProjects = this.allProjects.slice(0, 3);
     }
 
-    // Preparo la sección inferior con una mezcla fresca.
+    // Configuración de la sección de proyectos aleatorios
     this.setRandomProjects();
 
-    // Por defecto, mis resultados filtrados son todos los proyectos hasta que alguien busque algo.
+    // Inicialmente mostramos todos los proyectos en el listado filtrable
     this.filteredProjects = [...this.allProjects];
   }
 
   /**
-   * Aquí es donde hago la "magia" de la aleatoriedad.
+   * Genera una selección aleatoria de proyectos para mostrar variedad.
    */
   private setRandomProjects(): void {
     const featuredIds = this.featuredProjects.map(p => p.id);
     const others = this.allProjects.filter(p => !featuredIds.includes(p.id));
     
-    // Mezclamos y cogemos 3
+    // Algoritmo de mezcla y selección
     this.randomProjects = others.sort(() => 0.5 - Math.random()).slice(0, 3);
     
-    // Si no hay "otros", cogemos algunos de los que haya
+    // Si no hay suficientes proyectos "otros", usamos un slice genérico
     if (this.randomProjects.length === 0 && this.allProjects.length > 3) {
       this.randomProjects = this.allProjects.slice(3, 6);
     }
