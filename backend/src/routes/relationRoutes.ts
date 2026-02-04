@@ -1,52 +1,55 @@
 import express from "express";
 import * as relationController from "../controllers/relationController.js";
-import auth from "../middleware/authMiddleware.js";
+import authMiddleware, { isAdmin } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 /**
  * Rutas de Gestión de Relaciones N:M.
- * Controlan las vinculaciones entre diferentes entidades del sistema.
- * Todas estas rutas requieren autenticación.
+ * Todas estas rutas requieren privilegios de Administrador para ser modificadas.
  */
 
 // Asignar proyecto a usuario
-router.post("/assign-project", auth, relationController.assignProjectToUser);
+router.post("/assign-project", authMiddleware, isAdmin, relationController.assignProjectToUser);
 
 // Desvincular proyecto de usuario
-router.post("/remove-project", auth, relationController.removeProjectFromUser);
+router.post("/remove-project", authMiddleware, isAdmin, relationController.removeProjectFromUser);
 
-// Consultar proyectos de un usuario concreto
+// Consultar proyectos de un usuario (solo accesible por admin o el propio usuario, por ahora solo admin para simplificar gestión profesional)
 router.get(
   "/users/:tokken/projects",
-  auth,
+  authMiddleware,
+  isAdmin,
   relationController.getProjectsByUser
 );
 
-// Vincular Rol a Usuario
-router.post("/assign-rol-user", auth, relationController.assignRolToUser);
+// Vincular Rol a Usuario (Ruta antigua, redirige o protege con isAdmin)
+router.post("/assign-rol-user", authMiddleware, isAdmin, relationController.assignRolToUser);
 
 // Desvincular Rol de Usuario
-router.post("/remove-rol-user", auth, relationController.removeRolFromUser);
+router.post("/remove-rol-user", authMiddleware, isAdmin, relationController.removeRolFromUser);
 
 // Vincular Título a un Centro Educativo
 router.post(
   "/assign-titulo-centro",
-  auth,
+  authMiddleware,
+  isAdmin,
   relationController.assignTituloToCentro
 );
 
 // Vincular Curso a un Título Académico
 router.post(
   "/assign-curso-titulo",
-  auth,
+  authMiddleware,
+  isAdmin,
   relationController.assignCursoToTitulo
 );
 
 // Vincular Módulo a un Curso específico
 router.post(
   "/assign-modulo-curso",
-  auth,
+  authMiddleware,
+  isAdmin,
   relationController.assignModuloToCurso
 );
 

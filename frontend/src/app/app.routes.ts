@@ -11,7 +11,7 @@ import { UserListComponent } from './features/admin/users/user-list.component';
 import { UserRegisterComponent } from './features/admin/register/user-register.component';
 import { RoleManagementComponent } from './features/admin/roles/role-management.component';
 import { UserProjectManagementComponent } from './features/admin/users/user-project-management.component';
-import { CenterRegistrationComponent } from './features/admin/center-registration/center-registration.component';
+import { CenterManagementComponent } from './features/admin/center-management/center-management.component';
 import { authGuard } from './core/guards/auth.guard';
 
 /**
@@ -53,7 +53,7 @@ export const routes: Routes = [
       { path: 'registro-sesion', component: UserRegisterComponent }, // Registrar nuevos usuarios
       { path: 'gestion-roles', component: RoleManagementComponent }, // Asignar roles y permisos
       { path: 'gestion-usuarios', component: UserProjectManagementComponent }, // Asignar proyectos a usuarios
-      { path: 'centers', component: CenterRegistrationComponent }, // Gestión de centros educativos
+      { path: 'centers', component: CenterManagementComponent }, // Gestión de centros educativos
       { path: 'proyectos', component: ProjectListComponent }, // Vista administrativa de proyectos
       { path: 'subir-proyecto', component: ProjectUploadComponent } // Formulario de carga de proyectos
     ]

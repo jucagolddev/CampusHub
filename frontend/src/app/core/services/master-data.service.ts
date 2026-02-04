@@ -49,4 +49,12 @@ export class MasterDataService {
     createCentro(data: { nombreCentro: string; sufijoEmail?: string }): Observable<any> {
         return this.http.post(`${this.apiUrl}/centros`, data);
     }
+
+    updateCentro(id: number, data: { nombreCentro: string; sufijoEmail?: string }): Observable<any> {
+        return this.http.put(`${this.apiUrl}/centros/${id}`, data);
+    }
+
+    deleteCentro(id: number): Observable<any> {
+        return this.http.delete(`${this.apiUrl}/centros/${id}`);
+    }
 }

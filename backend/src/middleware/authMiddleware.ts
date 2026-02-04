@@ -57,3 +57,26 @@ export default async function authMiddleware(
       .json({ error: "Error interno al verificar la sesión" });
   }
 }
+/**
+ * Middleware para verificar si el usuario es Administrador.
+ * Debe usarse DESPUÉS de authMiddleware para tener req.user disponible.
+ */
+export async function isAdmin(req: AuthRequest, res: Response, next: NextFunction) {
+  try {
+    const user = req.user;
+    if (!user) {
+      return res.status(401).json({ error: "No autenticado" });
+    }
+
+    const roles = await userModel.getRolesByUserToken(user.tokken);
+
+    if (roles.includes("Administrador")) {
+      next();
+    } else {
+      return res.status(403).json({ error: "Acceso prohibido: Se requiere rol de Administrador" });
+    }
+  } catch (error) {
+    console.error("Error en isAdmin middleware:", error);
+    res.status(500).json({ error: "Error al verificar permisos de administrador" });
+  }
+}

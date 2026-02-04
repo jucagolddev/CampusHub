@@ -42,10 +42,12 @@ export class UserService {
   }
 
   assignRole(tokken: string, rolId: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}/relations/assign-rol-user`, { tokken, rolId });
+    // Usamos la nueva ruta profesionalizada en el backend
+    return this.http.put(`${this.apiUrl}/users/${tokken}/rol`, { rolId });
   }
 
   removeRole(tokken: string, rolId: number): Observable<any> {
+    // Por ahora mantenemos esta o la actualizamos si hay controlador para delete de rol
     return this.http.post(`${this.apiUrl}/relations/remove-rol-user`, { tokken, rolId });
   }
 

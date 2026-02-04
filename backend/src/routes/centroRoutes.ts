@@ -1,5 +1,6 @@
 import express from "express";
 import * as c from "../controllers/centroController.js";
+import authMiddleware, { isAdmin } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
@@ -8,9 +9,9 @@ const router = express.Router();
  * Accesibles desde: /api/centros/...
  */
 
-router.post("/", c.create); // POST /api/centros/ - Crear centro
-router.get("/", c.list); // GET /api/centros/  - Listar todos
-router.put("/:id", c.update); // PUT /api/centros/:id - Actualizar
-router.delete("/:id", c.remove); // DELETE /api/centros/:id - Borrar
+router.post("/", authMiddleware, isAdmin, c.create); // POST /api/centros/ - Crear centro (Solo Admin)
+router.get("/", c.list); // GET /api/centros/  - Listar todos (Público para desplegables)
+router.put("/:id", authMiddleware, isAdmin, c.update); // PUT /api/centros/:id - Actualizar (Solo Admin)
+router.delete("/:id", authMiddleware, isAdmin, c.remove); // DELETE /api/centros/:id - Borrar (Solo Admin)
 
 export default router;

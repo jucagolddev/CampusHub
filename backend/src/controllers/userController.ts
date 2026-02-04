@@ -123,3 +123,35 @@ export async function deleteUser(req: Request, res: Response) {
     return res.status(500).json({ error: "Error al eliminar usuario" });
   }
 }
+
+/**
+ * Asigna un nuevo rol a un usuario.
+ * Solo accesible por Administradores (vía middleware).
+ */
+export async function changeUserRole(req: Request, res: Response) {
+  try {
+    const { userToken } = req.params;
+    const { rolId } = req.body;
+
+    if (!userToken || !rolId) {
+      return res.status(400).json({ error: "Token de usuario y ID de rol son requeridos" });
+    }
+
+    // Verificamos si el usuario existe antes de intentar asignar el rol
+    const user = await userModel.findUserByTokken(userToken);
+    if (!user) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    await userModel.addRoleToUser(userToken, Number(rolId));
+
+    return res.status(200).json({ 
+      message: "Rol asignado correctamente",
+      userToken,
+      rolId 
+    });
+  } catch (err) {
+    console.error("Error al asignar rol:", err);
+    return res.status(500).json({ error: "Error interno al asignar el rol" });
+  }
+}

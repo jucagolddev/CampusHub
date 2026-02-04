@@ -82,3 +82,19 @@ export async function getAllUsersWithRoles(): Promise<any[]> {
 export async function deleteUserByTokken(tokken: string): Promise<void> {
   await db.execute("DELETE FROM USUARIO WHERE tokken = ?", [tokken]);
 }
+
+/**
+ * Agrega un nuevo rol a un usuario sin eliminar los anteriores.
+ * Evita duplicados mediante el manejo del error de entrada duplicada.
+ */
+export async function addRoleToUser(tokken: string, rolId: number): Promise<void> {
+  try {
+    const sql = "INSERT INTO ROL_USUARIO (tokken, rolId) VALUES (?, ?)";
+    await db.execute(sql, [tokken, rolId]);
+  } catch (error: any) {
+    // Si el error es "Entrada duplicada" (código ER_DUP_ENTRY o similar), lo ignoramos
+    if (error.code !== "ER_DUP_ENTRY" && error.errno !== 1062) {
+      throw error;
+    }
+  }
+}

@@ -1,0 +1,79 @@
+<section class="pagina-gestion">
+  <div class="contenedor-gestion">
+    <header class="header-gestion">
+      <div>
+        <h1>Gestión de Centros</h1>
+        <p>Administra los centros educativos del sistema</p>
+      </div>
+      <button class="boton-primario" (click)="abrirModalCrear()">
+        <i class="fas fa-plus"></i> Nuevo Centro
+      </button>
+    </header>
+
+    <!-- Feedback -->
+    <div *ngIf="mensaje" [ngClass]="{'alerta-exito': tipoMensaje === 'exito', 'alerta-error': tipoMensaje === 'error'}" class="alerta-flotante">
+      {{ mensaje }}
+    </div>
+
+    <!-- Tabla de Centros -->
+    <div class="tabla-container">
+      <table class="tabla-datos">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre del Centro</th>
+            <th>Sufijo Email</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let centro of centros">
+            <td>#{{ centro.id }}</td>
+            <td>{{ centro.nombreCentro }}</td>
+            <td>
+              <span class="badge" *ngIf="centro.sufijoEmail">{{ centro.sufijoEmail }}</span>
+              <span class="text-muted" *ngIf="!centro.sufijoEmail">N/A</span>
+            </td>
+            <td class="acciones">
+              <button class="btn-icon editar" (click)="abrirModalEditar(centro)" title="Editar">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="btn-icon eliminar" (click)="confirmarEliminar(centro)" title="Eliminar">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="centros.length === 0">
+            <td colspan="4" class="sin-resultados">No hay centros registrados.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Modal Crear/Editar -->
+  <div class="modal-overlay" *ngIf="mostrarModal">
+    <div class="modal-contenido">
+      <div class="modal-header">
+        <h2>{{ modoEdicion ? 'Editar Centro' : 'Nuevo Centro' }}</h2>
+        <button class="btn-cerrar" (click)="cerrarModal()">&times;</button>
+      </div>
+      <form (ngSubmit)="guardarCentro()">
+        <div class="modal-body">
+          <div class="grupo-input">
+            <label for="nombreCentro">Nombre del Centro *</label>
+            <input type="text" id="nombreCentro" name="nombreCentro" [(ngModel)]="centroForm.nombreCentro" required placeholder="Ej: Facultad de Ciencias">
+          </div>
+          <div class="grupo-input">
+            <label for="sufijoEmail">Dominio de Correo</label>
+            <input type="text" id="sufijoEmail" name="sufijoEmail" [(ngModel)]="centroForm.sufijoEmail" placeholder="Ej: @uam.es">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="boton-secundario" (click)="cerrarModal()">Cancelar</button>
+          <button type="submit" class="boton-primario">{{ modoEdicion ? 'Guardar Cambios' : 'Crear Centro' }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
