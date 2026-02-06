@@ -15,7 +15,8 @@ import { NotificationService } from '../../../core/services/notification.service
   selector: 'app-admin-register',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './user-register.component.html'
+  templateUrl: './user-register.component.html',
+  styleUrls: ['./user-register.component.scss']
 })
 export class UserRegisterComponent {
   registerForm: FormGroup;

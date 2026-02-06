@@ -1,0 +1,153 @@
+@use '../../../../styles/base/variables' as *;
+
+.register-wrapper {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+
+  .register-card {
+    background: white;
+    padding: 3.5rem;
+    border-radius: 32px;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 550px;
+    border: 1px solid rgba(0, 0, 0, 0.02);
+    animation: slideUpFade 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+    .header {
+      margin-bottom: 3rem;
+      text-align: center;
+
+      h2 {
+        color: $color-borde-estructura;
+        font-size: 2.25rem;
+        font-weight: 800;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.03em;
+      }
+
+      p {
+        color: $color-texto-secundario;
+        font-size: 1.05rem;
+        opacity: 0.8;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+
+      label {
+        font-weight: 700;
+        color: $color-borde-estructura;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding-left: 0.25rem;
+      }
+
+      .input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        i {
+          position: absolute;
+          left: 1.25rem;
+          color: #a4b0be;
+          transition: all 0.3s ease;
+          font-size: 1.1rem;
+        }
+
+        .form-control {
+          width: 100%;
+          padding: 1.15rem 1.5rem 1.15rem 3.25rem;
+          border-radius: 18px;
+          border: 2px solid #f1f2f6;
+          background: #f8fafc;
+          font-size: 1.05rem;
+          transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+          color: $color-texto-principal;
+
+          &:focus {
+            outline: none;
+            border-color: $color-interactivo-principal;
+            background: white;
+            box-shadow: 0 10px 25px rgba($color-interactivo-principal, 0.1);
+            transform: translateY(-2px);
+
+            ~ i {
+              color: $color-interactivo-principal;
+              transform: scale(1.1);
+            }
+          }
+
+          &::placeholder {
+            color: #d1d8e0;
+          }
+        }
+      }
+
+      .error-msg {
+        color: #ff4757;
+        font-size: 0.85rem;
+        font-weight: 600;
+        padding-left: 0.5rem;
+        animation: fadeIn 0.3s ease-out;
+      }
+    }
+
+    .actions {
+      margin-top: 3rem;
+
+      .btn-submit {
+        width: 100%;
+        background: $color-gradiente-principal;
+        color: white;
+        border: none;
+        padding: 1.25rem;
+        border-radius: 18px;
+        font-weight: 800;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        box-shadow: 0 12px 25px rgba($color-interactivo-principal, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+
+        &:hover:not(:disabled) {
+          transform: translateY(-4px);
+          box-shadow: 0 20px 40px rgba($color-interactivo-principal, 0.4);
+          filter: brightness(1.05);
+        }
+
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+          filter: grayscale(0.5);
+        }
+
+        i {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

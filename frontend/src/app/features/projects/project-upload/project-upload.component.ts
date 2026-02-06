@@ -17,6 +17,7 @@ import { NotificationService } from '../../../core/services/notification.service
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './project-upload.component.html',
+  styleUrls: ['./project-upload.component.scss']
 })
 export class ProjectUploadComponent {
   // Modelo de datos para el formulario

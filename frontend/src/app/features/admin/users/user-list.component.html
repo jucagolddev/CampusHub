@@ -23,42 +23,30 @@
         </thead>
         <tbody>
           <tr *ngFor="let user of users">
-            <td class="font-weight-bold">{{ user.userName }}</td>
+            <td style="font-weight: 800; color: #2f3542;">{{ user.userName }}</td>
             <td>{{ user.email }}</td>
             <td>
               <div class="token-container" title="{{ user.tokken }}">
                 <code>{{ user.tokken | slice: 0 : 12 }}...</code>
-                <button
-                  class="btn-icon-small"
-                  (click)="copyToken(user.tokken)"
-                  title="Copiar Token"
-                  aria-label="Copiar Token al portapapeles"
-                >
+                <button class="btn-icon-small" (click)="copyToken(user.tokken)" title="Copiar Token"
+                  aria-label="Copiar Token al portapapeles">
                   <i class="fas fa-copy" aria-hidden="true"></i>
                 </button>
               </div>
             </td>
             <td>
               <div class="badges">
-                <span
-                  *ngFor="let role of user.roles"
-                  class="badge"
-                  [ngClass]="{
+                <span *ngFor="let role of user.roles" class="badge" [ngClass]="{
                     'badge-admin': role === 'Administrador',
                     'badge-gestor': role === 'Gestor',
                     'badge-profesor': role === 'Profesor',
-                  }"
-                >
+                  }">
                   {{ role }}
                 </span>
               </div>
             </td>
             <td>
-              <button
-                class="boton-peligro"
-                (click)="startDeleteProcess(user)"
-                title="Eliminar usuario"
-              >
+              <button class="boton-peligro" (click)="startDeleteProcess(user)" title="Eliminar usuario">
                 <i class="fas fa-trash"></i> Eliminar
               </button>
             </td>
@@ -69,16 +57,9 @@
   </div>
 
   <!-- Modal de Confirmación Personalizado -->
-  <app-confirmation-modal
-    [isOpen]="showDeleteModal"
-    title="Eliminar Usuario"
-    [message]="
+  <app-confirmation-modal [isOpen]="showDeleteModal" title="Eliminar Usuario" [message]="
       '¿Estás seguro de eliminar a ' +
       (userToDelete?.userName || 'este usuario') +
       '? Esta acción no se puede deshacer.'
-    "
-    confirmText="Eliminar"
-    (confirm)="confirmDelete()"
-    (cancel)="cancelDelete()"
-  ></app-confirmation-modal>
+    " confirmText="Eliminar" (confirm)="confirmDelete()" (cancel)="cancelDelete()"></app-confirmation-modal>
 </div>

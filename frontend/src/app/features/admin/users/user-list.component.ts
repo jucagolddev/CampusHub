@@ -16,7 +16,8 @@ import { ConfirmationModalComponent } from '../../../shared/components/confirmat
   selector: 'app-user-list',
   standalone: true,
   imports: [CommonModule, ConfirmationModalComponent],
-  templateUrl: './user-list.component.html'
+  templateUrl: './user-list.component.html',
+  styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
   users: any[] = [];
