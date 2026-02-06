@@ -58,3 +58,16 @@ export async function updateProject(id: number, nombre: string, descripcion: str
   const sql = `UPDATE PROYECTO SET nombreProyecto = ?, descripcionProyecto = ? WHERE id = ?`;
   await db.execute(sql, [nombre, descripcion, id]);
 }
+
+/**
+ * Elimina un proyecto y todas sus relaciones asociadas.
+ */
+export async function deleteProject(id: number) {
+  // 1. Eliminar relaciones en tablas intermedias
+  await db.execute("DELETE FROM USUARIO_PROYECTO WHERE proyectoId = ?", [id]);
+  await db.execute("DELETE FROM PROYECTO_CENTRO WHERE proyectoId = ?", [id]);
+
+  // 2. Eliminar el proyecto principal
+  const sql = `DELETE FROM PROYECTO WHERE id = ?`;
+  await db.execute(sql, [id]);
+}

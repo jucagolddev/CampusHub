@@ -1,0 +1,251 @@
+@use '../../../../styles/base/variables' as *;
+
+.project-management-container {
+  max-width: 1000px;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+
+  .header {
+    margin-bottom: 3.5rem;
+    text-align: center;
+
+    h2 {
+      color: $color-borde-estructura;
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.03em;
+    }
+
+    p {
+      color: $color-texto-secundario;
+      font-size: 1.15rem;
+      opacity: 0.8;
+    }
+  }
+
+  .card {
+    background: white;
+    border-radius: 28px;
+    padding: 3.5rem;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.02);
+  }
+
+  .selection-area {
+    margin-bottom: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+
+    label {
+      font-weight: 700;
+      color: $color-borde-estructura;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      text-align: center;
+    }
+
+    .user-select {
+      padding: 1.15rem 1.5rem;
+      border-radius: 18px;
+      border: 2px solid #f1f2f6;
+      background: #f8fafc;
+      font-size: 1.1rem;
+      transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+      color: $color-texto-principal;
+      cursor: pointer;
+      appearance: none;
+      background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23747d8c%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fvisit%3E');
+      background-repeat: no-repeat;
+      background-position: right 1.5rem top 50%;
+      background-size: 0.8rem auto;
+
+      &:focus {
+        outline: none;
+        border-color: $color-interactivo-principal;
+        background-color: white;
+        box-shadow: 0 10px 25px rgba($color-interactivo-principal, 0.1);
+      }
+    }
+  }
+
+  .projects-area {
+    border-top: 2px solid #f1f2f6;
+    padding-top: 3.5rem;
+    animation: fadeIn 0.8s ease-out;
+
+    .projects-header {
+      margin-bottom: 2.5rem;
+      text-align: left;
+
+      h3 {
+        color: $color-borde-estructura;
+        font-size: 1.6rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        color: $color-texto-secundario;
+        font-size: 1.05rem;
+      }
+    }
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: #f8fafc;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+      transform: translateY(-5px);
+      background: white;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+    }
+
+    &.assigned {
+      border-color: rgba($color-interactivo-principal, 0.3);
+      background: white;
+
+      .card-content {
+        .checkbox-wrapper {
+          input + label {
+            background-color: $color-interactivo-principal;
+            border-color: $color-interactivo-principal;
+            
+            &::after {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+
+    .card-content {
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .checkbox-wrapper {
+      position: relative;
+      width: 26px;
+      height: 26px;
+      flex-shrink: 0;
+
+      input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+
+        &:checked + label {
+          background-color: $color-interactivo-principal;
+          border-color: $color-interactivo-principal;
+
+          &::after {
+            display: block;
+          }
+        }
+      }
+
+      label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 26px;
+        width: 26px;
+        background-color: white;
+        border: 2px solid #dcdde1;
+        border-radius: 8px;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+
+        &::after {
+          content: "";
+          position: absolute;
+          display: none;
+          left: 8px;
+          top: 4px;
+          width: 6px;
+          height: 12px;
+          border: solid white;
+          border-width: 0 3px 3px 0;
+          transform: rotate(45deg);
+        }
+      }
+
+      &:hover label {
+        border-color: $color-interactivo-principal;
+        background-color: rgba($color-interactivo-principal, 0.05);
+      }
+    }
+
+    .project-info {
+      flex: 1;
+
+      h4 {
+        margin: 0;
+        color: $color-borde-estructura;
+        font-size: 1.1rem;
+        font-weight: 700;
+        transition: color 0.3s;
+      }
+
+      .status {
+        display: inline-block;
+        margin-top: 0.4rem;
+        font-size: 0.75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: $color-interactivo-principal;
+        letter-spacing: 0.05em;
+        background: rgba($color-interactivo-principal, 0.08);
+        padding: 0.2rem 0.6rem;
+        border-radius: 6px;
+      }
+    }
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 5rem 2rem;
+    color: #a4b0be;
+
+    i {
+      font-size: 4rem;
+      margin-bottom: 2rem;
+      opacity: 0.3;
+      display: block;
+    }
+
+    p {
+      font-size: 1.2rem;
+      font-weight: 600;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}

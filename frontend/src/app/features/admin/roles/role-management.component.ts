@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../../core/services/user.service';
 import { NotificationService } from '../../../core/services/notification.service';
+import { ConfirmationModalComponent } from '../../../shared/components/confirmation-modal/confirmation-modal.component';
 
 /**
  * ==========================================
@@ -15,14 +16,19 @@ import { NotificationService } from '../../../core/services/notification.service
 @Component({
   selector: 'app-role-management',
   standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './role-management.component.html'
+  imports: [CommonModule, FormsModule, ConfirmationModalComponent],
+  templateUrl: './role-management.component.html',
+  styleUrls: ['./role-management.component.scss']
 })
 export class RoleManagementComponent implements OnInit {
   users: any[] = [];
   roles: any[] = [];
   selectedUser: any = null;
   selectedRole: any = null;
+
+  // Estado para modal de confirmación
+  showDeleteModal = false;
+  roleToRemove: string = '';
 
   constructor(private userService: UserService, private notificationService: NotificationService) {}
 
@@ -65,28 +71,45 @@ export class RoleManagementComponent implements OnInit {
 
   /**
    * Elimina un rol específico de un usuario.
+   * Abre el modal de confirmación para eliminar un rol.
    */
   removeRole(roleName: string) {
-    if (!this.selectedUser) return;
+    this.roleToRemove = roleName;
+    this.showDeleteModal = true;
+  }
+
+  cancelarEliminacionRole() {
+    this.showDeleteModal = false;
+    this.roleToRemove = '';
+  }
+
+  /**
+   * Ejecuta la desvinculación tras confirmar en el modal.
+   */
+  ejecutarEliminacionRole() {
+    if (!this.selectedUser || !this.roleToRemove) return;
     
+    const roleName = this.roleToRemove;
     const role = this.roles.find(r => r.nombreGrupo === roleName);
+    
     if (!role) {
       this.notificationService.showError('Error: No se pudo identificar el rol');
+      this.cancelarEliminacionRole();
       return;
     }
 
-    if (confirm(`¿Estás seguro de quitar el rol ${roleName} a ${this.selectedUser.userName}?`)) {
-      this.userService.removeRole(this.selectedUser.tokken, role.id).subscribe({
-        next: () => {
-          this.loadData();
-          this.selectedUser.roles = this.selectedUser.roles.filter((r: string) => r !== roleName);
-          this.notificationService.showSuccess(`Rol ${roleName} eliminado correctamente`);
-        },
-        error: (err) => {
-             console.error('Error removing role:', err);
-             this.notificationService.showError('Error al desvincular el rol');
-        }
-      });
-    }
+    this.userService.removeRole(this.selectedUser.tokken, role.id).subscribe({
+      next: () => {
+        this.loadData();
+        this.selectedUser.roles = this.selectedUser.roles.filter((r: string) => r !== roleName);
+        this.notificationService.showSuccess(`Rol ${roleName} eliminado correctamente`);
+        this.cancelarEliminacionRole();
+      },
+      error: (err) => {
+           console.error('Error removing role:', err);
+           this.notificationService.showError('Error al desvincular el rol');
+           this.cancelarEliminacionRole();
+      }
+    });
   }
 }

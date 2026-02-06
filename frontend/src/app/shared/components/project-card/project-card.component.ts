@@ -1,44 +1,91 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { Project } from '../../../core/models/project';
+import { AuthService } from '../../../core/services/auth.service';
+import { ProjectService } from '../../../core/services/project.service';
+import { NotificationService } from '../../../core/services/notification.service';
+import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
 
 /**
  * ==========================================
  * COMPONENTE TARJETA DE PROYECTO
  * ==========================================
- * Elemento de UI reutilizable para presentar el resumen de un proyecto en listas y grids.
- * Gestiona la navegación al detalle del proyecto o la apertura directa de la demo.
  */
 @Component({
   selector: 'app-project-card',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ConfirmationModalComponent],
   templateUrl: './project-card.component.html',
+  styleUrls: ['./project-card.component.scss']
 })
-export class ProjectCardComponent {
-  // Datos del proyecto a visualizar, inyectados por el componente padre
+export class ProjectCardComponent implements OnInit {
   @Input() project!: Project;
+  @Output() projectDeleted = new EventEmitter<void>();
 
-  constructor(private router: Router) {}
+  isAdmin = false;
+  showDeleteModal = false;
+
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private projectService: ProjectService,
+    private notificationService: NotificationService
+  ) {}
+
+  ngOnInit(): void {
+    this.isAdmin = this.authService.isAdmin();
+  }
 
   /**
    * Manejador de clic en la tarjeta.
-   * Si el usuario no hace clic en un enlace específico, abrimos la URL de ejecución del proyecto.
-   * Esto mejora la UX al hacer que toda la tarjeta sea interactiva.
    */
   ejecutarProyecto(event: Event): void {
-    // Evitamos conflictos si se hace clic en enlaces internos (botones de acción)
     if (
       (event.target as HTMLElement).tagName === 'A' ||
-      (event.target as HTMLElement).closest('a')
+      (event.target as HTMLElement).closest('a') ||
+      (event.target as HTMLElement).closest('button')
     ) {
       return;
     }
 
-    // Abrimos la demo en una nueva pestaña si está disponible
     if (this.project.executionUrl) {
       window.open(this.project.executionUrl, '_blank');
+    }
+  }
+
+  /**
+   * Abre el modal de confirmación.
+   */
+  abrirConfirmacionBorrado(event: Event): void {
+    event.stopPropagation();
+    this.showDeleteModal = true;
+  }
+
+  /**
+   * Cierra el modal de confirmación.
+   */
+  cancelarBorrado(): void {
+    this.showDeleteModal = false;
+  }
+
+  /**
+   * Ejecuta la eliminación tras confirmar en el modal.
+   */
+  confirmarBorrado(): void {
+    if (this.project.id) {
+      this.projectService.deleteProject(this.project.id).subscribe({
+        next: () => {
+          this.notificationService.showSuccess(`Proyecto "${this.project.title}" eliminado.`);
+          this.projectDeleted.emit();
+          this.showDeleteModal = false;
+        },
+        error: (err) => {
+          console.error('Error al eliminar proyecto:', err);
+          this.notificationService.showError('No se pudo eliminar el proyecto.');
+          this.showDeleteModal = false;
+        }
+      });
     }
   }
 }

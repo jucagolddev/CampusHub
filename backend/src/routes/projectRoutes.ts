@@ -1,6 +1,6 @@
 import express from "express";
 import * as projectController from "../controllers/projectController.js";
-import auth from "../middleware/authMiddleware.js";
+import auth, { isAdmin } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
@@ -17,5 +17,8 @@ router.get("/", projectController.listProjects);
 
 // Editar proyecto: Requiere autenticación y verificación de autoría (en el controlador)
 router.put("/:id", auth, projectController.updateProject);
+
+// Eliminar proyecto: Solo Administradores
+router.delete("/:id", auth, isAdmin, projectController.deleteProject);
 
 export default router;

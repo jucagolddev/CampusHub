@@ -5,30 +5,36 @@
   </div>
 
   <div class="contenido-tarjeta">
-    <!-- 2. Mis etiquetas dinámicas. Aquí pinto las categorías como píldoras. -->
-    <div class="etiquetas">
-      <span class="etiqueta-tech" *ngFor="let cat of project.categorias">
-        {{ cat }}
-      </span>
+    <!-- 1. Título del Proyecto: Nombre principal del trabajo -->
+    <div class="header-tarjeta">
+      <h3>{{ project.title }}</h3>
+      <!-- Botón de eliminar solo para administradores -->
+      <button *ngIf="isAdmin" class="btn-eliminar" (click)="abrirConfirmacionBorrado($event)" title="Eliminar Proyecto"
+        aria-label="Eliminar Proyecto">
+        <svg viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
+        </svg>
+      </button>
     </div>
 
-    <!-- 3. Título del Proyecto: Nombre principal del trabajo -->
-    <h3>{{ project.title }}</h3>
-
-    <!-- 4. Descripción breve: Texto explicativo del proyecto -->
+    <!-- 2. Descripción breve -->
     <p>
       {{ project.description }}
     </p>
 
-    <!-- 5. Pie de la tarjeta: Aquí pongo el enlace a los detalles.
-         Uso stopPropagation() para que no se abra la demo al pinchar aquí. -->
+    <!-- 3. Pie de la tarjeta -->
     <div class="autor">
       <div class="avatar">
         <img src="assets/images/GitHub.png" alt="GitHub icon">
       </div>
-      <a [routerLink]="['/projects', project.id]" class="link-detalle" (click)="$event.stopPropagation()">
-        {{ project.textolink || 'Ver detalles' }}
+      <a [href]="project.githubLink" target="_blank" class="link-detalle" (click)="$event.stopPropagation()">
+        {{ project.textolink || 'Ver Proyecto' }}
       </a>
     </div>
   </div>
+
+  <!-- Modal de confirmación premium -->
+  <app-confirmation-modal [isOpen]="showDeleteModal" title="Eliminar Proyecto"
+    [message]="'¿Estás seguro de que deseas eliminar permanentemente el proyecto \'' + project.title + '\'?'"
+    confirmText="Eliminar" (confirm)="confirmarBorrado()" (cancel)="cancelarBorrado()"></app-confirmation-modal>
 </article>

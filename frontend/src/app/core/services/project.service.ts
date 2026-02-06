@@ -66,5 +66,11 @@ export class ProjectService {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 
-  // Aquí se podrían añadir métodos para updateProject, deleteProject, etc.
+  /**
+   * Elimina un proyecto por su ID.
+   * @param id Identificador del proyecto.
+   */
+  deleteProject(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`, { headers: this.getHeaders() });
+  }
 }

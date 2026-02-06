@@ -26,10 +26,6 @@ import { AuthService } from '../../core/services/auth.service';
 export class HomeComponent implements OnInit {
   // Lista maestra de proyectos obtenida de la API
   allProjects: Project[] = [];
-
-  // Colecciones para las distintas secciones de la vista
-  featuredProjects: Project[] = []; 
-  randomProjects: Project[] = []; 
   filteredProjects: Project[] = []; 
   searchTerm: string = ''; 
   isLoading = true;
@@ -42,12 +38,17 @@ export class HomeComponent implements OnInit {
 
   /**
    * Inicialización del componente.
-   * Recupera los proyectos del servidor y configura la vista inicial.
    */
   ngOnInit(): void {
-    // Verificamos permisos de administración
     this.isAdmin = this.authService.isAdmin();
+    this.loadProjects();
+  }
 
+  /**
+   * Carga los proyectos desde el servicio.
+   */
+  loadProjects(): void {
+    this.isLoading = true;
     this.projectService.getProjects().subscribe({
       next: (data) => {
         this.allProjects = data.map(p => ({
@@ -55,7 +56,7 @@ export class HomeComponent implements OnInit {
           title: p.nombreProyecto,
           description: p.descripcionProyecto,
           authors: ['Usuario'], 
-          categorias: p.id <= 3 ? ['Destacados', 'General'] : ['General'], // Lógica temporal para destacados
+          categorias: [], // Categorías ya no se usan en la UI
           technologies: ['Web'],
           image: p.imgPortada,
           githubLink: p.urlGitHub,
@@ -63,7 +64,7 @@ export class HomeComponent implements OnInit {
           textolink: 'Ver Proyecto'
         }));
 
-        this.setupView();
+        this.applyFilters();
         this.isLoading = false;
       },
       error: (err) => {
@@ -73,64 +74,28 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  /**
-   * Organiza los proyectos en las secciones correspondientes (Destacados, Aleatorios).
-   */
-  private setupView(): void {
-    // Filtramos los destacados
-    this.featuredProjects = this.allProjects.filter(p => 
-      p.categorias.includes('Destacados')
-    ).slice(0, 3);
-
-    // Fallback: si no hay destacados, tomamos los primeros
-    if (this.featuredProjects.length === 0) {
-      this.featuredProjects = this.allProjects.slice(0, 3);
-    }
-
-    // Configuración de la sección de proyectos aleatorios
-    this.setRandomProjects();
-
-    // Inicialmente mostramos todos los proyectos en el listado filtrable
-    this.filteredProjects = [...this.allProjects];
-  }
-
-  /**
-   * Genera una selección aleatoria de proyectos para mostrar variedad.
-   */
-  private setRandomProjects(): void {
-    const featuredIds = this.featuredProjects.map(p => p.id);
-    const others = this.allProjects.filter(p => !featuredIds.includes(p.id));
-    
-    // Algoritmo de mezcla y selección
-    this.randomProjects = others.sort(() => 0.5 - Math.random()).slice(0, 3);
-    
-    // Si no hay suficientes proyectos "otros", usamos un slice genérico
-    if (this.randomProjects.length === 0 && this.allProjects.length > 3) {
-      this.randomProjects = this.allProjects.slice(3, 6);
-    }
-  }
-
   onSearch(term: string): void {
     this.searchTerm = term.toLowerCase();
     this.applyFilters();
   }
 
-  filterByCategory(category: string): void {
-    if (category === 'Todos') {
-      this.filteredProjects = [...this.allProjects];
-    } else {
-      this.filteredProjects = this.allProjects.filter((p) =>
-        p.categorias.includes(category)
-      );
-    }
+  /**
+   * Recarga la lista tras una eliminación.
+   */
+  onProjectDeleted(): void {
+    this.loadProjects();
   }
 
   private applyFilters(): void {
+    if (!this.searchTerm) {
+      this.filteredProjects = [...this.allProjects];
+      return;
+    }
+
     this.filteredProjects = this.allProjects.filter(
       (p) =>
         p.title.toLowerCase().includes(this.searchTerm) ||
         p.description.toLowerCase().includes(this.searchTerm) ||
-        p.categorias.some((c) => c.toLowerCase().includes(this.searchTerm)) ||
         p.authors.some((a) => a.toLowerCase().includes(this.searchTerm))
     );
   }

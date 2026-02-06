@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProjectService, ProjectData } from '../../../core/services/project.service';
+import { NotificationService } from '../../../core/services/notification.service';
 
 /**
  * ==========================================
@@ -28,7 +29,11 @@ export class ProjectUploadComponent {
 
   isLoading = false;
 
-  constructor(private projectService: ProjectService, private router: Router) {}
+  constructor(
+    private projectService: ProjectService, 
+    private router: Router,
+    private notificationService: NotificationService
+  ) {}
 
   /**
    * Envío del formulario de creación de proyecto.
@@ -38,7 +43,7 @@ export class ProjectUploadComponent {
 
     // Validación de campos obligatorios
     if (!this.nombreProyecto || !this.linkGithub) {
-        alert('Por favor complete los campos obligatorios (Nombre y GitHub).');
+        this.notificationService.showWarning('Por favor complete los campos obligatorios (Nombre y GitHub).');
         return;
     }
 
@@ -55,13 +60,13 @@ export class ProjectUploadComponent {
 
     this.projectService.createProject(newProject).subscribe({
         next: (res) => {
-            alert('Proyecto publicado correctamente.');
+            this.notificationService.showSuccess('¡Proyecto publicado correctamente!');
             this.isLoading = false;
-            this.router.navigate(['/projects']);
+            this.router.navigate(['/']); // Redirigir a Home, ya que /projects no existe
         },
         error: (err) => {
             console.error('Error al subir proyecto:', err);
-            alert('Error al publicar el proyecto. Inténtelo de nuevo.');
+            this.notificationService.showError('Error al publicar el proyecto. Inténtelo de nuevo.');
             this.isLoading = false;
         }
     });

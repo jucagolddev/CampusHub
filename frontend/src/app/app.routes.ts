@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './features/home/home.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { ProjectUploadComponent } from './features/projects/project-upload/project-upload.component';
-import { ProjectListComponent } from './features/projects/project-list/project-list.component';
 import { ProjectDetailComponent } from './features/projects/project-detail/project-detail.component';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
@@ -33,7 +32,6 @@ export const routes: Routes = [
       { path: '', component: HomeComponent }, // Página de inicio (Landing)
       { path: 'login', component: LoginComponent }, // Acceso de usuarios
       // Registro público desactivado intencionalmente
-      { path: 'projects', component: ProjectListComponent }, // Catálogo de proyectos públicos
       { path: 'projects/:id', component: ProjectDetailComponent }, // Detalles de un proyecto específico
       { path: 'upload', component: ProjectUploadComponent } // Subida de proyectos (provisionalmente aquí)
     ]
@@ -54,7 +52,6 @@ export const routes: Routes = [
       { path: 'gestion-roles', component: RoleManagementComponent }, // Asignar roles y permisos
       { path: 'gestion-usuarios', component: UserProjectManagementComponent }, // Asignar proyectos a usuarios
       { path: 'centers', component: CenterManagementComponent }, // Gestión de centros educativos
-      { path: 'proyectos', component: ProjectListComponent }, // Vista administrativa de proyectos
       { path: 'subir-proyecto', component: ProjectUploadComponent } // Formulario de carga de proyectos
     ]
   },

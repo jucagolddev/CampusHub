@@ -8,11 +8,7 @@
     <div class="form-grid">
       <div class="form-group">
         <label for="select-user">Usuario</label>
-        <select
-          id="select-user"
-          [(ngModel)]="selectedUser"
-          class="form-control"
-        >
+        <select id="select-user" [(ngModel)]="selectedUser" class="form-control">
           <option [ngValue]="null">Seleccionar Usuario</option>
           <option *ngFor="let user of users" [ngValue]="user">
             {{ user.userName }} ({{ user.email }})
@@ -22,11 +18,7 @@
 
       <div class="form-group">
         <label for="select-role">Rol a Asignar</label>
-        <select
-          id="select-role"
-          [(ngModel)]="selectedRole"
-          class="form-control"
-        >
+        <select id="select-role" [(ngModel)]="selectedRole" class="form-control">
           <option [ngValue]="null">Seleccionar Rol</option>
           <option *ngFor="let role of roles" [value]="role.id">
             {{ role.nombreGrupo }}
@@ -36,11 +28,7 @@
     </div>
 
     <div class="actions">
-      <button
-        (click)="assignRole()"
-        [disabled]="!selectedUser || !selectedRole"
-        class="btn-primary"
-      >
+      <button (click)="assignRole()" [disabled]="!selectedUser || !selectedRole" class="btn-primary">
         <i class="fas fa-save"></i> Guardar Cambios
       </button>
     </div>
@@ -49,31 +37,27 @@
       <h4>Roles actuales de {{ selectedUser.userName }}</h4>
       <div class="badges">
         <div *ngFor="let role of selectedUser.roles" class="badge-container">
-          <span
-            class="badge"
-            [ngClass]="{
+          <span class="badge" [ngClass]="{
               'badge-admin': role === 'Administrador',
               'badge-gestor': role === 'Gestor',
               'badge-profesor': role === 'Profesor',
-            }"
-          >
+            }">
             {{ role }}
           </span>
-          <button
-            class="btn-remove-role"
-            (click)="removeRole(role)"
-            title="Quitar rol"
-            [attr.aria-label]="'Quitar rol ' + role"
-          >
+          <button class="btn-remove-role" (click)="removeRole(role)" title="Quitar rol"
+            [attr.aria-label]="'Quitar rol ' + role">
             <i class="fas fa-times" aria-hidden="true"></i>
           </button>
         </div>
-        <span
-          *ngIf="!selectedUser.roles || selectedUser.roles.length === 0"
-          class="text-muted"
-          >Sin roles asignados</span
-        >
+        <span *ngIf="!selectedUser.roles || selectedUser.roles.length === 0" class="text-muted">Sin roles
+          asignados</span>
       </div>
     </div>
   </div>
+
+  <!-- Modal de confirmación premium para quitar roles -->
+  <app-confirmation-modal [isOpen]="showDeleteModal" title="Quitar Rol"
+    [message]="'¿Estás seguro de quitar el rol \'' + roleToRemove + '\' a ' + selectedUser?.userName + '?'"
+    confirmText="Quitar Rol" (confirm)="ejecutarEliminacionRole()"
+    (cancel)="cancelarEliminacionRole()"></app-confirmation-modal>
 </div>

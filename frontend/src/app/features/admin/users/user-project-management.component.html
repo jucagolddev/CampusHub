@@ -9,12 +9,8 @@
   <div class="card">
     <div class="selection-area">
       <label for="project-user-select">Seleccionar Usuario:</label>
-      <select
-        id="project-user-select"
-        [(ngModel)]="selectedUser"
-        (change)="onUserSelect()"
-        class="form-control user-select"
-      >
+      <select id="project-user-select" [(ngModel)]="selectedUser" (change)="onUserSelect()"
+        class="form-control user-select">
         <option [ngValue]="null">-- Seleccionar Usuario --</option>
         <option *ngFor="let user of users" [ngValue]="user">
           {{ user.userName }} ({{ user.email }})
@@ -27,35 +23,25 @@
         <h3>Proyectos Disponibles</h3>
         <p>
           Marca las casillas para dar acceso a
-          <strong>{{ selectedUser.userName }}</strong
-          >.
+          <strong>{{ selectedUser.userName }}</strong>.
         </p>
       </div>
 
       <div class="project-grid">
-        <div
-          *ngFor="let project of projects"
-          class="project-card"
-          [class.assigned]="isAssigned(project.id)"
-        >
+        <label *ngFor="let project of projects" class="project-card" [class.assigned]="isAssigned(project.id)"
+          [for]="'proj-' + project.id">
           <div class="card-content">
             <div class="checkbox-wrapper">
-              <input
-                type="checkbox"
-                [id]="'proj-' + project.id"
-                [checked]="isAssigned(project.id)"
-                (change)="toggleAssignment(project, $event)"
-              />
+              <input type="checkbox" [id]="'proj-' + project.id" [checked]="isAssigned(project.id)"
+                (change)="toggleAssignment(project, $event)" />
               <label [for]="'proj-' + project.id"></label>
             </div>
             <div class="project-info">
               <h4>{{ project.nombreProyecto }}</h4>
-              <span class="status" *ngIf="isAssigned(project.id)"
-                >Asignado</span
-              >
+              <span class="status" *ngIf="isAssigned(project.id)">Acceso Autorizado</span>
             </div>
           </div>
-        </div>
+        </label>
       </div>
     </div>
 

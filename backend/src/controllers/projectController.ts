@@ -91,3 +91,24 @@ export async function updateProject(req: AuthRequest, res: Response) {
     return res.status(500).json({ error: "Error interno al actualizar" });
   }
 }
+
+/**
+ * Elimina un proyecto.
+ * Solo accesible por administradores (verificado por middleware isAdmin).
+ */
+export async function deleteProject(req: AuthRequest, res: Response) {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({ error: "ID de proyecto requerido" });
+    }
+
+    await projectModel.deleteProject(Number(id));
+
+    return res.json({ message: "Proyecto eliminado correctamente" });
+  } catch (err) {
+    console.error("Error al eliminar proyecto:", err);
+    return res.status(500).json({ error: "Error interno al eliminar el proyecto" });
+  }
+}

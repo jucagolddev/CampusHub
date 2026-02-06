@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { NotificationToastComponent } from '../../shared/components/notification-toast/notification-toast.component';
 
 /**
  * ==========================================
@@ -14,7 +15,7 @@ import { FooterComponent } from './footer/footer.component';
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [CommonModule, RouterModule, HeaderComponent, FooterComponent],
+  imports: [CommonModule, RouterModule, HeaderComponent, FooterComponent, NotificationToastComponent],
   templateUrl: './main-layout.component.html',
 })
 export class MainLayoutComponent {}

@@ -2,11 +2,7 @@
   <div class="contenedor-header contenedor-pagina">
     <!-- 1. Sección del Logo: Enlaza siempre a la raíz de la aplicación -->
     <a routerLink="/" class="logo">
-      <img
-        src="assets/images/LogoV2.png"
-        alt="Campus Hub Logo"
-        class="icono-logo"
-      />
+      <img src="assets/images/LogoV2.png" alt="Campus Hub Logo" class="icono-logo" />
       CAMPUS HUB
     </a>
 
@@ -15,53 +11,27 @@
       <ul>
         <!-- Enlace de Inicio: Siempre visible -->
         <li>
-          <a
-            routerLink="/"
-            routerLinkActive="activo"
-            [routerLinkActiveOptions]="{ exact: true }"
-            aria-current="page"
-            >Inicio</a
-          >
-        </li>
-        <li>
-          <a routerLink="/projects" routerLinkActive="activo">Proyectos</a>
+          <a routerLink="/" routerLinkActive="activo" [routerLinkActiveOptions]="{ exact: true }"
+            aria-current="page">Inicio</a>
         </li>
 
         <!-- Bloque para usuarios NO autenticados: Registro e Inicio de Sesión -->
         <li>
-          <a routerLink="/login" routerLinkActive="activo" *ngIf="!isLoggedIn"
-            >Iniciar Sesión</a
-          >
+          <a routerLink="/login" routerLinkActive="activo" *ngIf="!isLoggedIn">Iniciar Sesión</a>
         </li>
 
         <!-- Bloque para usuarios SÍ autenticados: Funcionalidades de carga y cierre de sesión -->
         <li>
-          <a
-            routerLink="/admin/dashboard"
-            routerLinkActive="activo"
-            *ngIf="isLoggedIn && isAdmin"
-            >Dashboard</a
-          >
+          <a routerLink="/admin/dashboard" routerLinkActive="activo" *ngIf="isLoggedIn && isAdmin">Dashboard</a>
         </li>
         <li>
-          <a routerLink="/upload" routerLinkActive="activo" *ngIf="isLoggedIn"
-            >Subir Archivos</a
-          >
+          <a routerLink="/upload" routerLinkActive="activo" *ngIf="isLoggedIn">Subir Archivos</a>
         </li>
-        <li
-          *ngIf="isLoggedIn && userName"
-          class="saludo-usuario"
-          aria-live="polite"
-        >
+        <li *ngIf="isLoggedIn && userName" class="saludo-usuario" aria-live="polite">
           Hola, {{ userName }}
         </li>
         <li>
-          <button
-            (click)="logout()"
-            class="btn-logout"
-            *ngIf="isLoggedIn"
-            aria-label="Cerrar sesión actual"
-          >
+          <button (click)="logout()" class="btn-logout" *ngIf="isLoggedIn" aria-label="Cerrar sesión actual">
             Cerrar Sesión
           </button>
         </li>

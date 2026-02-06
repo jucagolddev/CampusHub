@@ -1,21 +1,15 @@
 <section class="pagina-gestion">
   <div class="contenedor-gestion">
-    <header class="header-gestion">
-      <div>
-        <h1>Gestión de Centros</h1>
-        <p>Administra los centros educativos del sistema</p>
-      </div>
-      <button class="boton-primario" (click)="abrirModalCrear()">
-        <i class="fas fa-plus"></i> Nuevo Centro
-      </button>
-    </header>
-
-    <!-- Feedback -->
-    <div *ngIf="mensaje" [ngClass]="{'alerta-exito': tipoMensaje === 'exito', 'alerta-error': tipoMensaje === 'error'}" class="alerta-flotante">
-      {{ mensaje }}
+    <div class="header-gestion">
+      <h2>Gestión de Centros Educativos</h2>
+      <button class="boton-primario" (click)="abrirModalCrear()">+ Nuevo Centro</button>
     </div>
 
-    <!-- Tabla de Centros -->
+    <!-- Feedback Visual (Ahora manejado por NotificationToast, pero mantenemos compatibilidad si se desea local) -->
+    <!-- <div *ngIf="mensaje" class="alerta-flotante" [ngClass]="{'alerta-exito': tipoMensaje === 'exito', 'alerta-error': tipoMensaje === 'error'}">
+      {{ mensaje }}
+    </div> -->
+
     <div class="tabla-container">
       <table class="tabla-datos">
         <thead>
@@ -28,52 +22,54 @@
         </thead>
         <tbody>
           <tr *ngFor="let centro of centros">
-            <td>#{{ centro.id }}</td>
+            <td>{{ centro.id }}</td>
             <td>{{ centro.nombreCentro }}</td>
-            <td>
-              <span class="badge" *ngIf="centro.sufijoEmail">{{ centro.sufijoEmail }}</span>
-              <span class="text-muted" *ngIf="!centro.sufijoEmail">N/A</span>
-            </td>
+            <td>{{ centro.sufijoEmail || '-' }}</td>
             <td class="acciones">
               <button class="btn-icon editar" (click)="abrirModalEditar(centro)" title="Editar">
                 <i class="fas fa-edit"></i>
               </button>
               <button class="btn-icon eliminar" (click)="confirmarEliminar(centro)" title="Eliminar">
-                <i class="fas fa-trash-alt"></i>
+                <i class="fas fa-trash"></i>
               </button>
             </td>
           </tr>
           <tr *ngIf="centros.length === 0">
-            <td colspan="4" class="sin-resultados">No hay centros registrados.</td>
+            <td colspan="4" class="sin-resultados" style="text-align: center; padding: 2rem;">No hay centros
+              registrados.</td>
           </tr>
         </tbody>
       </table>
     </div>
-  </div>
 
-  <!-- Modal Crear/Editar -->
-  <div class="modal-overlay" *ngIf="mostrarModal">
-    <div class="modal-contenido">
-      <div class="modal-header">
-        <h2>{{ modoEdicion ? 'Editar Centro' : 'Nuevo Centro' }}</h2>
-        <button class="btn-cerrar" (click)="cerrarModal()">&times;</button>
-      </div>
-      <form (ngSubmit)="guardarCentro()">
+    <!-- Modal para Crear/Editar -->
+    <div class="modal-overlay" *ngIf="mostrarModal">
+      <div class="modal-contenido">
+        <div class="modal-header">
+          <h3>{{ modoEdicion ? 'Editar Centro' : 'Nuevo Centro' }}</h3>
+          <button class="btn-cerrar" (click)="cerrarModal()">&times;</button>
+        </div>
         <div class="modal-body">
           <div class="grupo-input">
-            <label for="nombreCentro">Nombre del Centro *</label>
-            <input type="text" id="nombreCentro" name="nombreCentro" [(ngModel)]="centroForm.nombreCentro" required placeholder="Ej: Facultad de Ciencias">
+            <label>Nombre del Centro</label>
+            <input type="text" [(ngModel)]="centroForm.nombreCentro" placeholder="Ej: IES Francisco Giner de los Ríos">
           </div>
           <div class="grupo-input">
-            <label for="sufijoEmail">Dominio de Correo</label>
-            <input type="text" id="sufijoEmail" name="sufijoEmail" [(ngModel)]="centroForm.sufijoEmail" placeholder="Ej: @uam.es">
+            <label>Sufijo de Email (Opcional)</label>
+            <input type="text" [(ngModel)]="centroForm.sufijoEmail" placeholder="Ej: @iesginer.es">
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="boton-secundario" (click)="cerrarModal()">Cancelar</button>
-          <button type="submit" class="boton-primario">{{ modoEdicion ? 'Guardar Cambios' : 'Crear Centro' }}</button>
+          <button class="boton-secundario" (click)="cerrarModal()">Cancelar</button>
+          <button class="boton-primario" (click)="guardarCentro()">{{ modoEdicion ? 'Actualizar' : 'Crear'
+            }}</button>
         </div>
-      </form>
+      </div>
     </div>
+
+    <!-- Modal de confirmación premium para borrado -->
+    <app-confirmation-modal [isOpen]="showDeleteModal" title="Eliminar Centro"
+      [message]="'¿Estás seguro de que deseas eliminar permanentemente el centro \'' + (centerToDelete?.nombreCentro) + '\'?'"
+      confirmText="Eliminar" (confirm)="ejecutarEliminar()" (cancel)="cancelarEliminar()"></app-confirmation-modal>
   </div>
 </section>

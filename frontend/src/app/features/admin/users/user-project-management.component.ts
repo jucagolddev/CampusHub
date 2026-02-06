@@ -17,7 +17,8 @@ import { NotificationService } from '../../../core/services/notification.service
   selector: 'app-user-project-management',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './user-project-management.component.html'
+  templateUrl: './user-project-management.component.html',
+  styleUrls: ['./user-project-management.component.scss']
 })
 export class UserProjectManagementComponent implements OnInit {
   users: any[] = [];
