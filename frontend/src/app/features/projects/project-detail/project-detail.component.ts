@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { Project } from '../../../core/models/project';
+import { Project } from '../../../core/models/project.model';
 import { ProjectService } from '../../../core/services/project.service';
 
 /**

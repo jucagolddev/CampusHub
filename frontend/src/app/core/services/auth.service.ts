@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { User } from '../models/user.model';
 
 // Interfaces para tipado fuerte de respuestas API
 export interface LoginResponse {
@@ -38,7 +39,7 @@ export class AuthService {
     this.isAuthenticatedSubject.asObservable();
 
   // Estado reactivo del usuario actual
-  private currentUserSubject = new BehaviorSubject<any>(
+  private currentUserSubject = new BehaviorSubject<User | null>(
     this.getUserFromStorage(),
   );
   public currentUser$ = this.currentUserSubject.asObservable();
@@ -110,7 +111,7 @@ export class AuthService {
     return this.isAuthenticatedSubject.value;
   }
 
-  getCurrentUser(): any {
+  getCurrentUser(): User | null {
     return this.currentUserSubject.value;
   }
 
@@ -146,7 +147,7 @@ export class AuthService {
     return !!localStorage.getItem('authToken');
   }
 
-  private getUserFromStorage(): any {
+  private getUserFromStorage(): User | null {
     const userStr = localStorage.getItem('user');
     return userStr ? JSON.parse(userStr) : null;
   }

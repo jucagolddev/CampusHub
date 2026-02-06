@@ -83,12 +83,9 @@ Para una correcta puesta en marcha del ecosistema, consulte las guías específi
 │ ├── ⚙️ .gitattributes
 │ ├── ⚙️ .gitignore
 │ ├── 📝 README.md
-│ ├── 📄 check_user.js
-│ ├── 📄 db.js
 │ ├── ⚙️ package-lock.json
 │ ├── ⚙️ package.json
 │ ├── 📄 server.ts
-│ ├── 📄 test_api.ts
 │ └── ⚙️ tsconfig.json
 ├── 📁 frontend
 │ ├── 📁 src
@@ -106,9 +103,7 @@ Para una correcta puesta en marcha del ecosistema, consulte las guías específi
 │ │ │ │ │ └── 📄 token.interceptor.ts
 │ │ │ │ ├── 📁 models
 │ │ │ │ │ ├── 📄 project.model.ts
-│ │ │ │ │ ├── 📄 project.ts
-│ │ │ │ │ ├── 📄 user.model.ts
-│ │ │ │ │ └── 📄 user.ts
+│ │ │ │ │ └── 📄 user.model.ts
 │ │ │ │ └── 📁 services
 │ │ │ │ ├── 📄 api.service.spec.ts
 │ │ │ │ ├── 📄 api.service.ts
@@ -234,21 +229,6 @@ Para una correcta puesta en marcha del ecosistema, consulte las guías específi
 │ │ │ ├── 📄 environment.development.ts
 │ │ │ ├── 📄 environment.prod.ts
 │ │ │ └── 📄 environment.ts
-│ │ ├── 📁 layout
-│ │ │ ├── 📁 admin-layout
-│ │ │ │ └── 📁 sidebar
-│ │ │ │ ├── 🌐 sidebar.component.html
-│ │ │ │ ├── 📄 sidebar.component.spec.ts
-│ │ │ │ └── 📄 sidebar.component.ts
-│ │ │ └── 📁 main-layout
-│ │ │ ├── 📁 footer
-│ │ │ │ ├── 🌐 footer.component.html
-│ │ │ │ ├── 📄 footer.component.spec.ts
-│ │ │ │ └── 📄 footer.component.ts
-│ │ │ └── 📁 header
-│ │ │ ├── 🌐 header.component.html
-│ │ │ ├── 📄 header.component.spec.ts
-│ │ │ └── 📄 header.component.ts
 │ │ ├── 📁 styles
 │ │ │ ├── 📁 base
 │ │ │ │ ├── 🎨 \_mixins.scss
@@ -293,7 +273,6 @@ Para una correcta puesta en marcha del ecosistema, consulte las guías específi
 │ ├── ⚙️ tsconfig.json
 │ └── ⚙️ tsconfig.spec.json
 ├── ⚙️ .gitignore
-├── 📝 Estructura.md
 └── 📝 README.md
 
 ```
