@@ -1,105 +1,66 @@
-# CampusHub: Plataforma de Gestión Universitaria
+# CampusHub: Ecosistema Digital de Colaboración Académica
 
-![CampusHub Logo](https://via.placeholder.com/150) <!-- Por favor reemplazar con logo real si existe -->
+![CampusHub Logo](./frontend/src/assets/images/LogoV2.png)
 
-**CampusHub** es una solución integral diseñada para la administración y gestión eficiente de recursos universitarios. Este proyecto implementa una arquitectura moderna **MEAN** (MongoDB, Express.js, Angular, Node.js) para ofrecer una experiencia de usuario fluida y escalable.
-
----
-
-## 📋 Tabla de Contenidos
-
-1. [Visión General](#visión-general)
-2. [Arquitectura del Proyecto](#arquitectura-del-proyecto)
-3. [Requisitos Previos](#requisitos-previos)
-4. [Instalación y Puesta en Marcha](#instalación-y-puesta-en-marcha)
-5. [Estructura del Repositorio](#estructura-del-repositorio)
-6. [Equipo de Desarrollo](#equipo-de-desarrollo)
+**CampusHub** es una plataforma Full Stack diseñada para centralizar, gestionar y proyectar el talento académico. El proyecto nace como respuesta a la necesidad de un espacio unificado donde proyectos, usuarios y centros educativos converjan en un entorno digital seguro, escalable y con una experiencia de usuario de alta fidelidad.
 
 ---
 
-## 🌟 Visión General
+## 🏛️ Arquitectura del Sistema
 
-Nuestro objetivo es centralizar la información académica y administrativa en una sola plataforma, permitiendo a administradores, profesores y alumnos interactuar de manera sencilla.
+La aplicación sigue un modelo de desarrollo basado en la separación de responsabilidades (**Decoupled Architecture**), permitiendo que el cliente y el servidor evolucionen de forma independiente.
 
-### Funcionalidades Clave
+### 1. Frontend (Capa de Presentación)
 
-- **Gestión de Usuarios**: Roles diferenciados (Admin, Profesor, Alumno).
-- **Control Académico**: Gestión de cursos, horarios y notas.
-- **Interfaz Intuitiva**: Diseño adaptativo y moderno basado en Angular Material.
+Localizado en la carpeta `/frontend`, implementa una Single Page Application (SPA) con **Angular**.
 
----
+- **Diseño**: Sistema de diseño basado en _Glassmorphism_ (cristalismo) con SCSS avanzado.
+- **Gestión de Estado**: Servicios reactivos basados en RxJS para la sincronización de datos.
+- **Accesibilidad**: Cumplimiento de estándares semánticos HTML5 y atributos ARIA.
 
-## 🏗 Arquitectura del Proyecto
+### 2. Backend (Capa de Negocio)
 
-El sistema está dividido en dos grandes componentes desacoplados:
+Ubicado en la carpeta `/backend`, expone una **API RESTful** robusta construida con **Node.js** y **Express**.
 
-### [Frontend (Aplicación Cliente)](./frontend)
-
-Desarrollado en **Angular**, proporciona la interfaz de usuario. Se comunica con el backend a través de una API RESTful.
-
-- **Tecnologías**: Angular 16+, TypeScript, SCSS.
-
-### [Backend (Servidor API)](./backend)
-
-Desarrollado en **Node.js** con **Express**, gestiona la lógica de negocio y la persistencia de datos.
-
-- **Tecnologías**: Node.js, Express, MongoDB (Mongoose), TypeScript.
+- **Lógica**: Implementada en TypeScript para garantizar la integridad de los datos.
+- **Seguridad**: Autenticación y autorización mediante **JSON Web Tokens (JWT)** y middlewares de control de acceso.
+- **Persistencia**: Base de datos relacional **MySQL** con una arquitectura de modelos normalizada.
 
 ---
 
-## ⚙️ Requisitos Previos
+## 🚀 Despliegue y Ejecución
 
-Antes de comenzar, asegúrese de tener instalado el siguiente software:
+Para una correcta puesta en marcha del ecosistema, consulte las guías específicas en cada módulo:
 
-- [Node.js](https://nodejs.org/) (v18.x o superior recomendado)
-- [npm](https://www.npmjs.com/) (Manejador de paquetes de Node)
-- [MySQL](https://www.mysql.com/) (Base de datos relacional)
-- [Angular CLI](https://angular.io/cli) (`npm install -g @angular/cli`)
+1. [Configuración del Servidor y Base de Datos (Backend)](./backend/README.md)
+2. [Configuración de la Interfaz de Usuario (Frontend)](./frontend/README.md)
 
 ---
 
-## 🚀 Instalación y Puesta en Marcha
-
-Para levantar el entorno completo de desarrollo, siga estos pasos:
-
-1. **Clonar el repositorio**:
-
-   ```bash
-   git clone <URL_DEL_REPOSITORIO>
-   cd CampusHub
-   ```
-
-2. **Configurar el Backend**:
-   Vaya a la carpeta `backend`, instale dependencias y configure las variables de entorno.
-   _(Ver [README del Backend](./backend/README.md) para más detalles)_.
-
-3. **Configurar el Frontend**:
-   Vaya a la carpeta `frontend`, instale dependencias e inicie el servidor de desarrollo.
-   _(Ver [README del Frontend](./frontend/README.md) para más detalles)_.
-
----
-
-## 📂 Estructura del Repositorio
+## 📂 Estructura del Proyecto
 
 ```plaintext
 CampusHub/
-├── backend/            # Código fuente del servidor (API)
-├── frontend/           # Código fuente de la aplicación cliente (Angular)
-├── Estructura.md       # Documento de arquitectura detallada
-└── README.md           # Este archivo
+│
+├── backend/            # Lógica de servidor, API y modelos de datos
+│   ├── src/            # Código fuente en TypeScript
+│   └── bbdd/           # Scripts de inicialización de la base de datos
+│
+├── frontend/           # Interfaz de usuario y lógica de cliente
+│   ├── src/app/        # Componentes, servicios y core de Angular
+│   └── src/assets/     # Recursos estáticos y branding
+│
+└── Estructura.md       # Documentación detallada de la organización interna
 ```
 
 ---
 
-## 👥 Equipo de Desarrollo
+## 🛠️ Requisitos Técnicos
 
-Este proyecto ha sido desarrollado con dedicación por nuestro equipo de ingeniería:
-
-- **Integrante 1** - _Rol/Especialidad_
-- **Integrante 2** - _Rol/Especialidad_
-- **Integrante 3** - _Rol/Especialidad_
-- **Integrante 4** - _Rol/Especialidad_
+- **Entorno**: Node.js v18+ y npm v9+.
+- **Base de Datos**: MySQL v8.0+.
+- **Cliente**: Navegadores modernos con soporte para CSS Grid y Backdrop-filter.
 
 ---
 
-© 2024 CampusHub Team. Todos los derechos reservados.
+© 2024 CampusHub &middot; Proyecto Integrado de Ciclo Formativo de Grado Superior.

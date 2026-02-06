@@ -1,98 +1,316 @@
-# CampusHub - Frontend
+# CampusHub Frontend: Interfaz de Usuario y Experiencia Digital
 
-Este directorio contiene la aplicación cliente de **CampusHub**, desarrollada con **Angular 16+**. Nuestra interfaz está diseñada para ser rápida, responsiva y estéticamente agradable.
-
----
-
-## 🛠 Tecnologías Utilizadas
-
-- **Core**: Angular (v16), TypeScript (v5.1).
-- **Estilos**: SCSS (Sass) para estilos modulares y mantenibles.
-- **Enrutamiento**: Angular Router.
-- **Cliente HTTP**: Angular HttpClient.
+La interfaz de **CampusHub** es una aplicación cliente de alto nivel desarrollada con **Angular**. El diseño se centra en la claridad, la interactividad y la estética profesional, aplicando tendencias modernas de diseño de interfaces para entornos académicos.
 
 ---
 
-## ⚙️ Configuración e Instalación
+## 🎨 Sistema de Diseño: Glassmorphism Premium
 
-### 1. Prerrequisitos
+El proyecto implementa un lenguaje visual coherente basado en el **Glassmorphism** (Efecto Cristal), utilizando transparencias, difuminados y sombras profundas para crear una jerarquía visual moderna y limpia.
 
-Asegúrese de estar en el directorio `frontend/`:
+- **Fidelidad Visual**: Uso de efectos `backdrop-filter` y gradientes suaves.
+- **Interactividad**: Micro-animaciones en botones, tarjetas y campos de entrada para un feedback de usuario gratificante.
+- **Tipografía**: Jerarquía de fuentes clara y moderna para facilitar la legibilidad institucional.
 
-```bash
-cd frontend
+---
+
+## 🏗️ Arquitectura de Componentes
+
+La aplicación se organiza siguiendo una estructura modular optimizada para la escalabilidad:
+
+- **Core/Shared**: Servicios globales, componentes reutilizables (modales, alertas, toasts) y guardias de seguridad.
+- **Features**: Módulos independientes que encapsulan funcionalidades de negocio (Administración, Gestión de Proyectos, Autenticación).
+- **Layout**: Estructura base de la aplicación (Header con efecto cristal, Sidebar administrativa y Footer oscuro premium).
+
+**Generated:** 2/6/2026, 3:14:29 AM
+**Root Path:** `c:\xampp\htdocs\CampusHub`
+
 ```
-
-### 2. Instalar Dependencias
-
-Instalamos todas las librerías necesarias definidas en `package.json`:
-
-```bash
-npm install
+├── 📁 backend
+│   ├── 📁 bbdd
+│   │   └── 📄 campushub.sql
+│   ├── 📁 src
+│   │   ├── 📁 controllers
+│   │   │   ├── 📄 centroController.ts
+│   │   │   ├── 📄 cursoController.ts
+│   │   │   ├── 📄 moduloController.ts
+│   │   │   ├── 📄 projectController.ts
+│   │   │   ├── 📄 relationController.ts
+│   │   │   ├── 📄 rolController.ts
+│   │   │   ├── 📄 tituloController.ts
+│   │   │   └── 📄 userController.ts
+│   │   ├── 📁 db
+│   │   │   └── 📄 index.ts
+│   │   ├── 📁 middleware
+│   │   │   └── 📄 authMiddleware.ts
+│   │   ├── 📁 models
+│   │   │   ├── 📄 centroModel.ts
+│   │   │   ├── 📄 cursoModel.ts
+│   │   │   ├── 📄 moduloModel.ts
+│   │   │   ├── 📄 projectModel.ts
+│   │   │   ├── 📄 rolModel.ts
+│   │   │   ├── 📄 tituloModel.ts
+│   │   │   └── 📄 userModel.ts
+│   │   ├── 📁 routes
+│   │   │   ├── 📄 centroRoutes.ts
+│   │   │   ├── 📄 cursoRoutes.ts
+│   │   │   ├── 📄 index.ts
+│   │   │   ├── 📄 moduloRoutes.ts
+│   │   │   ├── 📄 projectRoutes.ts
+│   │   │   ├── 📄 relationRoutes.ts
+│   │   │   ├── 📄 rolRoutes.ts
+│   │   │   ├── 📄 tituloRoutes.ts
+│   │   │   └── 📄 userRoutes.ts
+│   │   ├── 📁 sql
+│   │   │   └── 📄 schema.sql
+│   │   ├── 📁 utils
+│   │   │   └── 📄 hash.ts
+│   │   └── 📄 types.ts
+│   ├── ⚙️ .gitattributes
+│   ├── ⚙️ .gitignore
+│   ├── 📝 README.md
+│   ├── 📄 check_user.js
+│   ├── 📄 db.js
+│   ├── ⚙️ package-lock.json
+│   ├── ⚙️ package.json
+│   ├── 📄 server.ts
+│   ├── 📄 test_api.ts
+│   └── ⚙️ tsconfig.json
+├── 📁 frontend
+│   ├── 📁 src
+│   │   ├── 📁 app
+│   │   │   ├── 📁 core
+│   │   │   │   ├── 📁 guards
+│   │   │   │   │   ├── 📄 auth.guard.spec.ts
+│   │   │   │   │   ├── 📄 auth.guard.ts
+│   │   │   │   │   ├── 📄 role.guard.spec.ts
+│   │   │   │   │   └── 📄 role.guard.ts
+│   │   │   │   ├── 📁 interceptors
+│   │   │   │   │   ├── 📄 error.interceptor.spec.ts
+│   │   │   │   │   ├── 📄 error.interceptor.ts
+│   │   │   │   │   ├── 📄 token.interceptor.spec.ts
+│   │   │   │   │   └── 📄 token.interceptor.ts
+│   │   │   │   ├── 📁 models
+│   │   │   │   │   ├── 📄 project.model.ts
+│   │   │   │   │   ├── 📄 project.ts
+│   │   │   │   │   ├── 📄 user.model.ts
+│   │   │   │   │   └── 📄 user.ts
+│   │   │   │   └── 📁 services
+│   │   │   │       ├── 📄 api.service.spec.ts
+│   │   │   │       ├── 📄 api.service.ts
+│   │   │   │       ├── 📄 auth.service.spec.ts
+│   │   │   │       ├── 📄 auth.service.ts
+│   │   │   │       ├── 📄 master-data.service.ts
+│   │   │   │       ├── 📄 notification.service.ts
+│   │   │   │       ├── 📄 project.service.ts
+│   │   │   │       ├── 📄 storage.service.spec.ts
+│   │   │   │       ├── 📄 storage.service.ts
+│   │   │   │       ├── 📄 ui.service.spec.ts
+│   │   │   │       ├── 📄 ui.service.ts
+│   │   │   │       └── 📄 user.service.ts
+│   │   │   ├── 📁 features
+│   │   │   │   ├── 📁 admin
+│   │   │   │   │   ├── 📁 center-management
+│   │   │   │   │   │   ├── 🌐 center-management.component.html
+│   │   │   │   │   │   ├── 🎨 center-management.component.scss
+│   │   │   │   │   │   └── 📄 center-management.component.ts
+│   │   │   │   │   ├── 📁 dashboard
+│   │   │   │   │   │   ├── 🌐 dashboard.component.html
+│   │   │   │   │   │   └── 📄 dashboard.component.ts
+│   │   │   │   │   ├── 📁 register
+│   │   │   │   │   │   ├── 🌐 user-register.component.html
+│   │   │   │   │   │   ├── 🎨 user-register.component.scss
+│   │   │   │   │   │   └── 📄 user-register.component.ts
+│   │   │   │   │   ├── 📁 roles
+│   │   │   │   │   │   ├── 🌐 role-management.component.html
+│   │   │   │   │   │   ├── 🎨 role-management.component.scss
+│   │   │   │   │   │   └── 📄 role-management.component.ts
+│   │   │   │   │   └── 📁 users
+│   │   │   │   │       ├── 🌐 user-list.component.html
+│   │   │   │   │       ├── 🎨 user-list.component.scss
+│   │   │   │   │       ├── 📄 user-list.component.ts
+│   │   │   │   │       ├── 🌐 user-project-management.component.html
+│   │   │   │   │       ├── 🎨 user-project-management.component.scss
+│   │   │   │   │       └── 📄 user-project-management.component.ts
+│   │   │   │   ├── 📁 auth
+│   │   │   │   │   └── 📁 login
+│   │   │   │   │       ├── 🌐 login.component.html
+│   │   │   │   │       ├── 🎨 login.component.scss
+│   │   │   │   │       ├── 📄 login.component.spec.ts
+│   │   │   │   │       └── 📄 login.component.ts
+│   │   │   │   ├── 📁 home
+│   │   │   │   │   ├── 🌐 home.component.html
+│   │   │   │   │   ├── 📄 home.component.spec.ts
+│   │   │   │   │   └── 📄 home.component.ts
+│   │   │   │   └── 📁 projects
+│   │   │   │       ├── 📁 project-detail
+│   │   │   │       │   ├── 🌐 project-detail.component.html
+│   │   │   │       │   ├── 📄 project-detail.component.spec.ts
+│   │   │   │       │   └── 📄 project-detail.component.ts
+│   │   │   │       └── 📁 project-upload
+│   │   │   │           ├── 🌐 project-upload.component.html
+│   │   │   │           ├── 🎨 project-upload.component.scss
+│   │   │   │           ├── 📄 project-upload.component.spec.ts
+│   │   │   │           └── 📄 project-upload.component.ts
+│   │   │   ├── 📁 layout
+│   │   │   │   ├── 📁 admin-layout
+│   │   │   │   │   ├── 📁 sidebar
+│   │   │   │   │   │   ├── 🌐 sidebar.component.html
+│   │   │   │   │   │   ├── 📄 sidebar.component.spec.ts
+│   │   │   │   │   │   └── 📄 sidebar.component.ts
+│   │   │   │   │   ├── 🌐 admin-layout.component.html
+│   │   │   │   │   ├── 📄 admin-layout.component.spec.ts
+│   │   │   │   │   └── 📄 admin-layout.component.ts
+│   │   │   │   └── 📁 main-layout
+│   │   │   │       ├── 📁 footer
+│   │   │   │       │   ├── 🌐 footer.component.html
+│   │   │   │       │   └── 📄 footer.component.ts
+│   │   │   │       ├── 📁 header
+│   │   │   │       │   ├── 🌐 header.component.html
+│   │   │   │       │   ├── 📄 header.component.spec.ts
+│   │   │   │       │   └── 📄 header.component.ts
+│   │   │   │       ├── 🌐 main-layout.component.html
+│   │   │   │       ├── 📄 main-layout.component.spec.ts
+│   │   │   │       └── 📄 main-layout.component.ts
+│   │   │   ├── 📁 shared
+│   │   │   │   ├── 📁 components
+│   │   │   │   │   ├── 📁 alert-msg
+│   │   │   │   │   │   ├── 🌐 alert-msg.component.html
+│   │   │   │   │   │   ├── 📄 alert-msg.component.spec.ts
+│   │   │   │   │   │   └── 📄 alert-msg.component.ts
+│   │   │   │   │   ├── 📁 confirmation-modal
+│   │   │   │   │   │   ├── 🌐 confirmation-modal.component.html
+│   │   │   │   │   │   ├── 🎨 confirmation-modal.component.scss
+│   │   │   │   │   │   └── 📄 confirmation-modal.component.ts
+│   │   │   │   │   ├── 📁 loading-spinner
+│   │   │   │   │   │   ├── 🌐 loading-spinner.component.html
+│   │   │   │   │   │   ├── 📄 loading-spinner.component.spec.ts
+│   │   │   │   │   │   └── 📄 loading-spinner.component.ts
+│   │   │   │   │   ├── 📁 notification-toast
+│   │   │   │   │   │   ├── 🎨 notification-toast.component.scss
+│   │   │   │   │   │   └── 📄 notification-toast.component.ts
+│   │   │   │   │   └── 📁 project-card
+│   │   │   │   │       ├── 🌐 project-card.component.html
+│   │   │   │   │       ├── 🎨 project-card.component.scss
+│   │   │   │   │       ├── 📄 project-card.component.spec.ts
+│   │   │   │   │       └── 📄 project-card.component.ts
+│   │   │   │   ├── 📁 directives
+│   │   │   │   │   ├── 📄 img-fallback.directive.spec.ts
+│   │   │   │   │   └── 📄 img-fallback.directive.ts
+│   │   │   │   └── 📁 pipes
+│   │   │   │       ├── 📄 truncate.pipe.spec.ts
+│   │   │   │       └── 📄 truncate.pipe.ts
+│   │   │   ├── 🌐 app.component.html
+│   │   │   ├── 📄 app.component.spec.ts
+│   │   │   ├── 📄 app.component.ts
+│   │   │   └── 📄 app.routes.ts
+│   │   ├── 📁 assets
+│   │   │   ├── 📁 images
+│   │   │   │   ├── 📁 projects
+│   │   │   │   │   ├── 🖼️ calendario_academico_cover.png
+│   │   │   │   │   ├── 🖼️ dashboard_docente_cover.png
+│   │   │   │   │   └── 🖼️ eusa_quiz_cover.png
+│   │   │   │   ├── 🖼️ GitHub.png
+│   │   │   │   ├── 🖼️ LogoTxtV2.png
+│   │   │   │   ├── 🖼️ LogoV2.png
+│   │   │   │   ├── 🖼️ logo.png.png
+│   │   │   │   └── 🖼️ logoTxt.png.png
+│   │   │   └── ⚙️ .gitkeep
+│   │   ├── 📁 environments
+│   │   │   ├── 📄 environment.development.ts
+│   │   │   ├── 📄 environment.prod.ts
+│   │   │   └── 📄 environment.ts
+│   │   ├── 📁 layout
+│   │   │   ├── 📁 admin-layout
+│   │   │   │   └── 📁 sidebar
+│   │   │   │       ├── 🌐 sidebar.component.html
+│   │   │   │       ├── 📄 sidebar.component.spec.ts
+│   │   │   │       └── 📄 sidebar.component.ts
+│   │   │   └── 📁 main-layout
+│   │   │       ├── 📁 footer
+│   │   │       │   ├── 🌐 footer.component.html
+│   │   │       │   ├── 📄 footer.component.spec.ts
+│   │   │       │   └── 📄 footer.component.ts
+│   │   │       └── 📁 header
+│   │   │           ├── 🌐 header.component.html
+│   │   │           ├── 📄 header.component.spec.ts
+│   │   │           └── 📄 header.component.ts
+│   │   ├── 📁 styles
+│   │   │   ├── 📁 base
+│   │   │   │   ├── 🎨 _mixins.scss
+│   │   │   │   ├── 🎨 _reset.scss
+│   │   │   │   ├── 🎨 _utilities.scss
+│   │   │   │   └── 🎨 _variables.scss
+│   │   │   ├── 📁 components
+│   │   │   │   ├── 🎨 _buttons.scss
+│   │   │   │   ├── 🎨 _cards.scss
+│   │   │   │   └── 🎨 _inputs.scss
+│   │   │   ├── 📁 layout
+│   │   │   │   ├── 📁 admin
+│   │   │   │   │   ├── 🎨 _admin-layout.scss
+│   │   │   │   │   └── 🎨 _sidebar.scss
+│   │   │   │   ├── 🎨 _footer.scss
+│   │   │   │   └── 🎨 _header.scss
+│   │   │   ├── 📁 pages
+│   │   │   │   ├── 📁 admin
+│   │   │   │   │   ├── 🎨 _dashboard.scss
+│   │   │   │   │   ├── 🎨 _role-management.scss
+│   │   │   │   │   ├── 🎨 _user-list.scss
+│   │   │   │   │   ├── 🎨 _user-project-management.scss
+│   │   │   │   │   └── 🎨 _user-register.scss
+│   │   │   │   ├── 🎨 _home.scss
+│   │   │   │   ├── 🎨 _login.scss
+│   │   │   │   ├── 🎨 _projects.scss
+│   │   │   │   ├── 🎨 _register.scss
+│   │   │   │   └── 🎨 _upload.scss
+│   │   │   ├── 🎨 main.css
+│   │   │   └── 🎨 main.scss
+│   │   ├── 🌐 index.html
+│   │   ├── 📄 main.ts
+│   │   ├── 🎨 styles.css
+│   │   └── 🎨 styles.scss
+│   ├── ⚙️ .editorconfig
+│   ├── ⚙️ .gitignore
+│   ├── 📝 README.md
+│   ├── ⚙️ angular.json
+│   ├── ⚙️ package-lock.json
+│   ├── ⚙️ package.json
+│   ├── ⚙️ tsconfig.app.json
+│   ├── ⚙️ tsconfig.json
+│   └── ⚙️ tsconfig.spec.json
+├── ⚙️ .gitignore
+├── 📝 Estructura.md
+└── 📝 README.md
 ```
 
 ---
 
-## ▶️ Ejecución del Proyecto
+## 🛠️ Tecnologías y Herramientas
 
-### Servidor de Desarrollo
-
-Para iniciar la aplicación en modo desarrollo con recarga automática:
-
-```bash
-npm start
-# O alternativamente:
-ng serve
-```
-
-La aplicación estará disponible en `http://localhost:4200/`.
-
-### Compilación para Producción
-
-Para generar los archivos optimizados para despliegue:
-
-```bash
-npm run build
-```
-
-Los artefactos de compilación se almacenarán en el directorio `dist/campus-hub`.
-
-### Tests Unitarios
-
-Para ejecutar las pruebas unitarias con Karma/Jasmine:
-
-```bash
-npm run test
-```
+- **Framework**: Angular v16+ (Arquitectura basada en componentes y servicios reactivos).
+- **Lenguaje**: TypeScript (Código robusto, tipado y mantenible).
+- **Estilos**: SCSS (Hojas de estilo modulares con uso intensivo de variables y mixins).
+- **Gestión de Datos**: RxJS (Programación reactiva para la comunicación con la API).
 
 ---
 
-## 📂 Estructura del Proyecto Frontend
+## ♿ Accesibilidad y SEO
 
-```plaintext
-src/
-├── app/
-│   ├── layout/          # Componentes de estructura (Sidebar, Navbar, Footer)
-│   ├── modules/         # Módulos funcionales (Auth, Dashboard, Usuarios)
-│   ├── shared/          # Componentes y servicios reutilizables
-│   ├── core/            # Servicios singleton y guardias
-│   ├── app.component.ts # Componente raíz
-│   └── app.module.ts    # Módulo raíz
-├── assets/              # Imágenes, fuentes e iconos estáticos
-├── environments/        # Variables de entorno (dev, prod)
-├── styles/              # Estilos globales y mixins SCSS
-├── index.html           # HTML base de la aplicación
-└── main.ts              # Punto de entrada de la aplicación
-```
+Se han implementado estándares de accesibilidad para garantizar un uso inclusivo:
+
+- **Semántica HTML5**: Uso correcto de etiquetas para una estructura lógica.
+- **Navegación**: Jerarquía de encabezados (`H1`) controlada por página.
+- **Lectores de Pantalla**: Inclusión de etiquetas `aria-label` y descripciones en iconos y botones de acción.
 
 ---
 
-## 📝 Guía de Estilos y Buenas Prácticas
+## 🚀 Guía de Desarrollo Local
 
-- **Componentes**: Usamos la estrategia `OnPush` donde sea posible para mejorar el rendimiento.
-- **Estilos**: Evitamos estilos globales innecesarios; preferimos encapsulación de componentes.
-- **Tipado**: Utilizamos TypeScript en modo estricto (`strict: true`) para garantizar la robustez del código.
+1. Navegar al directorio `/frontend`.
+2. Ejecutar `npm install` para consolidar el entorno de dependencias.
+3. Iniciar el servidor de desarrollo: `npm start` (disponible en `localhost:4200`).
+4. Compilar para despliegue final: `npm run build`.
 
 ---
 
-**CampusHub Frontend Team**
+© 2024 CampusHub &middot; Interfaz de Usuario para Plataformas Universitarias.

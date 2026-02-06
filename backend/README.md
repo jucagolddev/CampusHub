@@ -1,100 +1,62 @@
-# CampusHub - Backend API
+# CampusHub API: Núcleo de Lógica y Persistencia
 
-Bienvenido a la documentación del servidor **CampusHub**. Este backend proporciona una API RESTful robusta y segura para gestionar toda la lógica de negocio de la plataforma universitaria.
-
----
-
-## 🛠 Stack Tecnológico
-
-- **Runtime**: Node.js.
-- **Framework Web**: Express.js.
-- **Lenguaje**: TypeScript (compilado a JavaScript).
-- **Base de Datos**: MySQL (gestión relacional).
-- **Autenticación**: JWT (JSON Web Tokens).
+El backend de **CampusHub** es una API RESTful de alto rendimiento diseñada bajo los principios de modularidad y seguridad. El servidor gestiona la orquestación de datos entre la interfaz de usuario y la base de datos relacional, garantizando la integridad de cada transacción académica.
 
 ---
 
-## ⚙️ Instalación y Configuración
+## 🛠️ Especificaciones Técnicas
 
-### 1. Prerrequisitos
-
-Asegúrese de estar en el directorio `backend/`:
-
-```bash
-cd backend
-```
-
-### 2. Instalar Dependencias
-
-```bash
-npm install
-```
-
-### 3. Configuración de Variables de Entorno
-
-Cree un archivo `.env` en la raíz de la carpeta `backend` basándose en el siguiente ejemplo. **IMPORTANTE**: Nunca suba el archivo real con claves secretas al repositorio.
-
-```env
-PORT=3000
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=tu_password
-DB_NAME=campushub_db
-JWT_SECRET=tu_clave_super_secreta_aqui
-```
+- **Entorno de Ejecución**: Node.js (Ecosistema asíncrono y escalable).
+- **Framework**: Express.js (Gestión de rutas y middlewares).
+- **Lenguaje**: TypeScript (Tipado estricto para reducir errores en tiempo de ejecución).
+- **Base de Datos**: MySQL (Modelo relacional normalizado).
+- **Seguridad**: Implementación de JSON Web Tokens (JWT) para la gestión de sesiones.
 
 ---
 
-## ▶️ Ejecución del Servidor
+## 🔐 Capas de Seguridad y Control
 
-### Modo Desarrollo
+El sistema implementa una arquitectura de seguridad multinivel:
 
-Para iniciar el servidor con reinicio automático (usando `nodemon` o similar):
-
-```bash
-npm run dev
-```
-
-### Modo Producción
-
-Para compilar el código TypeScript y ejecutar la versión optimizada:
-
-```bash
-npm run build
-npm start
-```
-
-El servidor escuchará en el puerto definido en `.env` (por defecto 3000).
+1. **Autenticación (JWT)**: Todos los endpoints sensibles requieren una firma válida emitida tras un login exitoso.
+2. **Autorización (RBAC)**: Middlewares específicos validan si el usuario posee los roles necesarios (`Administrador`, `Profesor`, `Gestor`) para ejecutar acciones críticas.
+3. **Cifrado de Datos**: Las credenciales de acceso se procesan mediante algoritmos de hashing antes de su persistencia.
 
 ---
 
-## 🔌 API Endpoints (Resumen)
+## 📊 Modelo de Datos (MySQL)
 
-| Método | Endpoint             | Descripción                    | Autenticación |
-| ------ | -------------------- | ------------------------------ | ------------- |
-| POST   | `/api/auth/login`    | Iniciar sesión y obtener token | No            |
-| POST   | `/api/auth/register` | Registrar nuevo usuario        | No            |
-| GET    | `/api/users`         | Listar todos los usuarios      | Sí (Admin)    |
-| GET    | `/api/courses`       | Obtener cursos disponibles     | Sí            |
+La base de datos se estructura en torno a entidades clave:
 
-_(Para una documentación completa, referirse a la colección de Postman o Swagger del equipo)._
+- `Usuario`: Gestión de perfiles, credenciales y roles.
+- `Proyecto`: Almacenamiento de metadatos de las creaciones publicadas.
+- `Centro Educativo`: Catálogo de instituciones vinculadas.
+- `Rol`: Definición de permisos y niveles de acceso.
 
 ---
 
-## 📂 Estructura del Código Backend
+## 🔌 Estructura de Endpoints Principal
 
-```plaintext
-src/
-├── config/         # Configuración de DB y entorno
-├── controllers/    # Lógica de los endpoints (request/response)
-├── models/         # Esquemas de Mongoose (Datos)
-├── routes/         # Definición de rutas de la API
-├── middlewares/    # Funciones intermedias (Auth, Validación)
-├── utils/          # Herramientas auxiliares y helpers
-├── app.ts          # Configuración de Express
-└── server.ts       # Punto de entrada del servidor
-```
+### Autenticación
+
+- `POST /api/auth/login`: Validación de credenciales y emisión de tokens.
+- `POST /api/auth/register`: Creación de nuevas cuentas de usuario.
+
+### Gestión de Contenido
+
+- `GET /api/projects`: Recuperación del catálogo completo de proyectos.
+- `POST /api/projects`: Publicación de nuevos trabajos (Requiere Auth).
+- `DELETE /api/projects/:id`: Eliminación controlada de registros (Requiere Admin).
 
 ---
 
-**CampusHub Backend Team**
+## 🚀 Manual de Despliegue Local
+
+1. Instalar dependencias mediante `npm install`.
+2. Configurar el archivo `.env` con las credenciales de MySQL y el `JWT_SECRET`.
+3. Ejecutar los scripts SQL localizados en `/bbdd` para inicializar el esquema.
+4. Iniciar el servidor en modo desarrollo: `npm run dev`.
+
+---
+
+© 2024 CampusHub &middot; Arquitectura de Backend para Entornos Universitarios.
