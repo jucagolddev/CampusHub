@@ -1,104 +1,72 @@
 import { Request, Response } from "express";
-import { v4 as uuidv4 } from "uuid";
-import { hashPassword, comparePassword } from "../utils/hash.js";
-import * as userModel from "../models/userModel.js";
+import * as authService from "../services/authService.js";
 
 /**
  * Controladores para la gestión de usuarios (Registro y Autenticación).
+ * En esta capa solo manejamos la entrada/salida HTTP, delegando la inteligencia
+ * al servicio correspondiente para mantener un código limpio y profesional.
  */
 
 /**
- * Registra un nuevo usuario.
- * Proceso:
- * 1. Valida campos obligatorios.
- * 2. Verifica si el usuario ya existe.
- * 3. Hashea la contraseña.
- * 4. Genera un token UUID único (sesión permanente).
- * 5. Guarda en DB.
+ * Registra un nuevo usuario en la plataforma.
  */
 export async function register(req: Request, res: Response) {
   try {
     const { userName, password, email } = req.body;
 
-    // Validación básica de entrada
+    // Validación básica de entrada (Capa de Transporte)
     if (!userName || !password || !email) {
       return res.status(400).json({ error: "Faltan campos obligatorios" });
     }
 
-    // Comprobamos duplicados para evitar errores de clave única en la DB
-    const existing = await userModel.findUserByUsername(userName);
-    if (existing) {
-      return res
-        .status(409)
-        .json({ error: "El nombre de usuario ya está registrado" });
-    }
+    // Delegamos la lógica de registro al servicio de autenticación
+    const result = await authService.registerUser(userName, password, email);
 
-    // Seguridad: Nunca guardar contraseñas en texto plano
-    const hashed = await hashPassword(password);
-
-    // Generamos el ID de sesión (token) que usará el frontend
-    const tokken = uuidv4();
-
-    // Persistencia en base de datos
-    await userModel.createUser({ tokken, userName, passwrd: hashed, email });
-
-    // Devolvemos los datos (excepto la contraseña)
-    return res.status(201).json({ tokken, userName, email });
-  } catch (err) {
+    // Si todo ha ido bien, devolvemos la respuesta exitosa
+    return res.status(201).json(result);
+  } catch (err: any) {
     console.error("Error en registro:", err);
-    return res.status(500).json({ error: "Error interno del servidor" });
+    
+    // Capturamos errores específicos lanzados por el servicio o errores genéricos
+    const status = err.status || 500;
+    const message = err.message || "Error interno del servidor";
+    
+    return res.status(status).json({ error: message });
   }
 }
 
 /**
- * Autentica un usuario existente.
- * Proceso:
- * 1. Busca el usuario por nombre.
- * 2. Compara el hash de la contraseña.
- * 3. Si es correcto, devuelve el token UUID para futuras peticiones.
+ * Autentica un usuario existente para iniciar sesión.
  */
 export async function login(req: Request, res: Response) {
   try {
     const { userName, password } = req.body;
 
-    const user = await userModel.findUserByUsername(userName);
-    if (!user) {
-      return res.status(404).json({ error: "Usuario no encontrado" });
-    }
+    // Delegamos la validación de credenciales al servicio especializado
+    const authData = await authService.authenticateUser(userName, password);
 
-    // Verificamos la contraseña con la utilidad segura
-    const ok = await comparePassword(password, user.passwrd);
-    if (!ok) {
-      return res.status(401).json({ error: "Credenciales inválidas" });
-    }
-
-    // Login exitoso: El frontend guardará este token para autorizar sus llamadas
-    if (user) {
-      const roles = await userModel.getRolesByUserToken(user.tokken);
-      
-      return res.json({
-        message: "Login exitoso",
-        token: user.tokken,
-        user: {
-          userName: user.userName,
-          email: user.email,
-          roles: roles // Array de roles
-        },
-      });
-    }
-  } catch (err) {
+    // Devolvemos los datos de autenticación necesarios para el frontend
+    return res.json({
+      message: "Login exitoso",
+      ...authData
+    });
+  } catch (err: any) {
     console.error("Error en login:", err);
-    return res.status(500).json({ error: "Error interno del servidor" });
+    
+    const status = err.status || 500;
+    const message = err.message || "Error interno del servidor";
+    
+    return res.status(status).json({ error: message });
   }
 }
 
 /**
- * Obtiene la lista de todos los usuarios con sus roles.
+ * Obtiene la lista de todos los usuarios registrados.
  */
 export async function getUsers(req: Request, res: Response) {
   try {
-    const usersWithRoles = await userModel.getAllUsersWithRoles();
-    return res.json(usersWithRoles);
+    const users = await authService.listAllUsers();
+    return res.json(users);
   } catch (err) {
     console.error("Error al obtener usuarios:", err);
     return res.status(500).json({ error: "Error al listar usuarios" });
@@ -106,7 +74,7 @@ export async function getUsers(req: Request, res: Response) {
 }
 
 /**
- * Elimina un usuario.
+ * Elimina un usuario del sistema mediante su identificador único.
  */
 export async function deleteUser(req: Request, res: Response) {
   try {
@@ -116,7 +84,7 @@ export async function deleteUser(req: Request, res: Response) {
       return res.status(400).json({ error: "Token de usuario requerido" });
     }
 
-    await userModel.deleteUserByTokken(tokken);
+    await authService.removeUser(tokken);
     return res.status(200).json({ message: "Usuario eliminado correctamente" });
   } catch (err) {
     console.error("Error al eliminar usuario:", err);
@@ -125,8 +93,7 @@ export async function deleteUser(req: Request, res: Response) {
 }
 
 /**
- * Asigna un nuevo rol a un usuario.
- * Solo accesible por Administradores (vía middleware).
+ * Cambia o asigna un nuevo rol a un usuario determinado.
  */
 export async function changeUserRole(req: Request, res: Response) {
   try {
@@ -137,21 +104,19 @@ export async function changeUserRole(req: Request, res: Response) {
       return res.status(400).json({ error: "Token de usuario y ID de rol son requeridos" });
     }
 
-    // Verificamos si el usuario existe antes de intentar asignar el rol
-    const user = await userModel.findUserByTokken(userToken);
-    if (!user) {
-      return res.status(404).json({ error: "Usuario no encontrado" });
-    }
-
-    await userModel.addRoleToUser(userToken, Number(rolId));
+    // Delegamos la asignación y validación de existencia al servicio
+    const result = await authService.assignRoleToUser(userToken, Number(rolId));
 
     return res.status(200).json({ 
       message: "Rol asignado correctamente",
-      userToken,
-      rolId 
+      ...result 
     });
-  } catch (err) {
+  } catch (err: any) {
     console.error("Error al asignar rol:", err);
-    return res.status(500).json({ error: "Error interno al asignar el rol" });
+    
+    const status = err.status || 500;
+    const message = err.message || "Error interno al asignar el rol";
+    
+    return res.status(status).json({ error: message });
   }
 }

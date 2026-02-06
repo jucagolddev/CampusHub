@@ -1,10 +1,11 @@
 import { Response } from "express";
-import * as projectModel from "../models/projectModel.js";
 import { AuthRequest } from "../middleware/authMiddleware.js";
+import * as projectService from "../services/projectService.js";
 
 /**
  * Gestión de Proyectos Académicos.
- * Estos endpoints requieren que el usuario esté autenticado.
+ * En estos controladores gestionamos la interacción con el usuario autenticado,
+ * delegando la orquestación del negocio a la capa de servicios.
  */
 
 /**
@@ -26,17 +27,11 @@ export async function createProject(req: AuthRequest, res: Response) {
       return res.status(401).json({ error: "Usuario no autenticado" });
     }
 
-    // Fase 1: Insertar el proyecto principal
-    const newProjectId = await projectModel.createProject({
-      nombreProyecto,
-      descripcionProyecto,
-      urlProyecto,
-      urlGitHub,
-      imgPortada,
-    });
-
-    // Fase 2: Registrar la relación de propiedad
-    await projectModel.linkProjectToUser(userTokken, newProjectId);
+    // Delegamos la creación y vinculación compleja al servicio de proyectos
+    const newProjectId = await projectService.createNewProject(
+      { nombreProyecto, descripcionProyecto, urlProyecto, urlGitHub, imgPortada },
+      userTokken
+    );
 
     return res.status(201).json({
       message: "Proyecto creado y asignado correctamente",
@@ -53,7 +48,7 @@ export async function createProject(req: AuthRequest, res: Response) {
  */
 export async function listProjects(req: AuthRequest, res: Response) {
   try {
-    const projects = await projectModel.getAllProjects();
+    const projects = await projectService.getAllAvailableProjects();
     return res.json(projects);
   } catch (err) {
     return res.status(500).json({ error: "Error al listar proyectos" });
@@ -61,7 +56,7 @@ export async function listProjects(req: AuthRequest, res: Response) {
 }
 
 /**
- * Actualiza un proyecto.
+ * Actualiza un proyecto existente previa verificación de autoría.
  */
 export async function updateProject(req: AuthRequest, res: Response) {
   try {
@@ -73,28 +68,28 @@ export async function updateProject(req: AuthRequest, res: Response) {
       return res.status(401).json({ error: "Usuario no autenticado" });
     }
 
-    // Seguridad: Verificación de pertenencia
-    const hasPermission = await projectModel.checkProjectPermission(userTokken, Number(id));
-
-    if (!hasPermission) {
-      return res
-        .status(403)
-        .json({ error: "No tienes permiso para editar este proyecto" });
-    }
-
-    // Si tiene permiso, procedemos con la actualización
-    await projectModel.updateProject(Number(id), nombreProyecto, descripcionProyecto);
+    // Delegamos la actualización y la comprobación de permisos al servicio
+    await projectService.updateExistingProject(
+      Number(id),
+      userTokken,
+      nombreProyecto,
+      descripcionProyecto
+    );
 
     return res.json({ message: "Proyecto actualizado correctamente" });
-  } catch (err) {
+  } catch (err: any) {
     console.error("Error al actualizar proyecto:", err);
-    return res.status(500).json({ error: "Error interno al actualizar" });
+    
+    // Capturamos errores de permiso (403) lanzados por el servicio
+    const status = err.status || 500;
+    const message = err.message || "Error interno al actualizar";
+    
+    return res.status(status).json({ error: message });
   }
 }
 
 /**
- * Elimina un proyecto.
- * Solo accesible por administradores (verificado por middleware isAdmin).
+ * Elimina un proyecto del sistema (Solo administradores).
  */
 export async function deleteProject(req: AuthRequest, res: Response) {
   try {
@@ -104,7 +99,8 @@ export async function deleteProject(req: AuthRequest, res: Response) {
       return res.status(400).json({ error: "ID de proyecto requerido" });
     }
 
-    await projectModel.deleteProject(Number(id));
+    // Delegamos la eliminación al servicio
+    await projectService.deleteExistingProject(Number(id));
 
     return res.json({ message: "Proyecto eliminado correctamente" });
   } catch (err) {
