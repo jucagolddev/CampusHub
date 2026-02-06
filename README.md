@@ -40,9 +40,6 @@ Para una correcta puesta en marcha del ecosistema, consulte las guías específi
 ## 📂 Estructura del Proyecto
 
 ```plaintext
-
-```
-
 ├── 📁 backend
 │ ├── 📁 bbdd
 │ │ └── 📄 campushub.sql
@@ -297,7 +294,7 @@ Para una correcta puesta en marcha del ecosistema, consulte las guías específi
 │ └── ⚙️ tsconfig.spec.json
 ├── ⚙️ .gitignore
 ├── 📝 Estructura.md
-└── 📝 README.md`
+└── 📝 README.md
 
 ```
 
@@ -312,4 +309,3 @@ Para una correcta puesta en marcha del ecosistema, consulte las guías específi
 ---
 
 © 2024 CampusHub &middot; Proyecto Integrado de Ciclo Formativo de Grado Superior.
-```
