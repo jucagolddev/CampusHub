@@ -34,8 +34,8 @@
   <section id="all-projects">
     <div class="contenedor-pagina">
       <header>
-        <h2 *ngIf="!searchTerm">PROYECTOS</h2>
-        <h2 *ngIf="searchTerm">RESULTADOS DE BÚSQUEDA</h2>
+        <h1 *ngIf="!searchTerm">PROYECTOS</h1>
+        <h1 *ngIf="searchTerm">RESULTADOS DE BÚSQUEDA</h1>
         <p *ngIf="searchTerm">
           Encontrados {{ filteredProjects.length }} proyectos para "{{ searchTerm }}"
         </p>

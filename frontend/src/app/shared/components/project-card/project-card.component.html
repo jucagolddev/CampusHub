@@ -27,7 +27,8 @@
       <div class="avatar">
         <img src="assets/images/GitHub.png" alt="GitHub icon">
       </div>
-      <a [href]="project.githubLink" target="_blank" class="link-detalle" (click)="$event.stopPropagation()">
+      <a [href]="project.githubLink" target="_blank" rel="noopener noreferrer" class="link-detalle"
+        (click)="$event.stopPropagation()">
         {{ project.textolink || 'Ver Proyecto' }}
       </a>
     </div>

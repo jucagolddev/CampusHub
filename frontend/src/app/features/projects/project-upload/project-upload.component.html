@@ -8,9 +8,9 @@
             <form (ngSubmit)="onSubmit()" aria-label="Formulario de subida de proyectos">
                 <!-- Información técnica -->
                 <div class="grupo-input">
-                    <label for="nombreProyecto">Nombre del proyecto *</label>
+                    <label for="nombreProyecto">Título del Proyecto</label>
                     <input type="text" id="nombreProyecto" name="nombreProyecto" [(ngModel)]="nombreProyecto" required
-                        aria-required="true">
+                        placeholder="Ej: Mi web increíble">
                 </div>
 
                 <!-- Descripción (Nuevo Campo requerido por backend) -->
