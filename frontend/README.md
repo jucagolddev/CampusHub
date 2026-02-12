@@ -52,4 +52,4 @@ Se han implementado estándares de accesibilidad para garantizar un uso inclusiv
 
 ---
 
-© 2024 CampusHub &middot; Interfaz de Usuario para Plataformas Universitarias.
+2024 CampusHub &middot; Interfaz de Usuario para Plataformas Universitarias.

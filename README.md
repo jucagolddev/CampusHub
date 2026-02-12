@@ -218,7 +218,7 @@ Para una correcta puesta en marcha del ecosistema, consulte las guías específi
 │ │ │ │ ├── 📁 projects
 │ │ │ │ │ ├── 🖼️ calendario_academico_cover.png
 │ │ │ │ │ ├── 🖼️ dashboard_docente_cover.png
-│ │ │ │ │ └── 🖼️ eusa_quiz_cover.png
+
 │ │ │ │ ├── 🖼️ GitHub.png
 │ │ │ │ ├── 🖼️ LogoTxtV2.png
 │ │ │ │ ├── 🖼️ LogoV2.png
@@ -287,4 +287,4 @@ Para una correcta puesta en marcha del ecosistema, consulte las guías específi
 
 ---
 
-© 2024 CampusHub &middot; Proyecto Integrado de Ciclo Formativo de Grado Superior.
+2024 CampusHub &middot; Proyecto Integrado de Ciclo Formativo de Grado Superior.

@@ -59,4 +59,4 @@ La base de datos se estructura en torno a entidades clave:
 
 ---
 
-© 2024 CampusHub &middot; Arquitectura de Backend para Entornos Universitarios.
+2024 CampusHub &middot; Arquitectura de Backend para Entornos Universitarios.
