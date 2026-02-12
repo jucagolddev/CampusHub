@@ -6,9 +6,16 @@
 // Contenedor principal que se mantiene en la parte superior del visor.
 // Utiliza un diseño de fondo puro y un borde estructural para separar el contenido.
 .cabecera-principal {
-  background-color: $color-fondo-puro;
-  border-bottom: 2px solid $color-borde-estructura; // Separador visual inferior
-  padding: 1rem 0;
+  background-color: rgba($color-fondo-puro, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba($color-interactivo-principal, 0.1);
+  padding: 0.75rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1100;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
 
   // Contenedor interno: Alineación de elementos (Logo vs Menú)
   .contenedor-header {
